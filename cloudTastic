@@ -1,0 +1,2399 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name CLOUDTASTIC_1
+ label "<center>\[value name]"
+ note_font "Arial Black"
+ note_font_size 100
+ note_font_color 0x363636ff
+ selected true
+ xpos -7109
+ ypos 686
+ bdwidth 2125
+ bdheight 2156
+}
+BackdropNode {
+ inputs 0
+ name " 1"
+ tile_color 0x131313ff
+ gl_color 0xff
+ label "<center>AUTO SPAWN REGION NODES"
+ note_font "Arial Black"
+ note_font_size 20
+ note_font_color 0xff0000ff
+ selected true
+ xpos -5946
+ ypos 1760
+ appearance Border
+ border_width 10
+ bdwidth 375
+ bdheight 211
+ z_order 1
+}
+BackdropNode {
+ inputs 0
+ name " 31"
+ tile_color 0x444444ff
+ label " PARTICLE\n TEXTURES"
+ note_font "Arial Black"
+ note_font_size 60
+ note_font_color 0x7e7e7eff
+ selected true
+ xpos -7083
+ ypos 938
+ bdwidth 2017
+ bdheight 794
+ z_order 1
+}
+BackdropNode {
+ inputs 0
+ name " 32"
+ tile_color 0x131313ff
+ gl_color 0xff
+ label " VIEW PARTICLE TEXTURES \n     THROUGH THIS OFFSET"
+ note_font "Arial Black"
+ note_font_size 20
+ note_font_color 0xff0000ff
+ selected true
+ xpos -7051
+ ypos 1454
+ appearance Border
+ border_width 10
+ bdwidth 296
+ bdheight 152
+ z_order 1
+}
+Radial {
+ inputs 0
+ area {100 100 {root.format.width-100} {root.format.height-100}}
+ name Radial2
+ selected true
+ xpos -6907
+ ypos 1379
+}
+Dot {
+ name Dot15
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6741
+ ypos 1383
+}
+set N219f0070 [stack 0]
+Dot {
+ name Dot20
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6541
+ ypos 1383
+}
+set N219f4260 [stack 0]
+Dot {
+ name Dot25
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6348
+ ypos 1383
+}
+set N21f4f440 [stack 0]
+Dot {
+ name Dot26
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6184
+ ypos 1383
+}
+set N21f53490 [stack 0]
+Dot {
+ name Dot28
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6014
+ ypos 1383
+}
+set N21f57680 [stack 0]
+Dot {
+ name Dot30
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5818
+ ypos 1383
+}
+set N21f5b6e0 [stack 0]
+Dot {
+ name Dot31
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5615
+ ypos 1383
+}
+set N221038e0 [stack 0]
+Dot {
+ name Dot32
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5425
+ ypos 1383
+}
+set N221079d0 [stack 0]
+Dot {
+ name Dot36
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5243
+ ypos 1383
+}
+Noise {
+ inputs 0
+ size {{root.format.width/10}}
+ zoffset {{parent.CLOUDTASTIC_CONTROLS_1.seed}}
+ gain 0.221
+ gamma 0.31
+ center {1051 731}
+ name Noise3
+ selected true
+ xpos -6954
+ ypos 1168
+ hide_input true
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Grade {
+ channels rgba
+ white 8
+ add -1
+ black_clamp false
+ name Grade12
+ selected true
+ xpos -6954
+ ypos 1194
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+push $cut_paste_input
+Noise {
+ size {{parent.Noise3.size/2}}
+ zoffset {{parent.Noise3.zoffset}}
+ gain 0.246
+ gamma 0.304
+ center {1051 731}
+ name Noise4
+ selected true
+ xpos -7046
+ ypos 1200
+ hide_input true
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Grade {
+ channels rgba
+ white 4
+ add -0.3
+ black_clamp false
+ name Grade13
+ selected true
+ xpos -7046
+ ypos 1226
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Copy {
+ inputs 2
+ from0 rgba.green
+ to0 rgba.green
+ name Copy11
+ selected true
+ xpos -6954
+ ypos 1220
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Blur {
+ size {{(root.format.width/2)-(root.format.width/2*parent.CLOUDTASTIC_CONTROLS_1.warp_blur/10)}}
+ name Blur3
+ selected true
+ xpos -6954
+ ypos 1258
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Transform {
+ scale 1.1
+ center {1051 731}
+ shutteroffset centred
+ name Transform2
+ selected true
+ xpos -6853
+ ypos 1264
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Dot {
+ name Dot19
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6743
+ ypos 1268
+}
+set N229b2e00 [stack 0]
+Dot {
+ name Dot27
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6536
+ ypos 1268
+}
+set N229b73a0 [stack 0]
+Dot {
+ name Dot29
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6348
+ ypos 1268
+}
+set N229bbb10 [stack 0]
+Dot {
+ name Dot33
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6182
+ ypos 1268
+}
+set N229c0280 [stack 0]
+Dot {
+ name Dot34
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5982
+ ypos 1268
+}
+set N229c49f0 [stack 0]
+Dot {
+ name Dot35
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5800
+ ypos 1268
+}
+set N229c9160 [stack 0]
+Dot {
+ name Dot37
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5616
+ ypos 1268
+}
+set N22b10260 [stack 0]
+Dot {
+ name Dot38
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5419
+ ypos 1268
+}
+set N22b14400 [stack 0]
+Dot {
+ name Dot39
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5225
+ ypos 1268
+}
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front_4K0004/versions/0001/vars/original/Smoke_Front_4K0004_original.%06d.exr
+ localizationPolicy on
+ format "4096 2160 0 0 4096 2160 1 4K_DCP"
+ proxy /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front_4K0004/versions/0001/vars/proxy/Smoke_Front_4K0004_proxy.%06d.jpg
+ proxy_format "1024 540 0 0 1024 540 1 "
+ last 1686
+ frame_mode "start at"
+ frame 1001
+ origset true
+ version 307
+ name Smoke_Front_4K0004_v0001_3_original
+ selected true
+ xpos -5188
+ ypos 999
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1149181
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original proxy}}
+ addUserKnob {4 ieProxy l Proxy M {original proxy}}
+ ieProxy proxy
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front_4K0004/versions/0001/vars/original/Smoke_Front_4K0004_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+ ieProxySequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front_4K0004/versions/0001/vars/proxy/Smoke_Front_4K0004_proxy.%06d.jpg
+}
+Reformat {
+ resize fill
+ black_outside true
+ pbb true
+ name Reformat17
+ selected true
+ xpos -5188
+ ypos 1130
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle9
+ selected true
+ xpos -5188
+ ypos 1156
+}
+FrameHold {
+ firstFrame 1657
+ name FrameHold5
+ selected true
+ xpos -5188
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy28
+ selected true
+ xpos -5188
+ ypos 1284
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort17
+ selected true
+ xpos -5188
+ ypos 1334
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge18
+ selected true
+ xpos -5188
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade19
+ selected true
+ xpos -5188
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp11
+ selected true
+ xpos -5188
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat10
+ selected true
+ xpos -5188
+ ypos 1534
+}
+set N22c86cc0 [stack 0]
+push $N221079d0
+push $N22b14400
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front_4K0001/versions/0001/vars/original/Smoke_Front_4K0001_original.%06d.exr
+ localizationPolicy on
+ format "4096 2160 0 0 4096 2160 1 4K_DCP"
+ proxy /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front_4K0001/versions/0001/vars/proxy/Smoke_Front_4K0001_proxy.%06d.jpg
+ proxy_format "1024 540 0 0 1024 540 1 "
+ last 1687
+ frame_mode "start at"
+ frame 1001
+ origset true
+ version 487
+ name Smoke_Front_4K0001_v0001_3_original
+ selected true
+ xpos -5384
+ ypos 999
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1149177
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original proxy}}
+ addUserKnob {4 ieProxy l Proxy M {original proxy}}
+ ieProxy proxy
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front_4K0001/versions/0001/vars/original/Smoke_Front_4K0001_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+ ieProxySequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front_4K0001/versions/0001/vars/proxy/Smoke_Front_4K0001_proxy.%06d.jpg
+}
+Reformat {
+ resize fill
+ black_outside true
+ pbb true
+ name Reformat16
+ selected true
+ xpos -5384
+ ypos 1130
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle1
+ selected true
+ xpos -5384
+ ypos 1156
+}
+FrameHold {
+ firstFrame 1857
+ name FrameHold4
+ selected true
+ xpos -5384
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy27
+ selected true
+ xpos -5384
+ ypos 1285
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort16
+ selected true
+ xpos -5384
+ ypos 1335
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge17
+ selected true
+ xpos -5384
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade18
+ selected true
+ xpos -5384
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp10
+ selected true
+ xpos -5384
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat9
+ selected true
+ xpos -5384
+ ypos 1534
+}
+set N22e21100 [stack 0]
+push $N221038e0
+push $N22b10260
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0007/versions/0001/vars/original/Smoke_Front0007_original.%06d.exr
+ localizationPolicy on
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ proxy /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0007/versions/0001/vars/proxy/Smoke_Front0007_proxy.%06d.jpg
+ proxy_format "1024 540 0 0 1024 540 1 "
+ last 1079
+ frame_mode "start at"
+ frame 1001
+ origset true
+ version 132
+ name Smoke_Front0007_v0001_3_original
+ selected true
+ xpos -5584
+ ypos 999
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1149008
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original proxy}}
+ addUserKnob {4 ieProxy l Proxy M {original proxy}}
+ ieProxy proxy
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0007/versions/0001/vars/original/Smoke_Front0007_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+ ieProxySequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0007/versions/0001/vars/proxy/Smoke_Front0007_proxy.%06d.jpg
+}
+Reformat {
+ resize fill
+ black_outside true
+ pbb true
+ name Reformat15
+ selected true
+ xpos -5584
+ ypos 1130
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle8
+ selected true
+ xpos -5584
+ ypos 1156
+}
+FrameHold {
+ firstFrame 1457
+ name FrameHold7
+ selected true
+ xpos -5584
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy26
+ selected true
+ xpos -5584
+ ypos 1286
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort15
+ selected true
+ xpos -5584
+ ypos 1336
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge20
+ selected true
+ xpos -5584
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade21
+ selected true
+ xpos -5584
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp9
+ selected true
+ xpos -5584
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat8
+ selected true
+ xpos -5584
+ ypos 1534
+}
+set N22f7d460 [stack 0]
+push $N21f5b6e0
+push $N229c9160
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0004/versions/0001/vars/original/Smoke_Front0004_original.%06d.exr
+ localizationPolicy on
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ proxy /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0004/versions/0001/vars/proxy/Smoke_Front0004_proxy.%06d.jpg
+ proxy_format "1024 540 0 0 1024 540 1 "
+ last 1686
+ frame_mode "start at"
+ frame 1001
+ origset true
+ version 233
+ name Smoke_Front0004_v0001_3_original
+ selected true
+ xpos -5767
+ ypos 999
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1149005
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original proxy}}
+ addUserKnob {4 ieProxy l Proxy M {original proxy}}
+ ieProxy proxy
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0004/versions/0001/vars/original/Smoke_Front0004_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+ ieProxySequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0004/versions/0001/vars/proxy/Smoke_Front0004_proxy.%06d.jpg
+}
+Reformat {
+ resize fill
+ black_outside true
+ pbb true
+ name Reformat13
+ selected true
+ xpos -5767
+ ypos 1130
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle7
+ selected true
+ xpos -5767
+ ypos 1156
+}
+FrameHold {
+ firstFrame 1587
+ name FrameHold6
+ selected true
+ xpos -5767
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy25
+ selected true
+ xpos -5767
+ ypos 1287
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort14
+ selected true
+ xpos -5767
+ ypos 1337
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge19
+ selected true
+ xpos -5767
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade20
+ selected true
+ xpos -5767
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp8
+ selected true
+ xpos -5767
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat7
+ selected true
+ xpos -5767
+ ypos 1534
+}
+set N23137500 [stack 0]
+push $N21f57680
+push $N229c49f0
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0001/versions/0001/vars/original/Smoke_Front0001_original.%06d.exr
+ localizationPolicy on
+ format "2048 1080 0 0 2048 1080 1 2K_DCP"
+ proxy /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0001/versions/0001/vars/proxy/Smoke_Front0001_proxy.%06d.jpg
+ proxy_format "1024 540 0 0 1024 540 1 "
+ last 1687
+ frame_mode "start at"
+ frame 1001
+ origset true
+ version 178
+ name Smoke_Front0001_v0001_3_original
+ selected true
+ xpos -5969
+ ypos 999
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1149002
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original proxy}}
+ addUserKnob {4 ieProxy l Proxy M {original proxy}}
+ ieProxy proxy
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0001/versions/0001/vars/original/Smoke_Front0001_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+ ieProxySequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Smoke_Front0001/versions/0001/vars/proxy/Smoke_Front0001_proxy.%06d.jpg
+}
+Reformat {
+ resize fill
+ black_outside true
+ pbb true
+ name Reformat12
+ selected true
+ xpos -5969
+ ypos 1130
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle6
+ selected true
+ xpos -5969
+ ypos 1156
+}
+FrameHold {
+ firstFrame 1887
+ name FrameHold3
+ selected true
+ xpos -5969
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy24
+ selected true
+ xpos -5969
+ ypos 1287
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort13
+ selected true
+ xpos -5969
+ ypos 1337
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge16
+ selected true
+ xpos -5969
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade16
+ selected true
+ xpos -5969
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp7
+ selected true
+ xpos -5969
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat6
+ selected true
+ xpos -5969
+ ypos 1534
+}
+set N232f1510 [stack 0]
+push $N21f53490
+push $N229c0280
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0010/versions/0001/vars/original/Side_Smoke_4K0010_original.%06d.exr
+ localizationPolicy on
+ format "4096 2160 0 0 4096 2160 1 4K_DCP"
+ proxy /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0010/versions/0001/vars/proxy/Side_Smoke_4K0010_proxy.%06d.jpg
+ proxy_format "1024 540 0 0 1024 540 1 "
+ last 1088
+ frame_mode "start at"
+ frame 1001
+ origset true
+ version 96
+ name Side_Smoke_4K0010_v0001_3_original
+ selected true
+ xpos -6153
+ ypos 999
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1149156
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original proxy}}
+ addUserKnob {4 ieProxy l Proxy M {original proxy}}
+ ieProxy proxy
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0010/versions/0001/vars/original/Side_Smoke_4K0010_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+ ieProxySequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0010/versions/0001/vars/proxy/Side_Smoke_4K0010_proxy.%06d.jpg
+}
+Reformat {
+ resize fill
+ black_outside true
+ pbb true
+ name Reformat11
+ selected true
+ xpos -6153
+ ypos 1130
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle5
+ selected true
+ xpos -6153
+ ypos 1156
+}
+FrameHold {
+ firstFrame 1487
+ name FrameHold2
+ selected true
+ xpos -6153
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy23
+ selected true
+ xpos -6153
+ ypos 1287
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort12
+ selected true
+ xpos -6153
+ ypos 1337
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge15
+ selected true
+ xpos -6153
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade15
+ selected true
+ xpos -6153
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp6
+ selected true
+ xpos -6153
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat5
+ selected true
+ xpos -6153
+ ypos 1534
+}
+set N2344efe0 [stack 0]
+push $N21f4f440
+push $N229bbb10
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0007/versions/0001/vars/original/Side_Smoke_4K0007_original.%06d.exr
+ localizationPolicy on
+ format "4096 2160 0 0 4096 2160 1 4K_DCP"
+ proxy /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0007/versions/0001/vars/proxy/Side_Smoke_4K0007_proxy.%06d.jpg
+ proxy_format "1024 540 0 0 1024 540 1 "
+ last 1561
+ frame_mode "start at"
+ frame 1001
+ origset true
+ version 2575
+ name Side_Smoke_4K0007_v0001_3_original
+ selected true
+ xpos -6498
+ ypos 999
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1149153
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original proxy}}
+ addUserKnob {4 ieProxy l Proxy M {original proxy}}
+ ieProxy proxy
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0007/versions/0001/vars/original/Side_Smoke_4K0007_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+ ieProxySequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0007/versions/0001/vars/proxy/Side_Smoke_4K0007_proxy.%06d.jpg
+}
+Reformat {
+ resize fill
+ black_outside true
+ pbb true
+ name Reformat10
+ selected true
+ xpos -6498
+ ypos 1130
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle4
+ selected true
+ xpos -6498
+ ypos 1156
+}
+set N23577a40 [stack 0]
+FrameHold {
+ firstFrame 1517
+ name FrameHold1
+ selected true
+ xpos -6328
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy22
+ selected true
+ xpos -6328
+ ypos 1286
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort11
+ selected true
+ xpos -6328
+ ypos 1336
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge12
+ selected true
+ xpos -6328
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade14
+ selected true
+ xpos -6328
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp5
+ selected true
+ xpos -6328
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat4
+ selected true
+ xpos -6328
+ ypos 1534
+}
+set N235f5a10 [stack 0]
+push $N219f4260
+push $N229b73a0
+push $N23577a40
+FrameHold {
+ firstFrame 1847
+ name FrameHold9
+ selected true
+ xpos -6498
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy21
+ selected true
+ xpos -6498
+ ypos 1287
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort8
+ selected true
+ xpos -6498
+ ypos 1337
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge22
+ selected true
+ xpos -6498
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade23
+ selected true
+ xpos -6498
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp4
+ selected true
+ xpos -6498
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat3
+ selected true
+ xpos -6498
+ ypos 1534
+}
+set N23655550 [stack 0]
+push $N219f0070
+push $N229b2e00
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0002/versions/0001/vars/original/Side_Smoke_4K0002_original.%06d.exr
+ localizationPolicy on
+ format "4096 2160 0 0 4096 2160 1 4K_DCP"
+ proxy /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0002/versions/0001/vars/proxy/Side_Smoke_4K0002_proxy.%06d.jpg
+ proxy_format "1024 540 0 0 1024 540 1 "
+ last 1575
+ frame_mode "start at"
+ frame 1001
+ origset true
+ version 546
+ name Side_Smoke_4K0002_v0001_3_original
+ selected true
+ xpos -6687
+ ypos 999
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1149148
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original proxy}}
+ addUserKnob {4 ieProxy l Proxy M {original proxy}}
+ ieProxy proxy
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0002/versions/0001/vars/original/Side_Smoke_4K0002_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+ ieProxySequencePath /data/.jabuka/elementLibrary/smoke/Atmospheric_Smoke_and_Fog/Side_Smoke_4K0002/versions/0001/vars/proxy/Side_Smoke_4K0002_proxy.%06d.jpg
+}
+Reformat {
+ resize fill
+ black_outside true
+ pbb true
+ name Reformat8
+ selected true
+ xpos -6687
+ ypos 1130
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ fromInput2 {{0} B}
+ mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+ name Shuffle2
+ selected true
+ xpos -6687
+ ypos 1156
+}
+FrameHold {
+ firstFrame 2000
+ name FrameHold8
+ selected true
+ xpos -6687
+ ypos 1182
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy19
+ selected true
+ xpos -6687
+ ypos 1286
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+IDistort {
+ channels rgba
+ uv forward
+ uv_scale {{curve*CLOUDTASTIC_CONTROLS_1.warp_speed l x1 0 1}}
+ name IDistort18
+ selected true
+ xpos -6687
+ ypos 1336
+ disable {{CLOUDTASTIC_CONTROLS_1.warp==0?1:0}}
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge21
+ selected true
+ xpos -6687
+ ypos 1444
+}
+Grade {
+ multiply {{CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain} {CLOUDTASTIC_CONTROLS_1.cloud_gain}}
+ gamma {{CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma} {CLOUDTASTIC_CONTROLS_1.cloud_gamma}}
+ black_clamp false
+ name Grade22
+ selected true
+ xpos -6687
+ ypos 1470
+}
+Clamp {
+ channels alpha
+ name Clamp3
+ selected true
+ xpos -6687
+ ypos 1496
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat2
+ selected true
+ xpos -6687
+ ypos 1534
+}
+set N237fe270 [stack 0]
+ContactSheet {
+ inputs 9
+ width {{columns*input.width*scale}}
+ height {{rows*input.height*scale/input.format.pixel_aspect}}
+ rows {{input.format.pixel_aspect>=1.5?(ceil(sqrt(inputs))):(ceil(inputs/columns))}}
+ columns {{input.format.pixel_aspect>=1.5?(ceil(inputs/rows)):(ceil(sqrt(inputs)))}}
+ roworder TopBottom
+ name SmartContactSheet1
+ tile_color 0xffffff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 15
+ note_font_color 0xff
+ selected true
+ xpos -6944
+ ypos 1532
+ hide_input true
+ addUserKnob {20 SmartContactSheet l "Smart Contact Sheet"}
+ addUserKnob {7 scale l "Scale Resolution"}
+ scale 1
+ addUserKnob {26 ""}
+ addUserKnob {6 EnableText l "Enable Text" +STARTLINE}
+ EnableText true
+ addUserKnob {7 padding l "Padding %" R 0 25}
+ padding 10
+ addUserKnob {4 TextH l "Text Horizontal Position" M {left center right ""}}
+ TextH center
+ addUserKnob {4 TextV l "Text Vertical Position" M {top center bottom ""}}
+ addUserKnob {26 ""}
+ addUserKnob {19 TextColor l "Text Color"}
+ TextColor {1 1 0 1}
+ addUserKnob {6 TextColor_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 TextSize l "Text size"}
+ TextSize 1
+ addUserKnob {26 ""}
+ addUserKnob {6 EnableBackground l "Enable Background" +STARTLINE}
+ EnableBackground true
+ addUserKnob {19 BackgroundColor l "Background Color"}
+ BackgroundColor {0 0 0 0}
+ addUserKnob {6 BackgroundColor_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 BackgroundOpacity l "Background Opacity"}
+ BackgroundOpacity 0.75
+ addUserKnob {7 HorizontalPadding l "Horizontal Padding" R 0 30}
+ HorizontalPadding 10
+ addUserKnob {7 VerticalPadding l "Vertical Padding" R 0 30}
+ VerticalPadding 10
+ addUserKnob {20 About}
+ addUserKnob {26 abouttext l "" +STARTLINE T "\n\n---------------------------Notes------------------------------\n\nAssumes the resolution of input 1 as the resolution\nof each input.\n\n\"Scale Image\" when set to 1 will scale each input \nto the full resolution of input 1.\n\nThe text node will pickup the name of the top \nmost node of the tree it is connected to.\n\nTo connect multiple inputs select the contactsheet\nand then the nodes you want to connect in order\nand hit \"Y\"\n\nAutomatically switches to top and bottom instead\nof side by side when aspect ratio >= 1.5 is detected\n\n-----------------------------------------------------------------\n\nCreated by Daniel Bigaj\n\nv1.1\n\nLast revision 19 October 2021"}
+}
+Group {
+ name VIEW_PARTICLE
+ note_font "Bitstream Vera Sans Bold"
+ selected true
+ xpos -6944
+ ypos 1562
+ lock_connections {{curve x1008 0}}
+ addUserKnob {20 TimeOffsetSafe}
+ addUserKnob {3 time_offset l "time offset(frames)" t "This is actually a framehold run by expression. This is to get around the random node connections caused by scripts with the orignal NUke TimeOffset node in. "}
+ time_offset {{root.first_frame}}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 505
+  ypos 27
+ }
+ FrameHold {
+  firstFrame {{frame-time_offset}}
+  name FrameHold1
+  selected true
+  xpos 505
+  ypos 81
+ }
+ Output {
+  name Output1
+  xpos 505
+  ypos 167
+ }
+end_group
+push $cut_paste_input
+Axis2 {
+ rot_order XYZ
+ translate {-3750 -1100 31830}
+ name Cloudtastic_Particle_Look_At_Axis_1
+ label Control
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 20
+ selected true
+ xpos -6671
+ ypos 2135
+ hide_input true
+}
+Axis2 {
+ inputs 0
+ rot_order XYZ
+ translate {0 0 -148.8000031}
+ name Cloudtastic_Fade_Near_Axis_1
+ label Control
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 20
+ selected true
+ xpos -6680
+ ypos 2393
+ hide_input true
+}
+Camera2 {
+ inputs 0
+ translate {{curve x1000 1} {curve x1000 10} {curve x1000 3 x1100 -200}}
+ name Camera2
+ label "\nReplace me!"
+ selected true
+ xpos -5361
+ ypos 2187
+}
+Dot {
+ name CloudtasticCameraDot_1
+ tile_color 0xff0000ff
+ label "<font color=yellow>Plug in Camera\n<font color=\"#c90000\">(do not delete dot)"
+ note_font "Arial Black"
+ note_font_size 30
+ selected true
+ xpos -5337
+ ypos 2293
+}
+Dot {
+ inputs 0
+ name Dot42
+ tile_color 0xffff
+ label "  <font color=\"yellow\"> \nPlug in Deep Scene\n<font color=\"#c90000\">(do not delete dot)\n"
+ note_font "Arial Black"
+ note_font_size 30
+ note_font_color 0xff
+ selected true
+ xpos -5337
+ ypos 2510
+}
+set N2387ccc0 [stack 0]
+Camera2 {
+ inputs 0
+ translate {{"(\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.x)*(\[value CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraspeed])"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.y"} {"(\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.z)*(\[value CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraspeed])"}}
+ rotate {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.z"}}
+ scaling {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.z"}}
+ uniform_scale {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].uniform_scale"}}
+ skew {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.z"}}
+ pivot_translate {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.z"}}
+ focal {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].focal"}}
+ haperture {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].haperture"}}
+ vaperture {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].vaperture"}}
+ near {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].near"}}
+ far {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].far"}}
+ win_translate {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_translate.u"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_translate.v"}}
+ win_scale {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_scale.u"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_scale.v"}}
+ winroll {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].winroll"}}
+ focal_point {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].focal_point"}}
+ fstop {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].fstop"}}
+ name CloudtasticDummyCameraAuto_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -5949
+ ypos 2145
+}
+Camera2 {
+ inputs 0
+ translate {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.z"}}
+ rotate {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.z"}}
+ scaling {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.z"}}
+ uniform_scale {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].uniform_scale"}}
+ skew {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.z"}}
+ pivot_translate {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.x"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.y"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.z"}}
+ focal {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].focal"}}
+ haperture {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].haperture"}}
+ vaperture {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].vaperture"}}
+ near {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].near"}}
+ far {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].far"}}
+ win_translate {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_translate.u"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_translate.v"}}
+ win_scale {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_scale.u"} {"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_scale.v"}}
+ winroll {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].winroll"}}
+ focal_point {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].focal_point"}}
+ fstop {{"\[topnode CloudtasticCameraDot_\[lindex \[split \[value name] _] 1].input].fstop"}}
+ name CloudtasticDummyCameraManual_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -5949
+ ypos 2289
+}
+set N2389eef0 [stack 0]
+Switch {
+ inputs 2
+ which {{CLOUDTASTIC_CONTROLS_1.mode}}
+ name CloudtasticModeCameraSwitch_1
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -5959
+ ypos 2226
+}
+set N238bbee0 [stack 0]
+push $N22c86cc0
+Card2 {
+ rows 2
+ columns 2
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card5
+ selected true
+ xpos -5188
+ ypos 1560
+}
+Dot {
+ name Dot10
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -5982
+ ypos 1675
+}
+push $N22e21100
+Card2 {
+ rows 2
+ columns 2
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card3
+ selected true
+ xpos -5384
+ ypos 1560
+}
+Dot {
+ name Dot8
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6009
+ ypos 1675
+}
+push $N22f7d460
+Card2 {
+ rows 2
+ columns 2
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card7
+ selected true
+ xpos -5584
+ ypos 1560
+}
+Dot {
+ name Dot7
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6035
+ ypos 1675
+}
+push $N23137500
+Card2 {
+ rows 2
+ columns 2
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card6
+ selected true
+ xpos -5767
+ ypos 1560
+}
+Dot {
+ name Dot6
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6063
+ ypos 1675
+}
+push $N232f1510
+Card2 {
+ rows 2
+ columns 2
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card8
+ selected true
+ xpos -5969
+ ypos 1560
+}
+Dot {
+ name Dot5
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6091
+ ypos 1675
+}
+push $N2344efe0
+Card2 {
+ rows 2
+ columns 2
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card9
+ selected true
+ xpos -6153
+ ypos 1560
+}
+Dot {
+ name Dot4
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6119
+ ypos 1675
+}
+push $N235f5a10
+Card2 {
+ rows 2
+ columns 2
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card10
+ selected true
+ xpos -6328
+ ypos 1560
+}
+Dot {
+ name Dot11
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6148
+ ypos 1675
+}
+push $N23655550
+Card2 {
+ rows 2
+ columns 2
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card11
+ selected true
+ xpos -6498
+ ypos 1560
+}
+Dot {
+ name Dot12
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6177
+ ypos 1675
+}
+push $N237fe270
+Card2 {
+ rows 1
+ columns 1
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card12
+ selected true
+ xpos -6687
+ ypos 1560
+}
+Dot {
+ name Dot13
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6207
+ ypos 1675
+}
+Axis2 {
+ inputs 0
+ rot_order XYZ
+ translate {{CloudtasticDummyCameraAuto_1.translate.x(root.first_frame)} {CLOUDTASTIC_CONTROLS_1.yaxis} {CloudtasticDummyCameraAuto_1.translate.z(root.first_frame)}}
+ name CloudtasticEmitterAxisFirstPosition_1
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -5716
+ ypos 1836
+}
+Axis2 {
+ inputs 0
+ rot_order XYZ
+ translate {{"(\nCloudtasticDummyCameraAuto_1.translate.x(root.first_frame)\n+\nCloudtasticDummyCameraAuto_1.translate.x(root.last_frame)\n)/2"} {CLOUDTASTIC_CONTROLS_1.yaxis} {"(\nCloudtasticDummyCameraAuto_1.translate.z(root.first_frame)\n+\nCloudtasticDummyCameraAuto_1.translate.z(root.last_frame)\n)/2"}}
+ name CloudtasticEmitterAxisMiddlePosition_1
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -5836
+ ypos 1841
+}
+Cube {
+ inputs 0
+ display wireframe
+ rows 1
+ columns 1
+ cube {{-r} -20 {"(-(sqrt(pow(\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(root.first_frame)-\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(root.last_frame), 2) + pow(\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(root.first_frame)-\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(root.last_frame), 2) + pow(\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(root.first_frame)-\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(root.last_frame), 2))/2))-r"} {CLOUDTASTIC_CONTROLS_1.emitterpadding} {CLOUDTASTIC_CONTROLS_1.emitterheight} {"(sqrt(pow(\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(root.first_frame)-\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(root.last_frame), 2) + pow(\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(root.first_frame)-\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(root.last_frame), 2) + pow(\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(root.first_frame)-\\CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(root.last_frame), 2))/2)+r"}}
+ name CloudtasticEmitter_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -5658
+ ypos 1924
+}
+TransformGeo {
+ inputs 3
+ name CloudtasticTransformEmitterCube_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -5783
+ ypos 1924
+}
+Cube {
+ inputs 0
+ display wireframe
+ rows 1
+ columns 1
+ cube {-3.75999999 -0.009999999776 -5.349999905 3.309999943 0.5 0.5}
+ uniform_scale 1000
+ name Cube2
+ selected true
+ xpos -5371
+ ypos 1894
+}
+Dot {
+ name Dot3
+ label "  <font color=yellow>Plug in Spawn Region\n<font color=\"#c90000\">(do not delete dot)"
+ note_font "Arial Black"
+ note_font_size 30
+ selected true
+ xpos -5337
+ ypos 2014
+}
+Switch {
+ inputs 2
+ which {{CLOUDTASTIC_CONTROLS_1.mode}}
+ name CloudtasticModeEmitterSwitch_1
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -5783
+ ypos 2010
+}
+set N23b4c810 [stack 0]
+push 0
+ParticleEmitter {
+ inputs 11
+ start_frame {{CLOUDTASTIC_CONTROLS_1.start_frame-1}}
+ emit_from bbox
+ randomize_type "randomized direction"
+ rate {{frame<CLOUDTASTIC_CONTROLS_1.start_frame?CLOUDTASTIC_CONTROLS_1.p_count:0}}
+ rate_channel -rgba.red
+ lifetime 1000
+ velocity {{CLOUDTASTIC_CONTROLS_1.velocity}}
+ size {{CLOUDTASTIC_CONTROLS_1.p_size}}
+ size_variation 1
+ input_order "in order"
+ max_clip_length 250
+ seed {{CLOUDTASTIC_CONTROLS_1.seed}}
+ name CloudtasticParticleEmitter_1
+ selected true
+ xpos -6125
+ ypos 2010
+ disable {{"\[value CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].guiEmitter]==0?0:\$gui"}}
+}
+ParticleLookAt {
+ position {{"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.x(CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraframe):CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraframe)"} {"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.y(CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraframe):CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraframe)"} {"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.z(CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraframe):CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraframe)"}}
+ name CloudtasticParticleLookAtCamera_1
+ selected true
+ xpos -6125
+ ypos 2036
+ disable {{CLOUDTASTIC_CONTROLS_1.particlelookat==0?0:1}}
+}
+ParticleLookAt {
+ position {{Cloudtastic_Particle_Look_At_Axis_1.translate} {Cloudtastic_Particle_Look_At_Axis_1.translate} {Cloudtastic_Particle_Look_At_Axis_1.translate}}
+ name CloudtasticParticleLookAtAxis_1
+ selected true
+ xpos -6125
+ ypos 2074
+ disable {{CLOUDTASTIC_CONTROLS_1.particlelookat==1?0:1}}
+}
+ParticleExpression {
+ temp_name0 posA
+ temp_expr0 "v(\[value pos1.x], \[value pos1.y], \[value pos1.z])"
+ temp_name1 dist
+ temp_expr1 sqrt(pow2(x(pos)-x(posA))+pow2(y(pos)-y(posA))+pow2(y(pos)-y(posA))+pow2(z(pos)-z(posA)))
+ temp_name2 distPlus
+ temp_expr2 "dist-\[value pos1radius]<=0?0:dist-\[value pos1radius]"
+ temp_name3 result
+ temp_expr3 "(\[value pos1radius]/distPlus)>1?1:(\[value pos1radius]/distPlus)"
+ colexpr color*result<0?0:result
+ opacityexpr opacity*result<0?0:result
+ new_channels {a}
+ name CloudtasticFadeFarFromCamera_1
+ selected true
+ xpos -6125
+ ypos 2112
+ disable {{parent.CLOUDTASTIC_CONTROLS_1.kill_far_camera==0?1:0 x1008 1 x1053 1}}
+ addUserKnob {20 sceneTab l Variables}
+ addUserKnob {13 pos1}
+ pos1 {{"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.x:CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x"} {"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.y:CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y"} {"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.z:CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z"}}
+ addUserKnob {7 pos1radius}
+ pos1radius {{CLOUDTASTIC_CONTROLS_1.kill_area_far}}
+ addUserKnob {7 minValue}
+ addUserKnob {7 maxValue}
+ maxValue 1
+}
+ParticleExpression {
+ temp_name0 posA
+ temp_expr0 "v(\[value pos1.x], \[value pos1.y], \[value pos1.z])"
+ temp_name1 dist
+ temp_expr1 sqrt(pow2(x(pos)-x(posA))+pow2(y(pos)-y(posA))+pow2(y(pos)-y(posA))+pow2(z(pos)-z(posA)))
+ temp_name2 distPlus
+ temp_expr2 "dist-\[value pos1radius]<=0?0:dist-\[value pos1radius]"
+ temp_name3 result
+ temp_expr3 "(distPlus/\[value pos1radius])>=1?1:(distPlus/\[value pos1radius])"
+ colexpr color*(result<0?0:result)
+ opacityexpr opacity*(result<0?0:result)
+ new_channels all
+ name CloudtasticFadeNearCamera_1
+ selected true
+ xpos -6125
+ ypos 2150
+ disable {{parent.CLOUDTASTIC_CONTROLS_1.kill_near_camera==1?0:1 x1053 1}}
+ addUserKnob {20 sceneTab l Variables}
+ addUserKnob {13 pos1}
+ pos1 {{"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.x:CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x"} {"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.y:CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y"} {"!CLOUDTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].mode?CloudtasticDummyCameraManual_\[lindex \[split \[value name] _] 1].translate.z:CloudtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z"}}
+ addUserKnob {7 pos1radius}
+ pos1radius {{CLOUDTASTIC_CONTROLS_1.kill_area_near}}
+ addUserKnob {7 minValue}
+ addUserKnob {7 maxValue}
+ maxValue 1
+}
+ParticleExpression {
+ temp_name0 posA
+ temp_expr0 "v(\[value pos1.x], \[value pos1.y], \[value pos1.z])"
+ temp_name1 dist
+ temp_expr1 sqrt(pow2(x(pos)-x(posA))+pow2(y(pos)-y(posA))+pow2(y(pos)-y(posA))+pow2(z(pos)-z(posA)))
+ temp_name2 distPlus
+ temp_expr2 "dist-\[value pos1radius]<=0?0:dist-\[value pos1radius]"
+ temp_name3 result
+ temp_expr3 "(distPlus/\[value pos1radius])>=1?1:(distPlus/\[value pos1radius])"
+ colexpr color*(result<0?0:result)
+ opacityexpr opacity*(result<0?0:result)
+ new_channels all
+ name CloudtasticFadeNearAxis_1
+ selected true
+ xpos -6125
+ ypos 2188
+ disable {{CLOUDTASTIC_CONTROLS_1.kill_near_axis==0?1:0}}
+ addUserKnob {20 sceneTab l Variables}
+ addUserKnob {13 pos1}
+ pos1 {{Cloudtastic_Fade_Near_Axis_1.translate} {Cloudtastic_Fade_Near_Axis_1.translate} {Cloudtastic_Fade_Near_Axis_1.translate}}
+ addUserKnob {7 pos1radius}
+ pos1radius {{CLOUDTASTIC_CONTROLS_1.kill_area_axis}}
+ addUserKnob {7 minValue}
+ addUserKnob {7 maxValue}
+ maxValue 1
+}
+Reformat {
+ inputs 0
+ pbb true
+ name Reformat2
+ selected true
+ xpos -6235
+ ypos 2226
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ overscan {{width*(CLOUDTASTIC_CONTROLS_1.overscan/100)} {height*(CLOUDTASTIC_CONTROLS_1.overscan/100)}}
+ samples {{"\$gui?guiSamples:renderSamples"}}
+ shutteroffset centred
+ motion_vectors_type distance
+ name CloudtasticScanlineRender_1
+ selected true
+ xpos -6125
+ ypos 2226
+ addUserKnob {20 GuiSamples l "GUI Samples"}
+ addUserKnob {7 guiSamples l "GUI Samples"}
+ guiSamples {{CLOUDTASTIC_CONTROLS_1.gui}}
+ addUserKnob {7 renderSamples l "Render Samples"}
+ renderSamples {{CLOUDTASTIC_CONTROLS_1.render}}
+}
+Group {
+ name CloudtasticDeepFeather_1
+ tile_color 0x60ff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -6125
+ ypos 2252
+ addUserKnob {20 ieDeepFeather l DeepFeather}
+ addUserKnob {4 ieDirection l "Feather Direction" t "Choose which direction to feather your deep pass.\n\nCenter: Equally adjusts the deep.front and deep.back values (keeps the center point of your deep pass in the same position)\n\nBack: Only adjusts the deep.back value (feathers away from camera)\n\nFront: Only adjusts the deep.front value (feathers towards camera)" M {Center Back Front "" ""}}
+ addUserKnob {41 disable_1 l "Disable making  Alpha semi transparent" t "multiplies the alpha by 0.99999 to make it opaque but still allows the volumetric compositing to happen" -STARTLINE T DeepExpression2.disable}
+ addUserKnob {7 ieFeather l Feather R 0 100}
+ ieFeather {{CLOUDTASTIC_CONTROLS_1.feather}}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -154
+  ypos -128
+ }
+ DeepExpression {
+  chans1 deep
+  rgba.alpha "alpha * 0.99999"
+  name DeepExpression2
+  xpos -154
+  ypos -83
+ }
+set N23c21a20 [stack 0]
+ DeepExpression {
+  chans1 deep
+  deep.front "deep.front - \[value parent.ieFeather]"
+  name DeepExpression3
+  label "Feather front"
+  xpos -31
+  ypos -33
+  addUserKnob {20 ieOptions l options}
+  addUserKnob {7 ieFeather l feather R 0 100}
+  ieFeather 150
+ }
+push $N23c21a20
+ DeepExpression {
+  chans1 deep
+  deep.back "deep.back + \[value parent.ieFeather]"
+  name DeepExpression4
+  label "Feather back"
+  xpos -154
+  ypos -29
+  addUserKnob {20 ieOptions l options}
+  addUserKnob {7 ieFeather l feather R 0 100}
+  ieFeather 150
+ }
+push $N23c21a20
+ DeepExpression {
+  chans1 deep
+  deep.front "deep.front - (\[value parent.ieFeather]/2)"
+  deep.back "deep.back + (\[value parent.ieFeather]/2)"
+  name DeepExpression1
+  label "Feather Middle"
+  xpos -278
+  ypos -29
+  addUserKnob {20 ieOptions l options}
+  addUserKnob {7 ieFeather l feather R 0 100}
+ }
+ Switch {
+  inputs 3
+  which {{parent.ieDirection x1008 0}}
+  name Switch1
+  xpos -154
+  ypos 35
+ }
+ Output {
+  name Output1
+  xpos -154
+  ypos 126
+ }
+end_group
+DeepMerge2 {
+ inputs 2
+ operation holdout
+ drop_hidden true
+ name DeepMerge2
+ selected true
+ xpos -6125
+ ypos 2506
+}
+Group {
+ name DeepToImage
+ tile_color 0x60ff
+ selected true
+ xpos -6125
+ ypos 2532
+ addUserKnob {20 DeepToImage}
+ addUserKnob {6 volumetric_composition l "volumetric composition" +STARTLINE}
+ volumetric_composition true
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -891
+  ypos -705
+ }
+ DeepToImage {
+  volumetric_composition {{parent.volumetric_composition}}
+  name DeepToImage
+  xpos -891
+  ypos -637
+ }
+ ModifyMetaData {
+  metadata {
+   {remove exr/chunkCount ""}
+  }
+  name ModifyMetaData1
+  xpos -891
+  ypos -611
+ }
+ Output {
+  name Output1
+  xpos -891
+  ypos -530
+ }
+end_group
+Expression {
+ channel0 depth
+ expr0 (deep.front+deep.back)/2
+ channel1 none
+ name deepToDepth
+ selected true
+ xpos -6125
+ ypos 2558
+}
+Remove {
+ operation keep
+ channels rgba
+ channels2 depth
+ channels3 forward
+ name Remove2
+ selected true
+ xpos -6125
+ ypos 2584
+}
+Dot {
+ name Dot2
+ label " RESULT"
+ note_font "Arial Black"
+ note_font_size 50
+ selected true
+ xpos -6091
+ ypos 2652
+}
+push $N238bbee0
+push $N2389eef0
+push $N2387ccc0
+DeepToPoints {
+ inputs 2
+ display textured
+ cast_shadow false
+ receive_shadow false
+ detail 0.01
+ pointSize 1
+ name CloudtasticDeepToPoints_1
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -5663
+ ypos 2226
+ hide_input true
+}
+push $N23b4c810
+Scene {
+ inputs 3
+ name CloudtasticSpawnRegion_1
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -5773
+ ypos 2206
+}
+Dot {
+ name Dot77
+ label "  <font color=\"yellow\">View Spawn Region"
+ note_font "Arial Black"
+ note_font_size 30
+ selected true
+ xpos -5749
+ ypos 2651
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "\nPrecomp 32-bit\n     Render 1 frame/proc when samples greater than 1     \nRender 5 frames/proc when samples = 1\n"
+ note_font_size 20
+ selected true
+ xpos -6319
+ ypos 2694
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label http://docsie/index.php/Cloudtastic
+ note_font_size 50
+ selected true
+ xpos -6459
+ ypos 847
+}
+NoOp {
+ inputs 0
+ name CLOUDTASTIC_CONTROLS_1
+ knobChanged "\n# The 3 apostrophes above are opening a multi-line string. We're basically passing a python script to a knob as a string.\n# If we're touching a knob other than the mode, there is no point going further, so we check first.\nif nuke.thisKnob().name() == \"mode\": \n    # At this point the code will only run if we change the value of the mode knob.\n    # Let's check which mode we selected.\n    # I'm using getValue() instead of value() so that I get an ID back rather than the string of the mode, this way I can change the text later if I want to.\n    if nuke.thisKnob().getValue() == 0:\n        # Now I can do the actions that I want depending on this mode.\n        # In my case hide mode1_knob and show mode0_knob\n        nuke.thisNode().knob('spawnregiondivider').setVisible(False)\n        nuke.thisNode().knob('spawnregion').setVisible(False)\n        nuke.thisNode().knob('yaxis').setVisible(False)\n        nuke.thisNode().knob('emitterpadding').setVisible(False)\n        nuke.thisNode().knob('emitterheight').setVisible(False)\n        nuke.thisNode().knob('cameraspeed').setVisible(False)\n        nuke.thisNode().knob('cameraspeeddivider').setVisible(False)\n    # Do the same for the other mode(s)\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('spawnregiondivider').setVisible(True)\n        nuke.thisNode().knob('spawnregion').setVisible(True)\n        nuke.thisNode().knob('yaxis').setVisible(True)\n        nuke.thisNode().knob('emitterpadding').setVisible(True)\n        nuke.thisNode().knob('emitterheight').setVisible(True)\n        nuke.thisNode().knob('cameraspeed').setVisible(True)\n        nuke.thisNode().knob('cameraspeeddivider').setVisible(True)\n        \nif nuke.thisKnob().name() == \"particlelookat\":\n    if nuke.thisKnob().value() == 'Camera':\n        nuke.thisNode()\['cameraframe'].setVisible(True)\n    else:\n        nuke.thisNode()\['cameraframe'].setVisible(False)"
+ tile_color 0x20202ff
+ label "\n\[value mode]\n"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 36
+ note_font_color 0xffffffff
+ selected true
+ xpos -6677
+ ypos 1839
+ hide_input true
+ addUserKnob {20 Cloudtastic}
+ addUserKnob {6 guiEmitter l "\$gui Emitter" +STARTLINE}
+ guiEmitter true
+ addUserKnob {26 ""}
+ addUserKnob {4 mode l Mode M {"Manual Placement" "Auto Placement" "" ""}}
+ mode "Auto Placement"
+ addUserKnob {26 spawnregiondivider l "" +STARTLINE}
+ addUserKnob {26 spawnregion l " " T "Automatic Spawn Region Adjustments"}
+ addUserKnob {3 yaxis l "Y Axis"}
+ yaxis -20
+ addUserKnob {3 emitterpadding l Padding -STARTLINE}
+ emitterpadding 2500
+ addUserKnob {3 emitterheight l Height -STARTLINE}
+ emitterheight 200
+ addUserKnob {26 cameraspeeddivider l "" +STARTLINE}
+ addUserKnob {7 cameraspeed l "Camera Speed Multiplier" R 0 5}
+ cameraspeed 2
+ addUserKnob {26 ""}
+ addUserKnob {4 particlelookat l "Particle Look At" M {Camera Axis}}
+ addUserKnob {3 cameraframe l Frame t "Frame of camera position particles will look at.\n\nHandy Expressions:\n\nCurrent frame\nframe\n\nFirst frame of comp\nroot.first_frame\n\nLast frame of comp\nroot.last_frame\n\nMiddle frame of comp\n(root.last_frame+root.first_frame)/2\n\nCurrent Expresion" -STARTLINE}
+ cameraframe {{root.first_frame}}
+ addUserKnob {3 start_frame l "Start Frame"}
+ start_frame {{root.first_frame-5}}
+ addUserKnob {3 p_count l "Particle Amount"}
+ p_count 500
+ addUserKnob {3 p_size l "Particle Size"}
+ p_size 25
+ addUserKnob {7 feather l "Particle Feather" R 0 100}
+ feather 50
+ addUserKnob {7 velocity l Velocity R 0 10}
+ velocity 0.1
+ addUserKnob {3 seed l "Random Seed"}
+ seed 1
+ addUserKnob {26 ""}
+ addUserKnob {6 warp l "Warp particle textures?" t "Turn cloud texture warp on or off" +STARTLINE}
+ warp true
+ addUserKnob {7 warp_speed l "Warp Speed" R 0 10}
+ warp_speed 2
+ addUserKnob {7 warp_blur l "Warp Detail" -STARTLINE R 0 10}
+ warp_blur 5
+ addUserKnob {26 ""}
+ addUserKnob {7 kill_area_near l "Fade area near" R 0 5000}
+ kill_area_near 100
+ addUserKnob {6 kill_near_camera l "Fade clouds close to camera? " -STARTLINE}
+ kill_near_camera true
+ addUserKnob {7 kill_area_far l "Fade area far" R 0 50000}
+ kill_area_far 500
+ addUserKnob {6 kill_far_camera l "Fade clouds far from camera?" -STARTLINE}
+ kill_far_camera true
+ addUserKnob {7 kill_area_axis l "Fade near axis" R 0 5000}
+ kill_area_axis 30
+ addUserKnob {6 kill_near_axis l "Fade clouds near Axis?             " -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {3 gui l "GUI Samples"}
+ gui 1
+ addUserKnob {3 render l "                          Render Samples" -STARTLINE}
+ render 1
+ addUserKnob {26 rendertext l " " -STARTLINE T "<i><font color=grey>Do not exceed 5 samples"}
+ addUserKnob {7 overscan l "Overscan (%)" R 0 100}
+ overscan 10
+ addUserKnob {26 ""}
+ addUserKnob {19 cloud_gain l "Cloud Gain" R 0 4}
+ cloud_gain 1
+ addUserKnob {6 cloud_gain_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 cloud_gamma l "Gloud Gamma" R 0 2}
+ cloud_gamma 1
+ addUserKnob {6 cloud_gamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 Info}
+ addUserKnob {26 ""}
+ addUserKnob {26 version l "" +STARTLINE T "\nOriginally created by Ben McEwan\nwww.benmcewan.com\n\nModified by Daniel Bigaj\n\nVersion 1.71\nLast Updated: 1 Feb 2023\n\nFound a bug? Contact Daniel Bigaj"}
+ addUserKnob {26 ""}
+}
