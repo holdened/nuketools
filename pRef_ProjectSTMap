@@ -1,0 +1,314 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard2
+ selected true
+ xpos -15290
+ ypos -9860
+}
+Group {
+ name STMapCreator
+ selected true
+ xpos -15290
+ ypos -9781
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 175
+  ypos -103
+ }
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha black
+  name Shuffle4
+  label "\[value alpha] > \[value out]"
+  xpos 175
+  ypos -63
+ }
+ Expression {
+  expr0 (x+.5)/width
+  expr1 (y+.5)/height
+  name ST_map_creator
+  xpos 175
+  ypos -27
+ }
+ Output {
+  name Output1
+  xpos 175
+  ypos 73
+ }
+end_group
+Group {
+ name CropPadded
+ tile_color 0xad7cbcff
+ gl_color 0xff
+ selected true
+ xpos -15290
+ ypos -9755
+ addUserKnob {20 croppadded l "Crop Padded"}
+ addUserKnob {7 padding R 0 500}
+ addUserKnob {41 softness T Crop.softness}
+ addUserKnob {41 reformat T Crop.reformat}
+ addUserKnob {41 crop l "black outside" T Crop.crop}
+ addUserKnob {41 intersect T Crop.intersect}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 619
+  ypos -558
+ }
+ Crop {
+  box {{-parent.padding} {-parent.padding} {width+parent.padding} {height+parent.padding}}
+  name Crop
+  selected true
+  xpos 619
+  ypos -518
+ }
+ Output {
+  name Output1
+  xpos 619
+  ypos -418
+ }
+end_group
+Reformat {
+ name Reformat43
+ selected true
+ xpos -15290
+ ypos -9729
+}
+Group {
+ inputs 0
+ name SNP3_309_028_010_vehicle_trackscaler_beauty_v0013_1
+ tile_color 0x8eccffff
+ label "\n                          <img src=/software/apps/jabuka/7.182.0/tools/python/2.7/noarch/cortex/10.2/GafferJabukaUI/Resources/Icons/denoised_32.png>"
+ selected true
+ xpos -15505
+ ypos -9941
+ icon /software/apps/jabuka/7.182.0/tools/python/2.7/noarch/cortex/10.2/GafferJabukaUI/Resources/Icons/dynamic.png
+ postage_stamp true
+ addUserKnob {20 ieRenderPassLoader l "Render Pass Loader"}
+ addUserKnob {1 ieDisplayName l Name +DISABLED}
+ ieDisplayName vehicle_trackscaler_beauty
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {13 12 11 10 9 8 7 6 5 4 3 2 1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {26 ieAssetInfoSeparator l "  "}
+ addUserKnob {1 __ieAOVs l __AOVs +INVISIBLE}
+ __ieAOVs "\{\"all/data/crypto/cryptoMaterialID\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cryptoMaterialID\", \"loaded\": false\}, \"all/denoised/shading/indirect/indirectEmission\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectEmission_denoised\", \"loaded\": false\}, \"all/original/shading/uv\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"uv\", \"loaded\": false\}, \"all/original/shading/cameraNormals\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cameraNormals\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/01\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/1\", \"loaded\": false\}, \"all/original/shading/specular/direct/directSpecular\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directSpecular\", \"loaded\": false\}, \"all/data/normal\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"normal\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/03\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/3\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/02\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/2\", \"loaded\": false\}, \"all/denoised/shading/specular/indirect/indirectSpecular\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectSpecular_denoised\", \"loaded\": false\}, \"all/data/denoiser/frameOffsetNext\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"frameOffsetNext\", \"loaded\": false\}, \"all/denoised/shading/diffuse/indirect/indirectDiffuse\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectDiffuse_denoised\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/10\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/10\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/11\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/11\", \"loaded\": false\}, \"all/data/motionVectors\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"motionVectors\", \"loaded\": false\}, \"all/data/id/5\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/5\", \"loaded\": false\}, \"all/original/shading/snowGradient\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"snowGradient\", \"loaded\": false\}, \"all/denoised/shading/diffuse/direct/directDiffuse\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directDiffuse_denoised\", \"loaded\": false\}, \"all/data/position\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"position\", \"loaded\": false\}, \"all/data/crypto/cryptoAssetID\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cryptoAssetID\", \"loaded\": false\}, \"all/deep/deepAlpha\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"deepAlpha\", \"loaded\": false\}, \"all/data/id/4\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/4\", \"loaded\": false\}, \"all/original/shading/emission\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"emission\", \"loaded\": false\}, \"all/data/id/6\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/6\", \"loaded\": false\}, \"all/data/id/7\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/7\", \"loaded\": false\}, \"all/data/id/1\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/1\", \"loaded\": false\}, \"all/data/id/2\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/2\", \"loaded\": false\}, \"all/data/id/3\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/3\", \"loaded\": false\}, \"all/denoised/shading/beauty\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"beauty_denoised\", \"loaded\": true\}, \"all/data/id/8\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/8\", \"loaded\": false\}, \"all/data/denoiser/frameOffsetPrev\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"frameOffsetPrev\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/12\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/12\", \"loaded\": false\}, \"all/data/pref\": \{\"status\": \"updated\", \"linkLoaded\": true, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"pref\", \"loaded\": false\}, \"all/original/shading/diffuse/diffuseAlbedo\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"diffuseAlbedo\", \"loaded\": false\}, \"all/denoised/shading/specular/direct/directSpecular\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directSpecular_denoised\", \"loaded\": false\}, \"all/original/shading/indirect/indirectEmission\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectEmission\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/11\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/11\", \"loaded\": false\}, \"all/original/shading/refraction\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"refraction\", \"loaded\": false\}, \"all/original/shading/subsurfaceAlbedo\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"subsurfaceAlbedo\", \"loaded\": false\}, \"all/data/noisiness\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"noisiness\", \"loaded\": false\}, \"all/original/shading/specular/indirect/indirectCoatSpecular\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectCoatSpecular\", \"loaded\": false\}, \"all/original/shading/diffuse/indirect/indirectDiffuse\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectDiffuse\", \"loaded\": false\}, \"all/denoised/shading/subsurface\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"subsurface_denoised\", \"loaded\": false\}, \"all/original/shading/facingRatio\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"facingRatio\", \"loaded\": false\}, \"all/denoised/shading/indirect/indirectSubsurface\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectSubsurface_denoised\", \"loaded\": false\}, \"all/original/shading/specular/indirect/indirectSpecular\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectSpecular\", \"loaded\": false\}, \"all/original/shading/direct/directSubsurface\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directSubsurface\", \"loaded\": false\}, \"all/data/depth\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"depth\", \"loaded\": false\}, \"all/denoised/shading/refraction\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"refraction_denoised\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/10\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/10\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/12\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/12\", \"loaded\": false\}, \"all/original/shading/diffuse/direct/directDiffuse\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directDiffuse\", \"loaded\": false\}, \"all/denoised/shading/direct/directSubsurface\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directSubsurface_denoised\", \"loaded\": false\}, \"all/denoised/shading/specular/indirect/indirectCoatSpecular\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectCoatSpecular_denoised\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/09\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/9\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/08\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/8\", \"loaded\": false\}, \"all/original/shading/subsurface\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"subsurface\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/05\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/5\", \"loaded\": false\}, \"all/data/crypto/cryptomatteInstanceId\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cryptomatteInstanceId\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/07\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/7\", \"loaded\": false\}, \"all/denoised/lightGroup/lightGroupBeauty/06\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/6\", \"loaded\": false\}, \"all/data/crypto/cryptoObjectID\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cryptoObjectID\", \"loaded\": false\}, \"all/data/crypto/cryptoAssetCopyID\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cryptoAssetCopyID\", \"loaded\": false\}, \"all/original/shading/indirect/indirectSubsurface\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectSubsurface\", \"loaded\": false\}, \"all/original/shading/specular/direct/directCoatSpecular\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directCoatSpecular\", \"loaded\": false\}, \"all/original/shading/beauty\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"beauty\", \"loaded\": true\}, \"all/original/lightGroup/lightGroupBeauty/09\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/9\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/08\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/8\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/07\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/7\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/06\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/6\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/05\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/5\", \"loaded\": false\}, \"all/denoised/shading/emission\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"emission_denoised\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/03\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/3\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/02\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/2\", \"loaded\": false\}, \"all/original/lightGroup/lightGroupBeauty/01\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty/1\", \"loaded\": false\}, \"all/denoised/shading/specular/direct/directCoatSpecular\": \{\"status\": \"updated\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directCoatSpecular_denoised\", \"loaded\": false\}\}"
+ addUserKnob {32 ieCreateMissingLinkedReaders l "Create Missing Linked Readers" +STARTLINE}
+ addUserKnob {22 ieReloadReaders l Reload -STARTLINE T "JabukaNuke.JNFn.JNFnRenderPass( nuke.thisNode() ).reloadReaders()"}
+ addUserKnob {3 ieNodeVersion +INVISIBLE}
+ ieNodeVersion 1
+ addUserKnob {4 ieFilterPresets l "Filter Presets" M {All Beauties Deep Denoised Original Data Missing "Version Override" Lock Update}}
+ addUserKnob {1 ieAovFilter l "AOV Filter" t "Custom pattern to filter aovs in the form of '*denoised*' for filtering all the denoised Aovs.\nMultiple patterns can be used if seperated by space like '*denoised* *data*' will filter all the denoised and data Aovs.\nYou can also filter by status for example \"missing\" for all the missing aovs\".\nkey/value filtering is also supported, for example:\n`version=*` matches any aov that has a version override\n`loaded=True` matches any aov that is currently loaded by the node."}
+ addUserKnob {52 ieAovTree l AOV T "JabukaNuke.UI.Widgets.RenderPassLoaderWidget( nuke.thisNode() )" +STARTLINE}
+ addUserKnob {1 ie-pref-Path +INVISIBLE}
+ ie-pref-Path /data/jobs/SNP3/sequences/309-028/shots/SNP3-309-028-010/.jabuka/renderPassLibrary/lighting/vehicle_trackscaler_beauty/versions/0013/aovs/pref/pref.####.exr
+ addUserKnob {3 ie-pref-Last +INVISIBLE}
+ ie-pref-Last 1067
+ addUserKnob {3 ie-pref-First +INVISIBLE}
+ ie-pref-First 1005
+ addUserKnob {1 __ieSelectedItems l __selectedItems +INVISIBLE}
+ __ieSelectedItems "\[\"all/data/pref\"]"
+ addUserKnob {20 ieAdvancedOptions l Options}
+ addUserKnob {6 ieEnableReformat l "Enable Reformat" -STARTLINE}
+ addUserKnob {17 ieAOVFormat l "AOV format"}
+ addUserKnob {4 ieFilter l filter M {"impulse\t\t\tImpulse,Nearest" "cubic\t\t\tCubic,Bilinear,Bicubic" Keys Simon Rifman Mitchell Parzen "notch\t\t\tNotch" "Lanczos4\t\t\tLanczos" Lanczos6 "sinc4\t\t\tSinc4,Sinc"}}
+ ieFilter cubic
+ addUserKnob {4 ieMissingFrame l "Missing Frame" M {error black checkerboard "nearest frame"}}
+ ieMissingFrame black
+ addUserKnob {4 ieBoundingBoxMerge l "Bounding Box Merge" -STARTLINE M {union "B side" "A side"}}
+ ieBoundingBoxMerge "B side"
+ addUserKnob {6 ieDisplayOnlyExistingAOVs l "Display Only Existing AOVs" t "When updating the version we can preverse the AOVs found in the previous version but missing in the new one, or\nonly load the AOVs found in the current version.\nWhen setting this to False, it makes it easier to catch missing AOVs.\nOn the other end, if this is set to True, you are guaranteed that only existing AOVs are displayed in the tree view." +STARTLINE}
+ addUserKnob {6 ieDeepTargetInputAlpha l "Deep Target Input Alpha" +STARTLINE}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> RenderPass\n<B>ieEntityId:</B> 2657892\n<B>ieAssetId:</B> 0\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType RenderPass
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 2657892
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+ ieVersionCreationDate "12-10-2021 16:39:42"
+ addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+ ieVersionCreator christiel
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ ieRelativeToLocation true
+ addUserKnob {32 ieSourceScene l "Open Source Scene" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+}
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/SNP3/sequences/309-028/shots/SNP3-309-028-010/.jabuka/renderPassLibrary/lighting/vehicle_trackscaler_beauty/versions/0013/aovs/beauty/beauty.####.exr
+  first 1005
+  last 1067
+  on_error {{parent.ieMissingFrame}}
+  name Read2
+ }
+ Reformat {
+  format {{{parent.ieAOVFormat}}}
+  filter {{parent.ieFilter}}
+  pbb true
+  name Reformat2
+  disable {{"1 - parent.ieEnableReformat"}}
+ }
+add_layer {beauty beauty.red beauty.green beauty.blue beauty.alpha}
+ Shuffle {
+  out beauty
+  name Shuffle2
+ }
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/SNP3/sequences/309-028/shots/SNP3-309-028-010/.jabuka/renderPassLibrary/lighting/vehicle_trackscaler_beauty/versions/0013/aovs/beauty_denoised/beauty_denoised.####.exr
+  first 1005
+  last 1067
+  on_error {{parent.ieMissingFrame}}
+  name Read1
+ }
+ Reformat {
+  format {{{parent.ieAOVFormat}}}
+  filter {{parent.ieFilter}}
+  pbb true
+  name Reformat1
+  disable {{"1 - parent.ieEnableReformat"}}
+ }
+add_layer {beauty_denoised beauty_denoised.red beauty_denoised.green beauty_denoised.blue beauty_denoised.alpha}
+ Shuffle {
+  out beauty_denoised
+  name Shuffle1
+ }
+ Copy {
+  inputs 2
+  channels beauty
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy1
+ }
+ Output {
+  name Output1
+ }
+end_group
+Group {
+ name vehicle_trackscaler_beauty_pref
+ onCreate "import JabukaNuke;JabukaNuke.JNFn.JNFnRenderPass.LinkedReader.updateReferenceExpression( nuke.thisNode() )"
+ tile_color 0xf0b28e
+ selected true
+ xpos -15505
+ ypos -9813
+ disable {{"\[value \[value ieRenderPassLoaderPath].disable]"}}
+ postage_stamp true
+ addUserKnob {20 ieRenderPassLinkedReader l "Linked Render Pass"}
+ addUserKnob {32 ieUpdateRenderPassReference l "Relink to Render Pass Loader" -STARTLINE}
+ addUserKnob {1 ieRenderPassLoaderPath +DISABLED +INVISIBLE}
+ ieRenderPassLoaderPath "\[value \[topnode].name]"
+ addUserKnob {1 ieAovName +DISABLED +INVISIBLE}
+ ieAovName pref
+ addUserKnob {41 iePreserveBounds__Link l "Preserve Bounding Box" T vehicle_trackscaler_beauty_pref.Reformat1.pbb}
+ addUserKnob {41 ieBlackOutside__Link l "Black Outside" T vehicle_trackscaler_beauty_pref.Reformat1.black_outside}
+ addUserKnob {6 ieRenderPassLoaderLinkedReader -STARTLINE +INVISIBLE}
+ ieRenderPassLoaderLinkedReader true
+ addUserKnob {1 ieRenderPassLoaderLinkedReaderAovTag +INVISIBLE}
+ ieRenderPassLoaderLinkedReaderAovTag all/data/pref
+}
+ Input {
+  inputs 0
+  name Input
+ }
+ Read {
+  inputs 0
+  file_type exr
+  file "\[value \[value parent.ieRenderPassLoaderPath].ie-\[value parent.ieAovName]-Path ]"
+  first {{"\[value \[value parent.ieRenderPassLoaderPath].ie-\[value parent.ieAovName]-First ]"}}
+  last {{"\[value \[value parent.ieRenderPassLoaderPath].ie-\[value parent.ieAovName]-Last ]"}}
+  on_error {{SNP3_309_028_010_vehicle_trackscaler_beauty_v0013_1.ieMissingFrame}}
+  raw true
+  name Read1
+ }
+ Reformat {
+  format {{{SNP3_309_028_010_vehicle_trackscaler_beauty_v0013_1.ieAOVFormat}}}
+  filter {{SNP3_309_028_010_vehicle_trackscaler_beauty_v0013_1.ieFilter}}
+  black_outside true
+  pbb true
+  name Reformat1
+  disable {{"1 - \[value \[value parent.ieRenderPassLoaderPath].ieEnableReformat]"}}
+ }
+ Output {
+  name Output1
+ }
+end_group
+Group {
+ name CropPadded1
+ tile_color 0xad7cbcff
+ gl_color 0xff
+ selected true
+ xpos -15505
+ ypos -9688
+ addUserKnob {20 croppadded l "Crop Padded"}
+ addUserKnob {7 padding R 0 500}
+ addUserKnob {41 softness T Crop.softness}
+ addUserKnob {41 reformat T Crop.reformat}
+ addUserKnob {41 crop l "black outside" T Crop.crop}
+ addUserKnob {41 intersect T Crop.intersect}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 619
+  ypos -558
+ }
+ Crop {
+  box {{-parent.padding} {-parent.padding} {width+parent.padding} {height+parent.padding}}
+  name Crop
+  selected true
+  xpos 619
+  ypos -518
+ }
+ Output {
+  name Output1
+  xpos 619
+  ypos -418
+ }
+end_group
+Reformat {
+ name Reformat42
+ selected true
+ xpos -15505
+ ypos -9662
+}
+PrefProject {
+ inputs 2
+ name PrefProject1
+ label "\nExpects Cropped Inputs "
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 13
+ selected true
+ xpos -15290
+ ypos -9677
+ ProjFrame 1340
+}
+Dot {
+ name Dot199
+ label "  Set Reference Frame"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -15078
+ ypos -9664
+}
