@@ -1,0 +1,609 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Group {
+ name PatchTool2
+ help "This is a faster and lighter alternative to Dneg's own PatchMatch tool."
+ selected true
+ xpos -6262
+ ypos -331
+ addUserKnob {20 patchTool l PatchTool}
+ addUserKnob {4 fillMode l "fill mode" t "Turns patch detail on and off. Also has a \"Detail Only\" mode for use in conjunction with ColourDilates or similar." M {"colour fill" "colour fill + detail" "detail only" "" "" "" "" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {20 colourFill l "colour fill" n 1}
+ addUserKnob {14 fill l "fill amount" t "A higher number will fill a bigger area, though result in a more blurry patch." R 0 100}
+ addUserKnob {20 dirFill l "directional fill" n 1}
+ dirFill 0
+ addUserKnob {14 dirFillLength l length R 0 100}
+ addUserKnob {7 dirFillAngle l angle t "Directional fill angle." R -90 90}
+ addUserKnob {26 space l "" +STARTLINE T " "}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {14 blur l "patch blur" t "Blurs patch colour without affecting the alpha." R 0 100}
+ addUserKnob {14 patchSize l grow/shrink t "Grows or shrinks patch." R -100 100}
+ addUserKnob {14 edgeSoftness l "edge softness" t "Blurs patch edge." R 0 100}
+ addUserKnob {26 space_1 l "" +STARTLINE T " "}
+ addUserKnob {12 colourOffset l offset t "Offsets the colour fill."}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 detail n 1}
+ addUserKnob {4 blendMode l "blending mode" t "Multiply usually works best. Try plus for slightly different result of if multiply produces artefacts." M {multiply plus "" "" "" ""}}
+ addUserKnob {14 detailStrength l strength t "Determines the amount of detail that's added over the Colour Fill." R 0 100}
+ addUserKnob {19 detailSize l size t "Controls the amount of detail added to the patch edge by adjusting the gamma of the detail alpha." R 0.2 5}
+ detailSize {0 0 0 0}
+ addUserKnob {6 detailSize_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 transformDetail l offset t "Offsets the detail." T "\n"}
+ addUserKnob {41 translate T Transform7.translate}
+ addUserKnob {41 rotate T Transform7.rotate}
+ addUserKnob {41 scale T Transform7.scale}
+ addUserKnob {41 skew +INVISIBLE T Transform7.skew}
+ addUserKnob {41 center T Transform7.center}
+ addUserKnob {41 invert_matrix l invert T Transform7.invert_matrix}
+ addUserKnob {41 filter T Transform7.filter}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {6 premult_1 l premultiply t "Premults full image with patch mask. Preserves original bounding box." +STARTLINE}
+ addUserKnob {6 sourceAlpha l "retain source alpha" t "Combines alpha from Mask with Source alpha." -STARTLINE}
+ addUserKnob {26 ""}
+}
+ Input {
+  inputs 0
+  name Source
+  xpos -260
+  ypos -974
+ }
+ Dot {
+  name Dot14
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -226
+  ypos -870
+ }
+set N2429eb50 [stack 0]
+ Dot {
+  name Dot15
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -886
+  ypos -870
+ }
+ Dot {
+  name Dot16
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -886
+  ypos 3162
+ }
+ Input {
+  inputs 0
+  name Mask
+  xpos -1360
+  ypos -974
+  number 1
+ }
+ Shuffle {
+  name Shuffle1
+  xpos -1360
+  ypos -782
+ }
+ Dilate {
+  channels alpha
+  size {{parent.patchSize i} {parent.patchSize i}}
+  name Dilate1
+  xpos -1360
+  ypos -494
+ }
+ Blur {
+  channels alpha
+  size {{parent.edgeSoftness} {parent.edgeSoftness}}
+  name Blur1
+  xpos -1360
+  ypos -404
+ }
+ Crop {
+  box {0 0 {parent.Crop1.box.r} {parent.Crop1.box.t}}
+  intersect true
+  crop false
+  name Crop2
+  xpos -1360
+  ypos -288
+ }
+ Dot {
+  name Dot8
+  note_font "Century Gothic"
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1326
+  ypos -198
+ }
+set N242bc690 [stack 0]
+ Dot {
+  name Dot3
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1326
+  ypos 90
+ }
+set N244c0160 [stack 0]
+ Dot {
+  name Dot4
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1326
+  ypos 762
+ }
+set N242b1e60 [stack 0]
+ Dot {
+  name Dot10
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1326
+  ypos 954
+ }
+push $N242b1e60
+push $N244c0160
+push $N2429eb50
+ Shuffle {
+  alpha black
+  name Shuffle2
+  xpos -260
+  ypos -782
+ }
+ Clamp {
+  maximum_enable false
+  name Clamp1
+  xpos -260
+  ypos -686
+ }
+set N247e0b90 [stack 0]
+ Dot {
+  name Dot63
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -226
+  ypos -582
+ }
+set N247ef860 [stack 0]
+ Dot {
+  name Dot13
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -226
+  ypos -6
+ }
+set N24791c20 [stack 0]
+ Dot {
+  name Dot7
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1106
+  ypos -6
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy6
+  xpos -1140
+  ypos 82
+ }
+ Invert {
+  channels alpha
+  name Invert4
+  xpos -1140
+  ypos 178
+ }
+ Premult {
+  name Premult6
+  xpos -1140
+  ypos 279
+ }
+ VectorBlur {
+  constant {{cos(parent.dirFillAngle/180*pi) i} {sin(parent.dirFillAngle/180*pi) i}}
+  scale {{parent.dirFillLength i}}
+  name VectorBlur1
+  xpos -1140
+  ypos 368
+ }
+ Blur {
+  size {{parent.fill} {parent.fill}}
+  name Blur14
+  xpos -1140
+  ypos 429
+ }
+ Unpremult {
+  name Unpremult1
+  xpos -1140
+  ypos 567
+ }
+ Transform {
+  translate {{parent.colourOffset} {parent.colourOffset}}
+  center {1024 778}
+  name Transform1
+  xpos -1140
+  ypos 663
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy7
+  xpos -1140
+  ypos 754
+ }
+ Blur {
+  channels rgb
+  size {{parent.blur i} {parent.blur i}}
+  name Blur2
+  xpos -1140
+  ypos 844
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -1140
+  ypos 951
+ }
+ Premult {
+  name Premult7
+  xpos -1140
+  ypos 1047
+ }
+ Dot {
+  name Dot11
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1106
+  ypos 1146
+ }
+set N24152970 [stack 0]
+ Dot {
+  name Dot28
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1106
+  ypos 2682
+ }
+push $N247ef860
+ Dot {
+  name Dot66
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1766
+  ypos -582
+ }
+ Transform {
+  center {2048 1267}
+  name Transform7
+  xpos -1800
+  ypos -489
+ }
+ Dot {
+  name Dot6
+  note_font "Century Gothic"
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1766
+  ypos -390
+ }
+set N240917b0 [stack 0]
+ Dot {
+  name Dot67
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1986
+  ypos -390
+ }
+set N24096890 [stack 0]
+ Dot {
+  name Dot70
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -2426
+  ypos -390
+ }
+ Dot {
+  name Dot71
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -2426
+  ypos -6
+ }
+push $N240917b0
+ Blur {
+  size {{parent.detailStrength i} {parent.detailStrength i}}
+  name Blur18
+  xpos -1800
+  ypos -212
+ }
+set N240a55a0 [stack 0]
+ Dot {
+  name Dot20
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -2206
+  ypos -198
+ }
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge18
+  xpos -2240
+  ypos -14
+ }
+ Dot {
+  name Dot21
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -2206
+  ypos 186
+ }
+push $N24096890
+ Dot {
+  name Dot64
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1986
+  ypos -6
+ }
+push $N240a55a0
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge16
+  xpos -1800
+  ypos -10
+ }
+ Switch {
+  inputs 2
+  which {{parent.parent.PatchTool2.blendMode}}
+  name Switch5
+  xpos -1800
+  ypos 183
+ }
+ Crop {
+  box {0 0 {"\[python nuke.thisNode().input(0).width()]"} {"\[python nuke.thisNode().input(0).height()]"}}
+  intersect true
+  crop false
+  name Crop1
+  xpos -1800
+  ypos 1527
+ }
+ Dot {
+  name Dot5
+  note_font "Century Gothic"
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1766
+  ypos 1626
+ }
+set N242df320 [stack 0]
+ Dot {
+  name Dot23
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -2206
+  ypos 1626
+ }
+ Dot {
+  name Dot72
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -2206
+  ypos 2010
+ }
+push $N242bc690
+push $N247e0b90
+ Dot {
+  name Dot25
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -446
+  ypos -678
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -480
+  ypos -206
+ }
+ Dot {
+  name Dot24
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -446
+  ypos 1338
+ }
+push $N24152970
+push $N24791c20
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos -260
+  ypos 1138
+ }
+ Switch {
+  inputs 2
+  which {{"clamp((parent.parent.PatchTool2.fillMode-1), 0, 1)" i}}
+  name Switch6
+  xpos -260
+  ypos 1335
+ }
+ Dot {
+  name Dot68
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -226
+  ypos 1530
+ }
+set N2431f0b0 [stack 0]
+ Dot {
+  name Dot1
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1546
+  ypos 1530
+ }
+ Grade {
+  channels alpha
+  gamma {{parent.detailSize i}}
+  black_clamp false
+  white_clamp true
+  name Grade2
+  xpos -1580
+  ypos 1810
+ }
+set N244d9190 [stack 0]
+ Dot {
+  name Dot22
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1986
+  ypos 1818
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  maskChannelInput rgba.alpha
+  name Merge19
+  xpos -2020
+  ypos 1996
+ }
+ Dot {
+  name Dot74
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1986
+  ypos 2202
+ }
+push $N242df320
+ Dot {
+  name Dot65
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1766
+  ypos 2010
+ }
+push $N244d9190
+ Merge2 {
+  inputs 2
+  operation multiply
+  bbox B
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  maskChannelInput rgba.alpha
+  name Merge2
+  xpos -1580
+  ypos 1996
+ }
+ Switch {
+  inputs 2
+  which {{parent.parent.PatchTool2.blendMode i}}
+  name Switch1
+  xpos -1580
+  ypos 2199
+ }
+ Dot {
+  name Dot2
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -1546
+  ypos 2394
+ }
+push $N2431f0b0
+ Switch {
+  inputs 2
+  which {{"clamp(parent.parent.PatchTool2.fillMode, 0, 1)" i}}
+  name Switch2
+  xpos -260
+  ypos 2391
+ }
+ Dot {
+  name Dot27
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -226
+  ypos 2586
+ }
+set N23fc5660 [stack 0]
+ Dot {
+  name Dot26
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -446
+  ypos 2586
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox2
+  xpos -480
+  ypos 2679
+ }
+ Premult {
+  name Premult1
+  xpos -480
+  ypos 2775
+ }
+ Dot {
+  name Dot12
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -446
+  ypos 2874
+ }
+push $N23fc5660
+ Switch {
+  inputs 2
+  which {{parent.premult_1 i}}
+  name Switch3
+  xpos -260
+  ypos 2871
+ }
+ Dot {
+  name Dot18
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -226
+  ypos 3066
+ }
+set N23fecd40 [stack 0]
+ Dot {
+  name Dot17
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -446
+  ypos 3066
+ }
+ ChannelMerge {
+  inputs 2
+  name ChannelMerge1
+  xpos -480
+  ypos 3154
+ }
+ Dot {
+  name Dot19
+  note_font_size 42
+  note_font_color 0xadffff
+  xpos -446
+  ypos 3258
+ }
+push $N23fecd40
+ Switch {
+  inputs 2
+  which {{parent.sourceAlpha i}}
+  name Switch4
+  xpos -260
+  ypos 3255
+ }
+ Output {
+  name Output1
+  xpos -260
+  ypos 3447
+ }
+end_group
