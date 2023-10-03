@@ -1,0 +1,172 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Group {
+ name Keep
+ tile_color 0x9e3c63ff
+ selected true
+ xpos -5433
+ ypos -312
+ addUserKnob {20 Keep}
+ addUserKnob {41 channels T Remove6.channels}
+ addUserKnob {41 channels2 l and T Remove6.channels2}
+ addUserKnob {41 channels3 l and T Remove6.channels3}
+ addUserKnob {41 channels4 l and T Remove6.channels4}
+ addUserKnob {41 channels_1 l and T Remove8.channels}
+ addUserKnob {41 channels2_1 l and T Remove8.channels2}
+ addUserKnob {41 channels3_1 l and T Remove8.channels3}
+ addUserKnob {41 channels4_1 l and T Remove8.channels4}
+ addUserKnob {41 channels_2 l and T Remove7.channels}
+ addUserKnob {41 channels2_2 l and T Remove7.channels2}
+ addUserKnob {41 channels3_2 l and T Remove7.channels3}
+ addUserKnob {41 channels4_2 l and T Remove7.channels4}
+ addUserKnob {41 channels_3 l and T Remove9.channels}
+ addUserKnob {41 channels2_3 l and T Remove9.channels2}
+ addUserKnob {41 channels3_3 l and T Remove9.channels3}
+ addUserKnob {41 channels4_3 l and T Remove9.channels4}
+ addUserKnob {41 channels_4 l and T Remove10.channels}
+ addUserKnob {41 channels2_4 l and T Remove10.channels2}
+ addUserKnob {41 channels3_4 l and T Remove10.channels3}
+ addUserKnob {41 channels4_4 l and T Remove10.channels4}
+ addUserKnob {20 Version}
+ addUserKnob {26 nodeInfo l "" +STARTLINE T "Keep v1.0\n\nDoes the opposite of the remove node but in a more 'useful' keep fashion. "}
+ addUserKnob {26 ""}
+ addUserKnob {26 vesrionInfo l "" +STARTLINE T "Version Release: 1.0\n\nAuthors: Adrian Metzelaar (ametzelaar)\n\nLast Edited By: Enrik Pavdeja (epavdeja)\n\nRelease Date: 16/09/2016"}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -260
+  ypos 710
+ }
+ Dot {
+  name Dot68
+  xpos -226
+  ypos 810
+ }
+set N22b6d9e0 [stack 0]
+ Dot {
+  name Dot3
+  xpos -336
+  ypos 810
+ }
+set N23753d00 [stack 0]
+ Dot {
+  name Dot67
+  xpos -446
+  ypos 810
+ }
+set N2374d250 [stack 0]
+ Dot {
+  name Dot2
+  xpos -556
+  ypos 810
+ }
+set N248c24a0 [stack 0]
+ Dot {
+  name Dot69
+  xpos -666
+  ypos 810
+ }
+ Remove {
+  operation keep
+  channels rgba
+  channels2 depth
+  name Remove6
+  xpos -694
+  ypos 902
+ }
+ Dot {
+  name Dot1
+  xpos -666
+  ypos 1002
+ }
+push $N248c24a0
+ Remove {
+  operation keep
+  channels none
+  name Remove7
+  xpos -590
+  ypos 896
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy1
+  xpos -590
+  ypos 986
+ }
+ Dot {
+  name Dot6
+  xpos -556
+  ypos 1098
+ }
+push $N2374d250
+ Remove {
+  operation keep
+  channels none
+  name Remove8
+  xpos -480
+  ypos 896
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy2
+  xpos -480
+  ypos 1082
+ }
+ Dot {
+  name Dot5
+  xpos -446
+  ypos 1194
+ }
+push $N23753d00
+ Remove {
+  operation keep
+  channels none
+  name Remove9
+  xpos -370
+  ypos 896
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy3
+  xpos -370
+  ypos 1178
+ }
+ Dot {
+  name Dot4
+  xpos -336
+  ypos 1290
+ }
+push $N22b6d9e0
+ Remove {
+  operation keep
+  channels none
+  name Remove10
+  xpos -260
+  ypos 896
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy4
+  xpos -260
+  ypos 1274
+ }
+ Output {
+  name Output1
+  xpos -260
+  ypos 1382
+ }
+end_group
