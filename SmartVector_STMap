@@ -1,0 +1,150 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name " 15"
+ tile_color 0x444444ff
+ label "  SmartVector ST Map"
+ note_font "Arial Black"
+ note_font_size 60
+ note_font_color 0x7e7e7eff
+ selected true
+ xpos -12604
+ ypos 5851
+ bdwidth 773
+ bdheight 962
+ z_order -1
+}
+push $cut_paste_input
+Dot {
+ name Dot58
+ label "  PLATE"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -12242
+ ypos 6047
+}
+Crop {
+ box {0 0 2102 1462}
+ name Crop1
+ selected true
+ xpos -12276
+ ypos 6080
+}
+Dot {
+ name Dot54
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -12242
+ ypos 6128
+}
+set N8c8c1750 [stack 0]
+SmartVector {
+ vectorDetailReg 1
+ Advanced 1
+ flickerCompensation true
+ Tolerances 1
+ name SmartVector2
+ selected true
+ xpos -12276
+ ypos 6195
+}
+VectorDistort {
+ referenceFrame 1031
+ reference_frame_set true
+ outputMode st-map
+ last_output_mode st-map
+ name VectorDistort1
+ label "Ref Frame: \[value referenceFrame]"
+ selected true
+ xpos -12276
+ ypos 6265
+}
+ModifyMetaData {
+ metadata {
+  {remove exr/chunkCount ""}
+  {remove exr/jabuka* ""}
+  {set exr/jabukaSourceScene /data/jobs/VNM2/sequences/DOB/shots/VNM2-DOB-1050/.jabuka/sceneLibrary/nuke/comp/smartVectorTest/versions/0001/sceneBackup/VNM2_DOB_VNM2-DOB-1050_comp_smartVectorTest_v0001.0002.nk}
+  {set exr/jabukaSourceList "\[(2016107,1,\[])]"}
+  {set exr/jabukaContents "/VNM2/DOB/VNM2-DOB-1050/assets/cine/bg/plate_denoised v1"}
+  {set exr/jabukaNukeUnpublishedFiles "\[]"}
+  {set exr/jabukaSourceSceneSet "set(\['/data/jobs/VNM2/sequences/DOB/shots/VNM2-DOB-1050/.jabuka/sceneLibrary/nuke/comp/smartVectorTest/versions/0001/sceneBackup/VNM2_DOB_VNM2-DOB-1050_comp_smartVectorTest_v0001.0002.nk'])"}
+ }
+ name JabukaMetaData_Write_preComp_smartVectorSTMap1031_2
+ selected true
+ xpos -12276
+ ypos 6303
+}
+Blur {
+ inputs 0
+ channels rgb
+ size 25
+ name Blur19
+ selected true
+ xpos -12276
+ ypos 6517
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard2
+ selected true
+ xpos -12112
+ ypos 6572
+}
+STMap {
+ inputs 2
+ uv rgb
+ name STMap4
+ selected true
+ xpos -12276
+ ypos 6589
+}
+push $N8c8c1750
+Dot {
+ name Dot56
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -12481
+ ypos 6128
+}
+Dot {
+ name Dot57
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -12481
+ ypos 6664
+}
+Merge2 {
+ inputs 2
+ mix 0.2
+ name Merge46
+ selected true
+ xpos -12276
+ ypos 6660
+}
+Dot {
+ name Dot59
+ label "  QC"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -12242
+ ypos 6740
+}
+StickyNote {
+ inputs 0
+ name StickyNote6
+ label "Don't forget to name your precomp \nwith the reference frame you are using\nin your VectorDistort node"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 15
+ selected true
+ xpos -12144
+ ypos 6320
+}
