@@ -1,0 +1,88 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Reformat {
+ pbb true
+ name Reformat19
+ selected true
+ xpos -10748
+ ypos -6470
+}
+set N27f8e900 [stack 0]
+add_layer {directDiffuse directDiffuse.red directDiffuse.green directDiffuse.blue directDiffuse.alpha}
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 directDiffuse
+ fromInput2 {{0} B}
+ mappings "4 directDiffuse.red 0 0 rgba.red 0 0 directDiffuse.green 0 1 rgba.green 0 1 directDiffuse.blue 0 2 rgba.blue 0 2 directDiffuse.alpha 0 3 rgba.alpha 0 3"
+ name Shuffle28
+ label "\[value in1]"
+ selected true
+ xpos -10707
+ ypos -6402
+}
+push $N27f8e900
+add_layer {diffuseAlbedo diffuseAlbedo.red diffuseAlbedo.green diffuseAlbedo.blue diffuseAlbedo.alpha}
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 diffuseAlbedo
+ fromInput2 {{0} B}
+ mappings "4 diffuseAlbedo.red 0 0 rgba.red 0 0 diffuseAlbedo.green 0 1 rgba.green 0 1 diffuseAlbedo.blue 0 2 rgba.blue 0 2 diffuseAlbedo.alpha 0 3 rgba.alpha 0 3"
+ name Shuffle27
+ label "\[value in1]"
+ selected true
+ xpos -10822
+ ypos -6392
+}
+set N27fb5c00 [stack 0]
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge100
+ selected true
+ xpos -10754
+ ypos -6324
+}
+ColorCorrect {
+ channels rgba
+ midtones.gain 2.2
+ highlights.gamma 0.88
+ highlights.gain 0.68
+ lookup {shadow {}
+   midtone {}
+   highlight {curve x2.578944683 0 s0 x3.990383148 1 s0}}
+ name ColorCorrect23
+ selected true
+ xpos -10754
+ ypos -6298
+}
+push $N27fb5c00
+push $N27f8e900
+add_layer {subsurfaceAlbedo subsurfaceAlbedo.red subsurfaceAlbedo.green subsurfaceAlbedo.blue subsurfaceAlbedo.alpha}
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 subsurfaceAlbedo
+ fromInput2 {{0} B}
+ mappings "4 subsurfaceAlbedo.red 0 0 rgba.red 0 0 subsurfaceAlbedo.green 0 1 rgba.green 0 1 subsurfaceAlbedo.blue 0 2 rgba.blue 0 2 subsurfaceAlbedo.alpha 0 3 rgba.alpha 0 3"
+ name Shuffle29
+ label "\[value in1]"
+ selected true
+ xpos -10529
+ ypos -6411
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge102
+ selected true
+ xpos -10554
+ ypos -6348
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge101
+ selected true
+ xpos -10603
+ ypos -6226
+}
