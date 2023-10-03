@@ -1,0 +1,483 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode28
+ tile_color 0x3f4f61ff
+ label "<font color = yellow>Ambient occlusion on Ground plane and objects"
+ note_font_size 42
+ selected true
+ xpos -12785
+ ypos 4904
+ bdwidth 795
+ bdheight 967
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode32
+ tile_color 0x3f4f61ff
+ label "<font color = yellow>RayRender Reflection example"
+ note_font_size 42
+ selected true
+ xpos -12576
+ ypos 3482
+ bdwidth 1477
+ bdheight 1316
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode33
+ tile_color 0x314153ff
+ label "<< Replace with your Geometry >>"
+ note_font_size 42
+ selected true
+ xpos -12690
+ ypos 5228
+ appearance Border
+ bdwidth 605
+ bdheight 367
+ z_order 1
+}
+StickyNote {
+ inputs 0
+ name StickyNote11
+ label "<b>RayRender settings:</b><br>- Adjust the \"samples \"in the MotionBlur tab\n- Adjust \"Stochastic samples\" in the Rayrender tab\nFind the right balance between those two settings to get noise free renders"
+ note_font "DejaVu Sans"
+ selected true
+ xpos -12697
+ ypos 5740
+}
+Camera2 {
+ inputs 0
+ translate {0 2.082196951 6.870875359}
+ rotate {-11.58751923 0 0}
+ focal 20
+ name Camera1
+ selected true
+ xpos -12198
+ ypos 5670
+}
+Constant {
+ inputs 0
+ channels rgb
+ color 1
+ name Constant1
+ selected true
+ xpos -12428
+ ypos 5115
+}
+AmbientOcclusion {
+ name AmbientOcclusion1
+ selected true
+ xpos -12318
+ ypos 5138
+}
+Dot {
+ name Dot6
+ selected true
+ xpos -12290
+ ypos 5304
+}
+set N8c2e1660 [stack 0]
+Dot {
+ name Dot58
+ selected true
+ xpos -12400
+ ypos 5304
+}
+set N84131910 [stack 0]
+Dot {
+ name Dot52
+ selected true
+ xpos -12510
+ ypos 5304
+}
+set N84bcc390 [stack 0]
+Dot {
+ name Dot41
+ selected true
+ xpos -12620
+ ypos 5304
+}
+Cylinder {
+ close_top true
+ close_bottom true
+ translate {2.580002546 0.9700001478 0}
+ uniform_scale 0.7
+ name Cylinder1
+ selected true
+ xpos -12648
+ ypos 5402
+}
+push $N84bcc390
+Cube {
+ translate {-2.2 0.4600000083 0}
+ rotate {0 -30 0}
+ name Cube3
+ selected true
+ xpos -12538
+ ypos 5402
+}
+push $N8c2e1660
+Card2 {
+ rows 50
+ columns 50
+ translate {0 -6.862686064e-08 -1.570000052}
+ rotate {-90 0 0}
+ scaling {1.7 2.1 1}
+ uniform_scale 10
+ type bicubic
+ uv_position {0.3525638878 0.3525638878}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.3798828125 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.126627624 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.3798828125 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.126627624 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.3798828125 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.126627624 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1266276091 0} 0 {0 -0.1266276091 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1266276091 0} 0 {0 -0.1266276091 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1266276091 0} 0 {0 -0.1266276091 0} 0 {1 0.5 0} 
+1 {-0.5119999647 0.09499999881 0.5059999824} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.126627624 0} 0 {0 1 0} 
+1 {-0.01199999452 0.09499999881 0.5059999824} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.126627624 0} 0 {0.5 1 0} 
+1 {0.4880000055 0.09499999881 0.5059999824} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.126627624 0} 0 {1 1 0} }
+ drawPosition {-0.147436142 -0.1120169163 0}
+ name Card1
+ selected true
+ xpos -12318
+ ypos 5402
+}
+push $N84131910
+Sphere {
+ translate {0 0.9200000167 0}
+ name Sphere1
+ selected true
+ xpos -12428
+ ypos 5402
+}
+Scene {
+ inputs 4
+ name Scene1
+ selected true
+ xpos -12308
+ ypos 5478
+}
+push 0
+RayRender {
+ inputs 3
+ stochastic_samples 5
+ shutteroffset centred
+ name RayRender1
+ selected true
+ xpos -12318
+ ypos 5690
+}
+Dot {
+ name Dot80
+ selected true
+ xpos -12290
+ ypos 5952
+}
+Camera2 {
+ inputs 0
+ translate {0 2.082196951 6.870875359}
+ rotate {-11.58751923 0 0}
+ focal 20
+ far 1000
+ name Camera3
+ selected true
+ xpos -12088
+ ypos 4374
+}
+NoOp {
+ name CAMERA_FIX
+ selected true
+ xpos -11988
+ ypos 4394
+ addUserKnob {20 User}
+ addUserKnob {22 fix_camera l "I can't see anything. Help!" T "# Get the camera plugged into this node and save as a variable.\n\nnode = nuke.thisNode().input(0)\n\nif node:    \n\n    if node.Class() == 'Camera2':\n    \n        # Remove animation from far clipping plane and set to a better value.\n        node.knob('far').clearAnimated()\n        node.knob('far').setValue(node.knob('far').value()/10)\n        \n        # if the fStop knob has a value of 0, set it to something else.\n        node.knob('fstop').clearAnimated()\n        if node.knob('fstop').value() == 0:\n            node.knob('fstop').setValue(16)\n            \n    else:\n        nuke.message(\"Please connect this node's input directly to the camera node.\")\n\nelse:        \n    nuke.message(\"Please connect this node's input directly to the camera node.\")" +STARTLINE}
+ addUserKnob {26 _1 l "" +STARTLINE T "<font color=\"grey\"><br><i>If your RayRender is rendering black, or showing unexpected results, <br>connect the input of this node to your camera, and press the button above.<br><br>RayRender does not like cameras with far clipping planes at <br>extreme examples, and this node fixes that.</I></font>"}
+}
+Dot {
+ name Dot125
+ selected true
+ xpos -11850
+ ypos 4392
+}
+set Nac9ca260 [stack 0]
+Read {
+ inputs 0
+ file_type exr
+ file /data/.jabuka/elementLibrary/panorama/Sky_Ocean_Daylight/versions/0004/vars/original/Sky_Ocean_Daylight_original.%06d.exr
+ format "23116 11558 0 0 23116 11558 1 "
+ last 100
+ frame_mode "start at"
+ frame 1001
+ origset true
+ colorspace linear
+ name Sky_Ocean_Daylight_v0004_1_original
+ selected true
+ xpos -12208
+ ypos 3783
+ icon /software/apps/jabuka/7.205.3/tools/python/2.7/noarch/cortex/10.3/GafferJabukaUI/Resources/Icons/dynamic.png
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> Element\n<B>ieEntityId:</B> 773070\n<B>ieAssetId:</B> 0\n<B>ieCopyId:</B> 1\n<B>ieNodeTag:</B> original\n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Element
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 773070
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ ieNodeTag original
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "<span style=\"color:Silver\">Bundle Version </span>" t "\nThis entity is not part\nof a bundle." +DISABLED}
+ addUserKnob {1 ieDisplayName l Name +DISABLED}
+ ieDisplayName Sky_Ocean_Daylight
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {4 3 2 1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+ ieVersionCreationDate "04-04-2017 12:55:56"
+ addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+ ieVersionCreator mathiasl
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ ieRelativeToLocation true
+ addUserKnob {32 ieSourceScene l "Open Source Scene" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {4 ieVar l Var M {original}}
+ addUserKnob {4 ieProxy l Proxy M {original}}
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/.jabuka/elementLibrary/panorama/Sky_Ocean_Daylight/versions/0004/vars/original/Sky_Ocean_Daylight_original.%06d.exr
+ addUserKnob {32 ieUpdatePaths l "Update Paths" -STARTLINE}
+ addUserKnob {1 ieProxySequencePath l ProxySequencePath}
+}
+Reformat {
+ type scale
+ scale 0.1
+ name Reformat1
+ selected true
+ xpos -12208
+ ypos 3914
+}
+Grade {
+ white 0.32
+ multiply {0.5450000167 1 1.455000043 1}
+ black_clamp false
+ name Grade7
+ selected true
+ xpos -12208
+ ypos 3986
+}
+Sphere {
+ uniform_scale 1000
+ name Sphere4
+ selected true
+ xpos -12208
+ ypos 4058
+}
+Dot {
+ name Dot78
+ selected true
+ xpos -12180
+ ypos 4176
+}
+push $cut_paste_input
+Reflection {
+ name Reflection1
+ selected true
+ xpos -11768
+ ypos 3698
+}
+Sphere {
+ translate {0 0.9200000167 0}
+ name Sphere3
+ selected true
+ xpos -11768
+ ypos 3746
+}
+CheckerBoard2 {
+ inputs 0
+ centerlinewidth 0
+ name CheckerBoard1
+ selected true
+ xpos -11438
+ ypos 3891
+}
+set Nb4099a90 [stack 0]
+Card2 {
+ rows 50
+ columns 50
+ translate {0 -6.862686064e-08 -1.570000052}
+ rotate {-90 0 0}
+ scaling {1.7 2.1 1}
+ uniform_scale 10
+ uv_position {0.3525638878 0.3525638878}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.3798828125 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.126627624 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.3798828125 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.126627624 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.3798828125 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.126627624 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1266276091 0} 0 {0 -0.1266276091 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1266276091 0} 0 {0 -0.1266276091 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1266276091 0} 0 {0 -0.1266276091 0} 0 {1 0.5 0} 
+1 {-0.5119999647 0.09499999881 0.5059999824} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.126627624 0} 0 {0 1 0} 
+1 {-0.01199999452 0.09499999881 0.5059999824} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.126627624 0} 0 {0.5 1 0} 
+1 {0.4880000055 0.09499999881 0.5059999824} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.126627624 0} 0 {1 1 0} }
+ drawPosition {-0.147436142 -0.1120169163 0}
+ name Card3
+ selected true
+ xpos -11438
+ ypos 4058
+}
+Dot {
+ name Dot75
+ selected true
+ xpos -11410
+ ypos 4128
+}
+push $Nb4099a90
+Grade {
+ white {1.866666675 -0.7333332896 1.866666675 1}
+ black_clamp false
+ name Grade13
+ selected true
+ xpos -11548
+ ypos 4010
+}
+Cylinder {
+ close_top true
+ close_bottom true
+ translate {2.580002546 0.9700001478 0}
+ rotate {0 150 0}
+ uniform_scale 0.7
+ name Cylinder2
+ selected true
+ xpos -11548
+ ypos 4058
+}
+Dot {
+ name Dot77
+ selected true
+ xpos -11520
+ ypos 4104
+}
+push $Nb4099a90
+Grade {
+ white {0.1999999732 2.600000143 0.1999999732 1}
+ black_clamp false
+ name Grade12
+ selected true
+ xpos -11328
+ ypos 4010
+}
+Cube {
+ translate {-2.2 0.4600000083 0}
+ rotate {0 -30 0}
+ name Cube2
+ selected true
+ xpos -11328
+ ypos 4058
+}
+Dot {
+ name Dot74
+ selected true
+ xpos -11300
+ ypos 4176
+}
+Scene {
+ inputs 5
+ name Scene9
+ selected true
+ xpos -11758
+ ypos 4158
+}
+Dot {
+ name Dot124
+ selected true
+ xpos -11740
+ ypos 4272
+}
+set Nadaf0170 [stack 0]
+push 0
+RayRender {
+ inputs 3
+ stochastic_samples 10
+ shutteroffset centred
+ remove_from_beauty false
+ name RayRender3
+ selected true
+ xpos -11768
+ ypos 4466
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge7
+ selected true
+ xpos -11768
+ ypos 5954
+}
+StickyNote {
+ inputs 0
+ name StickyNote6
+ label "You can combine it with ambient Occlusion"
+ note_font "DejaVu Sans"
+ selected true
+ xpos -11839
+ ypos 5810
+}
+push $Nac9ca260
+Dot {
+ name Dot129
+ selected true
+ xpos -11630
+ ypos 4392
+}
+push $Nadaf0170
+Dot {
+ name Dot123
+ selected true
+ xpos -11520
+ ypos 4272
+}
+push 0
+add_layer {ReflectionAOV ReflectionAOV.red ReflectionAOV.green ReflectionAOV.blue ReflectionAOV.alpha}
+RayRender {
+ inputs 3
+ stochastic_samples 10
+ shutteroffset centred
+ output_shader_vectors true
+ remove_from_beauty false
+ AOV_Reflection ReflectionAOV
+ name RayRender6
+ selected true
+ xpos -11548
+ ypos 4466
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 ReflectionAOV
+ fromInput2 {{0} B}
+ in2 alpha
+ mappings "4 ReflectionAOV.red 0 0 rgba.red 0 0 ReflectionAOV.green 0 1 rgba.green 0 1 ReflectionAOV.blue 0 2 rgba.blue 0 2 rgba.alpha 1 0 rgba.alpha 0 3"
+ name Shuffle6
+ label "\[value in1]"
+ selected true
+ xpos -11548
+ ypos 4532
+}
+StickyNote {
+ inputs 0
+ name StickyNote7
+ label "<< if you want to output the reflection as its own channel<br> you can do it in the \"AOVs\" tab of the RayRender"
+ note_font "DejaVu Sans"
+ selected true
+ xpos -11443
+ ypos 4456
+}
