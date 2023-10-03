@@ -1,0 +1,1554 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name SNOWTASTIC_1
+ tile_color 0x7f7f7fff
+ label "<center>\[value name] "
+ note_font "Arial Black"
+ note_font_size 100
+ note_font_color 0x363636ff
+ selected true
+ xpos -6850
+ ypos 205
+ bdwidth 1855
+ bdheight 1645
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name " 19"
+ tile_color 0x3b3b3bff
+ label "<center>Particle Texture"
+ note_font "Arial Black"
+ note_font_size 40
+ note_font_color 0x5b7d89ff
+ selected true
+ xpos -6337
+ ypos 447
+ bdwidth 398
+ bdheight 352
+}
+BackdropNode {
+ inputs 0
+ name " 2"
+ tile_color 0x131313ff
+ gl_color 0xff
+ label "<center>AUTO SPAWN REGION NODES"
+ note_font "Arial Black"
+ note_font_size 20
+ note_font_color 0xff0000ff
+ selected true
+ xpos -5922
+ ypos 581
+ appearance Border
+ border_width 10
+ bdwidth 375
+ bdheight 211
+ z_order 1
+}
+Dot {
+ inputs 0
+ name Dot14
+ tile_color 0xffff
+ label "  <font color=\"yellow\"> \nPlug in Deep Scene\n<font color=\"#c90000\">(do not delete dot)\n"
+ note_font "Arial Black"
+ note_font_size 30
+ note_font_color 0xff
+ selected true
+ xpos -5457
+ ypos 1497
+}
+set N221e3800 [stack 0]
+Camera2 {
+ inputs 0
+ translate {{"(\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.x)*(\[value SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraspeed])"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.y"} {"(\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.z)*(\[value SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].cameraspeed])"}}
+ rotate {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.z"}}
+ scaling {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.z"}}
+ uniform_scale {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].uniform_scale"}}
+ skew {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.z"}}
+ pivot_translate {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.z"}}
+ focal {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].focal"}}
+ haperture {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].haperture"}}
+ vaperture {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].vaperture"}}
+ near {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].near"}}
+ far {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].far"}}
+ win_translate {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_translate.u"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_translate.v"}}
+ win_scale {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_scale.u"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_scale.v"}}
+ winroll {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].winroll"}}
+ focal_point {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].focal_point"}}
+ fstop {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].fstop"}}
+ name SnowtasticDummyCameraAuto_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -6014
+ ypos 1192
+}
+Camera2 {
+ inputs 0
+ translate {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].translate.z"}}
+ rotate {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].rotate.z"}}
+ scaling {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].scaling.z"}}
+ uniform_scale {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].uniform_scale"}}
+ skew {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].skew.z"}}
+ pivot_translate {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.x"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.y"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].pivot.z"}}
+ focal {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].focal"}}
+ haperture {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].haperture"}}
+ vaperture {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].vaperture"}}
+ near {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].near"}}
+ far {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].far"}}
+ win_translate {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_translate.u"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_translate.v"}}
+ win_scale {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_scale.u"} {"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].win_scale.v"}}
+ winroll {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].winroll"}}
+ focal_point {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].focal_point"}}
+ fstop {{"\[topnode SnowtasticCameraDot_\[lindex \[split \[value name] _] 1].input].fstop"}}
+ name SnowtasticDummyCameraManual_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -6014
+ ypos 1333
+}
+Switch {
+ inputs 2
+ which {{SNOWTASTIC_CONTROLS_1.mode}}
+ name SnowtasticModeCameraSwitch_1
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -6024
+ ypos 1273
+}
+set N22f25ea0 [stack 0]
+Group {
+ inputs 0
+ name SnowtasticSnowflakes_1
+ label "\nMode:\n\[value mode]\n."
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 20
+ selected true
+ xpos -6184
+ ypos 581
+ addUserKnob {20 User l "Snowtastic Snowflakes"}
+ addUserKnob {4 mode l Mode M {Render "Snowflake Textures"}}
+ addUserKnob {26 text l " " -STARTLINE T "<i><font color=grey>Auto switches to render mode on the farm"}
+ addUserKnob {7 scaletexture l "Scale Texture" R 0 5}
+ scaletexture 2.5
+ addUserKnob {7 resolution l "Scale Resolution" R 0.1 10}
+ resolution 1
+ addUserKnob {19 Grade1_gamma l Gamma +INVISIBLE R 0.2 5}
+ Grade1_gamma {{parent.SNOWTASTIC_CONTROLS_1.gamma}}
+ addUserKnob {6 Grade1_gamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 Grade1_white l Gain +INVISIBLE R 0 4}
+ Grade1_white {{parent.SNOWTASTIC_CONTROLS_1.gain}}
+ addUserKnob {6 Grade1_white_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {3 randomseed l "Random Seed"}
+ randomseed 1
+}
+ Reformat {
+  inputs 0
+  format "200 200 0 0 200 200 1 200sq"
+  pbb true
+  name Reformat7
+  xpos 533
+  ypos 121
+ }
+ Reformat {
+  type scale
+  scale {{resolution}}
+  pbb true
+  name Reformat1
+  xpos 533
+  ypos 159
+ }
+ Dot {
+  name Dot56
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 567
+  ypos 222
+ }
+set N246c4700 [stack 0]
+ Noise {
+  replace true
+  size {{14*scaletexture*resolution}}
+  zoffset {{curve*(randomseed+1) x1 1 x1000 1000}}
+  gamma 0.455
+  center {960 540}
+  name Noise5
+  xpos 667
+  ypos 309
+ }
+push 0
+push $N246c4700
+ Noise {
+  replace true
+  size {{135*scaletexture*resolution}}
+  zoffset {{curve*2*(randomseed+1) x1 1 x1000 1000}}
+  center {960 540}
+  name Noise6
+  xpos 335
+  ypos 218
+ }
+push $N246c4700
+ Noise {
+  replace true
+  size {{290*scaletexture*resolution}}
+  zoffset {{curve*(randomseed+1) x1 1 x1000 1000}}
+  gamma 0.235
+  center {960 540}
+  name Noise7
+  xpos 427
+  ypos 262
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge14
+  xpos 335
+  ypos 309
+ }
+push $N246c4700
+ Radial {
+  area {0 0 {width} {height}}
+  name Radial1
+  xpos 533
+  ypos 257
+ }
+ Group {
+  name FractalBlur1
+  tile_color 0xca7f50ff
+  xpos 533
+  ypos 283
+  addUserKnob {20 fractalnoise l "fractal noise"}
+  addUserKnob {41 size_1 l x/ysize T animNoise3.size}
+  addUserKnob {7 FractalBlur_UserDilate l Spread R 0 200}
+  addUserKnob {7 FractalBlur_UserContrast l Contrast}
+  addUserKnob {7 FractalBlur_UserGamma l Gamma R 0 5}
+  FractalBlur_UserGamma 0.38
+  addUserKnob {6 FractalBlur_UserBlackWhite l "Make black and white" +STARTLINE}
+  addUserKnob {7 FractalBlur_UserThreshold l Threshold}
+  addUserKnob {6 FractalBlur_UserBW l "Clamp output" +STARTLINE}
+  FractalBlur_UserBW true
+  addUserKnob {26 ""}
+  addUserKnob {26 instructions l "" +STARTLINE T "Plug a texture into Input2 to use that instead of noise"}
+  addUserKnob {20 "" l Transform}
+  addUserKnob {41 transform T animNoise3.transform}
+  addUserKnob {41 translate l INVISIBLE +INVISIBLE T animNoise3.translate}
+  addUserKnob {12 Translate}
+  addUserKnob {41 rotate T animNoise3.rotate}
+  addUserKnob {41 scale T animNoise3.scale}
+  addUserKnob {41 skewX l "skew X" T animNoise3.skewX}
+  addUserKnob {41 skewY l "skew Y" T animNoise3.skewY}
+  addUserKnob {41 skew_order l "skew order" T animNoise3.skew_order}
+  addUserKnob {41 center T animNoise3.center}
+  addUserKnob {41 xrotate T animNoise3.xrotate}
+  addUserKnob {41 yrotate T animNoise3.yrotate}
+  addUserKnob {20 ANIM l Anim}
+  addUserKnob {41 noiSpeed T animNoise3.noiSpeed}
+  addUserKnob {41 noiZSpeed T animNoise3.noiZSpeed}
+  addUserKnob {41 noiDirX T animNoise3.noiDirX}
+  addUserKnob {41 noiDirY T animNoise3.noiDirY}
+  addUserKnob {41 noiSpeedOffset T animNoise3.noiSpeedOffset}
+  addUserKnob {20 infoTab l Info}
+  addUserKnob {26 infoText l "" +STARTLINE T "FractalBlur\nlast modified on 24.06.2015 by Joel Delle-Vergin"}
+ }
+  Input {
+   inputs 0
+   name texture
+   xpos 1874
+   ypos -442
+   number 1
+  }
+  Dot {
+   name Dot2
+   xpos 1908
+   ypos -118
+  }
+set N21404c20 [stack 0]
+  Input {
+   inputs 0
+   name alpha
+   xpos 1516
+   ypos -447
+  }
+  Dot {
+   name Dot3
+   xpos 1550
+   ypos -370
+  }
+set N223ff4e0 [stack 0]
+  Dot {
+   name Dot1
+   xpos 1748
+   ypos -370
+  }
+  Shuffle {
+   red black
+   green black
+   blue black
+   alpha black
+   name Shuffle10
+   xpos 1714
+   ypos -238
+  }
+set N214b3590 [stack 0]
+  Noise {
+   size {{32*scaletexture*resolution}}
+   zoffset {{noiZSpeed*t}}
+   lacunarity 1.72
+   gain 0.294
+   gamma 0.74
+   translate {{(noiDirX*(noiSpeed*t))+noiSpeedOffset+Translate.x} {(noiDirY*(noiSpeed*t))+noiSpeedOffset+Translate.y}}
+   center {1440 1080}
+   name animNoise3
+   tile_color 0x39b7d8ff
+   gl_color 0x2b3ba1ff
+   xpos 1714
+   ypos -187
+   addUserKnob {20 ANIM}
+   addUserKnob {7 noiSpeed t "Speed of animation" R 0 100}
+   addUserKnob {7 noiZSpeed t "speed of Z" R 0 0.1}
+   noiZSpeed {{curve*(randomseed+1) x999 1 0}}
+   addUserKnob {7 noiDirX t "Direction of X" R -1 1}
+   noiDirX 1
+   addUserKnob {7 noiDirY t "Direction of X" R -1 1}
+   addUserKnob {7 noiSpeedOffset t "offset of direction" R -100 100}
+  }
+set N221f0390 [stack 0]
+  Switch {
+   inputs 2
+   which {{"\[exists parent.input1.name]"}}
+   name Switch3
+   xpos 1714
+   ypos -122
+  }
+  Invert {
+   name Invert4
+   xpos 1714
+   ypos -66
+  }
+push $N223ff4e0
+  Blur {
+   size {{"\[value FractalBlur_UserDilate]" x101 0}}
+   name Blur1
+   xpos 1516
+   ypos -304
+  }
+  FilterErode {
+   channels rgba
+   size {{"(-\[value FractalBlur_UserDilate])/2" x1 0}}
+   filter gaussian
+   name FilterErode7
+   xpos 1516
+   ypos -218
+  }
+  Dot {
+   name Dot10
+   xpos 1550
+   ypos -133
+  }
+set N22c1a050 [stack 0]
+  Merge2 {
+   inputs 2
+   operation minus
+   name Merge2
+   xpos 1660
+   ypos -6
+  }
+  Invert {
+   name Invert3
+   xpos 1660
+   ypos 51
+  }
+push $N22c1a050
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge13
+   xpos 1516
+   ypos 57
+  }
+set N214e2b40 [stack 0]
+  Clamp {
+   name Clamp1
+   xpos 1408
+   ypos 115
+  }
+  Grade {
+   channels rgba
+   blackpoint {{FractalBlur_UserThreshold}}
+   whitepoint {{FractalBlur_UserThreshold}}
+   name Grade1
+   xpos 1408
+   ypos 194
+  }
+push $N214e2b40
+  Switch {
+   inputs 2
+   which {{FractalBlur_UserBlackWhite i x47 1}}
+   name Switch1
+   xpos 1516
+   ypos 250
+  }
+  Grade {
+   channels rgba
+   blackpoint {{FractalBlur_UserContrast}}
+   whitepoint {{1-FractalBlur_UserContrast}}
+   gamma {{FractalBlur_UserGamma x101 0.985}}
+   name Grade5
+   xpos 1516
+   ypos 329
+  }
+set N248e75d0 [stack 0]
+  Clamp {
+   name Clamp2
+   xpos 1415
+   ypos 371
+  }
+push $N248e75d0
+  Switch {
+   inputs 2
+   which {{FractalBlur_UserBW i x47 0}}
+   name Switch2
+   xpos 1517
+   ypos 468
+  }
+  Shuffle {
+   red alpha
+   green alpha
+   blue alpha
+   name Shuffle15
+   xpos 1517
+   ypos 532
+  }
+  Output {
+   name Output1
+   xpos 1517
+   ypos 611
+  }
+  Viewer {
+   frame_range 1009-1042
+   input_process false
+   name Viewer1
+   xpos 876
+   ypos 856
+  }
+push $N21404c20
+push $N221f0390
+  Switch {
+   inputs 2
+   which {{parent.altInput}}
+   name Switch4
+   xpos 1874
+   ypos -65
+  }
+push $N214b3590
+  Noise {
+   size 51
+   zoffset {{noiZSpeed*t}}
+   rotate -4
+   center {1024 778}
+   name Noise1
+   xpos 1810
+   ypos -298
+  }
+ end_group
+ Merge2 {
+  inputs 3+1
+  operation multiply
+  name Merge25
+  xpos 533
+  ypos 309
+ }
+ Grade {
+  white 25
+  black_clamp false
+  name Grade6
+  selected true
+  xpos 533
+  ypos 335
+ }
+ Grade {
+  white {{parent.Grade1_white.r} {parent.Grade1_white.g} {parent.Grade1_white.b} {parent.Grade1_white.a}}
+  gamma {{parent.Grade1_gamma.r} {parent.Grade1_gamma.g} {parent.Grade1_gamma.b} {parent.Grade1_gamma.a}}
+  black_clamp false
+  name Grade1
+  xpos 533
+  ypos 361
+ }
+set N224a8350 [stack 0]
+ Group {
+  name TimeOffsetSafe1
+  xpos 689
+  ypos 453
+  addUserKnob {20 TimeOffsetSafe}
+  addUserKnob {3 time_offset l "time offset(frames)" t "This is actually a framehold run by expression. This is to get around the random node connections caused by scripts with the orignal NUke TimeOffset node in. "}
+  time_offset {{root.first_frame}}
+  addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+  Scriplet_Info central
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 505
+   ypos 27
+  }
+  FrameHold {
+   firstFrame {{frame-time_offset}}
+   name FrameHold1
+   selected true
+   xpos 505
+   ypos 80
+  }
+  Output {
+   name Output1
+   xpos 505
+   ypos 167
+  }
+ end_group
+push $N224a8350
+ Switch {
+  inputs 2
+  which {{"\$gui?mode:0"}}
+  name Switch1
+  xpos 533
+  ypos 453
+ }
+ BlendMat {
+  surfaceblend modulate
+  name BlendMat
+  label "required for near/far region fade"
+  xpos 533
+  ypos 504
+ }
+ Output {
+  name Output1
+  xpos 533
+  ypos 704
+ }
+end_group
+FrameRange {
+ first_frame 1
+ last_frame {{root.last_frame-root.first_frame+(root.first_frame-SnowtasticParticleEmitter_1.start_frame)}}
+ time ""
+ name FrameRange
+ selected true
+ xpos -6184
+ ypos 722
+}
+Axis2 {
+ inputs 0
+ rot_order XYZ
+ translate {{SnowtasticDummyCameraAuto_1.translate.x(root.first_frame)} {SnowtasticDummyCameraAuto_1.translate.y(root.first_frame)} {SnowtasticDummyCameraAuto_1.translate.z(root.first_frame)}}
+ name SnowtasticEmitterAxisFirstPosition_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -5849
+ ypos 673
+}
+Axis2 {
+ inputs 0
+ rot_order XYZ
+ translate {{"(\nSnowtasticDummyCameraAuto_1.translate.x(root.first_frame)\n+\nSnowtasticDummyCameraAuto_1.translate.x(root.last_frame)\n)/2"} {"(\nSnowtasticDummyCameraAuto_1.translate.y(root.first_frame)\n+\nSnowtasticDummyCameraAuto_1.translate.y(root.last_frame)\n)/2"} {"(\nSnowtasticDummyCameraAuto_1.translate.z(root.first_frame)\n+\nSnowtasticDummyCameraAuto_1.translate.z(root.last_frame)\n)/2"}}
+ name SnowtasticEmitterAxisMiddlePosition_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -5733
+ ypos 671
+}
+Cube {
+ inputs 0
+ display wireframe
+ rows 1
+ columns 1
+ cube {{-SNOWTASTIC_CONTROLS_1.emitterpadding-(SNOWTASTIC_CONTROLS_1.emitterwidth/2)} 0 {"(-(sqrt(pow(\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(root.first_frame)-\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(root.last_frame), 2) + pow(\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(root.first_frame)-\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(root.last_frame), 2) + pow(\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(root.first_frame)-\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(root.last_frame), 2))/2)-SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].emitterpadding)-SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].emitterlength"} {(SNOWTASTIC_CONTROLS_1.emitterwidth/2)+SNOWTASTIC_CONTROLS_1.emitterpadding} {SNOWTASTIC_CONTROLS_1.emitterpadding+SNOWTASTIC_CONTROLS_1.emitterheight} {"((sqrt(pow(\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(root.first_frame)-\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.x(root.last_frame), 2) + pow(\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(root.first_frame)-\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.y(root.last_frame), 2) + pow(\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(root.first_frame)-\\SnowtasticDummyCameraAuto_\[lindex \[split \[value name] _] 1].translate.z(root.last_frame), 2))/2)+SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].emitterpadding)+SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].emitterlength/2"}}
+ translate {0 {SNOWTASTIC_CONTROLS_1.yaxis} 0}
+ name SnowtasticEmitter_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -5678
+ ypos 751
+}
+TransformGeo {
+ inputs 3
+ name SnowtasticTransformEmitterCube_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -5820
+ ypos 751
+}
+Cube {
+ inputs 0
+ display wireframe
+ rows 1
+ columns 1
+ cube {-0.1030000001 0.0120000001 -0.09839999676 0.09899999946 0.2099999934 0.1011999995}
+ uniform_scale 1000
+ name Cube2
+ selected true
+ xpos -5491
+ ypos 754
+}
+Dot {
+ name Dot9
+ label "  <font color=yellow>Plug in Spawn Region\n<font color=\"#c90000\">(do not delete dot)"
+ note_font "Arial Black"
+ note_font_size 30
+ selected true
+ xpos -5457
+ ypos 835
+}
+Switch {
+ inputs 2
+ which {{SNOWTASTIC_CONTROLS_1.mode}}
+ name SnowtasticModeEmitterSwitch_1
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -5820
+ ypos 831
+}
+set N23562fe0 [stack 0]
+push 0
+ParticleEmitter {
+ inputs 3
+ start_frame {{parent.SNOWTASTIC_CONTROLS_1.start_frame}}
+ emit_from bbox
+ randomize_type "randomized direction"
+ rate {{frame==SNOWTASTIC_CONTROLS_1.start_frame?(SNOWTASTIC_CONTROLS_1.p_count*SNOWTASTIC_CONTROLS_1.cameraspeed):0}}
+ lifetime {{root.last_frame-SNOWTASTIC_CONTROLS_1.start_frame+10}}
+ velocity_variation 1
+ rotation_velocity 1
+ size {{SNOWTASTIC_CONTROLS_1.p_size/10}}
+ size_variation 1
+ mass 0.5
+ mass_variation 1
+ input_order "in order"
+ start_frame_animation random
+ start_wrap true
+ frame_advance constant
+ max_clip_length {{root.last_frame-root.first_frame+(root.first_frame-SnowtasticParticleEmitter_1.start_frame)}}
+ seed {{SNOWTASTIC_CONTROLS_1.seed}}
+ name SnowtasticParticleEmitter_1
+ selected true
+ xpos -6184
+ ypos 831
+ disable {{"\[value SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].gui]==0?0:\$gui"}}
+}
+ParticleSettings {
+ steps_per_frame {{"\$gui?SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].guisteps:SNOWTASTIC_CONTROLS_\[lindex \[split \[value name] _] 1].rendersteps"}}
+ name SnowtasticParticleSettings_1
+ selected true
+ xpos -6184
+ ypos 904
+ disable {{steps_per_frame<=1?1:0}}
+}
+ParticleGravity {
+ to {0 {-SNOWTASTIC_CONTROLS_1.gravity*.025} 0}
+ name SnowtasticParticleGravityDown_1
+ selected true
+ xpos -6184
+ ypos 930
+}
+ParticleDrag2 {
+ drag {{SNOWTASTIC_CONTROLS_1.drag*.05 x1000 0.05}}
+ name SnowtasticParticleDrag_1
+ selected true
+ xpos -6184
+ ypos 968
+}
+ParticleGravity {
+ to {{SNOWTASTIC_CONTROLS_1.winddirection.x/100} {SNOWTASTIC_CONTROLS_1.winddirection.y/100} {SNOWTASTIC_CONTROLS_1.winddirection.z/100}}
+ name SnowtasticParticleGravityWind_1
+ selected true
+ xpos -6184
+ ypos 1006
+}
+ParticleTurbulence {
+ strength {{parent.SNOWTASTIC_CONTROLS_1.turbulence/10} {parent.SNOWTASTIC_CONTROLS_1.turbulence/10} {parent.SNOWTASTIC_CONTROLS_1.turbulence/10}}
+ scale {{parent.SNOWTASTIC_CONTROLS_1.turbscale} {parent.SNOWTASTIC_CONTROLS_1.turbscale} {parent.SNOWTASTIC_CONTROLS_1.turbscale}}
+ name SnowtasticParticleTurbulence_1
+ selected true
+ xpos -6184
+ ypos 1044
+}
+Dot {
+ name Dot60
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -6150
+ ypos 1132
+}
+set N22504ca0 [stack 0]
+TransformGeo {
+ scaling {-1 1 -1}
+ pivot_translate {{SnowtasticEmitterAxisMiddlePosition_1.translate} {SnowtasticEmitterAxisMiddlePosition_1.translate} {SnowtasticEmitterAxisMiddlePosition_1.translate}}
+ name SnowtasticTransformDouble_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -6294
+ ypos 1165
+}
+push $N22504ca0
+MergeGeo {
+ inputs 2
+ name SnowtasticDouble_1
+ tile_color 0x7f7f7f00
+ selected true
+ xpos -6184
+ ypos 1165
+ disable {{SNOWTASTIC_CONTROLS_1.quickdouble==0?1:0}}
+}
+Reformat {
+ inputs 0
+ format "3840 2160 0 0 3840 2160 1 UHD_4K"
+ pbb true
+ name Reformat1
+ selected true
+ xpos -6320
+ ypos 1273
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ overscan {{width*(SNOWTASTIC_CONTROLS_1.overscan/100)} {height*(SNOWTASTIC_CONTROLS_1.overscan/100)}}
+ samples {{"\$gui?guiSamples:renderSamples"}}
+ shutter {{parent.SNOWTASTIC_CONTROLS_1.shutter/2}}
+ shutteroffset centred
+ name SnowtasticScanlineRender
+ selected true
+ xpos -6184
+ ypos 1273
+ addUserKnob {20 User}
+ addUserKnob {7 guiSamples l "GUI Samples"}
+ guiSamples {{SNOWTASTIC_CONTROLS_1.samplesgui}}
+ addUserKnob {7 renderSamples l "Render Samples"}
+ renderSamples {{SNOWTASTIC_CONTROLS_1.samplesrender}}
+}
+Group {
+ name SnowtasticDeepCropSoft_1
+ tile_color 0x6000
+ selected true
+ xpos -6184
+ ypos 1299
+ addUserKnob {20 deepCropSoftTab l DeepCropSoft}
+ addUserKnob {7 znear +DISABLED R 0 200}
+ znear {{parent.SNOWTASTIC_CONTROLS_1.fadenear}}
+ addUserKnob {7 falloffNear l " falloff" -STARTLINE +DISABLED R 0 10}
+ falloffNear {{parent.SNOWTASTIC_CONTROLS_1.fadenearfalloff}}
+ addUserKnob {41 use_znear l use -STARTLINE T Controller1.use_znear}
+ addUserKnob {7 zfar +DISABLED R 0 200}
+ zfar {{parent.SNOWTASTIC_CONTROLS_1.fadefar}}
+ addUserKnob {7 falloffFar l " falloff" -STARTLINE +DISABLED R 0 10}
+ falloffFar {{parent.SNOWTASTIC_CONTROLS_1.fadefarfalloff}}
+ addUserKnob {41 use_zfar l use -STARTLINE T Controller1.use_zfar}
+ addUserKnob {6 outsideRange l "keep outside zrange" +STARTLINE}
+ addUserKnob {1 output l INVISIBLE +INVISIBLE}
+ output "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+ addUserKnob {26 WouterGilsing l "" +STARTLINE +INVISIBLE}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info "user mine deep_cam_depth_fade"
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x3cff
+  label near
+  note_font_size 42
+  xpos -1157
+  ypos -509
+  bdwidth 701
+  bdheight 733
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x3cff
+  label far
+  note_font_size 42
+  xpos -1156
+  ypos 397
+  bdwidth 714
+  bdheight 748
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x3cff
+  label near
+  note_font_size 42
+  xpos 864
+  ypos -502
+  bdwidth 729
+  bdheight 733
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode4
+  tile_color 0x3cff
+  label far
+  note_font_size 42
+  xpos 36
+  ypos -501
+  bdwidth 701
+  bdheight 733
+ }
+ Input {
+  inputs 0
+  name Input
+  label "\[value number]"
+  xpos -588
+  ypos -1763
+ }
+ Dot {
+  name Dot29
+  xpos -554
+  ypos -895
+ }
+set N2460cf50 [stack 0]
+ Dot {
+  name Dot30
+  xpos 1407
+  ypos -895
+ }
+set N249e5b10 [stack 0]
+ Dot {
+  name Dot16
+  xpos 1407
+  ypos -382
+ }
+set N249ea970 [stack 0]
+ Dot {
+  name Dot18
+  xpos 1059
+  ypos -382
+ }
+set N2376c680 [stack 0]
+ Dot {
+  name Dot11
+  xpos 576
+  ypos -382
+ }
+set N245c06e0 [stack 0]
+ Dot {
+  name Dot25
+  xpos 182
+  ypos -382
+ }
+ DeepCrop {
+  znear {{parent.zfar}}
+  zfar {{"parent.zfar + parent.falloffFar"}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop10
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos 148
+  ypos -305
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red / rgba.alpha"
+  rgba.green "rgba.green / rgba.alpha"
+  rgba.blue "rgba.blue / rgba.alpha"
+  name DeepUnpremult4
+  xpos 148
+  ypos -197
+ }
+ DeepExpression {
+  temp_name0 near
+  temp_expr0 "\[value parent.zfar]"
+  temp_name1 far
+  temp_expr1 "\[value parent.zfar] + \[value parent.falloffFar]"
+  chans0 alpha
+  chans1 none
+  rgba.alpha "alpha *  ((deep.front - near) / (far - near))"
+  name DeepExpression4
+  xpos 148
+  ypos -158
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red * rgba.alpha"
+  rgba.green "rgba.green * rgba.alpha"
+  rgba.blue "rgba.blue * rgba.alpha"
+  name DeepPremult4
+  xpos 148
+  ypos -114
+ }
+ Dot {
+  name Dot26
+  xpos 182
+  ypos 28
+ }
+push $N245c06e0
+ DeepCrop {
+  znear {{"parent.zfar + parent.falloffFar"}}
+  zfar 1
+  use_zfar false
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop3
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos 542
+  ypos -293
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge4
+  xpos 542
+  ypos 24
+  disable {{"parent.falloffFar == 0"}}
+ }
+ Dot {
+  name Dot23
+  xpos 576
+  ypos 417
+ }
+set N230985a0 [stack 0]
+ Dot {
+  name Dot17
+  xpos 576
+  ypos 713
+ }
+push $N230985a0
+ Dot {
+  name Dot22
+  xpos 1059
+  ypos 417
+ }
+ Dot {
+  name Dot27
+  xpos 1059
+  ypos 510
+ }
+push $N2376c680
+ DeepCrop {
+  znear {{"parent.znear - parent.falloffNear"}}
+  zfar {{parent.znear}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop7
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos 1025
+  ypos -305
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red / rgba.alpha"
+  rgba.green "rgba.green / rgba.alpha"
+  rgba.blue "rgba.blue / rgba.alpha"
+  name DeepUnpremult3
+  xpos 1025
+  ypos -174
+ }
+ DeepExpression {
+  temp_name0 near
+  temp_expr0 "\[value parent.znear] - \[value parent.falloffNear]"
+  temp_name1 far
+  temp_expr1 "\[value parent.znear]"
+  chans0 alpha
+  chans1 none
+  rgba.alpha "alpha * (1 - ((deep.front - near) / (far - near)))"
+  name DeepExpression3
+  xpos 1025
+  ypos -133
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red * rgba.alpha"
+  rgba.green "rgba.green * rgba.alpha"
+  rgba.blue "rgba.blue * rgba.alpha"
+  name DeepPremult3
+  xpos 1025
+  ypos -90
+ }
+ Dot {
+  name Dot19
+  xpos 1059
+  ypos 31
+ }
+push $N249ea970
+ DeepCrop {
+  znear 0
+  use_znear false
+  zfar {{"parent.znear - parent.falloffNear"}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop9
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos 1373
+  ypos -306
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge3
+  xpos 1373
+  ypos 27
+  disable {{"parent.falloffNear == 0"}}
+ }
+ Dot {
+  name Dot15
+  xpos 1407
+  ypos 417
+ }
+set N2231f8a0 [stack 0]
+ Dot {
+  name Dot13
+  xpos 1219
+  ypos 417
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge5
+  xpos 1185
+  ypos 506
+ }
+ Dot {
+  name Dot21
+  xpos 1219
+  ypos 608
+ }
+push $N2231f8a0
+ Switch {
+  inputs 2
+  which {{parent.use_zfar}}
+  name Switch3
+  label "\[value which]"
+  xpos 1373
+  ypos 598
+ }
+ Switch {
+  inputs 2
+  which {{!parent.use_znear}}
+  name Switch6
+  label "\[value which]"
+  xpos 1373
+  ypos 703
+ }
+push $N249e5b10
+ Dot {
+  name Dot20
+  xpos 1995
+  ypos -895
+ }
+ Dot {
+  name Dot4
+  xpos 1995
+  ypos 835
+ }
+ Switch {
+  inputs 2
+  which {{"clamp(parent.use_znear + parent.use_zfar)"}}
+  name Switch2
+  label "\[value which]"
+  xpos 1373
+  ypos 825
+ }
+ Dot {
+  name Dot31
+  xpos 1407
+  ypos 1359
+ }
+push $N2460cf50
+ Dot {
+  name Dot9
+  xpos -554
+  ypos -389
+ }
+set N22c27d60 [stack 0]
+ Dot {
+  name Dot8
+  xpos -727.6666667
+  ypos -389
+ }
+set N23d6c560 [stack 0]
+ Dot {
+  name Dot2
+  xpos -1075
+  ypos -389
+ }
+ DeepCrop {
+  znear {{"parent.znear - parent.falloffNear"}}
+  zfar {{parent.znear}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop2
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -1109
+  ypos -311
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red / rgba.alpha"
+  rgba.green "rgba.green / rgba.alpha"
+  rgba.blue "rgba.blue / rgba.alpha"
+  name DeepUnpremult2
+  xpos -1109
+  ypos -181
+ }
+ DeepExpression {
+  temp_name0 near
+  temp_expr0 "\[value parent.znear] - \[value parent.falloffNear]"
+  temp_name1 far
+  temp_expr1 "\[value parent.znear]"
+  chans0 alpha
+  chans1 none
+  rgba.alpha "alpha * ((deep.front - near) / (far - near))"
+  name DeepExpression1
+  xpos -1109
+  ypos -140
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red * rgba.alpha"
+  rgba.green "rgba.green * rgba.alpha"
+  rgba.blue "rgba.blue * rgba.alpha"
+  name DeepPremult1
+  selected true
+  xpos -1109
+  ypos -97
+ }
+ Dot {
+  name Dot1
+  xpos -1075
+  ypos -13
+ }
+push $N23d6c560
+ DeepCrop {
+  znear {{parent.znear}}
+  zfar 200
+  use_zfar false
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop5
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -761
+  ypos -310
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge1
+  xpos -761
+  ypos -17
+  disable {{"parent.falloffNear == 0"}}
+ }
+ Dot {
+  name Dot7
+  xpos -727.6666667
+  ypos 152
+ }
+push $N22c27d60
+ Switch {
+  inputs 2
+  which {{parent.use_znear}}
+  name Switch1
+  label "\[value which]"
+  xpos -588
+  ypos 142
+ }
+ Dot {
+  name Dot3
+  xpos -554
+  ypos 517
+ }
+set N24560500 [stack 0]
+ Dot {
+  name Dot5
+  xpos -727
+  ypos 517
+ }
+set N24565480 [stack 0]
+ Dot {
+  name Dot6
+  xpos -1075
+  ypos 517
+ }
+ DeepCrop {
+  znear {{parent.zfar}}
+  zfar {{"parent.zfar + parent.falloffFar"}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop1
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -1109
+  ypos 594
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red / rgba.alpha"
+  rgba.green "rgba.green / rgba.alpha"
+  rgba.blue "rgba.blue / rgba.alpha"
+  name DeepUnpremult1
+  xpos -1109
+  ypos 702
+ }
+ DeepExpression {
+  temp_name0 near
+  temp_expr0 "\[value parent.zfar]"
+  temp_name1 far
+  temp_expr1 "\[value parent.zfar] + \[value parent.falloffFar]"
+  chans0 alpha
+  chans1 none
+  rgba.alpha "alpha * (1 - ((deep.front - near) / (far - near)))"
+  name DeepExpression2
+  xpos -1109
+  ypos 742
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red * rgba.alpha"
+  rgba.green "rgba.green * rgba.alpha"
+  rgba.blue "rgba.blue * rgba.alpha"
+  name DeepPremult2
+  xpos -1109
+  ypos 785
+ }
+ Dot {
+  name Dot12
+  xpos -1075
+  ypos 893
+ }
+push $N24565480
+ DeepCrop {
+  znear {{parent.zfar}}
+  zfar 0
+  use_zfar false
+  outside_zrange true
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop4
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -761
+  ypos 593
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge2
+  xpos -761
+  ypos 889
+  disable {{"parent.falloffFar == 0"}}
+ }
+ Dot {
+  name Dot14
+  xpos -727
+  ypos 1058
+ }
+push $N24560500
+ Switch {
+  inputs 2
+  which {{parent.use_zfar}}
+  name Switch4
+  label "\[value which]"
+  xpos -588
+  ypos 1048
+ }
+ Switch {
+  inputs 2
+  which {{parent.outsideRange}}
+  name Switch9
+  label "\[value which]"
+  xpos -588
+  ypos 1349
+ }
+ Output {
+  name Output1
+  xpos -588
+  ypos 2052
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  tile_color 0x3cff
+  label "   INVERSE   "
+  note_font_size 100
+  xpos 549
+  ypos -700
+ }
+ NoOp {
+  inputs 0
+  name Controller1
+  onCreate "node = nuke.thisGroup()\nfor mode in \['near', 'far']:\n    state = node.knob('use_z\{\}'.format(mode)).value()\n    for knobName in \['falloff\{\}'.format(mode.title()), 'z\{\}'.format(mode)]:\n        node.knob(knobName).setEnabled(state)\n    node.knob('z\{\}'.format(mode)).setRange(0,200)"
+  knobChanged "node = nuke.thisGroup()\nfor mode in \['near', 'far']:\n    state = node.knob('use_z\{\}'.format(mode)).value()\n    for knobName in \['falloff\{\}'.format(mode.title()), 'z\{\}'.format(mode)]:\n        node.knob(knobName).setEnabled(state)"
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -431
+  ypos -1098
+  addUserKnob {20 User}
+  addUserKnob {6 use_znear l use +STARTLINE}
+  use_znear {{parent.parent.SNOWTASTIC_CONTROLS_1.fadenearenable}}
+  addUserKnob {6 use_zfar l use +STARTLINE}
+  use_zfar {{parent.parent.SNOWTASTIC_CONTROLS_1.fadefarenable}}
+ }
+end_group
+DeepMerge2 {
+ inputs 2
+ operation holdout
+ drop_hidden true
+ name DeepMerge2
+ selected true
+ xpos -6184
+ ypos 1493
+}
+Group {
+ name DeepToImage_v0002_3
+ help "Composites deep image data to 2D image."
+ tile_color 0x60ff
+ selected true
+ xpos -6184
+ ypos 1519
+ addUserKnob {20 DeepToImage l DeepHoldout}
+ addUserKnob {41 volumetric_composition l "volumetric composition" T DeepToImage1.volumetric_composition}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> NukeScriptletPackage\n<B>ieEntityId:</B> 1678309.0\n<B>ieAssetId:</B> 0.0\n<B>ieCopyId:</B> 1\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0.0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType NukeScriptletPackage
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 1678309
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 3
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 "" n -1}
+ addUserKnob {3 ieBundleVersion l "<span style=\"color:Silver\">Bundle Version </span>" t "\nThis entity is not part\nof a bundle." +DISABLED}
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {2}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+ ieVersionCreationDate "12-02-2019 16:35:46"
+ addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+ ieVersionCreator nicolasd
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {20 "" n -1}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 149
+  ypos -139
+ }
+ DeepToImage {
+  name DeepToImage1
+  xpos 149
+  ypos -102
+ }
+ ModifyMetaData {
+  metadata {
+   {remove exr/chunkCount ""}
+  }
+  name ModifyMetaData1
+  selected true
+  xpos 149
+  ypos -69
+ }
+ Output {
+  name Output1
+  xpos 149
+  ypos 31
+ }
+end_group
+Expression {
+ channel0 depth
+ expr0 (deep.front+deep.back)/2
+ channel1 none
+ name deepToDepth1
+ selected true
+ xpos -6184
+ ypos 1545
+}
+Remove {
+ operation keep
+ channels rgba
+ channels2 depth
+ channels3 forward
+ name Remove3
+ selected true
+ xpos -6184
+ ypos 1571
+}
+Dot {
+ name Dot16
+ label " RESULT"
+ note_font "Arial Black"
+ note_font_size 50
+ selected true
+ xpos -6150
+ ypos 1668
+}
+Camera2 {
+ inputs 0
+ translate {0 10 0}
+ name Camera2
+ label "\nReplace me!"
+ selected true
+ xpos -5481
+ ypos 1147
+}
+Dot {
+ name SnowtasticCameraDot_1
+ tile_color 0xff0000ff
+ label "<font color=yellow>Plug in Layout Camera\n<font color=\"#c90000\">(do not delete dot)"
+ note_font "Arial Black"
+ note_font_size 30
+ selected true
+ xpos -5457
+ ypos 1277
+}
+push $N221e3800
+DeepToPoints {
+ inputs 2
+ display textured
+ cast_shadow false
+ receive_shadow false
+ detail 0.01
+ pointSize 1
+ name SnowtasticDeepToPoints_1
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -5669
+ ypos 1273
+ hide_input true
+}
+push $N22f25ea0
+push $N23562fe0
+Scene {
+ inputs 3
+ name SnowtasticSpawnRegion_1
+ tile_color 0x7f7f7f00
+ note_font "Bitstream Vera Sans"
+ note_font_size 13
+ selected true
+ xpos -5810
+ ypos 1253
+}
+Dot {
+ name Dot17
+ label "  <font color=\"yellow\">View Spawn Region"
+ note_font "Arial Black"
+ note_font_size 30
+ selected true
+ xpos -5786
+ ypos 1668
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label http://docsie/index.php/Snowtastic
+ note_font_size 50
+ selected true
+ xpos -6347
+ ypos 361
+}
+StickyNote {
+ inputs 0
+ name StickyNote4
+ label "\nPrecomp 32-bit\n      Render 5 frames/proc       \n"
+ note_font_size 20
+ selected true
+ xpos -6260
+ ypos 1720
+}
+NoOp {
+ inputs 0
+ name SNOWTASTIC_CONTROLS_1
+ knobChanged "\n# The 3 apostrophes above are opening a multi-line string. We're basically passing a python script to a knob as a string.\n# If we're touching a knob other than the mode, there is no point going further, so we check first.\nif nuke.thisKnob().name() == \"mode\": \n    # At this point the code will only run if we change the value of the mode knob.\n    # Let's check which mode we selected.\n    # I'm using getValue() instead of value() so that I get an ID back rather than the string of the mode, this way I can change the text later if I want to.\n    if nuke.thisKnob().getValue() == 0:\n        # Now I can do the actions that I want depending on this mode.\n        # In my case hide mode1_knob and show mode0_knob\n        nuke.thisNode().knob('autodivider1').setVisible(False)\n        nuke.thisNode().knob('cameraspeed').setVisible(False)\n        nuke.thisNode().knob('autodivider2').setVisible(False)\n        nuke.thisNode().knob('autotext').setVisible(False)\n        nuke.thisNode().knob('yaxis').setVisible(False)\n        nuke.thisNode().knob('emitterpadding').setVisible(False)\n        nuke.thisNode().knob('emitterheight').setVisible(False)\n        nuke.thisNode().knob('emitterlength').setVisible(False)\n        nuke.thisNode().knob('emitterwidth').setVisible(False)\n    # Do the same for the other mode(s)\n    if nuke.thisKnob().getValue() == 1:\n        nuke.thisNode().knob('autodivider1').setVisible(True)\n        nuke.thisNode().knob('cameraspeed').setVisible(True)\n        nuke.thisNode().knob('autodivider2').setVisible(True)\n        nuke.thisNode().knob('autotext').setVisible(True)\n        nuke.thisNode().knob('yaxis').setVisible(True)\n        nuke.thisNode().knob('emitterpadding').setVisible(True)\n        nuke.thisNode().knob('emitterheight').setVisible(True)\n        nuke.thisNode().knob('emitterlength').setVisible(True)\n        nuke.thisNode().knob('emitterwidth').setVisible(True)\n"
+ tile_color 0xffffffff
+ label "\n\[value mode]"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 36
+ note_font_color 0xffffffff
+ selected true
+ xpos -6596
+ ypos 957
+ hide_input true
+ addUserKnob {20 Snowtastic}
+ addUserKnob {6 gain_panelDropped l "panel dropped state" +HIDDEN +STARTLINE}
+ addUserKnob {6 gui l "\$gui Emitter" +STARTLINE}
+ gui true
+ addUserKnob {26 ""}
+ addUserKnob {4 mode l Mode M {"Manual Placement" "Auto Placement" ""}}
+ mode "Auto Placement"
+ addUserKnob {26 autodivider1 l "" +STARTLINE}
+ addUserKnob {26 autotext l " " T "Automatic Spawn Region Adjustments"}
+ addUserKnob {3 yaxis l "Y Axis"}
+ addUserKnob {3 emitterpadding l Padding}
+ emitterpadding 100
+ addUserKnob {3 emitterheight l Height -STARTLINE}
+ emitterheight 100
+ addUserKnob {3 emitterlength l Length -STARTLINE}
+ addUserKnob {3 emitterwidth l "  Width" -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {7 cameraspeed l "Camera Speed Multiplier" R 0 5}
+ cameraspeed 1
+ addUserKnob {26 autodivider2 l "" +STARTLINE}
+ addUserKnob {3 preroll l Pre-Roll}
+ preroll 25
+ addUserKnob {3 start_frame l "Start Frame"}
+ start_frame {{root.first_frame-preroll}}
+ addUserKnob {3 p_count l "Particle Amount"}
+ p_count 20000
+ addUserKnob {6 quickdouble l Double t "Mirrors particles as a quick and dirty cheat to double particle count" -STARTLINE}
+ addUserKnob {3 p_size l "Particle Size"}
+ p_size 5
+ addUserKnob {7 gravity l Gravity R 0 10}
+ gravity 3
+ addUserKnob {7 drag l Drag R 0 10}
+ drag 3
+ addUserKnob {3 seed l "Random Seed"}
+ seed 1
+ addUserKnob {26 seedtext l " " -STARTLINE T "<i><font color=grey>Adjust me to force refresh of particles"}
+ addUserKnob {26 ""}
+ addUserKnob {13 turbulence l "Turbulence Strength"}
+ turbulence {0.5 {turbulence.x} {turbulence.x}}
+ addUserKnob {13 turbscale l "Turbulence Scale"}
+ turbscale {3 {turbscale.x} {turbscale.x}}
+ addUserKnob {13 winddirection l "Wind Direction"}
+ winddirection {3 0 0}
+ addUserKnob {26 ""}
+ addUserKnob {7 fadenear l "Fade Near" R 0 1000}
+ fadenear 10
+ addUserKnob {7 fadenearfalloff l Falloff -STARTLINE R 0 500}
+ fadenearfalloff 25
+ addUserKnob {6 fadenearenable l Enable -STARTLINE}
+ fadenearenable true
+ addUserKnob {7 fadefar l "Fade Far" R 0 5000}
+ fadefar 300
+ addUserKnob {7 fadefarfalloff l Falloff -STARTLINE R 0 500}
+ fadefarfalloff 50
+ addUserKnob {6 fadefarenable l Enable -STARTLINE}
+ fadefarenable true
+ addUserKnob {26 ""}
+ addUserKnob {7 shutter l "Snow Length" R 0 2}
+ shutter 1
+ addUserKnob {26 text l "" -STARTLINE T "<i><font color=grey>Shutter cheat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}
+ addUserKnob {26 ""}
+ addUserKnob {3 guisteps l "GUI Sub Frame Steps" t "Number of steps of sub frame animation for particles"}
+ guisteps 1
+ addUserKnob {3 rendersteps l "Render Sub Frame Steps" t "Number of steps of sub frame animation for particles" -STARTLINE}
+ rendersteps 1
+ addUserKnob {26 stepstext l "" +STARTLINE T "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><font color=grey>These values control subframe animation samples"}
+ addUserKnob {26 ""}
+ addUserKnob {3 samplesgui l "GUI Samples"}
+ samplesgui 6
+ addUserKnob {3 samplesrender l "               Render Samples" -STARTLINE}
+ samplesrender 100
+ addUserKnob {7 overscan l "         Overscan (%)" R 0 100}
+ overscan 10
+ addUserKnob {26 _1 l "" +STARTLINE}
+ addUserKnob {19 gain l "Snowflake Gain" R 0 4}
+ gain 1
+ addUserKnob {6 gain_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 gamma l "Snowflake Gamma" R 0.2 5}
+ gamma 1
+ addUserKnob {6 gamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 Info}
+ addUserKnob {26 ""}
+ addUserKnob {26 version l "" +STARTLINE T "\nCreated by Daniel Bigaj\n\nVersion 2.0\n\nLast Updated: February 8th 2022\n"}
+ addUserKnob {26 ""}
+}
