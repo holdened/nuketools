@@ -1,0 +1,2318 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x60602ff
+ label deepTools
+ note_font_size 42
+ selected true
+ xpos -72
+ ypos -305
+ bdwidth 281
+ bdheight 952
+}
+push $cut_paste_input
+Group {
+ name DeepFixHoles
+ tile_color 0x60ff
+ selected true
+ xpos -14
+ ypos -177
+ addUserKnob {20 DeepFixHoles}
+ addUserKnob {26 _1 l "" +STARTLINE T "<font><b>Plug straight into your deep read.</b>\n<br><br>\n<i>Fixes holes in the deep alpha with an expression or by deep recoloring with a new alpha. \n<br><br>\nIf alpha input exists will automatically switch to that custom alpha, otherwise will use a solid alpha. "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _2 l "" +STARTLINE T "<b>v1 </b><font color=grey><i>Created by <b>Daniel Bigaj</b> 14 September 2022"}
+}
+ Input {
+  inputs 0
+  name alpha
+  xpos 686
+  ypos 636
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos 536
+  ypos 516
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 570
+  ypos 576
+ }
+set N1b022ee0 [stack 0]
+ DeepRecolor {
+  inputs 2
+  channels alpha
+  targetInputAlpha true
+  name DeepRecolor
+  xpos 536
+  ypos 630
+ }
+push $N1b022ee0
+ DeepExpression {
+  chans0 alpha
+  chans1 deep
+  rgba.alpha a>0?1:0
+  name DeepExpression
+  xpos 437
+  ypos 635
+ }
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input1]"}}
+  name Switch1
+  selected true
+  xpos 536
+  ypos 684
+ }
+ Output {
+  name Output
+  xpos 536
+  ypos 736
+ }
+end_group
+push $cut_paste_input
+Group {
+ name DeepCropSoft1
+ tile_color 0x6000
+ selected true
+ xpos -12
+ ypos -133
+ addUserKnob {20 deepCropSoftTab l DeepCropSoft}
+ addUserKnob {7 znear R 0 200}
+ znear 50
+ addUserKnob {7 falloffNear l " falloff" -STARTLINE R 0 10}
+ falloffNear 50
+ addUserKnob {41 use_znear l use -STARTLINE T Controller1.use_znear}
+ addUserKnob {7 zfar +DISABLED R 0 200}
+ zfar 2
+ addUserKnob {7 falloffFar l " falloff" -STARTLINE +DISABLED R 0 10}
+ addUserKnob {41 use_zfar l use -STARTLINE T Controller1.use_zfar}
+ addUserKnob {6 outsideRange l "keep outside zrange" +STARTLINE}
+ addUserKnob {1 output l INVISIBLE +INVISIBLE}
+ output "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+ addUserKnob {26 WouterGilsing l "" +STARTLINE +INVISIBLE}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info "user mine deep_cam_depth_fade"
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x3cff
+  label near
+  note_font_size 42
+  xpos -1157
+  ypos -509
+  bdwidth 701
+  bdheight 733
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x3cff
+  label far
+  note_font_size 42
+  xpos -1156
+  ypos 397
+  bdwidth 714
+  bdheight 748
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x3cff
+  label near
+  note_font_size 42
+  xpos 864
+  ypos -502
+  bdwidth 729
+  bdheight 733
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode4
+  tile_color 0x3cff
+  label far
+  note_font_size 42
+  xpos 36
+  ypos -501
+  bdwidth 701
+  bdheight 733
+ }
+ Input {
+  inputs 0
+  name Input
+  label "\[value number]"
+  xpos -588
+  ypos -1763
+ }
+ Dot {
+  name Dot29
+  xpos -554
+  ypos -895
+ }
+set N1b0800b0 [stack 0]
+ Dot {
+  name Dot30
+  xpos 1407
+  ypos -895
+ }
+set N1b084fc0 [stack 0]
+ Dot {
+  name Dot16
+  xpos 1407
+  ypos -382
+ }
+set N1b089fb0 [stack 0]
+ Dot {
+  name Dot18
+  xpos 1059
+  ypos -382
+ }
+set N1b08ef00 [stack 0]
+ Dot {
+  name Dot11
+  xpos 576
+  ypos -382
+ }
+set N1b093ee0 [stack 0]
+ Dot {
+  name Dot25
+  xpos 182
+  ypos -382
+ }
+ DeepCrop {
+  znear {{parent.zfar}}
+  zfar {{"parent.zfar + parent.falloffFar"}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop10
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos 148
+  ypos -305
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red / rgba.alpha"
+  rgba.green "rgba.green / rgba.alpha"
+  rgba.blue "rgba.blue / rgba.alpha"
+  name DeepUnpremult4
+  xpos 148
+  ypos -197
+ }
+ DeepExpression {
+  temp_name0 near
+  temp_expr0 "\[value parent.zfar]"
+  temp_name1 far
+  temp_expr1 "\[value parent.zfar] + \[value parent.falloffFar]"
+  chans0 alpha
+  chans1 none
+  rgba.alpha "alpha *  ((deep.front - near) / (far - near))"
+  name DeepExpression4
+  xpos 148
+  ypos -158
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red * rgba.alpha"
+  rgba.green "rgba.green * rgba.alpha"
+  rgba.blue "rgba.blue * rgba.alpha"
+  name DeepPremult4
+  xpos 148
+  ypos -114
+ }
+ Dot {
+  name Dot26
+  xpos 182
+  ypos 28
+ }
+push $N1b093ee0
+ DeepCrop {
+  znear {{"parent.zfar + parent.falloffFar"}}
+  zfar 1
+  use_zfar false
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop3
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos 542
+  ypos -293
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge4
+  xpos 542
+  ypos 24
+  disable {{"parent.falloffFar == 0"}}
+ }
+ Dot {
+  name Dot23
+  xpos 576
+  ypos 417
+ }
+set N1b0e2100 [stack 0]
+ Dot {
+  name Dot17
+  xpos 576
+  ypos 713
+ }
+push $N1b0e2100
+ Dot {
+  name Dot22
+  xpos 1059
+  ypos 417
+ }
+ Dot {
+  name Dot27
+  xpos 1059
+  ypos 510
+ }
+push $N1b08ef00
+ DeepCrop {
+  znear {{"parent.znear - parent.falloffNear"}}
+  zfar {{parent.znear}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop7
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos 1025
+  ypos -305
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red / rgba.alpha"
+  rgba.green "rgba.green / rgba.alpha"
+  rgba.blue "rgba.blue / rgba.alpha"
+  name DeepUnpremult3
+  xpos 1025
+  ypos -174
+ }
+ DeepExpression {
+  temp_name0 near
+  temp_expr0 "\[value parent.znear] - \[value parent.falloffNear]"
+  temp_name1 far
+  temp_expr1 "\[value parent.znear]"
+  chans0 alpha
+  chans1 none
+  rgba.alpha "alpha * (1 - ((deep.front - near) / (far - near)))"
+  name DeepExpression3
+  xpos 1025
+  ypos -133
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red * rgba.alpha"
+  rgba.green "rgba.green * rgba.alpha"
+  rgba.blue "rgba.blue * rgba.alpha"
+  name DeepPremult3
+  xpos 1025
+  ypos -90
+ }
+ Dot {
+  name Dot19
+  xpos 1059
+  ypos 31
+ }
+push $N1b089fb0
+ DeepCrop {
+  znear 0
+  use_znear false
+  zfar {{"parent.znear - parent.falloffNear"}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop9
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos 1373
+  ypos -306
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge3
+  xpos 1373
+  ypos 27
+  disable {{"parent.falloffNear == 0"}}
+ }
+ Dot {
+  name Dot15
+  xpos 1407
+  ypos 417
+ }
+set N1b139320 [stack 0]
+ Dot {
+  name Dot13
+  xpos 1219
+  ypos 417
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge5
+  xpos 1185
+  ypos 506
+ }
+ Dot {
+  name Dot21
+  xpos 1219
+  ypos 608
+ }
+push $N1b139320
+ Switch {
+  inputs 2
+  which {{parent.use_zfar}}
+  name Switch3
+  label "\[value which]"
+  xpos 1373
+  ypos 598
+ }
+ Switch {
+  inputs 2
+  which {{!parent.use_znear}}
+  name Switch6
+  label "\[value which]"
+  xpos 1373
+  ypos 703
+ }
+push $N1b084fc0
+ Dot {
+  name Dot20
+  xpos 1995
+  ypos -895
+ }
+ Dot {
+  name Dot4
+  xpos 1995
+  ypos 835
+ }
+ Switch {
+  inputs 2
+  which {{"clamp(parent.use_znear + parent.use_zfar)"}}
+  name Switch2
+  label "\[value which]"
+  xpos 1373
+  ypos 825
+ }
+ Dot {
+  name Dot31
+  xpos 1407
+  ypos 1359
+ }
+push $N1b0800b0
+ Dot {
+  name Dot9
+  xpos -554
+  ypos -389
+ }
+set N1b1799a0 [stack 0]
+ Dot {
+  name Dot8
+  xpos -727.6666667
+  ypos -389
+ }
+set N1b17e8f0 [stack 0]
+ Dot {
+  name Dot2
+  xpos -1075
+  ypos -389
+ }
+ DeepCrop {
+  znear {{"parent.znear - parent.falloffNear"}}
+  zfar {{parent.znear}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop2
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -1109
+  ypos -311
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red / rgba.alpha"
+  rgba.green "rgba.green / rgba.alpha"
+  rgba.blue "rgba.blue / rgba.alpha"
+  name DeepUnpremult2
+  xpos -1109
+  ypos -181
+ }
+ DeepExpression {
+  temp_name0 near
+  temp_expr0 "\[value parent.znear] - \[value parent.falloffNear]"
+  temp_name1 far
+  temp_expr1 "\[value parent.znear]"
+  chans0 alpha
+  chans1 none
+  rgba.alpha "alpha * ((deep.front - near) / (far - near))"
+  name DeepExpression1
+  xpos -1109
+  ypos -140
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red * rgba.alpha"
+  rgba.green "rgba.green * rgba.alpha"
+  rgba.blue "rgba.blue * rgba.alpha"
+  name DeepPremult1
+  selected true
+  xpos -1109
+  ypos -97
+ }
+ Dot {
+  name Dot1
+  xpos -1075
+  ypos -13
+ }
+push $N1b17e8f0
+ DeepCrop {
+  znear {{parent.znear}}
+  zfar 200
+  use_zfar false
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop5
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -761
+  ypos -310
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge1
+  xpos -761
+  ypos -17
+  disable {{"parent.falloffNear == 0"}}
+ }
+ Dot {
+  name Dot7
+  xpos -727.6666667
+  ypos 152
+ }
+push $N1b1799a0
+ Switch {
+  inputs 2
+  which {{parent.use_znear}}
+  name Switch1
+  label "\[value which]"
+  xpos -588
+  ypos 142
+ }
+ Dot {
+  name Dot3
+  xpos -554
+  ypos 517
+ }
+set N1b1d8790 [stack 0]
+ Dot {
+  name Dot5
+  xpos -727
+  ypos 517
+ }
+set N1b1dd730 [stack 0]
+ Dot {
+  name Dot6
+  xpos -1075
+  ypos 517
+ }
+ DeepCrop {
+  znear {{parent.zfar}}
+  zfar {{"parent.zfar + parent.falloffFar"}}
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop1
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -1109
+  ypos 594
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red / rgba.alpha"
+  rgba.green "rgba.green / rgba.alpha"
+  rgba.blue "rgba.blue / rgba.alpha"
+  name DeepUnpremult1
+  xpos -1109
+  ypos 702
+ }
+ DeepExpression {
+  temp_name0 near
+  temp_expr0 "\[value parent.zfar]"
+  temp_name1 far
+  temp_expr1 "\[value parent.zfar] + \[value parent.falloffFar]"
+  chans0 alpha
+  chans1 none
+  rgba.alpha "alpha * (1 - ((deep.front - near) / (far - near)))"
+  name DeepExpression2
+  xpos -1109
+  ypos 742
+ }
+ DeepExpression {
+  chans1 rgba
+  rgba.red "rgba.red * rgba.alpha"
+  rgba.green "rgba.green * rgba.alpha"
+  rgba.blue "rgba.blue * rgba.alpha"
+  name DeepPremult2
+  xpos -1109
+  ypos 785
+ }
+ Dot {
+  name Dot12
+  xpos -1075
+  ypos 893
+ }
+push $N1b1dd730
+ DeepCrop {
+  znear {{parent.zfar}}
+  zfar 0
+  use_zfar false
+  outside_zrange true
+  bbox {431.6000061 242.8000031 1726.400024 971.2000122}
+  use_bbox false
+  name DeepCrop4
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -761
+  ypos 593
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge2
+  xpos -761
+  ypos 889
+  disable {{"parent.falloffFar == 0"}}
+ }
+ Dot {
+  name Dot14
+  xpos -727
+  ypos 1058
+ }
+push $N1b1d8790
+ Switch {
+  inputs 2
+  which {{parent.use_zfar}}
+  name Switch4
+  label "\[value which]"
+  xpos -588
+  ypos 1048
+ }
+ Switch {
+  inputs 2
+  which {{parent.outsideRange}}
+  name Switch9
+  label "\[value which]"
+  xpos -588
+  ypos 1349
+ }
+ Output {
+  name Output1
+  xpos -588
+  ypos 2052
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  tile_color 0x3cff
+  label "   INVERSE   "
+  note_font_size 100
+  xpos 549
+  ypos -700
+ }
+ NoOp {
+  inputs 0
+  name Controller1
+  onCreate "node = nuke.thisGroup()\nfor mode in \['near', 'far']:\n    state = node.knob('use_z\{\}'.format(mode)).value()\n    for knobName in \['falloff\{\}'.format(mode.title()), 'z\{\}'.format(mode)]:\n        node.knob(knobName).setEnabled(state)\n    node.knob('z\{\}'.format(mode)).setRange(0,200)"
+  knobChanged "node = nuke.thisGroup()\nfor mode in \['near', 'far']:\n    state = node.knob('use_z\{\}'.format(mode)).value()\n    for knobName in \['falloff\{\}'.format(mode.title()), 'z\{\}'.format(mode)]:\n        node.knob(knobName).setEnabled(state)"
+  label "\[ expr \{ \[value use_znear] ?  \[value znear]: \"\" \}] \[ expr \{ \[value use_znear] ?  \"-\": \"\" \}] \[ expr \{ \[value use_zfar] ?  \[value zfar]: \"\" \}]"
+  xpos -431
+  ypos -1098
+  addUserKnob {20 User}
+  addUserKnob {6 use_znear l use +STARTLINE}
+  use_znear true
+  addUserKnob {6 use_zfar l use +STARTLINE}
+ }
+end_group
+push $cut_paste_input
+Group {
+ name DeepFeather
+ tile_color 0x60ff
+ selected true
+ xpos -12
+ ypos -73
+ addUserKnob {20 ieDeepFeather l DeepFeather}
+ addUserKnob {4 ieDirection l "Feather Direction" t "Choose which direction to feather your deep pass.\n\nCenter: Equally adjusts the deep.front and deep.back values (keeps the center point of your deep pass in the same position)\n\nBack: Only adjusts the deep.back value (feathers away from camera)\n\nFront: Only adjusts the deep.front value (feathers towards camera)" M {Center Back Front "" ""}}
+ ieDirection Back
+ addUserKnob {41 disable_1 l "Disable making  Alpha semi transparent" t "multiplies the alpha by 0.99999 to make it opaque but still allows the volumetric compositing to happen" -STARTLINE T DeepExpression2.disable}
+ addUserKnob {7 ieFeather l Feather R 0 100}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -154
+  ypos -128
+ }
+ DeepExpression {
+  chans1 deep
+  rgba.alpha "alpha * 0.99999"
+  name DeepExpression2
+  xpos -154
+  ypos -83
+ }
+set N1b26b340 [stack 0]
+ DeepExpression {
+  chans1 deep
+  deep.front "deep.front - \[value parent.ieFeather]"
+  name DeepExpression3
+  label "Feather front"
+  selected true
+  xpos -31
+  ypos -33
+  addUserKnob {20 ieOptions l options}
+  addUserKnob {7 ieFeather l feather R 0 100}
+  ieFeather 150
+ }
+push $N1b26b340
+ DeepExpression {
+  chans1 deep
+  deep.back "deep.back + \[value parent.ieFeather]"
+  name DeepExpression4
+  label "Feather back"
+  xpos -154
+  ypos -29
+  addUserKnob {20 ieOptions l options}
+  addUserKnob {7 ieFeather l feather R 0 100}
+  ieFeather 150
+ }
+push $N1b26b340
+ DeepExpression {
+  chans1 deep
+  deep.front "deep.front - (\[value parent.ieFeather]/2)"
+  deep.back "deep.back + (\[value parent.ieFeather]/2)"
+  name DeepExpression1
+  label "Feather Middle"
+  xpos -277
+  ypos -29
+  addUserKnob {20 ieOptions l options}
+  addUserKnob {7 ieFeather l feather R 0 100}
+ }
+ Switch {
+  inputs 3
+  which {{parent.ieDirection x1008 0}}
+  name Switch1
+  xpos -154
+  ypos 35
+ }
+ Output {
+  name Output1
+  xpos -154
+  ypos 126
+ }
+end_group
+push $cut_paste_input
+Group {
+ name DeepDepthHaze
+ tile_color 0x56ff
+ selected true
+ xpos -7
+ ypos -25
+ addUserKnob {20 DepthHaze l "Deep Depth Haze"}
+ addUserKnob {4 view l View M {Result "Depth Visualization"}}
+ view "Depth Visualization"
+ addUserKnob {26 ""}
+ addUserKnob {7 distnear l near R 0 10000}
+ distnear 100
+ addUserKnob {7 distfar l far -STARTLINE R 0 20000}
+ distfar 800
+ addUserKnob {6 reverse l Reverse -STARTLINE}
+ addUserKnob {6 DeepColorCorrect1_offset_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Gain.channels}
+ addUserKnob {19 DeepColorCorrect1_gain l gain R 0 4}
+ DeepColorCorrect1_gain 1
+ addUserKnob {6 DeepColorCorrect1_gain_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {19 DeepColorCorrect1_offset l lift R -1 1}
+ DeepColorCorrect1_offset 0.05
+ addUserKnob {6 DeepColorCorrect1_offset_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {8 DeepColorCorrect1_mix l mix}
+ DeepColorCorrect1_mix 1
+ addUserKnob {26 _1 l "" +STARTLINE T " "}
+ addUserKnob {26 text l "" +STARTLINE T "<b>v1.3 </b><font color=grey><i>Created by <b>Daniel Bigaj</b> 16 Oct 2021"}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos 812
+  ypos 511
+ }
+set N1b2d0540 [stack 0]
+ DeepColorCorrect2 {
+  gain 0
+  name DeepColorCorrect2
+  xpos 974
+  ypos 592
+ }
+set N1b2d71f0 [stack 0]
+ DeepColorCorrect2 {
+  offset 1
+  mix {{parent.DeepColorCorrect1_mix}}
+  zmap {0 0 {parent.distnear} {parent.distfar}}
+  limit_z true
+  name DeepColorCorrect4
+  xpos 974
+  ypos 651
+ }
+push $N1b2d71f0
+ DeepColorCorrect2 {
+  offset 1
+  mix {{parent.DeepColorCorrect1_mix}}
+  zmap {{parent.distnear} {parent.distfar} inf inf}
+  limit_z true
+  name DeepColorCorrect3
+  xpos 1081
+  ypos 650
+ }
+ Switch {
+  inputs 2
+  which {{parent.reverse}}
+  name Switch3
+  label reverse
+  xpos 974
+  ypos 726
+ }
+push $N1b2d0540
+ DeepColorCorrect2 {
+  gain {{parent.DeepColorCorrect1_gain} {parent.DeepColorCorrect1_gain} {parent.DeepColorCorrect1_gain} {parent.DeepColorCorrect1_gain}}
+  mix {{parent.DeepColorCorrect1_mix}}
+  zmap {0 0 {parent.distnear} {parent.distfar}}
+  limit_z true
+  name Gain
+  xpos 707
+  ypos 607
+ }
+ DeepColorCorrect2 {
+  channels {{{Gain.channels}}}
+  offset {{parent.DeepColorCorrect1_offset.r} {parent.DeepColorCorrect1_offset.g} {parent.DeepColorCorrect1_offset.b} {parent.DeepColorCorrect1_offset.a}}
+  mix {{parent.DeepColorCorrect1_mix}}
+  zmap {0 0 {parent.distnear} {parent.distfar}}
+  limit_z true
+  name Offset
+  xpos 707
+  ypos 670
+ }
+push $N1b2d0540
+ DeepColorCorrect2 {
+  gain {{parent.DeepColorCorrect1_gain} {parent.DeepColorCorrect1_gain} {parent.DeepColorCorrect1_gain} {parent.DeepColorCorrect1_gain}}
+  mix {{parent.DeepColorCorrect1_mix}}
+  zmap {{parent.distnear} {parent.distfar} inf inf}
+  limit_z true
+  name Gain1
+  xpos 812
+  ypos 609
+ }
+ DeepColorCorrect2 {
+  channels {{{Gain.channels}}}
+  offset {{parent.DeepColorCorrect1_offset.r} {parent.DeepColorCorrect1_offset.g} {parent.DeepColorCorrect1_offset.b} {parent.DeepColorCorrect1_offset.a}}
+  mix {{parent.DeepColorCorrect1_mix}}
+  zmap {{parent.distnear} {parent.distfar} inf inf}
+  limit_z true
+  name Offset1
+  xpos 812
+  ypos 670
+ }
+ Switch {
+  inputs 2
+  which {{parent.reverse}}
+  name Switch2
+  label reverse
+  xpos 812
+  ypos 730
+ }
+ Switch {
+  inputs 2
+  which {{parent.view}}
+  name Switch1
+  xpos 812
+  ypos 768
+ }
+ Output {
+  name Output1
+  xpos 812
+  ypos 809
+ }
+end_group
+push $cut_paste_input
+push 0
+Group {
+ inputs 2
+ name DeepKeymix
+ selected true
+ xpos -4
+ ypos 35
+ addUserKnob {20 DeepKeymix t " a group performing something akin to a KeyMix function but on deep images. \n\n\nThe A and B pipes require deep inputs. The Mask pipe takes a matte via the alpha channel. \n\n\nOther things you can do with this:\n\n\nDeep Stencil: Connect your Deep Image to the B pipe and a matte to the Mask input\nDeep Mask: Connect your Deep Image to the A Pipe and a matte to the Mask input\nDeep Dissolve: Connect Deep images to A and B with no Mask input and adjust the mix parameter "}
+ addUserKnob {26 Info l "" t " a group performing something akin to a KeyMix function but on deep images. \n\n\nThe A and B pipes require deep inputs. The Mask pipe takes a matte via the alpha channel. \n\n\nOther things you can do with this:\n\n\nDeep Stencil: Connect your Deep Image to the B pipe and a matte to the Mask input\nDeep Mask: Connect your Deep Image to the A Pipe and a matte to the Mask input\nDeep Dissolve: Connect Deep images to A and B with no Mask input and adjust the mix parameter " +STARTLINE}
+ addUserKnob {7 mix}
+ mix 1
+ addUserKnob {1 Scriplet_Info l INVISIBLE +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos 505
+  ypos -496
+  number 2
+ }
+ Dot {
+  name Dot2
+  xpos 539
+  ypos -418
+ }
+set N1b3e0a70 [stack 0]
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle1
+  xpos 505
+  ypos -376
+ }
+ Grade {
+  channels rgba
+  multiply {{parent.mix x1074 0.008}}
+  black_clamp false
+  name Grade2
+  xpos 505
+  ypos -303
+ }
+ Dot {
+  name Dot1
+  xpos 539
+  ypos -266
+ }
+set N1b408430 [stack 0]
+ Invert {
+  name Invert1
+  xpos 362
+  ypos -276
+ }
+push $N1b3e0a70
+ Shuffle {
+  red white
+  green white
+  blue white
+  alpha white
+  name Shuffle2
+  xpos 674
+  ypos -361
+ }
+ Grade {
+  channels rgba
+  multiply {{parent.mix x1074 0.008}}
+  black_clamp false
+  name Grade1
+  xpos 674
+  ypos -304
+ }
+set N1b42a790 [stack 0]
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input2]"}}
+  name Switch2
+  xpos 362
+  ypos -199
+ }
+ DeepFromImage {
+  set_z true
+  name DeepFromImage2
+  xpos 362
+  ypos -149
+ }
+ Input {
+  inputs 0
+  name A
+  xpos 140
+  ypos -65
+  number 1
+ }
+ DeepMerge {
+  inputs 2
+  operation holdout
+  name DeepMerge2
+  selected true
+  xpos 243
+  ypos -47
+ }
+push $N1b408430
+push $N1b42a790
+ Invert {
+  name Invert2
+  xpos 674
+  ypos -216
+ }
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input2]"}}
+  name Switch1
+  xpos 505
+  ypos -210
+ }
+ DeepFromImage {
+  set_z true
+  name DeepFromImage1
+  xpos 505
+  ypos -149
+ }
+ Input {
+  inputs 0
+  name B
+  xpos 857
+  ypos -114
+ }
+ DeepMerge {
+  inputs 2
+  operation holdout
+  name DeepMerge1
+  xpos 505
+  ypos -86
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge9
+  xpos 511
+  ypos -33
+ }
+ Output {
+  name Output1
+  xpos 505
+  ypos 136
+ }
+end_group
+push $cut_paste_input
+push 0
+DeepCKeymix {
+ inputs 2
+ name DeepCKeymix1
+ selected true
+ xpos -1
+ ypos 85
+}
+Group {
+ inputs 0
+ name DeepMerge_Advanced
+ help "- Merges all channels from A and B in deep. - Fixes issue with DeepMerge's holdout operation which exists in Nuke 11."
+ tile_color 0x60ff
+ selected true
+ xpos -4
+ ypos 149
+ addUserKnob {20 DeepMerge_Advanced}
+ addUserKnob {26 ""}
+ addUserKnob {4 operation M {combine holdout "" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {7 blurAmt l Blur R 0 100}
+ blurAmt 1
+ addUserKnob {26 ""}
+ addUserKnob {4 output_data l "Output Data" M {Deep 2D ""}}
+ addUserKnob {26 ""}
+ addUserKnob {20 Info}
+ addUserKnob {26 version_info l "" +STARTLINE T "\nCreated by Ben McEwan\nwww.benmcewan.com\n\nVersion 0.2.0\nLast Updated: September 10th, 2019\n"}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Input {
+  inputs 0
+  name A
+  xpos 242
+  ypos -499
+  number 1
+ }
+ DeepExpression {
+  temp_name0 blur
+  temp_expr0 "\[value blurAmt]/2"
+  chans1 deep
+  rgba.alpha "alpha * 0.999999"
+  deep.back "deep.back + blur"
+  name DeepExpression2
+  xpos 393
+  ypos -499
+ }
+set N1b5abda0 [stack 0]
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 427
+  ypos -434
+ }
+ Input {
+  inputs 0
+  name B
+  xpos 551
+  ypos -654
+ }
+ DeepExpression {
+  temp_name0 blur
+  temp_expr0 "\[value blurAmt]/2"
+  chans1 deep
+  rgba.alpha "alpha * 0.999999"
+  deep.back "deep.back + blur"
+  name DeepExpression1
+  xpos 551
+  ypos -585
+ }
+set N1b5c0ad0 [stack 0]
+ Dot {
+  name Dot2
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 788
+  ypos -581
+ }
+set N1b5cb8d0 [stack 0]
+ DeepHoldout2 {
+  inputs 2
+  name DeepHoldout2
+  xpos 754
+  ypos -438
+ }
+push $N1b5cb8d0
+ Dot {
+  name Dot3
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 895
+  ypos -532
+ }
+ Dot {
+  name Dot4
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 895
+  ypos -395
+ }
+ DeepRecolor {
+  inputs 2
+  channels all
+  targetInputAlpha true
+  name DeepRecolor2
+  xpos 754
+  ypos -361
+ }
+push $N1b5abda0
+push $N1b5c0ad0
+ DeepMerge {
+  inputs 2
+  drop_hidden true
+  name DeepMerge2
+  xpos 551
+  ypos -499
+ }
+ Switch {
+  inputs 2
+  which {{operation}}
+  name Switch1
+  xpos 551
+  ypos -356
+ }
+ DeepToImage {
+  name DeepToImage1
+  selected true
+  xpos 551
+  ypos -279
+  disable {{!output_data}}
+ }
+ Output {
+  name Output1
+  xpos 551
+  ypos -199
+ }
+end_group
+push $cut_paste_input
+DeepToImage {
+ name DeepToImage1
+ selected true
+ xpos 1
+ ypos 202
+}
+Expression {
+ channel0 depth
+ expr0 depth.Z!=0?1/depth.Z:0
+ channel1 none
+ name deepToDepth
+ selected true
+ xpos 1
+ ypos 228
+}
+Group {
+ inputs 0
+ name ImagePlaneDeep
+ help "This node lets yuo project a texture onto a card to fit the frustum of the connected camera at the reference frame.\n\nThis is useful to either matchmove or stabilise a plate based on a camera rather than 2D tracking data.\n\n"
+ knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\n\nif k.name() == 'use_input':\n    n\['knob'].setEnabled( not k.value() )\n"
+ note_font_size 22
+ selected true
+ xpos -5
+ ypos 291
+ addUserKnob {20 _1 l "Image Plane Deep"}
+ addUserKnob {32 knob l "import chan file" t "when importing a chan file instead of hooking up a camera node, make sure to set the corrcet aperture in the CameraKnobs tab before importing the file!" -STARTLINE +DISABLED T "import_chan_button this.CAM_ANIM\nknob this.use_input 0"}
+ addUserKnob {6 use_input l "use input" t "if checked the camera hooked up to the cam pipe is used\ninstead of the internal one.\nIf unchecked, make sure to set the correct aperture in the CameraKnobs tab before importing the chan file!" -STARTLINE}
+ use_input true
+ addUserKnob {4 output t "stabilize - use this to stabilize a plate using the respective match moved camera\nmatch - track an element into the shot based on the camera input" M {stabilize match}}
+ output match
+ addUserKnob {3 ref l refFrame t "if the output format is the same as the plate you want to match/stabilize,\nthis will be the frame that will not be modified."}
+ ref 1001
+ addUserKnob {22 refframe_btn l "Set to Current Frame" -STARTLINE T nuke.thisNode().knob('ref').setValue(nuke.frame())}
+ addUserKnob {7 distance t "the distance of the card to the camera.\nIf you have a nodal camera this isn't important\notherwise you need to adjust this to get the required parallax." R 1 10000}
+ distance 100
+ addUserKnob {26 "" l output}
+ addUserKnob {41 format l "output format" T Reformat1.format}
+ addUserKnob {41 filter T ScanlineRender1.filter}
+ addUserKnob {41 overscan T ScanlineRender1.overscan}
+ addUserKnob {41 crop_1 l "black outside" +INVISIBLE T Card3D1.crop}
+ addUserKnob {41 full_format l "output format" +INVISIBLE T Card3D1.full_format}
+ addUserKnob {41 proxy_format l "proxy format" +INVISIBLE T Card3D1.proxy_format}
+ addUserKnob {20 "" l MotionBlur}
+ addUserKnob {41 samples T ScanlineRender1.samples}
+ addUserKnob {41 shutter T ScanlineRender1.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T ScanlineRender1.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T ScanlineRender1.shuttercustomoffset}
+ addUserKnob {41 temporal_jitter l "randomize time" T ScanlineRender1.temporal_jitter}
+ addUserKnob {41 spatial_jitter l "sample diameter" T ScanlineRender1.spatial_jitter}
+ addUserKnob {41 focal_jitter l "focus diameter" T ScanlineRender1.focal_jitter}
+ addUserKnob {41 stochastic_samples l "stochastic samples" T ScanlineRender1.stochastic_samples}
+ addUserKnob {41 uniform_distribution l "uniform distribution" -STARTLINE T ScanlineRender1.uniform_distribution}
+ addUserKnob {20 "" l CameraKnobs}
+ addUserKnob {41 rot_order l "rotation order" T CAM_ANIM.rot_order}
+ addUserKnob {41 translate T CAM_ANIM.translate}
+ addUserKnob {41 rotate T CAM_ANIM.rotate}
+ addUserKnob {26 ""}
+ addUserKnob {41 focal l "focal length" T CAM_ANIM.focal}
+ addUserKnob {41 haperture l "horiz aperture" T CAM_ANIM.haperture}
+ addUserKnob {41 vaperture l "vert aperture" T CAM_ANIM.vaperture}
+ addUserKnob {41 win_scale l "window scale" T CAM_ANIM.win_scale}
+ addUserKnob {26 ""}
+ addUserKnob {41 label_1 l label T CAM_ANIM.label}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Camera {
+  inputs 0
+  display off
+  selectable false
+  rot_order {{"\[topnode parent.input1].rot_order"}}
+  translate {{"\[topnode parent.input1].translate.x(parent.ref)"} {"\[topnode parent.input1].translate.y(parent.ref)"} {"\[topnode parent.input1].translate.z(parent.ref)"}}
+  rotate {{"\[topnode parent.input1].rotate.x(parent.ref)"} {"\[topnode parent.input1].rotate.y(parent.ref)"} {"\[topnode parent.input1].rotate.z(parent.ref)"}}
+  focal {{"\[topnode input1].focal.0"}}
+  haperture {{"\[topnode input1].haperture.0"}}
+  vaperture {{"\[topnode input1].vaperture.0"}}
+  near 0.0001
+  far {{parent.distance*2}}
+  win_scale {{"\[topnode input1].win_scale.0"} {"\[topnode input1].win_scale.1"}}
+  name CAM_STATIC1
+  tile_color 0x5682e700
+  gl_color 0x4851e400
+  label "connected cam\n"
+  xpos 13
+  ypos -109
+ }
+ Camera {
+  inputs 0
+  display off
+  selectable false
+  rot_order {{CAM_ANIM.rot_order}}
+  translate {{CAM_ANIM.translate.x(parent.ref)} {CAM_ANIM.translate.y(parent.ref)} {CAM_ANIM.translate.z(parent.ref)}}
+  rotate {{CAM_ANIM.rotate.x(parent.ref)} {CAM_ANIM.rotate.y(parent.ref)} {CAM_ANIM.rotate.z(parent.ref)}}
+  focal {{CAM_ANIM.focal.0}}
+  haperture {{CAM_ANIM.haperture.0}}
+  vaperture {{CAM_ANIM.vaperture.0}}
+  near 0.0001
+  far {{parent.distance*2}}
+  name CAM_STATIC
+  tile_color 0x5682e700
+  gl_color 0x4851e400
+  label "internal cam"
+  xpos -127
+  ypos -16
+ }
+ Switch {
+  inputs 2
+  which {{parent.use_input}}
+  name Switch5
+  label "internal or connected cam\n\[input this \[knob parent.use_input]]"
+  xpos 3
+  ypos -9
+ }
+set N1b6f07a0 [stack 0]
+ Input {
+  inputs 0
+  name CAM
+  xpos 3
+  ypos 247
+  number 1
+ }
+ Camera {
+  inputs 0
+  display off
+  selectable false
+  haperture 9.58
+  vaperture 5.39
+  near 0.001
+  far {{parent.distance*2}}
+  name CAM_ANIM
+  xpos -136
+  ypos 122
+ }
+ Switch {
+  inputs 2
+  which {{parent.use_input}}
+  name Switch4
+  label "internal or connected camera"
+  xpos 3
+  ypos 136
+ }
+set N1b7105c0 [stack 0]
+ Switch {
+  inputs 2
+  which {{!parent.output}}
+  name Switch2
+  label "match or stabilize"
+  xpos 163
+  ypos 136
+ }
+push $N1b7105c0
+push $N1b6f07a0
+ Switch {
+  inputs 2
+  which {{!parent.output}}
+  name Switch1
+  label "match or stabilize"
+  xpos 162
+  ypos -3
+ }
+ Input {
+  inputs 0
+  name IMG
+  xpos 409
+  ypos -170
+ }
+ NoTimeBlur {
+  name NoTimeBlur1
+  xpos 409
+  ypos -111
+ }
+ Card2 {
+  z {{parent.distance}}
+  lens_in_focal {{"\[input Switch5 \[value parent.use_input]].focal"}}
+  lens_in_haperture {{"\[input Switch5 \[value parent.use_input]].haperture"}}
+  control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+  name Card1
+  xpos 409
+  ypos -49
+ }
+ TransformGeo {
+  inputs 2
+  name TransformGeo1
+  xpos 409
+  ypos 3
+ }
+ Reformat {
+  inputs 0
+  pbb true
+  name Reformat1
+  xpos 541
+  ypos 70
+ }
+ ScanlineRender {
+  inputs 3
+  conservative_shader_sampling false
+  overscan 100
+  samples 0
+  shutteroffset centred
+  uniform_distribution true
+  motion_vectors_type distance
+  name ScanlineRender1
+  selected true
+  xpos 409
+  ypos 142
+ }
+ Output {
+  name Output1
+  xpos 409
+  ypos 326
+ }
+end_group
+push $cut_paste_input
+Group {
+ name ImagePlane
+ help "This node lets yuo project a texture onto a card to fit the frustum of the connected camera at the reference frame.\n\nThis is useful to either matchmove or stabilise a plate based on a camera rather than 2D tracking data.\n\n"
+ knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\n\nif k.name() == 'use_input':\n    n\['knob'].setEnabled( not k.value() )\n"
+ note_font_size 22
+ selected true
+ xpos -8
+ ypos 378
+ addUserKnob {20 "" l User}
+ addUserKnob {32 knob l "import chan file" t "when importing a chan file instead of hooking up a camera node, make sure to set the corrcet aperture in the CameraKnobs tab before importing the file!" -STARTLINE +DISABLED T "import_chan_button this.CAM_ANIM\nknob this.use_input 0"}
+ addUserKnob {6 use_input l "use input" t "if checked the camera hooked up to the cam pipe is used\ninstead of the internal one.\nIf unchecked, make sure to set the correct aperture in the CameraKnobs tab before importing the chan file!" -STARTLINE}
+ use_input true
+ addUserKnob {4 output t "stabilize - use this to stabilize a plate using the respective match moved camera\nmatch - track an element into the shot based on the camera input" M {stabilize match}}
+ output match
+ addUserKnob {3 ref l refFrame t "if the output format is the same as the plate you want to match/stabilize,\nthis will be the frame that will not be modified."}
+ ref 1001
+ addUserKnob {22 refframe_btn l "Set to Current Frame" -STARTLINE T nuke.thisNode().knob('ref').setValue(nuke.frame())}
+ addUserKnob {7 distance t "the distance of the card to the camera.\nIf you have a nodal camera this isn't important\notherwise you need to adjust this to get the required parallax." R 1 10000}
+ distance 100
+ addUserKnob {26 "" l output}
+ addUserKnob {41 format T Card3D1.format}
+ addUserKnob {41 crop_1 l "black outside" +INVISIBLE T Card3D1.crop}
+ addUserKnob {6 crop -STARTLINE}
+ crop true
+ addUserKnob {41 full_format l "output format" +INVISIBLE T Card3D1.full_format}
+ addUserKnob {41 proxy_format l "proxy format" +INVISIBLE T Card3D1.proxy_format}
+ addUserKnob {41 filter T Card3D1.filter}
+ addUserKnob {20 "" l MotionBlur}
+ addUserKnob {41 motionblur T Card3D1.motionblur}
+ addUserKnob {41 shutter T Card3D1.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T Card3D1.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T Card3D1.shuttercustomoffset}
+ addUserKnob {20 "" l CameraKnobs}
+ addUserKnob {41 rot_order l "rotation order" T CAM_ANIM.rot_order}
+ addUserKnob {41 translate T CAM_ANIM.translate}
+ addUserKnob {41 rotate T CAM_ANIM.rotate}
+ addUserKnob {26 ""}
+ addUserKnob {41 focal l "focal length" T CAM_ANIM.focal}
+ addUserKnob {41 haperture l "horiz aperture" T CAM_ANIM.haperture}
+ addUserKnob {41 vaperture l "vert aperture" T CAM_ANIM.vaperture}
+ addUserKnob {41 win_scale l "window scale" T CAM_ANIM.win_scale}
+ addUserKnob {26 ""}
+ addUserKnob {41 label_1 l label T CAM_ANIM.label}
+}
+ Input {
+  inputs 0
+  name CAM
+  xpos -16
+  ypos 113
+  number 1
+ }
+ Camera {
+  inputs 0
+  display off
+  selectable false
+  haperture 9.58
+  vaperture 5.39
+  near 0.001
+  far {{parent.distance*2}}
+  name CAM_ANIM
+  xpos -136
+  ypos 41
+ }
+ Switch {
+  inputs 2
+  which {{parent.use_input}}
+  name Switch4
+  label "internal or connected camera"
+  xpos -16
+  ypos 54
+ }
+set N1b863ac0 [stack 0]
+ Camera {
+  inputs 0
+  display off
+  selectable false
+  rot_order {{"\[topnode parent.input1].rot_order"}}
+  translate {{"\[topnode parent.input1].translate.x(parent.ref)"} {"\[topnode parent.input1].translate.y(parent.ref)"} {"\[topnode parent.input1].translate.z(parent.ref)"}}
+  rotate {{"\[topnode parent.input1].rotate.x(parent.ref)"} {"\[topnode parent.input1].rotate.y(parent.ref)"} {"\[topnode parent.input1].rotate.z(parent.ref)"}}
+  focal {{"\[topnode input1].focal.0"}}
+  haperture {{"\[topnode input1].haperture.0"}}
+  vaperture {{"\[topnode input1].vaperture.0"}}
+  near 0.0001
+  far {{parent.distance*2}}
+  win_scale {{"\[topnode input1].win_scale.0"} {"\[topnode input1].win_scale.1"}}
+  name CAM_STATIC1
+  tile_color 0x5682e700
+  gl_color 0x4851e400
+  label "connected cam\n"
+  xpos 28
+  ypos -178
+ }
+ Camera {
+  inputs 0
+  display off
+  selectable false
+  rot_order {{CAM_ANIM.rot_order}}
+  translate {{CAM_ANIM.translate.x(parent.ref)} {CAM_ANIM.translate.y(parent.ref)} {CAM_ANIM.translate.z(parent.ref)}}
+  rotate {{CAM_ANIM.rotate.x(parent.ref)} {CAM_ANIM.rotate.y(parent.ref)} {CAM_ANIM.rotate.z(parent.ref)}}
+  focal {{CAM_ANIM.focal.0}}
+  haperture {{CAM_ANIM.haperture.0}}
+  vaperture {{CAM_ANIM.vaperture.0}}
+  near 0.0001
+  far {{parent.distance*2}}
+  name CAM_STATIC
+  tile_color 0x5682e700
+  gl_color 0x4851e400
+  label "internal cam"
+  xpos -112
+  ypos -85
+ }
+ Switch {
+  inputs 2
+  which {{parent.use_input}}
+  name Switch5
+  label "internal or connected cam\n\[input this \[knob parent.use_input]]"
+  xpos 28
+  ypos -72
+ }
+set N1b894980 [stack 0]
+ Switch {
+  inputs 2
+  which {{!parent.output}}
+  name Switch1
+  label "match or stabilize"
+  xpos 177
+  ypos -72
+ }
+push $N1b894980
+push $N1b863ac0
+ Switch {
+  inputs 2
+  which {{!parent.output}}
+  name Switch2
+  label "match or stabilize"
+  xpos 166
+  ypos 54
+ }
+ Input {
+  inputs 0
+  name IMG
+  xpos 409
+  ypos -97
+ }
+ Card3D {
+  inputs 3
+  scaling {{"\[input Switch5 \[value parent.use_input]].win_scale.0"} {"\[input Switch5 \[value parent.use_input]].win_scale.1"} 1}
+  uniform_scale {{parent.distance}}
+  pivot_translate {0 0 1}
+  lens_in_focal {{"\[input Switch5 \[value parent.use_input]].focal"}}
+  lens_in_haperture {{"\[input Switch5 \[value parent.use_input]].haperture"}}
+  shutteroffset centred
+  name Card3D1
+  label internal
+  selected true
+  xpos 409
+  ypos 54
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  intersect true
+  name Crop1
+  xpos 409
+  ypos 241
+  disable {{!parent.crop}}
+ }
+ Output {
+  name Output1
+  xpos 409
+  ypos 324
+ }
+end_group
+push $cut_paste_input
+Group {
+ name DeepHack3
+ label "Don't tell your mom\nabout the error in your ways"
+ selected true
+ xpos -3
+ ypos 475
+ addUserKnob {20 User +INVISIBLE}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 567
+  ypos -626
+ }
+ DeepToImage {
+  name DeepToImage1
+  xpos 567
+  ypos -587
+ }
+set N1b8ed390 [stack 0]
+push $N1b8ed390
+ Shuffle {
+  in2 deep
+  red red2
+  green green2
+  blue black
+  name Shuffle1
+  xpos 576
+  ypos -550
+ }
+set N1b8f5730 [stack 0]
+push $N1b8f5730
+ Group {
+  inputs 2
+  name Group1
+  knobChanged "\ntn = nuke.thisNode()\ntk = nuke.thisKnob()\n\nfullList =  tn\['fullList'].value().strip(\"\[']\").split(\"', '\")\nnodeList = fullList\[0], fullList\[1], fullList\[2], fullList\[3], fullList\[4], fullList\[5], fullList\[6]\npreviousLoopNum = tn\['previousLoopNum'].getValue()\n\ngrowTexture = tn\['growTexture'].getValue()\nqualityVal = int( tn\['quality'].getValue() )\n\n\n##### DEFINE VALUE CHANGES ##################\n\ndef valChange():\n    qualityBias = tn\['qualityBias'].getValue()\n    blurCenter = tn\['blurCenter'].getValue()\n    bcDistribution = tn\['bcDistribution'].getValue()\n    for i in range (0, qualityVal):\n        blurVal = nuke.toNode(fullList\[i*len(nodeList)])\n        erodeVal = nuke.toNode(fullList\[i*len(nodeList)+3])\n        blurCenterVal = nuke.toNode(fullList\[i*len(nodeList)+5])\n        if isinstance(growTexture, float) == True:\n            blurValSize = (growTexture/qualityVal*(i+1)*(1-qualityBias)) + (growTexture/qualityVal*(i+1)) * (qualityBias*(pow(i+1, 2)/pow(qualityVal, 2)))\n            blurVal\['size'].setValue( blurValSize )\n            erodeVal\['size'].setValue(blurVal\['size'].getValue()/2)\n            blurCenterVal\['size'].setValue( ( blurValSize*(1-bcDistribution) +  (blurValSize*(bcDistribution*(pow(i+1, 2)/pow(qualityVal, 2)))) ) * blurCenter )\n        else:\n            blurVal\['size'].setValue(\[ (growTexture\[0]/qualityVal*(i+1)*(1-qualityBias)) + (growTexture\[0]/qualityVal*(i+1)) * (qualityBias*(pow(i+1, 2)/pow(qualityVal, 2))) , (growTexture\[1]/qualityVal*(i+1)*(1-qualityBias)) + (growTexture\[1]/qualityVal*(i+1)) * (qualityBias*(pow(i+1, 2)/pow(qualityVal, 2))) ])\n            erodeVal\['size'].setValue(\[blurVal\['size'].getValue()\[0]/2,blurVal\['size'].getValue()\[1]/2])\n            blurCenterVal\['size'].setValue(\[ (growTexture\[0]/qualityVal*(i+1)*(1-qualityBias)) + (growTexture\[0]/qualityVal*(i+1)) * (qualityBias*(pow(i+1, 2)/pow(qualityVal, 2))) , (growTexture\[1]/qualityVal*(i+1)*(1-qualityBias)) + (growTexture\[1]/qualityVal*(i+1)) * (qualityBias*(pow(i+1, 2)/pow(qualityVal, 2))) ])\n\ndef filterChange():\n    filters = int( tn\['filter'].getValue() )\n    filterQuality = int( tn\['filterQuality'].getValue() )\n    crop = int( tn\['crop'].getValue() )\n    for i in range (0, qualityVal):\n        blurVal = nuke.toNode(fullList\[i*len(nodeList)])\n        blurVal\['filter'].setValue( filters )\n        blurVal\['quality'].setValue( filterQuality )\n        blurVal\['crop'].setValue( crop )\n        blurCenterVal = nuke.toNode(fullList\[i*len(nodeList)])\n        blurCenterVal\['filter'].setValue( filters )\n        blurCenterVal\['quality'].setValue( filterQuality )\n        blurCenterVal\['crop'].setValue( crop )\n\n\n##### CREATE THE NODES ###################\n\nif tk.name()=='quality':\n    if qualityVal < 1:\n        qualityVal = 1\n    elif qualityVal >100:\n        qualityVal = 100\n    tn\['quality'].setValue( qualityVal )\n    \n\n    if qualityVal != previousLoopNum:\n\n\n        inputDep = nuke.dependencies(\[nuke.toNode('Unpremult1')], nuke.INPUTS)\n        resultOver = nuke.toNode( inputDep\[0].name() )\n\n        difference = qualityVal-previousLoopNum\n        if difference > 0:\n            for i in range (1, int(difference+1)):\n                \n                blur = nuke.nodes.Blur ()\n                blur\['channels'].setValue('rgba')\n                blur\['maskChannelInput'].setValue('none')\n                blur.setInput (0, nuke.toNode('Switch2'))\n                \n                unpremult = nuke.nodes.Unpremult ()\n                unpremult\['channels'].setValue('rgb')\n                unpremult\['alpha'].setValue('rgba.alpha')\n                unpremult\['invert'].setValue(0)\n                unpremult.setInput (0, blur)\n                \n                expression = nuke.nodes.Expression(expr3 = 'a==0?0:1')\n                expression.setInput (0, unpremult)\n                \n                erode = nuke.nodes.FilterErode ()\n                erode\['channels'].setValue( 'rgba.alpha' )\n                erode\['filter'].setValue( 'gaussian' )\n                erode.setInput (0, expression)\n                \n                premult = nuke.nodes.Premult ()\n                premult\['channels'].setValue( 'rgb' )\n                premult\['alpha'].setValue( 'rgba.alpha' )\n                premult.setInput (0, erode)\n\n                blurCenter = nuke.nodes.Blur ()\n                blurCenter\['channels'].setValue('rgba')\n                blurCenter\['maskChannelInput'].setValue('none')\n                blurCenter.setInput (0, premult)\n\n                mergeOver = nuke.nodes.Merge2 ()\n                mergeOver\['operation'].setValue( 'over' )\n                mergeOver\['sRGB'].setValue( 0 )\n                mergeOver\['screen_alpha'].setValue( 0 )\n                mergeOver\['bbox'].setValue( 'union' )\n                mergeOver\['Achannels'].setValue( 'rgba' )\n                mergeOver\['Bchannels'].setValue( 'rgba' )\n                mergeOver\['output'].setValue( 'rgba' )\n                mergeOver\['also_merge'].setValue( 'none' )\n                mergeOver.setInput (0, blurCenter)\n                mergeOver.setInput (1, resultOver)\n                \n                \n                resultOver = mergeOver\n                \n                \n                nodeList = blur.name(), unpremult.name(), expression.name(), erode.name(), premult.name(), blurCenter.name(), resultOver.name()\n                fullList.extend(nodeList)\n\n\n##### DELETE THE NODES ##################################\n\n        else:\n            fullList.reverse()\n            for i in range (int(qualityVal), int(previousLoopNum)):\n                for i in range (0, len(nodeList)):\n                    nuke.delete(nuke.toNode(fullList\[0]))\n                    del fullList\[0]\n                resultOver = nuke.toNode(fullList\[0])\n                resultExpression = nuke.toNode(fullList\[3])\n            fullList.reverse()\n\n        nuke.toNode('Unpremult1').setInput(0, resultOver)\n        valChange()\n        filterChange()\n                \n        previousLoopNum = qualityVal\n        \n        tn\['previousLoopNum'].setValue( int(previousLoopNum) )\n        tn\['fullList'].setValue( str(fullList) )\n\n\n\n##### CHANGE EXISTING VALUES #####################\n\nif tk.name()=='growTexture':\n    valChange()\n    \nif tk.name()=='qualityBias':\n    valChange()\n\nif tk.name()=='blurCenter':\n    valChange()\n\nif tk.name()=='bcDistribution':\n    valChange()\n    \nif tk.name()=='filter':\n    filterChange()\n    \nif tk.name()=='filterQuality':\n    filterChange()\n    \nif tk.name()=='crop':\n    filterChange()\n\n\n"
+  note_font "Bitstream Vera Sans"
+  xpos 576
+  ypos -521
+  addUserKnob {20 User l fColourDilate}
+  addUserKnob {14 growTexture l "Grow Texture" R 0 100}
+  growTexture 100
+  addUserKnob {14 erodeMatte l "Erode Matte" t "Dilate or erode the matte to adjust the grow start paint" R -100 100}
+  erodeMatte -1
+  addUserKnob {7 expandMatte l "Expand Matte" t "Expand or compress the matte to adjust the grow start point" R -0.99999 0.99999}
+  addUserKnob {7 quality l Iterations t "The number of iterations Colour Dilate will go through.  More is slower.  Max steps is 100" R 1 20}
+  quality 7
+  addUserKnob {7 qualityBias l Distribution t "0 is a linear distribution.  1 is exponential distribution.\nExponential is smoother with low quality.\nLinear is better with high quality."}
+  qualityBias 1
+  addUserKnob {26 ""}
+  addUserKnob {7 blurCenter l "Blur Center" t "Soften central area where opposite dilates meet creating a hard line.  Is a multiple of Grow Texture." R 0 5}
+  addUserKnob {7 bcDistribution l "BC Distribution" t "0 blurs a direct multiple of Grow Texture. 1 blurs exponentially more towards the center."}
+  addUserKnob {26 ""}
+  addUserKnob {4 filter l Filter t "filter\n" M {box triangle quadratic gaussian ""}}
+  filter gaussian
+  addUserKnob {3 filterQuality l " " -STARTLINE}
+  filterQuality 15
+  addUserKnob {6 crop l "crop to format" -STARTLINE}
+  crop true
+  addUserKnob {4 matteOutput l "Matte Output" M {rgb.alpha matte "dilated matte" "dilated area" "grain matte" ""}}
+  matteOutput "dilated area"
+  addUserKnob {26 blank l "" -STARTLINE T "      "}
+  addUserKnob {6 invertMatte l "invert Matte" -STARTLINE}
+  invertMatte true
+  addUserKnob {26 blank2 l "" -STARTLINE T "      "}
+  addUserKnob {6 rgbIsPremult l "RGB is Premult?" -STARTLINE}
+  addUserKnob {1 colorDilate l INVISIBLE t "Keep me hidden" +INVISIBLE}
+  addUserKnob {3 previousLoopNum l INVISIBLE +INVISIBLE}
+  previousLoopNum 7
+  addUserKnob {1 fullList l INVISIBLE +INVISIBLE}
+  fullList "\['Blur1', 'Unpremult2', 'Expression1', 'FilterErode2', 'Premult1', 'BlurCenter', 'Merge2', 'Blur2', 'Unpremult3', 'Expression2', 'FilterErode3', 'Premult2', 'Blur3', 'Merge5', 'Blur4', 'Unpremult4', 'Expression3', 'FilterErode4', 'Premult3', 'Blur5', 'Merge6', 'Blur6', 'Unpremult5', 'Expression4', 'FilterErode5', 'Premult4', 'Blur7', 'Merge7', 'Blur8', 'Unpremult6', 'Expression5', 'FilterErode6', 'Premult5', 'Blur9', 'Merge8', 'Blur10', 'Unpremult7', 'Expression6', 'FilterErode7', 'Premult6', 'Blur11', 'Merge9', 'Blur12', 'Unpremult8', 'Expression7', 'FilterErode8', 'Premult7', 'Blur13', 'Merge10']"
+ }
+  Input {
+   inputs 0
+   name InputMask
+   note_font "Bitstream Vera Sans"
+   xpos 803
+   ypos -665
+   number 1
+  }
+set N1b914180 [stack 0]
+  AddChannels {
+   channels alpha
+   name AddChannels2
+   note_font "Bitstream Vera Sans"
+   xpos 365
+   ypos 1125
+  }
+  Dot {
+   name Dot3
+   note_font "Bitstream Vera Sans"
+   xpos 399
+   ypos 1183
+  }
+  Input {
+   inputs 0
+   name InputRGB
+   note_font "Bitstream Vera Sans"
+   xpos 1013
+   ypos -531
+  }
+set N1b92ba60 [stack 0]
+  AddChannels {
+   channels alpha
+   name AddChannels1
+   note_font "Bitstream Vera Sans"
+   xpos 348
+   ypos 949
+  }
+  Dot {
+   name Dot2
+   note_font "Bitstream Vera Sans"
+   xpos 382
+   ypos 1078
+  }
+push $N1b914180
+  FilterErode {
+   channels alpha
+   size {{invertMatte==0?erodeMatte.w:-erodeMatte.w i} {invertMatte==0?erodeMatte.h:-erodeMatte.h i}}
+   name FilterErode1
+   note_font "Bitstream Vera Sans"
+   xpos 803
+   ypos -621
+  }
+  Invert {
+   channels alpha
+   mix {{invertMatte i}}
+   name Invert2
+   note_font "Bitstream Vera Sans"
+   xpos 803
+   ypos -563
+  }
+  Grade {
+   channels alpha
+   blackpoint {{"clamp(expandMatte, 0, 1)" i}}
+   whitepoint {{"clamp(1+expandMatte, 0, 1)" i}}
+   white_clamp true
+   name Grade1
+   note_font "Bitstream Vera Sans"
+   xpos 803
+   ypos -505
+  }
+  Grade {
+   channels alpha
+   whitepoint 0.5
+   black_clamp false
+   white_clamp true
+   name Grade6
+   note_font "Bitstream Vera Sans"
+   xpos 803
+   ypos -345
+  }
+  Dot {
+   name Dot1
+   note_font "Bitstream Vera Sans"
+   xpos 837
+   ypos -287
+  }
+set N1b979fd0 [stack 0]
+push $N1b92ba60
+  AddChannels {
+   channels alpha
+   name AddChannels3
+   note_font "Bitstream Vera Sans"
+   xpos 1120
+   ypos -444
+  }
+push $N1b92ba60
+  Shuffle {
+   alpha white
+   name Shuffle1
+   note_font "Bitstream Vera Sans"
+   xpos 1013
+   ypos -458
+  }
+  Crop {
+   box {{InputRGB.bbox.x i x1001 542} {InputRGB.bbox.y i} {InputRGB.bbox.r i} {InputRGB.bbox.t i}}
+   name Crop3
+   note_font "Bitstream Vera Sans"
+   xpos 1013
+   ypos -414
+  }
+  Switch {
+   inputs 2
+   which {{rgbIsPremult i}}
+   name Switch1
+   note_font "Bitstream Vera Sans"
+   xpos 1013
+   ypos -370
+  }
+  Dot {
+   name Dot5
+   note_font "Bitstream Vera Sans"
+   xpos 1047
+   ypos -326
+  }
+set N1b9ac610 [stack 0]
+  Merge2 {
+   inputs 2
+   operation stencil
+   bbox intersection
+   name Merge1
+   note_font "Bitstream Vera Sans"
+   xpos 1013
+   ypos -292
+  }
+push $N1b979fd0
+  Dot {
+   name Dot4
+   note_font "Bitstream Vera Sans"
+   xpos 837
+   ypos -253
+  }
+push $N1b9ac610
+  Dot {
+   name Dot6
+   note_font "Bitstream Vera Sans"
+   xpos 946
+   ypos -326
+  }
+  Merge2 {
+   inputs 2
+   operation stencil
+   bbox B
+   name Merge3
+   note_font "Bitstream Vera Sans"
+   xpos 912
+   ypos -258
+  }
+  Dot {
+   name Dot7
+   note_font "Bitstream Vera Sans"
+   xpos 946
+   ypos -192
+  }
+  Switch {
+   inputs 2
+   which {{invertMatte i}}
+   name Switch2
+   note_font "Bitstream Vera Sans"
+   xpos 1002
+   ypos -196
+  }
+set N1b9e1ba0 [stack 0]
+push $N1b9e1ba0
+  Blur {
+   channels rgba
+   size 0.2915451895
+   name Blur1
+   note_font "Bitstream Vera Sans"
+   xpos 1336
+   ypos -26
+  }
+  Unpremult {
+   name Unpremult2
+   note_font "Bitstream Vera Sans"
+   xpos 1336
+   ypos 18
+  }
+  Expression {
+   expr3 a==0?0:1
+   name Expression1
+   note_font "Bitstream Vera Sans"
+   xpos 1336
+   ypos 62
+  }
+  FilterErode {
+   channels alpha
+   size 0.1457725948
+   filter gaussian
+   name FilterErode2
+   note_font "Bitstream Vera Sans"
+   xpos 1336
+   ypos 106
+  }
+  Premult {
+   name Premult1
+   note_font "Bitstream Vera Sans"
+   xpos 1336
+   ypos 164
+  }
+  Blur {
+   channels rgba
+   name BlurCenter
+   note_font "Bitstream Vera Sans"
+   xpos 1336
+   ypos 222
+  }
+  Merge2 {
+   inputs 2
+   name Merge2
+   note_font "Bitstream Vera Sans"
+   xpos 1336
+   ypos 280
+  }
+push $N1b9e1ba0
+  Blur {
+   channels rgba
+   size 2.332361516
+   name Blur2
+  }
+  Unpremult {
+   name Unpremult3
+  }
+  Expression {
+   expr3 a==0?0:1
+   name Expression2
+  }
+  FilterErode {
+   channels alpha
+   size 1.166180758
+   filter gaussian
+   name FilterErode3
+  }
+  Premult {
+   name Premult2
+  }
+  Blur {
+   channels rgba
+   name Blur3
+  }
+  Merge2 {
+   inputs 2
+   name Merge5
+  }
+push $N1b9e1ba0
+  Blur {
+   channels rgba
+   size 7.871720117
+   name Blur4
+  }
+  Unpremult {
+   name Unpremult4
+  }
+  Expression {
+   expr3 a==0?0:1
+   name Expression3
+  }
+  FilterErode {
+   channels alpha
+   size 3.935860058
+   filter gaussian
+   name FilterErode4
+  }
+  Premult {
+   name Premult3
+  }
+  Blur {
+   channels rgba
+   name Blur5
+  }
+  Merge2 {
+   inputs 2
+   name Merge6
+  }
+push $N1b9e1ba0
+  Blur {
+   channels rgba
+   size 18.65889213
+   name Blur6
+  }
+  Unpremult {
+   name Unpremult5
+  }
+  Expression {
+   expr3 a==0?0:1
+   name Expression4
+  }
+  FilterErode {
+   channels alpha
+   size 9.329446064
+   filter gaussian
+   name FilterErode5
+  }
+  Premult {
+   name Premult4
+  }
+  Blur {
+   channels rgba
+   name Blur7
+  }
+  Merge2 {
+   inputs 2
+   name Merge7
+  }
+push $N1b9e1ba0
+  Blur {
+   channels rgba
+   size 36.44314869
+   name Blur8
+  }
+  Unpremult {
+   name Unpremult6
+  }
+  Expression {
+   expr3 a==0?0:1
+   name Expression5
+  }
+  FilterErode {
+   channels alpha
+   size 18.22157434
+   filter gaussian
+   name FilterErode6
+  }
+  Premult {
+   name Premult5
+  }
+  Blur {
+   channels rgba
+   name Blur9
+  }
+  Merge2 {
+   inputs 2
+   name Merge8
+  }
+push $N1b9e1ba0
+  Blur {
+   channels rgba
+   size 62.97376093
+   name Blur10
+  }
+  Unpremult {
+   name Unpremult7
+  }
+  Expression {
+   expr3 a==0?0:1
+   name Expression6
+  }
+  FilterErode {
+   channels alpha
+   size 31.48688047
+   filter gaussian
+   name FilterErode7
+  }
+  Premult {
+   name Premult6
+  }
+  Blur {
+   channels rgba
+   name Blur11
+  }
+  Merge2 {
+   inputs 2
+   name Merge9
+  }
+push $N1b9e1ba0
+  Blur {
+   channels rgba
+   size 100
+   name Blur12
+  }
+  Unpremult {
+   name Unpremult8
+  }
+  Expression {
+   expr3 a==0?0:1
+   name Expression7
+  }
+  FilterErode {
+   channels alpha
+   size 50
+   filter gaussian
+   name FilterErode8
+  }
+  Premult {
+   name Premult7
+  }
+  Blur {
+   channels rgba
+   name Blur13
+  }
+  Merge2 {
+   inputs 2
+   name Merge10
+  }
+  Unpremult {
+   name Unpremult1
+   note_font "Bitstream Vera Sans"
+   xpos 224
+   ypos 966
+  }
+  Dot {
+   name Dot11
+   xpos 258
+   ypos 1020
+  }
+set N1bc560c0 [stack 0]
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   mix {{matteOutput==0?1:0 i}}
+   name Copy2
+   note_font "Bitstream Vera Sans"
+   xpos 224
+   ypos 1068
+  }
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   mix {{matteOutput==1?1:0}}
+   name Copy1
+   note_font "Bitstream Vera Sans"
+   xpos 224
+   ypos 1173
+  }
+  Dot {
+   name Dot8
+   xpos 258
+   ypos 1227
+  }
+set N1bc78980 [stack 0]
+  Dot {
+   name Dot9
+   xpos 453
+   ypos 1227
+  }
+  Expression {
+   expr3 a<=0.000001?0:1
+   name Expression12
+   note_font "Bitstream Vera Sans"
+   xpos 419
+   ypos 1261
+  }
+  Dot {
+   name Dot10
+   xpos 453
+   ypos 1303
+  }
+push $N1bc560c0
+  Dot {
+   name Dot13
+   xpos 521
+   ypos 1020
+  }
+  Dot {
+   name Dot12
+   xpos 521
+   ypos 1205
+  }
+push $N1b92ba60
+  Merge2 {
+   inputs 2
+   operation difference
+   bbox B
+   name Merge14
+   xpos 563
+   ypos 1201
+  }
+  Keyer {
+   operation "luminance key"
+   range {0 1e-05 1 1}
+   name Keyer1
+   xpos 563
+   ypos 1243
+  }
+  Merge2 {
+   inputs 2
+   operation mask
+   bbox B
+   name Merge15
+   xpos 563
+   ypos 1299
+  }
+  Dot {
+   name Dot14
+   xpos 597
+   ypos 1341
+  }
+push $N1bc78980
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   mix {{matteOutput==4?1:0 i}}
+   name Copy3
+   note_font "Bitstream Vera Sans"
+   xpos 224
+   ypos 1331
+  }
+set N1bcd0df0 [stack 0]
+  Expression {
+   expr3 a<=0.000001?0:1
+   mix {{matteOutput==3?1:0}}
+   name Expression8
+   note_font "Bitstream Vera Sans"
+   xpos 224
+   ypos 1418
+  }
+push $N1b92ba60
+  Merge2 {
+   inputs 2
+   operation copy
+   bbox B
+   name Merge4
+   xpos 932
+   ypos 1418
+  }
+  Output {
+   name Output1
+   note_font "Bitstream Vera Sans"
+   xpos 932
+   ypos 1579
+  }
+push $N1b92ba60
+push $N1bcd0df0
+  Viewer {
+   inputs 2
+   input_process false
+   name Viewer1
+   xpos 336
+   ypos 1225
+  }
+ end_group
+ Blur {
+  size 2.6
+  name Blur1
+  xpos 576
+  ypos -495
+  disable true
+ }
+ Shuffle {
+  out deep
+  name Shuffle2
+  xpos 574
+  ypos -451
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  from1 rgba.green
+  to1 rgba.green
+  from2 rgba.blue
+  to2 rgba.blue
+  from3 rgba.alpha
+  to3 rgba.alpha
+  name Copy1
+  xpos 465
+  ypos -444
+ }
+ DeepFromImage {
+  premult true
+  name DeepFromImage1
+  selected true
+  xpos 576
+  ypos -374
+ }
+ Output {
+  name Output1
+  xpos 576
+  ypos -323
+ }
+end_group
+push $cut_paste_input
+Group {
+ name DeepGradeMasked
+ tile_color 0x60ff
+ selected true
+ xpos 3
+ ypos 560
+ addUserKnob {20 User}
+ addUserKnob {4 output M {"visualize P" input}}
+ output input
+ addUserKnob {26 ""}
+ addUserKnob {41 center T DEEP_MASK1.center}
+ addUserKnob {41 radius T DEEP_MASK1.radius}
+ addUserKnob {41 max l falloff T DeepCoreMask.max}
+ addUserKnob {26 ""}
+ addUserKnob {41 deepMult T DEEP_GRADE.deepMult}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Input {
+  inputs 0
+  name deep
+  selected true
+  xpos -26
+  ypos 230
+ }
+ Dot {
+  name Dot1
+  xpos 8
+  ypos 270
+ }
+set N1bdfd120 [stack 0]
+add_layer {other other.BA other.GA other.RA}
+ DeepExpression {
+  temp_name0 centerX
+  temp_expr0 "\[value center.r]"
+  temp_name1 centerY
+  temp_expr1 "\[value center.g]"
+  temp_name2 centerZ
+  temp_expr2 "\[value center.b]"
+  chans0 other
+  chans1 deep
+  other.BA "(1-(sqrt((x-centerX)*(x-centerX)+(y-centerY)*(y-centerY)+(z-centerZ)*(z-centerZ))/\[value radius]))<0?0:(1-(sqrt((x-centerX)*(x-centerX)+(y-centerY)*(y-centerY)+(z-centerZ)*(z-centerZ))/\[value radius]))"
+  other.GA 0
+  other.RA 0
+  name DEEP_MASK1
+  xpos 85
+  ypos 316
+  addUserKnob {20 User}
+  addUserKnob {7 radius R 1 2000}
+  radius 500
+  addUserKnob {18 center}
+  center {1719 420 165.947464}
+  addUserKnob {6 center_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ DeepExpression {
+  chans0 other
+  chans1 deep
+  other.BA "other.BA/\[value max]"
+  name DeepCoreMask
+  xpos 93
+  ypos 354
+  addUserKnob {20 User}
+  addUserKnob {7 max}
+  max 0.646
+ }
+ DeepExpression {
+  chans1 deep
+  rgba.red rgba.red/rgba.alpha
+  rgba.green rgba.green/rgba.alpha
+  rgba.blue rgba.blue/rgba.alpha
+  name deepUnpremult
+  xpos 85
+  ypos 425
+ }
+ DeepExpression {
+  chans1 deep
+  rgba.red "((r*\[value deepMult.r])*other.BA)+(r*(1-other.BA))"
+  rgba.green "((g*\[value deepMult.g])*other.BA)+(g*(1-other.BA))"
+  rgba.blue "((b*\[value deepMult.b])*other.BA)+(b*(1-other.BA))"
+  rgba.alpha "((a*\[value deepMult.a])*other.BA)+(a*(1-other.BA))"
+  name DEEP_GRADE
+  xpos 90
+  ypos 466
+  addUserKnob {20 User}
+  addUserKnob {19 deepMult}
+  deepMult {1 1 1 1}
+  addUserKnob {6 deepMult_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  deepMult_panelDropped true
+ }
+ DeepExpression {
+  chans1 deep
+  rgba.red rgba.red*rgba.alpha
+  rgba.green rgba.green*rgba.alpha
+  rgba.blue rgba.blue*rgba.alpha
+  name deepPremult
+  xpos 90
+  ypos 492
+ }
+ DeepExpression {
+  chans1 deep
+  rgba.red rgba.red<0?0:rgba.red
+  rgba.green rgba.green<0?0:rgba.green
+  rgba.blue rgba.blue<0?0:rgba.blue
+  rgba.alpha rgba.alpha<0?0:rgba.alpha
+  name DeepBlackClamp
+  xpos 90
+  ypos 518
+ }
+push $N1bdfd120
+ DeepExpression {
+  chans1 deep
+  rgba.red x
+  rgba.green y
+  rgba.blue z
+  rgba.alpha 1
+  name vizP
+  xpos -18
+  ypos 520
+ }
+ Switch {
+  inputs 2
+  which {{output}}
+  name Switch1
+  xpos 98
+  ypos 567
+ }
+ Output {
+  name Output1
+  xpos 98
+  ypos 667
+ }
+end_group
