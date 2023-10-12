@@ -1,0 +1,2419 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode41
+ tile_color 0xff
+ label <center>ALPHA
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 150
+ note_font_color 0xffff7fff
+ selected true
+ xpos -23787
+ ypos -4010
+ bdwidth 2140
+ bdheight 20
+ z_order -2
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode42
+ tile_color 0xff
+ label <center>COLOR
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 150
+ note_font_color 0x7fffffff
+ selected true
+ xpos -20540
+ ypos -4010
+ bdwidth 2467
+ bdheight 20
+ z_order -2
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode43
+ tile_color 0x514f5aff
+ label "<center>(OPTIONAL) BG despill edge blending"
+ note_font_size 62
+ selected true
+ xpos -20318
+ ypos 836
+ bdwidth 1583
+ bdheight 696
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode44
+ tile_color 0x436967ff
+ label "creating \"GS\" channel\nfor review at bottom of key"
+ note_font_size 42
+ selected true
+ xpos -20263
+ ypos -4855
+ bdwidth 593
+ bdheight 317
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode45
+ tile_color 0x388e8e00
+ label "<center>SOFT KEY for edges"
+ note_font_size 80
+ selected true
+ xpos -23830
+ ypos -3629
+ bdwidth 906
+ bdheight 793
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode46
+ tile_color 0x554662ff
+ label "<center>Crunch KEY for Core"
+ note_font_size 80
+ selected true
+ xpos -22513
+ ypos -3631
+ bdwidth 692
+ bdheight 798
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode47
+ tile_color 0x388e8eff
+ label "<center>Edge Despill"
+ note_font "Bitstream Vera Sans"
+ note_font_size 80
+ selected true
+ xpos -19136
+ ypos -3632
+ bdwidth 979
+ bdheight 799
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode51
+ tile_color 0x825f85ff
+ label <center>Transforms
+ note_font_size 62
+ selected true
+ xpos -20355
+ ypos -189
+ bdwidth 776
+ bdheight 777
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode52
+ tile_color 0x72859fff
+ label "<center>Color \nCorrections"
+ note_font_size 62
+ selected true
+ xpos -20352
+ ypos -1030
+ bdwidth 770
+ bdheight 779
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode53
+ tile_color 0x554662ff
+ label "<center>Core Despill"
+ note_font_size 80
+ selected true
+ xpos -20313
+ ypos -3607
+ bdwidth 692
+ bdheight 798
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode54
+ tile_color 0x58534dff
+ label "<br><br><br><br><br>This template is hugely inspired by <b>Tony Lyons's \"Advanced Keying template\"</b>\nFor in depth explanation of the principles used in this template you can watch his video:\n<u><font color=blue>https://compositingmentor.com/2015/12/18/advanced-keying-breakdown-4-1-template/</u>\n\n<b>STEPS:</b> \n\n1.) Core despill, adjust or replace with your own core despill\n2.) Edge Despill, adjust or replace with your edge despill, should roughly match BG color after despilled\n3.) Core Key, replace with a crunchy core key\n4.) Edge key, this will be your normal key, replace nodes with whatever keyer you wish\n5.) BG despill edge blending.  Adjust your BG Prep Grade while viewing the merge(plus), adjust \n     Blackpoint and white point to turn BG darks negative, and make whites brighter.  Adjust the \n     saturation before the merge(plus) if the despill is turning an odd color from the edge despill.\n"
+ note_font_size 50
+ selected true
+ xpos -23266
+ ypos -5684
+ bdwidth 2199
+ bdheight 1063
+}
+StickyNote {
+ inputs 0
+ name StickyNote18
+ label "STENCIL KEY"
+ note_font_size 21
+ selected true
+ xpos -23661
+ ypos -1711
+}
+NoOp {
+ inputs 0
+ name BACKGROUND1
+ tile_color 0x666666ff
+ note_font "DejaVu Sans Bold"
+ note_font_size 31
+ note_font_color 0x626262ff
+ selected true
+ xpos -15717
+ ypos -5676
+}
+Dot {
+ name Dot72
+ selected true
+ xpos -15689
+ ypos 1052
+}
+set N25249f50 [stack 0]
+Dot {
+ name Dot73
+ label BG
+ note_font_size 101
+ selected true
+ xpos -19209
+ ypos 1052
+}
+Grade {
+ black_clamp false
+ name Grade31
+ label "BG Prep"
+ selected true
+ xpos -19237
+ ypos 1120
+}
+Dot {
+ name Dot74
+ selected true
+ xpos -19209
+ ypos 1316
+}
+NoOp {
+ inputs 0
+ name NoOp2
+ selected true
+ xpos -23857
+ ypos -1658
+}
+NoOp {
+ inputs 0
+ name NoOp3
+ selected true
+ xpos -23857
+ ypos -1874
+}
+push $cut_paste_input
+NoOp {
+ name PLATE_DENOISED1
+ tile_color 0x666666ff
+ note_font "DejaVu Sans Bold"
+ note_font_size 31
+ note_font_color 0x626262ff
+ selected true
+ xpos -20007
+ ypos -5676
+}
+Dot {
+ name Dot75
+ selected true
+ xpos -19979
+ ypos -4756
+}
+AddChannels {
+ channels rgba
+ name AddChannels2
+ selected true
+ xpos -20007
+ ypos -4706
+}
+set N524f1b0 [stack 0]
+push $N524f1b0
+add_layer {GS GS.red GS.green GS.blue GS.alpha}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 GS.red
+ from1 rgba.green
+ to1 GS.green
+ from2 rgba.blue
+ to2 GS.blue
+ name Copy2
+ selected true
+ xpos -20007
+ ypos -4628
+}
+Dot {
+ name Dot77
+ selected true
+ xpos -19979
+ ypos -4156
+}
+set N5046f40 [stack 0]
+Dot {
+ name Dot78
+ selected true
+ xpos -23609
+ ypos -4156
+}
+Dot {
+ name Dot79
+ selected true
+ xpos -23609
+ ypos -3412
+}
+set N4f41100 [stack 0]
+Dot {
+ name Dot80
+ selected true
+ xpos -23389
+ ypos -3412
+}
+set N4f45ff0 [stack 0]
+Dot {
+ name Dot81
+ selected true
+ xpos -22179
+ ypos -3412
+}
+set N4f4b080 [stack 0]
+Dot {
+ name Dot82
+ selected true
+ xpos -22069
+ ypos -3412
+}
+Primatte3 {
+ data { 5
+    0 0 0
+    65552
+    0 5
+    30234 30234 30234 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    -1 -1 -1 -1
+    -1 -1 999999 999999
+    -1 -1 -1 -1
+    0.05 1.732 1.732
+    0.05 1.732 1.732
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+  }
+
+ primEdgedata { 5
+    0 0 0
+    65552
+    0 5
+    30234 30234 30234 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    -1 -1 -1 -1
+    -1 -1 999999 999999
+    -1 -1 -1 -1
+    0.05 1.732 1.732
+    0.05 1.732 1.732
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+  }
+
+ primBodydata { 5
+    0 0 0
+    65552
+    0 5
+    30234 30234 30234 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    0 0 0 0 0 0
+    -1 -1 -1 -1
+    -1 -1 999999 999999
+    -1 -1 -1 -1
+    0.05 1.732 1.732
+    0.05 1.732 1.732
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+    0.05 0.866 0.866
+  }
+
+ bg_color_selected false
+ crop {0 0 2048 1556}
+ "Adjust Lighting" 0
+ "Hybrid Matte" 0
+ "Fine Tuning" 0
+ name Primatte1
+ selected true
+ xpos -22097
+ ypos -3290
+}
+push $N4f4b080
+OFXuk.co.thefoundry.keylight.keylight_v201 {
+ show "Final Result"
+ unPreMultiply false
+ screenColour {0 0 0}
+ screenGain 1
+ screenBalance 0.5
+ alphaBias {0.5 0.5 0.5}
+ despillBias {0.5 0.5 0.5}
+ gangBiases true
+ preBlur 0
+ "Screen Matte" 1
+ screenClipMin 0
+ screenClipMax 1
+ screenClipRollback 0
+ screenGrowShrink 0
+ screenSoftness 0
+ screenDespotBlack 0
+ screenDespotWhite 0
+ screenReplaceMethod "Soft Colour"
+ screenReplaceColour {0.5 0.5 0.5}
+ Tuning 0
+ midPoint 0.5
+ lowGain 1
+ midGain 1
+ highGain 1
+ "Inside Mask" 0
+ sourceAlphaHandling Ignore
+ insideReplaceMethod "Soft Colour"
+ insideReplaceColour {0.5 0.5 0.5}
+ Crops 0
+ SourceXMethod Colour
+ SourceYMethod Colour
+ SourceEdgeColour 0
+ SourceCropL 0
+ SourceCropR 1
+ SourceCropB 0
+ SourceCropT 1
+ balanceSet false
+ insideComponent None
+ outsideComponent None
+ cacheBreaker true
+ name Keylight4
+ selected true
+ xpos -22207
+ ypos -3290
+}
+Switch {
+ inputs 2
+ name Choose_Keyer2
+ selected true
+ xpos -22207
+ ypos -3242
+}
+Dot {
+ name Dot83
+ selected true
+ xpos -22179
+ ypos -3196
+}
+set N424fcc0 [stack 0]
+Group {
+ name PxF_Erode1
+ help "Erode the edges of an RGBA image by blurring the alpha, applying a gamma to it and doing a \"min\" with the original alpha."
+ tile_color 0x733520ff
+ selected true
+ xpos -22207
+ ypos -3122
+ addUserKnob {20 User}
+ addUserKnob {7 amount t "Amount of alpha erode. Positive values erode the alpha, negative values expand the alpha." R -100 100}
+ amount 46.5
+ addUserKnob {7 gamma t "Controls the feather of the erode. Smaller values create a harder edge."}
+ gamma 0.31
+ addUserKnob {4 dSel l divide t "Auto: Unpremult the RGB by the alpha only if amount > 0. \n\nOn: Always unpremult RGB by the alpha.\n\nOff: Never unpremult the RGB by the alpha." M {auto on off "" ""}}
+ addUserKnob {4 mSel l multiply t "Auto: Premult the RGB by the alpha after the erode only if amount > 0. \n\nOn: Always premult the RGB by the alpha after the erode.\n\nOff: Never premult the RGB by the alpha after the erode." M {auto on off "" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {26 t l "" -STARTLINE T "PxF_Erode 2.1 - (c) 2015 - Xavier Bourque - www.pixelfudger.com"}
+}
+ Input {
+  inputs 0
+  name mask
+  xpos 675
+  ypos 423
+  number 1
+ }
+ Input {
+  inputs 0
+  name img
+  xpos 501
+  ypos -28
+ }
+set N4044b80 [stack 0]
+ Dot {
+  name Dot1
+  xpos 735
+  ypos 245
+ }
+push $N4044b80
+ Unpremult {
+  name Unpremult1
+  xpos 501
+  ypos 49
+  disable {{"parent.dSel == 0 ? parent.amount < 0 ? 1 : 0 : parent.dSel == 1 ? 0 : 1"}}
+ }
+set N404e920 [stack 0]
+push $N404e920
+ Invert {
+  name Invert1
+  xpos 374
+  ypos 45
+  disable {{"amount < 0 ? 0 : 1"}}
+ }
+ Blur {
+  channels alpha
+  size {{abs(parent.amount)}}
+  name Blur1
+  xpos 381
+  ypos 93
+ }
+ Gamma {
+  channels alpha
+  value {{parent.gamma}}
+  name Gamma1
+  xpos 381
+  ypos 153
+ }
+ Invert {
+  name Invert2
+  xpos 371
+  ypos 208
+  disable {{"amount < 0 ? 0 : 1"}}
+ }
+set N3d4d390 [stack 0]
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos 459
+  ypos 294
+ }
+set N3c49340 [stack 0]
+push $N404e920
+push $N404e920
+push $N3d4d390
+ Merge2 {
+  inputs 2
+  operation mask
+  name In
+  xpos 325
+  ypos 286
+ }
+ Switch {
+  inputs 2
+  which {{"parent.amount == 0"}}
+  name Switch2
+  xpos 330
+  ypos 322
+ }
+ Switch {
+  inputs 2
+  which {{"parent.amount < 0 ? 1 : 0"}}
+  name Switch1
+  xpos 393
+  ypos 359
+ }
+push $N404e920
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy1
+  xpos 510
+  ypos 355
+ }
+ Premult {
+  name Premult1
+  xpos 510
+  ypos 399
+  disable {{"parent.mSel == 0 ? parent.amount < 0 ? 1 : 0 : parent.mSel == 1 ? 0 : 1"}}
+ }
+ Keymix {
+  inputs 3
+  invertMask true
+  bbox B
+  name Keymix1
+  xpos 508
+  ypos 477
+  disable {{"\[exists parent.input1] ? 0 : 1" i x1 0}}
+ }
+ Output {
+  name Output1
+  xpos 510
+  ypos 546
+ }
+push $N3c49340
+ Viewer {
+  frame_range 1-100
+  name Viewer1
+  xpos 501
+  ypos 129
+ }
+end_group
+Dot {
+ name Dot84
+ label "Core KEY"
+ note_font_size 60
+ note_font_color 0x1ffba1ff
+ selected true
+ xpos -22179
+ ypos -2548
+}
+Dot {
+ name Dot85
+ selected true
+ xpos -22179
+ ypos -2236
+}
+set N2e42e10 [stack 0]
+push $N424fcc0
+Dilate {
+ size 16
+ name Dilate2
+ selected true
+ xpos -23307
+ ypos -3200
+}
+push $N4f45ff0
+Inpaint2 {
+ inputs 2
+ fillRegion "Matte Alpha"
+ center {1024 778}
+ name Inpaint2
+ selected true
+ xpos -23417
+ ypos -3194
+}
+set N2d43590 [stack 0]
+Dot {
+ name Dot86
+ selected true
+ xpos -23389
+ ypos -3028
+}
+push $N2d43590
+push $N4f41100
+IBKGizmoV3 {
+ inputs 2
+ name IBKGizmoV3_1
+ xpos -23637
+ ypos -3194
+ st C-green
+}
+add_layer {GS_clean GS_clean.red GS_clean.green GS_clean.blue GS_clean.alpha}
+AddChannels {
+ channels GS_clean
+ name AddChannels3
+ selected true
+ xpos -23637
+ ypos -3104
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 GS_clean.red
+ from1 rgba.green
+ to1 GS_clean.green
+ from2 rgba.blue
+ to2 GS_clean.blue
+ from3 rgba.alpha
+ to3 GS_clean.alpha
+ name Copy3
+ selected true
+ xpos -23637
+ ypos -3050
+}
+Dot {
+ name Dot87
+ label "Edge KEY"
+ note_font_size 60
+ note_font_color 0x1ffba1ff
+ selected true
+ xpos -23609
+ ypos -2548
+}
+Merge2 {
+ inputs 2
+ operation screen
+ name Merge27
+ selected true
+ xpos -23637
+ ypos -2234
+}
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge30
+ selected true
+ xpos -23637
+ ypos -1874
+ disable true
+}
+Merge2 {
+ inputs 2
+ operation stencil
+ name Merge31
+ selected true
+ xpos -23637
+ ypos -1658
+ disable true
+}
+Dot {
+ name Dot88
+ selected true
+ xpos -23609
+ ypos -1468
+}
+set N21465e0 [stack 0]
+Dot {
+ name Dot89
+ selected true
+ xpos -23609
+ ypos -1276
+}
+Dot {
+ name Dot90
+ selected true
+ xpos -20089
+ ypos -1276
+}
+set N2150950 [stack 0]
+Dot {
+ name Dot91
+ selected true
+ xpos -20089
+ ypos -1204
+}
+push $N2150950
+push $N2e42e10
+push $N21465e0
+Switch {
+ inputs 2
+ name Switch1
+ label "Choose what gives you the best result"
+ selected true
+ xpos -22207
+ ypos -1472
+}
+Group {
+ name ExponBlur_v03_1
+ help "L_ExponBlur_v03 The ExponBlur blurs an image with an exponential falloff based upon an alpha. Most often used with roto shapes. The effect is applied to RGBA only. (For any questions, comments or suggestions please email gizmos@luma-pictures.com)"
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -20337
+ ypos -1466
+ mapsize {0.15 0.15}
+ addUserKnob {20 ExponBlur}
+ addUserKnob {26 Description l "" +STARTLINE T ":ExponBlur: by Luma Pictures\n\nExponentially blurs image outward or inward"}
+ addUserKnob {14 size R -40 40}
+ size -4.2
+ addUserKnob {7 Multiplier R 0 10}
+ Multiplier 5.05
+ addUserKnob {6 crop l "crop to format" +STARTLINE}
+ addUserKnob {6 disableCropBB l "disable CropBB" -STARTLINE}
+ addUserKnob {26 ""}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -372
+  ypos 265
+ }
+set N1f4d610 [stack 0]
+ Invert {
+  name L_ExponBlur_Invert4
+  xpos -372
+  ypos 329
+  disable {{"parent.size>=0 ? 1 : 0" i}}
+ }
+set N1e42370 [stack 0]
+ Blur {
+  size {{parent.size.w i} {parent.size.h i}}
+  crop {{parent.crop i}}
+  name L_ExponBlur_Blur1
+  label "\[value size]"
+  xpos -592
+  ypos 479
+ }
+push $N1e42370
+ Blur {
+  size {{parent.size.w*parent.Multiplier i} {parent.size.h*parent.Multiplier i}}
+  crop {{parent.crop i}}
+  name L_ExponBlur_Blur2
+  label "\[value size]"
+  xpos -482
+  ypos 479
+ }
+ Merge2 {
+  inputs 2
+  name L_ExponBlur_Merge7
+  xpos -537
+  ypos 572
+ }
+push $N1e42370
+ Blur {
+  size {{parent.size.w*parent.Multiplier*2 i} {parent.size.h*parent.Multiplier*2 i}}
+  crop {{parent.crop i}}
+  name L_ExponBlur_Blur3
+  label "\[value size]"
+  xpos -372
+  ypos 479
+ }
+ Merge2 {
+  inputs 2
+  name L_ExponBlur_Merge8
+  xpos -477
+  ypos 637
+ }
+push $N1e42370
+ Blur {
+  size {{parent.size.w*parent.Multiplier*4 i} {parent.size.h*parent.Multiplier*4 i}}
+  crop {{parent.crop i}}
+  name L_ExponBlur_Blur4
+  label "\[value size]"
+  xpos -262
+  ypos 479
+ }
+ Merge2 {
+  inputs 2
+  name L_ExponBlur_Merge9
+  xpos -372
+  ypos 709
+ }
+ Invert {
+  name L_ExponBlur_Invert5
+  xpos -372
+  ypos 774
+  disable {{"parent.size>=0 ? 1 : 0"}}
+ }
+ Clamp {
+  channels {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name L_ExponBlur_clampOutput
+  xpos -372
+  ypos 835
+ }
+ Crop {
+  box {0 0 {input.width i} {input.height i}}
+  reformat true
+  crop false
+  name L_ExponBlur_Crop1
+  xpos -372
+  ypos 901
+  disable {{parent.disableCropBB i x-5 1}}
+ }
+push $N1f4d610
+ Dot {
+  name Dot1
+  xpos -81
+  ypos 270
+ }
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  name L_ExponBlur_ChannelsPassThrough
+  xpos -115
+  ypos 901
+ }
+ Output {
+  name Output1
+  xpos -115
+  ypos 993
+ }
+end_group
+Invert {
+ name Invert2
+ selected true
+ xpos -20227
+ ypos -1472
+}
+push $N5046f40
+Dot {
+ name Dot92
+ selected true
+ xpos -18879
+ ypos -4156
+}
+Dot {
+ name Dot93
+ selected true
+ xpos -18879
+ ypos -3316
+}
+set N124bdf0 [stack 0]
+Group {
+ name apDespill2
+ help "apDespill v2.0 by Adrian Pueyo\n\nGizmo to despill an image, with options to despill any hue (and not only the primaries), select different algorithms for de/respilling, and protect tones from the despill.\n\nIf you just want a basic despill, its default values should already be enough and the tool will avoid any extra calculations.\n\nv2 includes a new \"absolute\" mode which lets you basically perform a key, or do a \"despill to color\" operation. Also, the despill color, respill color and limit can now be plugged as image inputs if you wish, letting you perform a fully image-based despill or key, sort of iKeylight. Additionally, it allows you to perform the despill under a colorspace sandwich, for the artists who prefer to loop through different colorspaces in order to find one that works. Thanks to Tony Lyons the best feedback!\n\nadrianpueyo.com, 2014-2021"
+ onCreate "n = nuke.thisNode()\nn\['tolerance'].setRange(0,2)\nn\['prot1_tolerance'].setFlag(0x00000004)\nn\['prot1_effect'].setFlag(0x00000004)"
+ knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name()\nif kn == \"color\":\n    kv = k.getValue()\n    custom_weight_labels = \[\"green - blue\", \"red - blue\", \"red - green\", \" \"]\n    n\[\"custom_weight\"].setLabel(custom_weight_labels\[int(kv)])\n    n\[\"pick\"].setVisible(k.getValue() == 3)\nelif kn == \"mode\":\n    n\[\"custom_weight\"].setVisible(n\[\"mode\"].getValue()==3)\nelif kn in \[\"out\",\"output_alpha\"]:\n    n\[\"respill_math\"].setEnabled(n\[\"out\"].getValue()==0 or n\[\"output_alpha\"].getValue()==1)\n    n\[\"respill_color\"].setEnabled(n\[\"out\"].getValue()==0)\n    n\[\"inverted_spill_matte\"].setEnabled(n\[\"output_alpha\"].value())\nelif kn == \"prot1_activate\":\n    protA = n\[\"prot1_activate\"].value()\n    n\[\"prot1_preview\"].setEnabled(protA)\n    for i in \[\"prot1\", \"prot1_tolerance\", \"prot1_falloff\",\"prot1_effect\"]:\n        n\[i].setVisible(protA)\nelif kn == \"inputChange\":\n    n.knobs()\[\"limit_channel\"].setVisible(n.input(3) is not None)\n    n.knobs()\[\"invert_limit_channel\"].setVisible(n.input(3) is not None)\n    color_enabled = nuke.toNode(\"apDespillKernel\")\[\"apDespillKernel_use_color_input\"].getValue()==0\n    n\[\"color\"].setEnabled(color_enabled)\n    n.knobs()\[\"pick\"].setEnabled(color_enabled)\n    n\[\"info_using_input_color\"].setVisible(not color_enabled)\nelif kn == \"colorspace_shift\":\n    kv = k.value()\n    for i in \[\"colorspace_out\", \"illuminant_out\", \"primary_out\"]:\n        n.knobs()\[i].setEnabled(kv)\n    for i in \[\"colorspace_in\", \"illuminant_in\", \"primary_in\"]:\n        n.knobs()\[i].setEnabled(kv and n\[\"input_colorspace\"].value())\n    n\[\"input_colorspace\"].setEnabled(kv)\nelif kn == \"input_colorspace\":\n    kv = k.value()\n    for i in \[\"colorspace_in\", \"illuminant_in\", \"primary_in\"]:\n        n.knobs()\[i].setVisible(kv)\n        n.knobs()\[i].setEnabled(kv)\nelif kn == \"imagebased\":\n    kv = k.value()\n    input_names = \[\"color\",\"limit\",\"respill\"]\n    if kv:\n        for i_name in input_names:\n            i_fullname = \"Input\"+i_name\n            if not nuke.exists(i_fullname):\n                i_node = nuke.nodes.Input()\n                i_node\[\"name\"].setValue(i_fullname)\n            else:\n                i_node = nuke.toNode(i_fullname)\n            dot = nuke.toNode(\"Dot\"+i_name)\n            i_node.setXYpos(dot.xpos(),dot.ypos()-40)\n            dot.setInput(0,i_node)\n    else:\n        # If something connected, do nothing\n        if not any(\[n.input(i) for i in \[2,3,4]]):\n            for i_name in input_names:\n                if nuke.exists(\"Input\"+i_name):\n                    nuke.delete(nuke.toNode(\"Input\"+i_name))\n        else:\n            k.setValue(True)"
+ tile_color 0x8b8b8bff
+ selected true
+ xpos -18907
+ ypos -3194
+ addUserKnob {20 apDespill}
+ addUserKnob {6 pick_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 imagebased l image-based t "Show or hide image-based inputs.\n\nThis doesn't change anything internally except hiding inputs, just to avoid intimidating arrows on the node graph.\n\nNote: While any image-based input is connected, this won't let you hide them." +STARTLINE}
+ addUserKnob {6 absolute_mode l "absolute mode" t "Absolute mode performs a keying algorithm instead of a regular despill, so that you can do a \"spill to colour\" or even use this node as an image-based Keylight." -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {4 color t "Select a primary as a starting point, or custom to show RGB controls to select any color.\n\nNote: If an image is plugged on the color input, this will get overwritten by the input." M {red green blue custom "" "" ""}}
+ color custom
+ addUserKnob {26 info_using_input_color l " " -STARTLINE +HIDDEN T "<i><font color=#AAA> (Using color from input)"}
+ addUserKnob {18 pick t "Pick the color you'd like to use for the despill. \n\nPlease use ctrl/cmd+alt+click for picking.\n\nNOTE: If a despill color image input is plugged, this value will be ignored."}
+ pick {0 1 0}
+ addUserKnob {6 pick_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 dfg_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {4 out l output t "Quick switch to output the despilled image or the substracted one." M {despill spill}}
+ addUserKnob {6 output_alpha l "output spill matte in alpha" t "Output the spill luminance in the alpha channel." +STARTLINE}
+ output_alpha true
+ addUserKnob {6 inverted_spill_matte l inverted t "Invert the output spill matte (in the alpha channel), especially useful when the despill is set to Absolute mode, in which case this will output a keying-like alpha." -STARTLINE}
+ inverted_spill_matte true
+ addUserKnob {4 mode l "despill math" t "average = avg of other two channels\nmaximum = max of other two channels\nminimum = min of other two channels\ncustom = select custom weights" M {average maximum minimum custom ""}}
+ addUserKnob {7 custom_weight l " " t "-1 = only capped by the first channel\n0 = capped by avg of both\n1 = only capped by the second channel" -STARTLINE +HIDDEN R -1 1}
+ addUserKnob {26 ""}
+ addUserKnob {6 colorspace_shift l "alt colorspace" t "This allows for the popular artistic approach to refining the despill where you browse through colorspace conversions (mainly white point and primaries) and choose one that matches your desired despill bias.\n\n<b>Tip:</b> Double click on a dropdown and use the Page Up and Page Down keys on your keyboard to browse quickly through the items.\n\n<b>Note:</b> There's no need at all for the values of these dropdowns to match your working colorspace, so you can leave it as-is or tweak it if you prefer, regardless of the colorspace you're comping at (e.g. ACEScg). It is literally an artistic conversion prior to the despill algorithm that then gets reverted." +STARTLINE}
+ colorspace_shift true
+ addUserKnob {6 input_colorspace l "input colorspace" t "Also tweak the input colorspace for the back and forth colorspace conversion. This is generally not needed however, as this colorspace conversion is generally only used for artistic purposes." -STARTLINE}
+ addUserKnob {6 log_space l log t "Perform Lin2Log -> Despill -> Log2Lin." -STARTLINE}
+ addUserKnob {41 colorspace_in l "in colorspace" +DISABLED +HIDDEN T Colorspace1.colorspace_in}
+ addUserKnob {41 illuminant_in l "" -STARTLINE +DISABLED +HIDDEN T Colorspace1.illuminant_in}
+ addUserKnob {41 primary_in l "" -STARTLINE +DISABLED +HIDDEN T Colorspace1.primary_in}
+ addUserKnob {41 colorspace_out l "despill space" T Colorspace1.colorspace_out}
+ addUserKnob {41 illuminant_out l "" -STARTLINE T Colorspace1.illuminant_out}
+ addUserKnob {41 primary_out l "" -STARTLINE T Colorspace1.primary_out}
+ addUserKnob {26 ""}
+ addUserKnob {7 hue_offset l "hue offset" t "Rotate the despill vectors to despill an arbitrary tone other than the primaries or the picked color.\nNote: A rotation of +-120 degrees is the same as selecting a different color channel." R -30 30}
+ addUserKnob {7 tolerance l limit t "Use this to multiply the hue tolerance (the limiter value). You can move it all the way down to 0 to completely remove a hue from your image.\n\n<b>NOTE:</b> If an image is plugged into the <i>limit</i> input, this will act as a multiplier." R 0 2}
+ tolerance 1
+ addUserKnob {41 limit_channel l "limit channel" +HIDDEN T CopyLimit.from0}
+ addUserKnob {6 invert_limit_channel l invert t "The recommended workflow for the image-based limit is keeping this invert turned on, so that the higher the value of the limit channel, the lower the limit gets." -STARTLINE +HIDDEN}
+ invert_limit_channel true
+ addUserKnob {6 prot1_activate l "protect tones" t "Enable controls to select tones to protect from despilling." +STARTLINE}
+ addUserKnob {6 prot1_preview l preview t "Output the protected tones." -STARTLINE +DISABLED}
+ addUserKnob {18 prot1 l protect t "Pick the central hue to protect.\n(ctrl/cmd+alt+click)" +HIDDEN}
+ prot1 {0 0 0}
+ addUserKnob {6 prot1_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 prot1_tolerance l tolerance t "Amount of hues to include in the selection." +HIDDEN}
+ prot1_tolerance 0.2
+ addUserKnob {7 prot1_falloff l falloff t "Falloff for the hue selection. A higher falloff will make hues apart from the picked one lose weight more quickly." +HIDDEN R 0 4}
+ prot1_falloff 2
+ addUserKnob {7 prot1_effect l effect t "Multiplier for the hue protection, and for the spill limit value." +HIDDEN R 0 10}
+ prot1_effect 1
+ addUserKnob {26 respill_divider l "" +STARTLINE}
+ addUserKnob {4 respill_math l "spill math" t "Settings for the math for desaturating the the spill before adding it back." M {"Rec 709" "Ccir 601" "Rec 2020" Average Maximum "" "" "" "" ""}}
+ addUserKnob {18 respill_color l "respill color" t "RGB multiplier for the desaturated spill when adding it back.\n\nIf used on non-degrained plates (which should be avoided anyway), any value other than 1 here will most likely produce grain artifacts.\n\nNOTE: If a respill image input is plugged, this value will act as a multiplier." R 0 4}
+ respill_color {0 0 0}
+ addUserKnob {6 respill_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannelMask l mask T Merge.maskChannelMask}
+ addUserKnob {41 inject -STARTLINE T Merge.inject}
+ addUserKnob {41 invert_mask l invert -STARTLINE T Merge.invert_mask}
+ addUserKnob {41 fringe -STARTLINE T Merge.fringe}
+ addUserKnob {41 mix T Merge.mix}
+ addUserKnob {26 version_author l "" t "apDespill v2.0\n13 April, 2021" +STARTLINE T "<span style=\"color:#666\"><br/><b>apDespill v2.0</b> - <a href=\"http://www.adrianpueyo.com\" style=\"color:#666;text-decoration: none;\">adrianpueyo.com</a>, 2014-2021</span>"}
+}
+ Input {
+  inputs 0
+  name Inputmask
+  xpos 273
+  ypos -370
+  number 1
+ }
+ Dot {
+  name Dot1
+  note_font_size 41
+  xpos 307
+  ypos -267
+ }
+set N104b3a0 [stack 0]
+ Dot {
+  name Dot5
+  note_font_size 41
+  xpos 307
+  ypos -237
+ }
+ Dot {
+  inputs 0
+  name Dotrespill
+  label Dotrespill
+  note_font "Verdana Bold"
+  xpos 1190
+  ypos -525
+ }
+ AddChannels {
+  channels rgba
+  format_size true
+  name AddRGBA_spill
+  xpos 1156
+  ypos -442
+ }
+ Dot {
+  inputs 0
+  name Dotcolor
+  label Dotcolor
+  note_font "Verdana Bold"
+  xpos 1080
+  ypos -593
+ }
+ AddChannels {
+  channels rgba
+  format_size true
+  name AddRGBA_color
+  xpos 1046
+  ypos -499
+ }
+ Dot {
+  inputs 0
+  name Dotlimit
+  label Dotlimit
+  note_font "Verdana Bold"
+  xpos 936
+  ypos -732
+ }
+ Shuffle {
+  name Shuffle_limit
+  xpos 902
+  ypos -670
+ }
+ Input {
+  inputs 0
+  name Inputimage
+  xpos 449
+  ypos -761
+ }
+set Nc47e10 [stack 0]
+ Dot {
+  name Dot2
+  note_font_size 41
+  xpos 788
+  ypos -758
+ }
+ Shuffle {
+  alpha black
+  name Shuffle
+  xpos 754
+  ypos -694
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name CopyLimit
+  xpos 754
+  ypos -670
+ }
+ Invert {
+  channels alpha
+  name InvertLimit
+  xpos 754
+  ypos -611
+  disable {{!invert_limit_channel}}
+ }
+ Colorspace {
+  name Colorspace1
+  label "\[value colorspace_in] >> \[value colorspace_out]"
+  xpos 754
+  ypos -544
+  disable {{!parent.colorspace_shift}}
+ }
+ Log2Lin {
+  operation lin2log
+  name Log2Lin1
+  xpos 754
+  ypos -508
+  disable {{!log_space}}
+ }
+ BlinkScript {
+  inputs 3
+  recompileCount 94
+  ProgramGroup 1
+  KernelDescription "2 \"apDespillKernel\" iterate pixelWise 857ee5211c9dc340b8743026c9778403c1424a4ec1afa5c7990e55b71f93720c 4 \"src\" Read Point \"color_src\" Read Point \"spill_src\" Read Point \"dst\" Write Point 21 \"limit\" Float 1 AACAPw== \"shift\" Float 1 AAAAAA== \"weights\" Float 1 AAAAAA== \"outmode\" Int 1 AAAAAA== \"output_alpha\" Int 1 AAAAAA== \"output_alpha_inverted\" Int 1 AAAAAA== \"clr\" Int 1 AAAAAA== \"mode\" Int 1 AAAAAA== \"respill_math\" Int 1 AAAAAA== \"respill_color\" Float 4 AAAAAAAAAAAAAAAAAAAAAA== \"prot1_on\" Int 1 AAAAAA== \"prot1_preview\" Int 1 AAAAAA== \"prot1\" Float 3 AAAAAAAAAAAAAAAAAAAAAA== \"prot1_tolerance\" Float 1 AAAAAA== \"prot1_mult\" Float 1 AAAAAA== \"prot1_falloff\" Float 1 AAAAAA== \"pickSpill\" Float 3 AAAAAAAAAAAAAAAAAAAAAA== \"despill_method\" Int 1 AAAAAA== \"use_color_input\" Int 1 AAAAAA== \"use_spill_input\" Int 1 AAAAAA== \"use_limit_input\" Int 1 AAAAAA== 21 \"limit\" 1 1 \"shift\" 1 1 \"weights\" 1 1 \"outmode\" 1 1 \"output_alpha\" 1 1 \"output_alpha_inverted\" 1 1 \"clr\" 1 1 \"mode\" 1 1 \"respill_math\" 1 1 \"respill_color\" 4 1 \"prot1_on\" 1 1 \"prot1_preview\" 1 1 \"prot1\" 3 1 \"prot1_tolerance\" 1 1 \"prot1_mult\" 1 1 \"prot1_falloff\" 1 1 \"pickSpill\" 3 1 \"despill_method\" 1 1 \"use_color_input\" 1 1 \"use_spill_input\" 1 1 \"use_limit_input\" 1 1 7 \"_usePicked\" Int 1 1 AAAAAA== \"_clr\" Int 1 1 AAAAAA== \"_ret\" Int 1 1 AAAAAA== \"_hueShift\" Float 1 1 AAAAAA== \"_autoShift\" Float 1 1 AAAAAA== \"despillColor\" Float 3 1 AAAAAAAAAAAAAAAAAAAAAA== \"vNorm\" Float 3 1 AAAAAAAAAAAAAAAAAAAAAA=="
+  kernelSource "//---------------------------------------------------------\n// apDespillKernel - apDespill v1.0 by Adrian Pueyo\n//\n// Despill an image, with options to despill any hue (and\n// not only the primaries), select different algorithms for\n// des/respilling, and protect tones from the despill.\n//\n// v2.0: Ability to plug image inputs for the controls,\n// and to perform a full key and respill.\n//\n// adrianpueyo.com, 2014-2017\n// ---------------------------------------------------------\n\ninline float y_convert_ccir601(const float4 in)\{\n  return in.x * 0.299f + in.y * 0.587f + in.z * 0.114f;\n\}\n\ninline float y_convert_rec709(const float4 in)\{\n  return in.x * 0.2125f + in.y * 0.7154f + in.z * 0.0721f;\n\}\n\ninline float y_convert_rec2020(const float4 in)\{\n  return in.x * 0.2627f + in.y * 0.678f + in.z * 0.0593f;\n\}\n\ninline float4 hueRotate(const float4 in, const float H)\{\n  if(H==0.0f)\{\n    return in;\n  \}else\{\n    float cosH = cos(H*PI/180);\n    float sinH = sin(H*PI/180);\n    float3 ret;\n    ret.x = (in.x+in.y+in.z)*(1-cosH)/3 + in.x*cosH + (-in.y/sqrt(3.0f)+in.z/sqrt(3.0f))*sinH;\n    ret.y = (in.x+in.y+in.z)*(1-cosH)/3 + in.y*cosH + (in.x/sqrt(3.0f)-in.z/sqrt(3.0f))*sinH;\n    ret.z = (in.x+in.y+in.z)*(1-cosH)/3 + in.z*cosH + (-in.x/sqrt(3.0f)+in.y/sqrt(3.0f))*sinH;\n    return float4(ret.x,ret.y,ret.z,in\[3]);\n  \}\n\}\n\nfloat3 vecToPlane(float3 v1, float3 v2 = float3(1.0f,1.0f,1.0f))\{\n  float3 v1onv2;\n  v1onv2 = v2 * float((float(dot(v2,v1))/float(dot(v2,v2)))); //Projection of vector on another (plane's normal)\n  return v1-v1onv2; //Projection of vector on plane\n\}\n\ninline float3 myCross(float3 a, float3 b)\{\n  return float3(float(a.y*b.z-a.z*b.y),float(a.z*b.x-a.x*b.z),float(a.x*b.y-a.y*b.x));\n\}\n\ninline float colorAngle(const float3 v1, const float3 v2)\{\n  const float3 vN=float3(1.0f,1.0f,1.0f);\n  float ang = acos(float(dot(v1,v2))/float(sqrt(dot(v1,v1)*dot(v2,v2))));\n  float3 crs = myCross(v1,v2);\n  if (dot(vN, crs) > 0) \{\n    ang = -ang;\n  \}\n  return ang;\n\}\n\n//Main function to calculate the despill for a float4 colour. If prot1_preview is True, returns the prot1 result instead.\ninline float4 apDespillMain(float4 src_color, float hueShift, int clr, int mode, float limit, float weights, int prot1_preview, int prot1_on, float3 prot1, float prot1_tolerance, float prot1_mult, float prot1_falloff)\{\n    //1. HueRotate IN\n    float4 despilled = hueRotate(src_color, hueShift);\n\n    //2. Calculate the limit\n    float resultLimit = 0.0f;\n    int2 others;\n    if(clr==0)\{//If red (and if _usePicked, also set red)\n      others = int2(1,2);\n    \}else if(clr==1)\{\n      others=int2(0,2);\n    \}else if(clr==2)\{\n      others=int2(0,1);\n    \}\n\n    if(mode==0)\{//average\n      resultLimit = (despilled\[others\[0]]+despilled\[others\[1]])/2;\n    \}else if(mode==1)\{//max\n      resultLimit = max(despilled\[others\[0]],despilled\[others\[1]]);\n    \}else if(mode==2)\{//min\n      resultLimit = min(despilled\[others\[0]],despilled\[others\[1]]);\n    \}else\{//custom\n      resultLimit = despilled\[others\[0]]*weights+despilled\[others\[1]]*(1-weights);\n    \}\n\n    //3. Protect tones\n    float prot1_result;\n    if(prot1_on==1&&(prot1\[0]!=prot1\[1]||prot1\[0]!=prot1\[2]||prot1\[1]!=prot1\[2]))\{\n      float cos_prot1_angle;\n      cos_prot1_angle = (src_color\[0]*prot1\[0]+src_color\[1]*prot1\[1]+src_color\[2]*prot1\[2]) / (sqrt(prot1\[0]*prot1\[0]+prot1\[1]*prot1\[1]+prot1\[2]*prot1\[2]) * sqrt(src_color\[0]*src_color\[0]+src_color\[1]*src_color\[1]+src_color\[2]*src_color\[2]));\n      prot1_result = pow(clamp(cos_prot1_angle,0.0f,1.0f),1/pow(prot1_tolerance,prot1_falloff));\n      resultLimit = resultLimit*(1+prot1_result*prot1_mult);\n    \}\n\n    //4. Calculate the despill and HueRotate OUT\n    for (int component = 0; component < 3; component++)\{\n      despilled\[component] = component==clr?min(despilled\[component],resultLimit*limit):despilled\[component];\n    \}\n    despilled = hueRotate(despilled,-hueShift);\n    despilled\[3] = prot1_result;\n    return despilled;\n\}\n\ninline float getLuma(float4 src_color, int luma_math)\{\n  float luma;\n  if(luma_math==0)\{\n    luma = y_convert_rec709(src_color);\n  \}else if(luma_math==1)\{\n    luma = y_convert_ccir601(src_color);\n  \}else if(luma_math==2)\{\n    luma = y_convert_rec2020(src_color);    \n  \}else if(luma_math==3)\{\n    luma = (src_color\[0]+src_color\[1]+src_color\[2])/3;\n  \}else\{\n    luma = max(max(src_color\[0],src_color\[1]),src_color\[2]);\n  \}\n  return luma;\n\}\n\nkernel apDespillKernel : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessPoint, eEdgeClamped> src;\n  Image<eRead, eAccessPoint, eEdgeClamped> color_src;\n  Image<eRead, eAccessPoint, eEdgeClamped> spill_src; //Acts as a multiplier for the respill color\n  Image<eWrite> dst;\n\n  param:\n    float limit;\n    float shift;\n    float weights;\n    int outmode;//0=despill,1=spill\n    int output_alpha;\n    int output_alpha_inverted;\n    int clr; //0=red,1=green,2=blue\n    int mode; //0=average,1=maximum,2=minimum,3=custom\n    int respill_math; //0=Rec709,1=Ccir601,2=Avg,3=Max\n    float4 respill_color;\n    int prot1_on;\n    int prot1_preview;\n    float3 prot1;\n    float prot1_tolerance;\n    float prot1_mult;\n    float prot1_falloff;\n    float3 pickSpill;\n    int despill_method; //0=despill,1=key/\"absolute\"\n\n    int use_color_input;\n    int use_spill_input;\n    int use_limit_input; //Should be shuffled in the src's alpha\n\n  local:\n    int _usePicked;\n    int _clr;\n    int _ret;\n    float _hueShift;\n    float _autoShift;\n    float3 despillColor;\n    float3 vNorm;\n\n  void define() \{\n    defineParam(limit, \"limit\", 1.0f);\n    defineParam(shift, \"shift\", 0.0f);\n  \}\n\n  void init() \{\n    //1. Calculate which color to affect\n    _ret = 0;\n    if(use_color_input==1)\{\n      _clr = 0;\n      _usePicked = 1;\n    \}else if(clr!=3)\{//red green or blue\n      _usePicked = 0;\n      _clr = clr;\n    \}else if(pickSpill.x==pickSpill.y && pickSpill.x==pickSpill.z)\{\n      _ret = 1;//if \"custom\" selected but has a gray value, avoid any calculations\n    \}else\{\n      _usePicked = 1;\n      _clr = 0;\n    \}\n    vNorm = float3(1.0f,1.0f,1.0f);\n    if(use_color_input==0)\{\n      //2. Calculate the necessary hue shift\n      _autoShift = 0.0f;\n      if(_usePicked==1)\{\n        _autoShift = colorAngle(vecToPlane(pickSpill,vNorm),vecToPlane(float3(1.0f,0.0f,0.0f),vNorm));\n        _autoShift = _autoShift*180/PI;//to deg\n      \}\n      _hueShift = shift-_autoShift;\n    \}\n  \}\n\n  void process()\{\n    if(_ret == 1)\{ dst()=src(); return; \} //Avoid any calculations if no despill selected\n\n    //0. If color from input, calculate the necessary hue shift\n    float hueShift = 0.0f, autoShift = 0.0f;\n    float3 despillColor;\n    if(use_color_input==1)\{\n      despillColor = float3(color_src(0),color_src(1),color_src(2));\n      autoShift = colorAngle(vecToPlane(despillColor,vNorm),vecToPlane(float3(1.0f,0.0f,0.0f),vNorm));\n      autoShift = autoShift*180/PI;//to deg\n      hueShift = shift-autoShift;\n    \}else\{\n      if(_usePicked == 1)\{\n        despillColor = pickSpill;\n      \}else\{\n        despillColor = float3(_clr==0?1.0f:0.0f,_clr==1?1.0f:0.0f,_clr==2?1.0f:0.0f);\n      \}\n      \n      hueShift = _hueShift;\n    \}\n\n    float limit_result = use_limit_input==1?limit*src(3):limit;\n\n    //1. Despill the source image\n    float4 despilled = apDespillMain(src(), hueShift, _clr, mode, limit_result, weights, prot1_preview, prot1_on, prot1, prot1_tolerance, prot1_mult, prot1_falloff);\n    if(prot1_preview==1 && prot1_on==1)\{\n      dst() = src()*clamp(despilled\[3]*prot1_mult,0.0f,1.0f);\n      return;\n    \}\n    float4 spill = src()-despilled;\n    float spill_luma = getLuma(spill, respill_math);\n\n    //2. Process the key if key method selected\n    float4 result;\n    float4 despilled_full, spill_full; //Will account for the key if method selected is key\n    float spill_luma_full;\n    if(despill_method==0)\{\n      //Despill Method = Despill\n      despilled_full = despilled;\n      spill_full = spill;\n      spill_luma_full = spill_luma;\n    \}else\{\n      //Despill Method = Key\n      float4 despillColor4 = float4(despillColor.x,despillColor.y,despillColor.z,1.0f); //For simplicity\n\n      //2.1. Despill the picked despill colour itself, for normalizing the spill\n      float4 pickSpill_despilled = apDespillMain(despillColor4, hueShift, _clr, mode, limit_result, weights, prot1_preview, prot1_on, prot1, prot1_tolerance, prot1_mult, prot1_falloff);\n      float4 pickSpill_spill = despillColor4-pickSpill_despilled;\n      float pickSpill_spill_luma = getLuma(pickSpill_spill, respill_math);\n\n      spill_luma_full = pickSpill_spill_luma == 0? 0:spill_luma/pickSpill_spill_luma;\n      spill_full = despillColor4*spill_luma_full;\n      despilled_full = src()-spill_full;\n    \}\n\n\n    float4 respill_color_result = use_spill_input==1?spill_src()*respill_color:respill_color;\n    //3. Output\n    if(outmode==0)\{ //Despill\n      result = despilled_full+spill_luma_full*respill_color_result;\n    \}else\{ //Spill\n      result = spill_full;\n    \}\n\n    if(output_alpha==0)\{\n      result\[3]=src(3);\n    \}else\{\n      if(output_alpha_inverted == 0)\{\n        result\[3]=spill_luma_full;\n      \}else\{\n        result\[3]=1-spill_luma_full;\n      \}\n    \}\n\n    dst() = result;\n\n  \}\n\};"
+  useGPUIfAvailable false
+  vectorize false
+  rebuild ""
+  apDespillKernel_limit {{parent.tolerance}}
+  apDespillKernel_shift {{parent.hue_offset}}
+  apDespillKernel_weights {{(parent.custom_weight+1)/2}}
+  apDespillKernel_outmode {{parent.out}}
+  apDespillKernel_output_alpha {{parent.output_alpha}}
+  apDespillKernel_output_alpha_inverted {{parent.inverted_spill_matte}}
+  apDespillKernel_clr {{parent.color}}
+  apDespillKernel_mode {{parent.mode}}
+  apDespillKernel_respill_math {{parent.respill_math}}
+  apDespillKernel_respill_color {{parent.respill_color.r} {parent.respill_color.g} {parent.respill_color.b} 1}
+  apDespillKernel_prot1_on {{parent.prot1_activate}}
+  apDespillKernel_prot1_preview {{parent.prot1_preview}}
+  apDespillKernel_prot1 {{parent.prot1} {parent.prot1} {parent.prot1}}
+  apDespillKernel_prot1_tolerance {{parent.prot1_tolerance}}
+  apDespillKernel_prot1_mult {{parent.prot1_effect}}
+  apDespillKernel_prot1_falloff {{parent.prot1_falloff}}
+  apDespillKernel_pickSpill {{parent.pick} {parent.pick} {parent.pick}}
+  apDespillKernel_despill_method {{parent.absolute_mode}}
+  apDespillKernel_use_color_input {{"\[\nif \{ \[lsearch -exact \[channels \[input this 1].input] rgba.red] >= 0\} \{\n    return 1\n\} else \{\n    return 0\n\}\n]"}}
+  apDespillKernel_use_spill_input {{"\[\nif \{ \[lsearch -exact \[channels \[input this 2].input] rgba.red] >= 0\} \{\n    return 1\n\} else \{\n    return 0\n\}\n]"}}
+  apDespillKernel_use_limit_input {{"\[exists parent.input3]"}}
+  rebuild_finalise ""
+  name apDespillKernel
+  xpos 754
+  ypos -448
+ }
+ Log2Lin {
+  name Log2Lin2
+  xpos 754
+  ypos -378
+  disable {{!log_space}}
+ }
+ Colorspace {
+  channels {{{parent.Colorspace5.channels}}}
+  colorspace_in {{parent.Colorspace1.colorspace_out}}
+  illuminant_in {{parent.Colorspace1.illuminant_out}}
+  primary_in {{parent.Colorspace1.primary_out}}
+  colorspace_out {{parent.Colorspace1.colorspace_in}}
+  illuminant_out {{parent.Colorspace1.illuminant_in}}
+  primary_out {{parent.Colorspace1.primary_in}}
+  name Colorspace2
+  label "\[value colorspace_in] >> \[value colorspace_out]"
+  xpos 754
+  ypos -354
+  disable {{!parent.colorspace_shift}}
+ }
+ Dot {
+  name Dot3
+  note_font_size 41
+  xpos 788
+  ypos -267
+ }
+set Ne16fb3d0 [stack 0]
+ Dot {
+  name Dot4
+  note_font_size 41
+  xpos 788
+  ypos -237
+ }
+push $N104b3a0
+push $Ne16fb3d0
+push $Nc47e10
+ Merge2 {
+  inputs 2+1
+  operation copy
+  bbox B
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  name Merge
+  xpos 449
+  ypos -270
+ }
+ Copy {
+  inputs 2+1
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox B
+  maskChannelMask {{{parent.Merge.maskChannelMask}}}
+  maskChannelInput {{{parent.Merge.maskChannelInput}}}
+  inject {{parent.Merge.inject}}
+  invert_mask {{parent.Merge.invert_mask}}
+  fringe {{parent.Merge.fringe}}
+  name CopyAlpha
+  xpos 449
+  ypos -246
+  disable {{!parent.output_alpha}}
+ }
+ Output {
+  name Output
+  xpos 449
+  ypos -166
+ }
+end_group
+set N1141100 [stack 0]
+push $N124bdf0
+Dot {
+ name Dot94
+ selected true
+ xpos -18659
+ ypos -3316
+}
+Merge2 {
+ inputs 2
+ operation from
+ name Merge32
+ selected true
+ xpos -18687
+ ypos -3194
+}
+Saturation {
+ saturation 0
+ name Saturation1
+ selected true
+ xpos -18687
+ ypos -3098
+}
+Clamp {
+ name Clamp1
+ selected true
+ xpos -18687
+ ypos -3056
+}
+push $N1141100
+add_layer {SpillMatte SpillMatte.red}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 SpillMatte.red
+ name Copy7
+ selected true
+ xpos -18907
+ ypos -3056
+}
+Dot {
+ name Dot95
+ label "Edge Despill"
+ note_font_size 60
+ note_font_color 0x1ffba1ff
+ selected true
+ xpos -18879
+ ypos -2548
+}
+Dot {
+ name Dot96
+ selected true
+ xpos -18879
+ ypos -1468
+}
+push $N5046f40
+Group {
+ name apDespill5
+ help "apDespill v2.0 by Adrian Pueyo\n\nGizmo to despill an image, with options to despill any hue (and not only the primaries), select different algorithms for de/respilling, and protect tones from the despill.\n\nIf you just want a basic despill, its default values should already be enough and the tool will avoid any extra calculations.\n\nv2 includes a new \"absolute\" mode which lets you basically perform a key, or do a \"despill to color\" operation. Also, the despill color, respill color and limit can now be plugged as image inputs if you wish, letting you perform a fully image-based despill or key, sort of iKeylight. Additionally, it allows you to perform the despill under a colorspace sandwich, for the artists who prefer to loop through different colorspaces in order to find one that works. Thanks to Tony Lyons the best feedback!\n\nadrianpueyo.com, 2014-2021"
+ onCreate "n = nuke.thisNode()\nn\['tolerance'].setRange(0,2)\nn\['prot1_tolerance'].setFlag(0x00000004)\nn\['prot1_effect'].setFlag(0x00000004)"
+ knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name()\nif kn == \"color\":\n    kv = k.getValue()\n    custom_weight_labels = \[\"green - blue\", \"red - blue\", \"red - green\", \" \"]\n    n\[\"custom_weight\"].setLabel(custom_weight_labels\[int(kv)])\n    n\[\"pick\"].setVisible(k.getValue() == 3)\nelif kn == \"mode\":\n    n\[\"custom_weight\"].setVisible(n\[\"mode\"].getValue()==3)\nelif kn in \[\"out\",\"output_alpha\"]:\n    n\[\"respill_math\"].setEnabled(n\[\"out\"].getValue()==0 or n\[\"output_alpha\"].getValue()==1)\n    n\[\"respill_color\"].setEnabled(n\[\"out\"].getValue()==0)\n    n\[\"inverted_spill_matte\"].setEnabled(n\[\"output_alpha\"].value())\nelif kn == \"prot1_activate\":\n    protA = n\[\"prot1_activate\"].value()\n    n\[\"prot1_preview\"].setEnabled(protA)\n    for i in \[\"prot1\", \"prot1_tolerance\", \"prot1_falloff\",\"prot1_effect\"]:\n        n\[i].setVisible(protA)\nelif kn == \"inputChange\":\n    n.knobs()\[\"limit_channel\"].setVisible(n.input(3) is not None)\n    n.knobs()\[\"invert_limit_channel\"].setVisible(n.input(3) is not None)\n    color_enabled = nuke.toNode(\"apDespillKernel\")\[\"apDespillKernel_use_color_input\"].getValue()==0\n    n\[\"color\"].setEnabled(color_enabled)\n    n.knobs()\[\"pick\"].setEnabled(color_enabled)\n    n\[\"info_using_input_color\"].setVisible(not color_enabled)\nelif kn == \"colorspace_shift\":\n    kv = k.value()\n    for i in \[\"colorspace_out\", \"illuminant_out\", \"primary_out\"]:\n        n.knobs()\[i].setEnabled(kv)\n    for i in \[\"colorspace_in\", \"illuminant_in\", \"primary_in\"]:\n        n.knobs()\[i].setEnabled(kv and n\[\"input_colorspace\"].value())\n    n\[\"input_colorspace\"].setEnabled(kv)\nelif kn == \"input_colorspace\":\n    kv = k.value()\n    for i in \[\"colorspace_in\", \"illuminant_in\", \"primary_in\"]:\n        n.knobs()\[i].setVisible(kv)\n        n.knobs()\[i].setEnabled(kv)\nelif kn == \"imagebased\":\n    kv = k.value()\n    input_names = \[\"color\",\"limit\",\"respill\"]\n    if kv:\n        for i_name in input_names:\n            i_fullname = \"Input\"+i_name\n            if not nuke.exists(i_fullname):\n                i_node = nuke.nodes.Input()\n                i_node\[\"name\"].setValue(i_fullname)\n            else:\n                i_node = nuke.toNode(i_fullname)\n            dot = nuke.toNode(\"Dot\"+i_name)\n            i_node.setXYpos(dot.xpos(),dot.ypos()-40)\n            dot.setInput(0,i_node)\n    else:\n        # If something connected, do nothing\n        if not any(\[n.input(i) for i in \[2,3,4]]):\n            for i_name in input_names:\n                if nuke.exists(\"Input\"+i_name):\n                    nuke.delete(nuke.toNode(\"Input\"+i_name))\n        else:\n            k.setValue(True)"
+ tile_color 0x8b8b8bff
+ selected true
+ xpos -20007
+ ypos -3194
+ addUserKnob {20 apDespill}
+ addUserKnob {6 pick_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 imagebased l image-based t "Show or hide image-based inputs.\n\nThis doesn't change anything internally except hiding inputs, just to avoid intimidating arrows on the node graph.\n\nNote: While any image-based input is connected, this won't let you hide them." +STARTLINE}
+ addUserKnob {6 absolute_mode l "absolute mode" t "Absolute mode performs a keying algorithm instead of a regular despill, so that you can do a \"spill to colour\" or even use this node as an image-based Keylight." -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {4 color t "Select a primary as a starting point, or custom to show RGB controls to select any color.\n\nNote: If an image is plugged on the color input, this will get overwritten by the input." M {red green blue custom "" "" ""}}
+ color custom
+ addUserKnob {26 info_using_input_color l " " -STARTLINE +HIDDEN T "<i><font color=#AAA> (Using color from input)"}
+ addUserKnob {18 pick t "Pick the color you'd like to use for the despill. \n\nPlease use ctrl/cmd+alt+click for picking.\n\nNOTE: If a despill color image input is plugged, this value will be ignored."}
+ pick {0 1 0}
+ addUserKnob {6 pick_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 dfg_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {4 out l output t "Quick switch to output the despilled image or the substracted one." M {despill spill}}
+ addUserKnob {6 output_alpha l "output spill matte in alpha" t "Output the spill luminance in the alpha channel." +STARTLINE}
+ output_alpha true
+ addUserKnob {6 inverted_spill_matte l inverted t "Invert the output spill matte (in the alpha channel), especially useful when the despill is set to Absolute mode, in which case this will output a keying-like alpha." -STARTLINE}
+ inverted_spill_matte true
+ addUserKnob {4 mode l "despill math" t "average = avg of other two channels\nmaximum = max of other two channels\nminimum = min of other two channels\ncustom = select custom weights" M {average maximum minimum custom ""}}
+ addUserKnob {7 custom_weight l " " t "-1 = only capped by the first channel\n0 = capped by avg of both\n1 = only capped by the second channel" -STARTLINE +HIDDEN R -1 1}
+ addUserKnob {26 ""}
+ addUserKnob {6 colorspace_shift l "alt colorspace" t "This allows for the popular artistic approach to refining the despill where you browse through colorspace conversions (mainly white point and primaries) and choose one that matches your desired despill bias.\n\n<b>Tip:</b> Double click on a dropdown and use the Page Up and Page Down keys on your keyboard to browse quickly through the items.\n\n<b>Note:</b> There's no need at all for the values of these dropdowns to match your working colorspace, so you can leave it as-is or tweak it if you prefer, regardless of the colorspace you're comping at (e.g. ACEScg). It is literally an artistic conversion prior to the despill algorithm that then gets reverted." +STARTLINE}
+ colorspace_shift true
+ addUserKnob {6 input_colorspace l "input colorspace" t "Also tweak the input colorspace for the back and forth colorspace conversion. This is generally not needed however, as this colorspace conversion is generally only used for artistic purposes." -STARTLINE}
+ addUserKnob {6 log_space l log t "Perform Lin2Log -> Despill -> Log2Lin." -STARTLINE}
+ addUserKnob {41 colorspace_in l "in colorspace" +DISABLED +HIDDEN T Colorspace1.colorspace_in}
+ addUserKnob {41 illuminant_in l "" -STARTLINE +DISABLED +HIDDEN T Colorspace1.illuminant_in}
+ addUserKnob {41 primary_in l "" -STARTLINE +DISABLED +HIDDEN T Colorspace1.primary_in}
+ addUserKnob {41 colorspace_out l "despill space" T Colorspace1.colorspace_out}
+ addUserKnob {41 illuminant_out l "" -STARTLINE T Colorspace1.illuminant_out}
+ addUserKnob {41 primary_out l "" -STARTLINE T Colorspace1.primary_out}
+ addUserKnob {26 ""}
+ addUserKnob {7 hue_offset l "hue offset" t "Rotate the despill vectors to despill an arbitrary tone other than the primaries or the picked color.\nNote: A rotation of +-120 degrees is the same as selecting a different color channel." R -30 30}
+ addUserKnob {7 tolerance l limit t "Use this to multiply the hue tolerance (the limiter value). You can move it all the way down to 0 to completely remove a hue from your image.\n\n<b>NOTE:</b> If an image is plugged into the <i>limit</i> input, this will act as a multiplier." R 0 2}
+ tolerance 1
+ addUserKnob {41 limit_channel l "limit channel" +HIDDEN T CopyLimit.from0}
+ addUserKnob {6 invert_limit_channel l invert t "The recommended workflow for the image-based limit is keeping this invert turned on, so that the higher the value of the limit channel, the lower the limit gets." -STARTLINE +HIDDEN}
+ invert_limit_channel true
+ addUserKnob {6 prot1_activate l "protect tones" t "Enable controls to select tones to protect from despilling." +STARTLINE}
+ addUserKnob {6 prot1_preview l preview t "Output the protected tones." -STARTLINE +DISABLED}
+ addUserKnob {18 prot1 l protect t "Pick the central hue to protect.\n(ctrl/cmd+alt+click)" +HIDDEN}
+ prot1 {0 0 0}
+ addUserKnob {6 prot1_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 prot1_tolerance l tolerance t "Amount of hues to include in the selection." +HIDDEN}
+ prot1_tolerance 0.2
+ addUserKnob {7 prot1_falloff l falloff t "Falloff for the hue selection. A higher falloff will make hues apart from the picked one lose weight more quickly." +HIDDEN R 0 4}
+ prot1_falloff 2
+ addUserKnob {7 prot1_effect l effect t "Multiplier for the hue protection, and for the spill limit value." +HIDDEN R 0 10}
+ prot1_effect 1
+ addUserKnob {26 respill_divider l "" +STARTLINE}
+ addUserKnob {4 respill_math l "spill math" t "Settings for the math for desaturating the the spill before adding it back." M {"Rec 709" "Ccir 601" "Rec 2020" Average Maximum "" "" "" "" ""}}
+ addUserKnob {18 respill_color l "respill color" t "RGB multiplier for the desaturated spill when adding it back.\n\nIf used on non-degrained plates (which should be avoided anyway), any value other than 1 here will most likely produce grain artifacts.\n\nNOTE: If a respill image input is plugged, this value will act as a multiplier." R 0 4}
+ respill_color 1
+ addUserKnob {6 respill_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannelMask l mask T Merge.maskChannelMask}
+ addUserKnob {41 inject -STARTLINE T Merge.inject}
+ addUserKnob {41 invert_mask l invert -STARTLINE T Merge.invert_mask}
+ addUserKnob {41 fringe -STARTLINE T Merge.fringe}
+ addUserKnob {41 mix T Merge.mix}
+ addUserKnob {26 version_author l "" t "apDespill v2.0\n13 April, 2021" +STARTLINE T "<span style=\"color:#666\"><br/><b>apDespill v2.0</b> - <a href=\"http://www.adrianpueyo.com\" style=\"color:#666;text-decoration: none;\">adrianpueyo.com</a>, 2014-2021</span>"}
+}
+ Input {
+  inputs 0
+  name Inputmask
+  xpos 273
+  ypos -370
+  number 1
+ }
+ Dot {
+  name Dot1
+  note_font_size 41
+  xpos 307
+  ypos -267
+ }
+set Nffc50470 [stack 0]
+ Dot {
+  name Dot5
+  note_font_size 41
+  xpos 307
+  ypos -237
+ }
+ Dot {
+  inputs 0
+  name Dotrespill
+  label Dotrespill
+  note_font "Verdana Bold"
+  xpos 1190
+  ypos -525
+ }
+ AddChannels {
+  channels rgba
+  format_size true
+  name AddRGBA_spill
+  xpos 1156
+  ypos -442
+ }
+ Dot {
+  inputs 0
+  name Dotcolor
+  label Dotcolor
+  note_font "Verdana Bold"
+  xpos 1080
+  ypos -593
+ }
+ AddChannels {
+  channels rgba
+  format_size true
+  name AddRGBA_color
+  xpos 1046
+  ypos -499
+ }
+ Dot {
+  inputs 0
+  name Dotlimit
+  label Dotlimit
+  note_font "Verdana Bold"
+  xpos 936
+  ypos -732
+ }
+ Shuffle {
+  name Shuffle_limit
+  xpos 902
+  ypos -670
+ }
+ Input {
+  inputs 0
+  name Inputimage
+  xpos 449
+  ypos -761
+ }
+set Nff84c960 [stack 0]
+ Dot {
+  name Dot2
+  note_font_size 41
+  xpos 788
+  ypos -758
+ }
+ Shuffle {
+  alpha black
+  name Shuffle
+  xpos 754
+  ypos -694
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name CopyLimit
+  xpos 754
+  ypos -670
+ }
+ Invert {
+  channels alpha
+  name InvertLimit
+  xpos 754
+  ypos -611
+  disable {{!invert_limit_channel}}
+ }
+ Colorspace {
+  name Colorspace1
+  label "\[value colorspace_in] >> \[value colorspace_out]"
+  xpos 754
+  ypos -544
+  disable {{!parent.colorspace_shift}}
+ }
+ Log2Lin {
+  operation lin2log
+  name Log2Lin1
+  xpos 754
+  ypos -508
+  disable {{!log_space}}
+ }
+ BlinkScript {
+  inputs 3
+  recompileCount 94
+  ProgramGroup 1
+  KernelDescription "2 \"apDespillKernel\" iterate pixelWise 857ee5211c9dc340b8743026c9778403c1424a4ec1afa5c7990e55b71f93720c 4 \"src\" Read Point \"color_src\" Read Point \"spill_src\" Read Point \"dst\" Write Point 21 \"limit\" Float 1 AACAPw== \"shift\" Float 1 AAAAAA== \"weights\" Float 1 AAAAAA== \"outmode\" Int 1 AAAAAA== \"output_alpha\" Int 1 AAAAAA== \"output_alpha_inverted\" Int 1 AAAAAA== \"clr\" Int 1 AAAAAA== \"mode\" Int 1 AAAAAA== \"respill_math\" Int 1 AAAAAA== \"respill_color\" Float 4 AAAAAAAAAAAAAAAAAAAAAA== \"prot1_on\" Int 1 AAAAAA== \"prot1_preview\" Int 1 AAAAAA== \"prot1\" Float 3 AAAAAAAAAAAAAAAAAAAAAA== \"prot1_tolerance\" Float 1 AAAAAA== \"prot1_mult\" Float 1 AAAAAA== \"prot1_falloff\" Float 1 AAAAAA== \"pickSpill\" Float 3 AAAAAAAAAAAAAAAAAAAAAA== \"despill_method\" Int 1 AAAAAA== \"use_color_input\" Int 1 AAAAAA== \"use_spill_input\" Int 1 AAAAAA== \"use_limit_input\" Int 1 AAAAAA== 21 \"limit\" 1 1 \"shift\" 1 1 \"weights\" 1 1 \"outmode\" 1 1 \"output_alpha\" 1 1 \"output_alpha_inverted\" 1 1 \"clr\" 1 1 \"mode\" 1 1 \"respill_math\" 1 1 \"respill_color\" 4 1 \"prot1_on\" 1 1 \"prot1_preview\" 1 1 \"prot1\" 3 1 \"prot1_tolerance\" 1 1 \"prot1_mult\" 1 1 \"prot1_falloff\" 1 1 \"pickSpill\" 3 1 \"despill_method\" 1 1 \"use_color_input\" 1 1 \"use_spill_input\" 1 1 \"use_limit_input\" 1 1 7 \"_usePicked\" Int 1 1 AAAAAA== \"_clr\" Int 1 1 AAAAAA== \"_ret\" Int 1 1 AAAAAA== \"_hueShift\" Float 1 1 AAAAAA== \"_autoShift\" Float 1 1 AAAAAA== \"despillColor\" Float 3 1 AAAAAAAAAAAAAAAAAAAAAA== \"vNorm\" Float 3 1 AAAAAAAAAAAAAAAAAAAAAA=="
+  kernelSource "//---------------------------------------------------------\n// apDespillKernel - apDespill v1.0 by Adrian Pueyo\n//\n// Despill an image, with options to despill any hue (and\n// not only the primaries), select different algorithms for\n// des/respilling, and protect tones from the despill.\n//\n// v2.0: Ability to plug image inputs for the controls,\n// and to perform a full key and respill.\n//\n// adrianpueyo.com, 2014-2017\n// ---------------------------------------------------------\n\ninline float y_convert_ccir601(const float4 in)\{\n  return in.x * 0.299f + in.y * 0.587f + in.z * 0.114f;\n\}\n\ninline float y_convert_rec709(const float4 in)\{\n  return in.x * 0.2125f + in.y * 0.7154f + in.z * 0.0721f;\n\}\n\ninline float y_convert_rec2020(const float4 in)\{\n  return in.x * 0.2627f + in.y * 0.678f + in.z * 0.0593f;\n\}\n\ninline float4 hueRotate(const float4 in, const float H)\{\n  if(H==0.0f)\{\n    return in;\n  \}else\{\n    float cosH = cos(H*PI/180);\n    float sinH = sin(H*PI/180);\n    float3 ret;\n    ret.x = (in.x+in.y+in.z)*(1-cosH)/3 + in.x*cosH + (-in.y/sqrt(3.0f)+in.z/sqrt(3.0f))*sinH;\n    ret.y = (in.x+in.y+in.z)*(1-cosH)/3 + in.y*cosH + (in.x/sqrt(3.0f)-in.z/sqrt(3.0f))*sinH;\n    ret.z = (in.x+in.y+in.z)*(1-cosH)/3 + in.z*cosH + (-in.x/sqrt(3.0f)+in.y/sqrt(3.0f))*sinH;\n    return float4(ret.x,ret.y,ret.z,in\[3]);\n  \}\n\}\n\nfloat3 vecToPlane(float3 v1, float3 v2 = float3(1.0f,1.0f,1.0f))\{\n  float3 v1onv2;\n  v1onv2 = v2 * float((float(dot(v2,v1))/float(dot(v2,v2)))); //Projection of vector on another (plane's normal)\n  return v1-v1onv2; //Projection of vector on plane\n\}\n\ninline float3 myCross(float3 a, float3 b)\{\n  return float3(float(a.y*b.z-a.z*b.y),float(a.z*b.x-a.x*b.z),float(a.x*b.y-a.y*b.x));\n\}\n\ninline float colorAngle(const float3 v1, const float3 v2)\{\n  const float3 vN=float3(1.0f,1.0f,1.0f);\n  float ang = acos(float(dot(v1,v2))/float(sqrt(dot(v1,v1)*dot(v2,v2))));\n  float3 crs = myCross(v1,v2);\n  if (dot(vN, crs) > 0) \{\n    ang = -ang;\n  \}\n  return ang;\n\}\n\n//Main function to calculate the despill for a float4 colour. If prot1_preview is True, returns the prot1 result instead.\ninline float4 apDespillMain(float4 src_color, float hueShift, int clr, int mode, float limit, float weights, int prot1_preview, int prot1_on, float3 prot1, float prot1_tolerance, float prot1_mult, float prot1_falloff)\{\n    //1. HueRotate IN\n    float4 despilled = hueRotate(src_color, hueShift);\n\n    //2. Calculate the limit\n    float resultLimit = 0.0f;\n    int2 others;\n    if(clr==0)\{//If red (and if _usePicked, also set red)\n      others = int2(1,2);\n    \}else if(clr==1)\{\n      others=int2(0,2);\n    \}else if(clr==2)\{\n      others=int2(0,1);\n    \}\n\n    if(mode==0)\{//average\n      resultLimit = (despilled\[others\[0]]+despilled\[others\[1]])/2;\n    \}else if(mode==1)\{//max\n      resultLimit = max(despilled\[others\[0]],despilled\[others\[1]]);\n    \}else if(mode==2)\{//min\n      resultLimit = min(despilled\[others\[0]],despilled\[others\[1]]);\n    \}else\{//custom\n      resultLimit = despilled\[others\[0]]*weights+despilled\[others\[1]]*(1-weights);\n    \}\n\n    //3. Protect tones\n    float prot1_result;\n    if(prot1_on==1&&(prot1\[0]!=prot1\[1]||prot1\[0]!=prot1\[2]||prot1\[1]!=prot1\[2]))\{\n      float cos_prot1_angle;\n      cos_prot1_angle = (src_color\[0]*prot1\[0]+src_color\[1]*prot1\[1]+src_color\[2]*prot1\[2]) / (sqrt(prot1\[0]*prot1\[0]+prot1\[1]*prot1\[1]+prot1\[2]*prot1\[2]) * sqrt(src_color\[0]*src_color\[0]+src_color\[1]*src_color\[1]+src_color\[2]*src_color\[2]));\n      prot1_result = pow(clamp(cos_prot1_angle,0.0f,1.0f),1/pow(prot1_tolerance,prot1_falloff));\n      resultLimit = resultLimit*(1+prot1_result*prot1_mult);\n    \}\n\n    //4. Calculate the despill and HueRotate OUT\n    for (int component = 0; component < 3; component++)\{\n      despilled\[component] = component==clr?min(despilled\[component],resultLimit*limit):despilled\[component];\n    \}\n    despilled = hueRotate(despilled,-hueShift);\n    despilled\[3] = prot1_result;\n    return despilled;\n\}\n\ninline float getLuma(float4 src_color, int luma_math)\{\n  float luma;\n  if(luma_math==0)\{\n    luma = y_convert_rec709(src_color);\n  \}else if(luma_math==1)\{\n    luma = y_convert_ccir601(src_color);\n  \}else if(luma_math==2)\{\n    luma = y_convert_rec2020(src_color);    \n  \}else if(luma_math==3)\{\n    luma = (src_color\[0]+src_color\[1]+src_color\[2])/3;\n  \}else\{\n    luma = max(max(src_color\[0],src_color\[1]),src_color\[2]);\n  \}\n  return luma;\n\}\n\nkernel apDespillKernel : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessPoint, eEdgeClamped> src;\n  Image<eRead, eAccessPoint, eEdgeClamped> color_src;\n  Image<eRead, eAccessPoint, eEdgeClamped> spill_src; //Acts as a multiplier for the respill color\n  Image<eWrite> dst;\n\n  param:\n    float limit;\n    float shift;\n    float weights;\n    int outmode;//0=despill,1=spill\n    int output_alpha;\n    int output_alpha_inverted;\n    int clr; //0=red,1=green,2=blue\n    int mode; //0=average,1=maximum,2=minimum,3=custom\n    int respill_math; //0=Rec709,1=Ccir601,2=Avg,3=Max\n    float4 respill_color;\n    int prot1_on;\n    int prot1_preview;\n    float3 prot1;\n    float prot1_tolerance;\n    float prot1_mult;\n    float prot1_falloff;\n    float3 pickSpill;\n    int despill_method; //0=despill,1=key/\"absolute\"\n\n    int use_color_input;\n    int use_spill_input;\n    int use_limit_input; //Should be shuffled in the src's alpha\n\n  local:\n    int _usePicked;\n    int _clr;\n    int _ret;\n    float _hueShift;\n    float _autoShift;\n    float3 despillColor;\n    float3 vNorm;\n\n  void define() \{\n    defineParam(limit, \"limit\", 1.0f);\n    defineParam(shift, \"shift\", 0.0f);\n  \}\n\n  void init() \{\n    //1. Calculate which color to affect\n    _ret = 0;\n    if(use_color_input==1)\{\n      _clr = 0;\n      _usePicked = 1;\n    \}else if(clr!=3)\{//red green or blue\n      _usePicked = 0;\n      _clr = clr;\n    \}else if(pickSpill.x==pickSpill.y && pickSpill.x==pickSpill.z)\{\n      _ret = 1;//if \"custom\" selected but has a gray value, avoid any calculations\n    \}else\{\n      _usePicked = 1;\n      _clr = 0;\n    \}\n    vNorm = float3(1.0f,1.0f,1.0f);\n    if(use_color_input==0)\{\n      //2. Calculate the necessary hue shift\n      _autoShift = 0.0f;\n      if(_usePicked==1)\{\n        _autoShift = colorAngle(vecToPlane(pickSpill,vNorm),vecToPlane(float3(1.0f,0.0f,0.0f),vNorm));\n        _autoShift = _autoShift*180/PI;//to deg\n      \}\n      _hueShift = shift-_autoShift;\n    \}\n  \}\n\n  void process()\{\n    if(_ret == 1)\{ dst()=src(); return; \} //Avoid any calculations if no despill selected\n\n    //0. If color from input, calculate the necessary hue shift\n    float hueShift = 0.0f, autoShift = 0.0f;\n    float3 despillColor;\n    if(use_color_input==1)\{\n      despillColor = float3(color_src(0),color_src(1),color_src(2));\n      autoShift = colorAngle(vecToPlane(despillColor,vNorm),vecToPlane(float3(1.0f,0.0f,0.0f),vNorm));\n      autoShift = autoShift*180/PI;//to deg\n      hueShift = shift-autoShift;\n    \}else\{\n      if(_usePicked == 1)\{\n        despillColor = pickSpill;\n      \}else\{\n        despillColor = float3(_clr==0?1.0f:0.0f,_clr==1?1.0f:0.0f,_clr==2?1.0f:0.0f);\n      \}\n      \n      hueShift = _hueShift;\n    \}\n\n    float limit_result = use_limit_input==1?limit*src(3):limit;\n\n    //1. Despill the source image\n    float4 despilled = apDespillMain(src(), hueShift, _clr, mode, limit_result, weights, prot1_preview, prot1_on, prot1, prot1_tolerance, prot1_mult, prot1_falloff);\n    if(prot1_preview==1 && prot1_on==1)\{\n      dst() = src()*clamp(despilled\[3]*prot1_mult,0.0f,1.0f);\n      return;\n    \}\n    float4 spill = src()-despilled;\n    float spill_luma = getLuma(spill, respill_math);\n\n    //2. Process the key if key method selected\n    float4 result;\n    float4 despilled_full, spill_full; //Will account for the key if method selected is key\n    float spill_luma_full;\n    if(despill_method==0)\{\n      //Despill Method = Despill\n      despilled_full = despilled;\n      spill_full = spill;\n      spill_luma_full = spill_luma;\n    \}else\{\n      //Despill Method = Key\n      float4 despillColor4 = float4(despillColor.x,despillColor.y,despillColor.z,1.0f); //For simplicity\n\n      //2.1. Despill the picked despill colour itself, for normalizing the spill\n      float4 pickSpill_despilled = apDespillMain(despillColor4, hueShift, _clr, mode, limit_result, weights, prot1_preview, prot1_on, prot1, prot1_tolerance, prot1_mult, prot1_falloff);\n      float4 pickSpill_spill = despillColor4-pickSpill_despilled;\n      float pickSpill_spill_luma = getLuma(pickSpill_spill, respill_math);\n\n      spill_luma_full = pickSpill_spill_luma == 0? 0:spill_luma/pickSpill_spill_luma;\n      spill_full = despillColor4*spill_luma_full;\n      despilled_full = src()-spill_full;\n    \}\n\n\n    float4 respill_color_result = use_spill_input==1?spill_src()*respill_color:respill_color;\n    //3. Output\n    if(outmode==0)\{ //Despill\n      result = despilled_full+spill_luma_full*respill_color_result;\n    \}else\{ //Spill\n      result = spill_full;\n    \}\n\n    if(output_alpha==0)\{\n      result\[3]=src(3);\n    \}else\{\n      if(output_alpha_inverted == 0)\{\n        result\[3]=spill_luma_full;\n      \}else\{\n        result\[3]=1-spill_luma_full;\n      \}\n    \}\n\n    dst() = result;\n\n  \}\n\};"
+  useGPUIfAvailable false
+  vectorize false
+  rebuild ""
+  apDespillKernel_limit {{parent.tolerance}}
+  apDespillKernel_shift {{parent.hue_offset}}
+  apDespillKernel_weights {{(parent.custom_weight+1)/2}}
+  apDespillKernel_outmode {{parent.out}}
+  apDespillKernel_output_alpha {{parent.output_alpha}}
+  apDespillKernel_output_alpha_inverted {{parent.inverted_spill_matte}}
+  apDespillKernel_clr {{parent.color}}
+  apDespillKernel_mode {{parent.mode}}
+  apDespillKernel_respill_math {{parent.respill_math}}
+  apDespillKernel_respill_color {{parent.respill_color.r} {parent.respill_color.g} {parent.respill_color.b} 1}
+  apDespillKernel_prot1_on {{parent.prot1_activate}}
+  apDespillKernel_prot1_preview {{parent.prot1_preview}}
+  apDespillKernel_prot1 {{parent.prot1} {parent.prot1} {parent.prot1}}
+  apDespillKernel_prot1_tolerance {{parent.prot1_tolerance}}
+  apDespillKernel_prot1_mult {{parent.prot1_effect}}
+  apDespillKernel_prot1_falloff {{parent.prot1_falloff}}
+  apDespillKernel_pickSpill {{parent.pick} {parent.pick} {parent.pick}}
+  apDespillKernel_despill_method {{parent.absolute_mode}}
+  apDespillKernel_use_color_input {{"\[\nif \{ \[lsearch -exact \[channels \[input this 1].input] rgba.red] >= 0\} \{\n    return 1\n\} else \{\n    return 0\n\}\n]"}}
+  apDespillKernel_use_spill_input {{"\[\nif \{ \[lsearch -exact \[channels \[input this 2].input] rgba.red] >= 0\} \{\n    return 1\n\} else \{\n    return 0\n\}\n]"}}
+  apDespillKernel_use_limit_input {{"\[exists parent.input3]"}}
+  rebuild_finalise ""
+  name apDespillKernel
+  xpos 754
+  ypos -448
+ }
+ Log2Lin {
+  name Log2Lin2
+  xpos 754
+  ypos -378
+  disable {{!log_space}}
+ }
+ Colorspace {
+  channels {{{parent.Colorspace5.channels}}}
+  colorspace_in {{parent.Colorspace1.colorspace_out}}
+  illuminant_in {{parent.Colorspace1.illuminant_out}}
+  primary_in {{parent.Colorspace1.primary_out}}
+  colorspace_out {{parent.Colorspace1.colorspace_in}}
+  illuminant_out {{parent.Colorspace1.illuminant_in}}
+  primary_out {{parent.Colorspace1.primary_in}}
+  name Colorspace2
+  label "\[value colorspace_in] >> \[value colorspace_out]"
+  xpos 754
+  ypos -354
+  disable {{!parent.colorspace_shift}}
+ }
+ Dot {
+  name Dot3
+  note_font_size 41
+  xpos 788
+  ypos -267
+ }
+set Nfea4af60 [stack 0]
+ Dot {
+  name Dot4
+  note_font_size 41
+  xpos 788
+  ypos -237
+ }
+push $Nffc50470
+push $Nfea4af60
+push $Nff84c960
+ Merge2 {
+  inputs 2+1
+  operation copy
+  bbox B
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  name Merge
+  xpos 449
+  ypos -270
+ }
+ Copy {
+  inputs 2+1
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox B
+  maskChannelMask {{{parent.Merge.maskChannelMask}}}
+  maskChannelInput {{{parent.Merge.maskChannelInput}}}
+  inject {{parent.Merge.inject}}
+  invert_mask {{parent.Merge.invert_mask}}
+  fringe {{parent.Merge.fringe}}
+  name CopyAlpha
+  xpos 449
+  ypos -246
+  disable {{!parent.output_alpha}}
+ }
+ Output {
+  name Output
+  xpos 449
+  ypos -166
+ }
+end_group
+Dot {
+ name Dot99
+ label "Core Despill"
+ note_font_size 60
+ note_font_color 0x1ffba1ff
+ selected true
+ xpos -19979
+ ypos -2548
+}
+Keymix {
+ inputs 3
+ bbox B
+ name Keymix1
+ selected true
+ xpos -20007
+ ypos -1472
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ channels GS_clean
+ name Copy9
+ selected true
+ xpos -20007
+ ypos -1286
+}
+Copy {
+ inputs 2
+ channels GS
+ name Copy10
+ selected true
+ xpos -20007
+ ypos -1214
+}
+Dot {
+ name Dot103
+ label "<----- put shot's CDL/neutral grade\n         and additional color grading here"
+ note_font_size 61
+ selected true
+ xpos -19979
+ ypos -820
+}
+Dot {
+ name Dot104
+ label "<----- put transforms/anim cards here"
+ note_font_size 61
+ selected true
+ xpos -19979
+ ypos 164
+}
+Dot {
+ name Dot105
+ selected true
+ xpos -19979
+ ypos 1076
+}
+set Nfe350660 [stack 0]
+Shuffle {
+ in SpillMatte
+ name Shuffle1
+ label "\[value in]"
+ selected true
+ xpos -19677
+ ypos 1072
+}
+Remove {
+ operation keep
+ channels rgba
+ name Remove1
+ selected true
+ xpos -19677
+ ypos 1126
+}
+Grade {
+ black_clamp false
+ name Grade32
+ selected true
+ xpos -19677
+ ypos 1174
+}
+set Nfe14f570 [stack 0]
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge33
+ selected true
+ xpos -19677
+ ypos 1318
+}
+Shuffle {
+ alpha black
+ name Shuffle2
+ label "\[value in]"
+ selected true
+ xpos -19677
+ ypos 1408
+}
+push $Nfe14f570
+Shuffle {
+ green red
+ blue red
+ alpha red
+ name Shuffle3
+ label "\[value in]"
+ selected true
+ xpos -19787
+ ypos 1168
+}
+Grade {
+ channels all
+ whitepoint 0.5
+ black_clamp false
+ name Grade33
+ selected true
+ xpos -19787
+ ypos 1216
+}
+push $Nfe350660
+Saturation {
+ inputs 1+1
+ name Saturation3
+ label "change if necessary"
+ selected true
+ xpos -20007
+ ypos 1216
+}
+Merge2 {
+ inputs 2
+ operation plus
+ bbox B
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Merge34
+ selected true
+ xpos -20007
+ ypos 1414
+}
+Premult {
+ name Premult1
+ selected true
+ xpos -20007
+ ypos 1750
+}
+Dot {
+ name Dot106
+ selected true
+ xpos -19979
+ ypos 2156
+}
+Dot {
+ name Dot108
+ selected true
+ xpos -16459
+ ypos 2156
+}
+set Ne13fdc10 [stack 0]
+Shuffle {
+ in GS
+ name Shuffle4
+ label "\[value in]"
+ selected true
+ xpos -16487
+ ypos 2296
+}
+Dot {
+ name Dot110
+ label "Key\nQC "
+ note_font_size 141
+ selected true
+ xpos -16459
+ ypos 2516
+}
+StickyNote {
+ inputs 0
+ name StickyNote33
+ label "MASK KEY"
+ note_font_size 21
+ selected true
+ xpos -23649
+ ypos -1951
+}
+push $Ne13fdc10
+Remove {
+ channels GS
+ channels2 GS_clean
+ channels3 SpillMatte
+ name Remove4
+ label "and (\[value channels2]) and (\[value channels3])"
+ selected true
+ xpos -16377
+ ypos 2146
+}
+Group {
+ name InjectDiMatte1
+ onCreate "##### Set variables #####\npresets = \[]\nthis = nuke.thisNode()\ncopy = nuke.toNode('Copy')\nknobs = this.knobs()\n\n##### Only run onCreate on first load - create knob to track first creation (manually delete this knob before saving toolset) #####\nif \"CreationDummy\" not in this.knobs():\n    this.addKnob(nuke.Boolean_Knob('CreationDummy', 'CreationDummy'))\n    this\['CreationDummy'].setVisible(False)\n    this\['CreationDummy'].setEnabled(False)\n    \n    ##### Set presets file path #####\n    import sys\n    filepath = os.environ\['IEENV_WORKING_PATH'].split(\"/\")\n    filepath = \"/data/jobs/\"+filepath\[3]+\"/tools/nuke/scriptlets/pipeline\"\n    sys.path.insert(1, filepath)\n    \n    ##### Load presets file and set variable if warning text required #####\n    if os.path.isfile(filepath+\"/DiMattePresets.py\") == False:\n        Warning = True      \n    else: \n        Warning = False\n        import DiMattePresets\n        reload(DiMattePresets)\n        presets = DiMattePresets.presets.split(' ')\n    \n    ##### Add CUSTOM choice to the Presets list #####    \n    presets.append('CUSTOM')\n            \n    ##### Only reload presets knob if presets does not match loaded presets #####\n    if presets != this\['Presets'].values():\n        \n        ##### Save preset choice if it exists #####\n        if \"Presets\" in this.knobs():\n            chosenPreset = this\['Presets'].value()\n            \n            ##### Delete Presets knob #####\n            this.removeKnob(knobs\[ 'Presets' ])\n               \n        ##### Load Presets knob and load previous value if it exists #####\n        if \"Presets\" not in this.knobs():\n            this.addKnob(nuke.Enumeration_Knob('Presets', 'Matte Name', presets))\n            if chosenPreset in this\['Presets'].values():\n                this\['Presets'].setValue(chosenPreset)\n    \n    ##### Ignore Dividers #####\n    if \"-\" in this\['Presets'].value():\n        if this\['Presets'].getValue() >= (len(this\['Presets'].values())-1):\n            newValue = int(this\['Presets'].getValue())-1\n        else:\n            newValue = int(this\['Presets'].getValue())+1\n        this\['Presets'].setValue(newValue)\n    \n    ##### Decide whether or not to use Custom Matte name #####\n    if this\['Presets'].value() == \"CUSTOM\":\n        this\['CustomMatte'].setVisible(True)\n        preset = this\['CustomMatte'].value()\n    else:\n        preset = this\['Presets'].value()\n        this\['CustomMatte'].setVisible(False)\n    \n    ##### If inputs do not exist set all to none #####    \n    if this.input(0) == None and this.input(1) == None:\n        copy.knob('to0').setValue('none')\n    else:\n        ##### Only create channel if it has a name #####    \n        if  preset != \"\":    \n            channelName = preset+'.red'\n            nuke.Layer(preset, \[channelName])\n            copy.knob('to0').setValue(channelName)\n        else:\n            copy.knob('to0').setValue('none')\n            \n    ##### Reload Warning Text and Open Folder Button #####\n    OpenFoldersScript = \"\"\"import os\n    TemplateFolder = '/data/jobs/SBX/tools/nuke/scriptlets/pipeline'\n    ShowFolder = '\"\"\"+filepath+\"\"\"'\n    os.system('xdg-open \"%s\"' % TemplateFolder)\n    os.system('xdg-open \"%s\"' % ShowFolder)\"\"\"\n    \n    if \"Warning\" in this.knobs():\n        this.removeKnob(knobs\[ 'Warning' ])\n        \n    if \"OpenFolders\" in this.knobs():\n        this.removeKnob(knobs\[ 'OpenFolders' ])\n        \n    if Warning == True:\n        this.addKnob(nuke.Text_Knob('Warning', ' ', \"<br><br><font>\"+filepath+\"/DiMattePresets.py -  Does not exist!<br><br><font color='red'>Please contact your Comp supe about creating di matte presets.<br>\")) \n        this.addKnob(nuke.PyScript_Knob(\"OpenFolders\", \"Open Folders\", OpenFoldersScript))\n        this\['OpenFolders'].setFlag(nuke.STARTLINE)\n        this\['OpenFolders'].setTooltip(\"\\nWill open the folder of the example presets file and the folder where this show's preset file should be added.\")"
+ knobChanged "############################## Presets knobChanged ##############################\nif nuke.thisKnob().name() == \"Presets\":\n    \n    this = nuke.thisNode()\n    copy = nuke.toNode('Copy')\n    preset = \"\"\n\n    ##### Ignore Dividers #####\n    if \"-\" in this\['Presets'].value():\n        if this\['Presets'].getValue() >= (len(this\['Presets'].values())-1):\n            newValue = int(this\['Presets'].getValue())-1\n        else:\n            newValue = int(this\['Presets'].getValue())+1\n        this\['Presets'].setValue(newValue)\n    \n    ##### Decide whether or not to use Custom Matte name #####\n    if this\['Presets'].value() == \"CUSTOM\":\n        this\['CustomMatte'].setVisible(True)\n        preset = this\['CustomMatte'].value()\n    else:\n        preset = this\['Presets'].value()\n        this\['CustomMatte'].setVisible(False)\n    \n    ##### If inputs do not exist set all to none #####    \n    if this.input(0) == None and this.input(1) == None:\n        copy.knob('to0').setValue('none')\n    else:\n        ##### Only create channel if it has a name #####    \n        if  preset != \"\":    \n            channelName = preset+'.red'\n            nuke.Layer(preset, \[channelName])\n            copy.knob('to0').setValue(channelName)\n        else:\n            copy.knob('to0').setValue('none')\n\n############################## CUSTOM knobChanged ##############################   \nif nuke.thisKnob().name() == \"CustomMatte\":\n    \n    this = nuke.thisNode()\n    copy = nuke.toNode('Copy')\n    preset = \"\"\n        \n    ##### Decide whether or not to use Custom Matte name #####\n    if this\['Presets'].value() == \"CUSTOM\":\n        preset = this\['CustomMatte'].value()\n    else:\n        preset = this\['Presets'].value()\n    \n    ##### If inputs do not exist set all to none #####    \n    if this.input(0) == None and this.input(1) == None:\n        copy.knob('to0').setValue('none')\n    else:\n        ##### Only create channel if it has a name #####    \n        if  preset != \"\":    \n            channelName = preset+'.red'\n            nuke.Layer(preset, \[channelName])\n            copy.knob('to0').setValue(channelName)\n        else:\n            copy.knob('to0').setValue('none')\n                \n############################## inputChange knobChanged ##############################\nif nuke.thisKnob().name() == \"inputChange\":\n    \n    this = nuke.thisNode()\n    copy = nuke.toNode('Copy')\n    preset = \"\"\n   \n    ##### Decide whether or not to use Custom Matte name #####\n    if this\['Presets'].value() == \"CUSTOM\":\n        preset = this\['CustomMatte'].value()\n    else:\n        preset = this\['Presets'].value()\n    \n    ##### If inputs do not exist set all to none #####    \n    if this.input(0) == None and this.input(1) == None:\n        copy.knob('to0').setValue('none')\n    else:\n        ##### Only create channel if it has a name #####    \n        if  preset != \"\":    \n            channelName = preset+'.red'\n            nuke.Layer(preset, \[channelName])\n            copy.knob('to0').setValue(channelName)\n        else:\n            copy.knob('to0').setValue('none')"
+ tile_color 0xffdb00ff
+ label "\[value from0] --> \[if \{\[value Presets]==\"CUSTOM\"\} \{return \[value CustomMatte]\} \{return \[value Presets]\}]\[if \{\[value cleanChannels]==true\} \{return \" (clean)\"\} \{return \"\"\}]\n\n"
+ note_font "Bitstream Vera Sans"
+ note_font_color 0xff0000ff
+ selected true
+ xpos -16047
+ ypos 2152
+ addUserKnob {20 InjectDiMatte}
+ addUserKnob {41 from0 l "Matte Channel" t "Select the channel you want to create a DI matte from." T Copy.from0}
+ addUserKnob {26 ""}
+ addUserKnob {22 RefreshPresets l "Refresh Presets" t "Reloads preset choices for DI matte naming for THIS node." T "##### Set variables #####\npresets = \[]\nthis = nuke.thisNode()\ncopy = nuke.toNode('Copy')\nknobs = this.knobs()\n  \n##### Set presets file path #####\nimport sys\nfilepath = os.environ\['IEENV_WORKING_PATH'].split(\"/\")\nfilepath = \"/data/jobs/\"+filepath\[3]+\"/tools/nuke/scriptlets/pipeline\"\nsys.path.insert(1, filepath)\n\n##### Load presets file and set variable if warning text required #####\nif os.path.isfile(filepath+\"/DiMattePresets.py\") == False:\n    Warning = True      \nelse: \n    Warning = False\n    import DiMattePresets\n    reload(DiMattePresets)\n    presets = DiMattePresets.presets.split(' ')\n\n##### Add CUSTOM choice to the Presets list #####    \npresets.append('CUSTOM')\n   \n##### Only reload presets knob if presets does not match loaded presets #####\nif presets != this\['Presets'].values():\n    \n    ##### Save preset choice if it exists #####\n    if \"Presets\" in this.knobs():\n        chosenPreset = this\['Presets'].value()\n        \n        ##### Delete Presets knob #####\n        this.removeKnob(knobs\[ 'Presets' ])\n           \n    ##### Load Presets knob and load previous value if it exists #####\n    if \"Presets\" not in this.knobs():\n        this.addKnob(nuke.Enumeration_Knob('Presets', 'Matte Name', presets))\n        if chosenPreset in this\['Presets'].values():\n            this\['Presets'].setValue(chosenPreset)\n\n##### Ignore Dividers #####\nif \"-\" in this\['Presets'].value():\n    if this\['Presets'].getValue() >= (len(this\['Presets'].values())-1):\n        newValue = int(this\['Presets'].getValue())-1\n    else:\n        newValue = int(this\['Presets'].getValue())+1\n    this\['Presets'].setValue(newValue)\n\n##### Decide whether or not to use Custom Matte name #####\nif this\['Presets'].value() == \"CUSTOM\":\n    this\['CustomMatte'].setVisible(True)\n    preset = this\['CustomMatte'].value()\nelse:\n    preset = this\['Presets'].value()\n    this\['CustomMatte'].setVisible(False)\n\n##### If inputs do not exist set all to none #####    \nif this.input(0) == None and this.input(1) == None:\n    copy.knob('to0').setValue('none')\nelse:\n    ##### Only create channel if it has a name #####    \n    if  preset != \"\":    \n        channelName = preset+'.red'\n        nuke.Layer(preset, \[channelName])\n        copy.knob('to0').setValue(channelName)\n    else:\n        copy.knob('to0').setValue('none')\n        \n##### Reload Warning Text and Open Folder Button #####\nOpenFoldersScript = \"\"\"import os\nTemplateFolder = '/data/jobs/SBX/tools/nuke/scriptlets/pipeline'\nShowFolder = '\"\"\"+filepath+\"\"\"'\nos.system('xdg-open \"%s\"' % TemplateFolder)\nos.system('xdg-open \"%s\"' % ShowFolder)\"\"\"\n\nif \"Warning\" in this.knobs():\n    this.removeKnob(knobs\[ 'Warning' ])\n    \nif \"OpenFolders\" in this.knobs():\n    this.removeKnob(knobs\[ 'OpenFolders' ])\n    \nif Warning == True:\n    this.addKnob(nuke.Text_Knob('Warning', ' ', \"<br><br><font>\"+filepath+\"/DiMattePresets.py -  Does not exist!<br><br><font color='red'>Please contact your Comp supe about creating di matte presets.<br>\")) \n    this.addKnob(nuke.PyScript_Knob(\"OpenFolders\", \"Open Folders\", OpenFoldersScript))\n    this\['OpenFolders'].setFlag(nuke.STARTLINE)\n    this\['OpenFolders'].setTooltip(\"\\nWill open the folder of the example presets file and the folder where this show's preset file should be added.\")" +STARTLINE}
+ addUserKnob {22 RefreshAll l "Refresh All" t "Reloads preset choices for DI matte naming for ALL InjectDiMatte nodes." -STARTLINE T "with nuke.root():\n    for n in nuke.allNodes():\n        if \"InjectDiMatte\" in n.name():\n            if \"RefreshPresets\" in n.knobs():\n                n\['RefreshPresets'].execute()"}
+ addUserKnob {6 cleanChannels l "Clean Up Extra Channels" t "\nWhen enabled removes all channels except RGBA, depth and your injected DI Matte." +STARTLINE}
+ addUserKnob {26 _1 l "" +STARTLINE T " "}
+ addUserKnob {1 CustomMatte l "Custom Matte"}
+ CustomMatte FG
+ addUserKnob {6 CreationDummy -STARTLINE +DISABLED +HIDDEN}
+ addUserKnob {4 Presets l "Matte Name" M {CUSTOM}}
+ addUserKnob {26 Warning l " " T "<br><br><font>/data/jobs/TRN/tools/nuke/scriptlets/pipeline/DiMattePresets.py -  Does not exist!<br><br><font color='red'>Please contact your Comp supe about creating di matte presets.<br>"}
+ addUserKnob {22 OpenFolders l "Open Folders" t "\nWill open the folder of the example presets file and the folder where this show's preset file should be added." T "import os\n    TemplateFolder = '/data/jobs/SBX/tools/nuke/scriptlets/pipeline'\n    ShowFolder = '/data/jobs/TRN/tools/nuke/scriptlets/pipeline'\n    os.system('xdg-open \"%s\"' % TemplateFolder)\n    os.system('xdg-open \"%s\"' % ShowFolder)" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name matte
+  xpos 250
+  ypos 500
+  number 1
+ }
+ Input {
+  inputs 0
+  name input
+  xpos 466
+  ypos 364
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 500
+  ypos 445
+ }
+set Ne0ffe790 [stack 0]
+add_layer {FG FG.red}
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 FG.red
+  name Copy
+  xpos 466
+  ypos 494
+ }
+set Nfdb44820 [stack 0]
+push $Ne0ffe790
+ Remove {
+  operation keep
+  channels rgba
+  channels2 depth
+  name Remove
+  label "\[value channels]"
+  xpos 593
+  ypos 435
+ }
+ Copy {
+  inputs 2
+  from0 {{{Copy.to0}}}
+  to0 {{{Copy.to0}}}
+  name CopyToClean
+  xpos 593
+  ypos 494
+ }
+push $Nfdb44820
+ Switch {
+  inputs 2
+  which {{parent.cleanChannels}}
+  name Switch1
+  xpos 466
+  ypos 567
+ }
+ Output {
+  name Output1
+  xpos 466
+  ypos 619
+ }
+end_group
+OCIOLogConvert {
+ operation "lin to log"
+ unpremult rgba.alpha
+ name OCIOLogConvert4
+ selected true
+ xpos -15827
+ ypos 2152
+ disable true
+}
+push $N25249f50
+OCIOLogConvert {
+ operation "lin to log"
+ name OCIOLogConvert5
+ selected true
+ xpos -15717
+ ypos 2062
+ disable true
+}
+Group {
+ inputs 2
+ name MergeDiMatte1
+ onCreate "# Show/Hide mask channels\nif nuke.thisNode().input(2) == None:\n    nuke.thisNode().knobs()\['maskChannelMask'].setVisible(False)\n    nuke.thisNode().knobs()\['maskChannelInput'].setVisible(True)\nif nuke.thisNode().input(2) != None:\n    nuke.thisNode().knobs()\['maskChannelMask'].setVisible(True)\n    nuke.thisNode().knobs()\['maskChannelInput'].setVisible(False)"
+ knobChanged "# Show/Hide mask channels\nif nuke.thisKnob().name() == \"inputChange\": \n    if nuke.thisNode().input(2) == None:\n        nuke.thisNode().knobs()\['maskChannelMask'].setVisible(False)\n        nuke.thisNode().knobs()\['maskChannelInput'].setVisible(True)\n    if nuke.thisNode().input(2) != None:\n        nuke.thisNode().knobs()\['maskChannelMask'].setVisible(True)\n        nuke.thisNode().knobs()\['maskChannelInput'].setVisible(False)"
+ tile_color 0x4a5dc5ff
+ note_font_color 0xffff00ff
+ selected true
+ xpos -15717
+ ypos 2158
+ addUserKnob {20 User l MergeDiMatte}
+ addUserKnob {2 filepath +INVISIBLE}
+ filepath /data/tools/nuke/scriptlets/COMP/DiMattes/MergeDiMatte.nk
+ addUserKnob {41 operation T Merge.operation}
+ addUserKnob {6 sRGB l "Video colorspace" -STARTLINE}
+ addUserKnob {6 screen_alpha l "alpha masking" -STARTLINE}
+ addUserKnob {41 bbox l "set bbox to " T Merge.bbox}
+ addUserKnob {41 metainput l "metadata from" -STARTLINE T Merge.metainput}
+ addUserKnob {41 rangeinput l "range from" -STARTLINE T Merge.rangeinput}
+ addUserKnob {26 ""}
+ addUserKnob {41 Achannels l "A channels" T Merge.Achannels}
+ addUserKnob {41 Bchannels l "B channels" T Merge.Bchannels}
+ addUserKnob {41 output T Merge.output}
+ addUserKnob {26 ""}
+ addUserKnob {26 _1 l mask T " "}
+ addUserKnob {41 maskChannelMask l "" -STARTLINE +HIDDEN T Merge.maskChannelMask}
+ addUserKnob {41 maskChannelInput l "" -STARTLINE T Merge.maskChannelInput}
+ addUserKnob {6 inject -STARTLINE}
+ addUserKnob {6 invert_mask l invert -STARTLINE}
+ addUserKnob {6 fringe -STARTLINE}
+ addUserKnob {8 mix}
+ mix 1
+ addUserKnob {26 ""}
+ addUserKnob {22 Convert l "Convert Selected to MergeDiMatte nodes" t "\nWill convert all nodes with class 'Merge2' to MergeDiMatte nodes while preserving all connections and expressions.\n\nWill not convert Merge2 nodes that have more than one A input." T "def convertMerge(filepath):   \n    converted = \[]\n    extra = \[]\n    node = nuke.selectedNode()\n    \n    #### Define knob names to copy ####\n    knobs = \['operation','sRGB','screen_alpha','bbox','metainput','rangeinput','Achannels','Bchannels','output','maskChannelInput','maskChannelMask','inject','invert_mask','fringe','mix','label','note_font','note_font_size','hide_input','cached','disable','dope_sheet','bookmark','postage_stamp','postage_stamp_frame','lifetimeStart','lifetimeEnd','useLifetime','xpos','ypos']\n   \n    #### Load toolset of new MergeDiMatte node ####\n    converted = nuke.loadToolset(filepath)\n    \n    #### Defines list of all nodes in script ####\n    with nuke.root():\n        allNodes = nuke.allNodes()\n  \n    #### Connects new MergeDiMatte to the same inputs as the original Merge ####\n    for i in range(3):\n        converted.setInput(i, node.input(i))\n        \n    #### Copies all knob values specified by knobs variable from original Merge to new MergeDiMatte ####\n    for k in knobs:\n        converted\[k].fromScript(node\[k].toScript())\n    \n    #### Swaps inputs for all nodes connected to original Merge to new MergeDiMatte ####\n    for n in allNodes:\n        for i in range(n.inputs()):\n                if n.input(i) == node:\n                    n.setInput(i, converted)\n        \n        #### Swaps expressions for all nodes linked to original Merge to new MergeDiMatte ####            \n        extra = \['.','\[',']',' ']\n        for k in n.knobs():\n            if 'name' not in k:\n                for e in extra:\n                    if node.name()+e in n\[k].toScript():\n                        n\[k].fromScript(n\[k].toScript().replace(node.name()+e, converted.name()+e))\n    \n    #### Delete original Merge node ####   \n    nuke.delete(node)\n    \n    #### END convertMerge FUNCTION ############################################################################################\n    \n\n\n#### Define filepath for MergeDiMatte toolset ####     \npath = nuke.thisNode()\['filepath'].value()\n\nwith nuke.root():  \n    \n    #### Define variables ####\n    selected = nuke.selectedNodes('Merge2')\n    filtered = \[]\n    skipped = \[]\n    message = '<font color=red>Warning!</font> MergeDiMatte only allows for <b>ONE</b> A input\\n\\nThe following merge nodes were not converted:\\n\\n'\n    \n    #### Filter Merge nodes with more than one A input into skipped list ####\n    for s in selected:\n        if s.inputs() < 4:\n            filtered.append(s)\n        else:\n            skipped.append(s)\n    \n    #### Warning if no valid Merge nodes in selection ####\n    if filtered == \[]:\n        if skipped == \[]:\n            nuke.message('No valid merge nodes selected')\n    else:\n        #### Iterate convertMerge function on list of valid Merge nodes ####\n        for merge in filtered:\n            nuke.selectAll()\n            nuke.invertSelection()\n            merge.setSelected(True)\n            convertMerge(path)\n    \n    #### Error message if any Merge nodes were skipped ####\n    if skipped != \[]:\n        for s in skipped:\n            message = message+s.name()+'\\n'\n        nuke.message(message)\n        " +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {26 _3 l " " T "<b>v2 </b><font color=grey><i>Created by <b>Daniel Bigaj "}
+ addUserKnob {20 PassThrough l "Pass Through"}
+ addUserKnob {26 _2 l " " T "<font color=grey><i>Add layers here to pass through this node's B-stream without being affected. "}
+ addUserKnob {26 ""}
+ addUserKnob {22 AddLayer l "Add Layer" T "group = nuke.thisNode()\n\ngroup.begin()\n\nconnectB = nuke.toNode('Output').input(0)\nconnectA = nuke.toNode('IgnoreDot')\n\nnewCopy = nuke.createNode('Copy', inpanel=False)\nnewCopy.setInput(0, connectB)\nnewCopy.setInput(1, connectA)\nnewCopy\['from0'].setValue('none')\nnewCopy\['to0'].setValue('none')\n\nnuke.toNode('Output').setInput(0, newCopy)\n\nlayerKnobName = 'layer'+str(newCopy.name().split('Copy')\[-1])\nremoveKnobName = 'remove'+str(newCopy.name().split('Copy')\[-1])\n\nlayerKnob = nuke.Link_Knob(layerKnobName,'Layer')\nlayerKnob.setLink(newCopy.name()+'.channels')\ngroup.addKnob(layerKnob)\n\n\nlabel = \"\[value \"+layerKnobName+\"]\\n\"\nlabelRemove = \"\[value \"+layerKnobName+\"]\\\\n\"\n\nif group\['AddLabel'].value() == True:\n    group\['label'].setValue(group\['label'].value()+label)\n\nremoveKnobScript = \"this = nuke.thisNode(); knobs = this.knobs(); this.removeKnob(knobs\[ '\"+layerKnobName+\"' ]); this.removeKnob(knobs\[ '\"+removeKnobName+\"' ]); nuke.delete(nuke.toNode('\"+newCopy.name()+\"')); this\['label'].setValue(this\['label'].value().replace('\"+labelRemove+\"', ''))\"\n\nremoveKnob = nuke.PyScript_Knob(removeKnobName,\"Remove\",removeKnobScript)\ngroup.addKnob(removeKnob)\n\nautoplaceList = \[]\n\nfor n in nuke.allNodes('Copy'):\n    if \"Copy\" in n.name():\n        autoplaceList.append(n)\n\nif autoplaceList != \[]:\n    for n in autoplaceList:\n        nuke.autoplace(n)\n\ngroup.end()\n    " +STARTLINE}
+ addUserKnob {6 AddLabel l "Add to Label" -STARTLINE}
+ AddLabel true
+}
+ Input {
+  inputs 0
+  name B
+  xpos 140
+  ypos 414
+ }
+ Dot {
+  name Dot30
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 174
+  ypos 468
+ }
+set Nfd444520 [stack 0]
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -189
+  ypos 468
+ }
+ Dot {
+  name IgnoreDot
+  label "   \[value name]"
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -189
+  ypos 594
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 19
+  ypos 558
+  number 2
+ }
+ Input {
+  inputs 0
+  name A
+  xpos 466
+  ypos 427
+  number 1
+ }
+ Dot {
+  name Dot31
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 500
+  ypos 523
+ }
+set Nfd34d450 [stack 0]
+push $Nfd444520
+ Multiply {
+  value 0
+  name EmptyBLayers
+  xpos 289
+  ypos 458
+ }
+push $Nfd34d450
+ Copy {
+  inputs 2
+  channels all
+  name BLayers
+  xpos 289
+  ypos 496
+ }
+ Copy {
+  inputs 2
+  channels all
+  name ALayers
+  xpos 289
+  ypos 546
+ }
+push $Nfd444520
+ Merge2 {
+  inputs 2+1
+  sRGB {{parent.sRGB}}
+  screen_alpha {{parent.screen_alpha}}
+  also_merge all
+  inject {{parent.inject}}
+  invert_mask {{parent.invert_mask}}
+  fringe {{parent.fringe}}
+  mix {{parent.mix}}
+  name Merge
+  xpos 140
+  ypos 558
+ }
+ Output {
+  name Output
+  xpos 140
+  ypos 1184
+ }
+end_group
+OCIOLogConvert {
+ operation "log to lin"
+ name OCIOLogConvert6
+ selected true
+ xpos -15717
+ ypos 2254
+ disable true
+}
+Dot {
+ name Dot111
+ selected true
+ xpos -15689
+ ypos 3332
+}
+StickyNote {
+ inputs 0
+ name StickyNote35
+ label "uncheck clamp black from\nthis grade.  add contrast with \nblack point and whitepoint.\nthe key is to add negative values\nso that dark areas get darker, and \nlight areas brighten."
+ note_font_size 18
+ selected true
+ xpos -19100
+ ypos 1174
+}
+StickyNote {
+ inputs 0
+ name StickyNote36
+ label "Make sure you set the DIMatte channel <br>properly according to your show's naming convention<br>"
+ note_font_size 18
+ selected true
+ xpos -16205
+ ypos 2037
+}
+StickyNote {
+ inputs 0
+ name StickyNote37
+ label "<<-- will want to change WP /BP"
+ note_font_size 22
+ selected true
+ xpos -19123
+ ypos 1121
+}
+StickyNote {
+ inputs 0
+ name StickyNote38
+ label "<-- adjust despill matte\nif necessary"
+ note_font_size 18
+ selected true
+ xpos -19611
+ ypos 1162
+}
+StickyNote {
+ inputs 0
+ name StickyNote39
+ label "Sometimes you'll want to desat the \ndespill, to avoid unatural colors"
+ note_font_size 12
+ selected true
+ xpos -20275
+ ypos 1216
+}
+StickyNote {
+ inputs 0
+ name StickyNote40
+ label "Adjust per shot -->>"
+ note_font_size 31
+ selected true
+ xpos -20753
+ ypos -1475
+}
+StickyNote {
+ inputs 0
+ name StickyNote41
+ label "Adjust or Replace with your own soft Keyer>>"
+ note_font_size 60
+ selected true
+ xpos -24926
+ ypos -3218
+}
+StickyNote {
+ inputs 0
+ name StickyNote42
+ label "<< Adjust or Replace with your own Core Keyer"
+ note_font_size 60
+ selected true
+ xpos -21979
+ ypos -3218
+}
+StickyNote {
+ inputs 0
+ name StickyNote43
+ tile_color 0x888888ff
+ label "<<<br>Tips:\n- Merging in LOG space can help bringing details back on top of a bright background.\n- Try enabling/disabling the OCIOLogConvert nodes<br><br>"
+ note_font_size 18
+ selected true
+ xpos -15548
+ ypos 2106
+}
+StickyNote {
+ inputs 0
+ name StickyNote44
+ label "<< you can replace \"apDespill\"\nby your preferred Despill nodes >>"
+ note_font_size 35
+ selected true
+ xpos -19665
+ ypos -3224
+}
+StickyNote {
+ inputs 0
+ name StickyNote45
+ tile_color 0xb0b6b1ff
+ label "Keying template V1"
+ note_font_size 140
+ selected true
+ xpos -22725
+ ypos -5611
+}
+StickyNote {
+ inputs 0
+ name StickyNote46
+ label "<<-- Create spill Matte"
+ note_font_size 21
+ selected true
+ xpos -18524
+ ypos -3055
+}
