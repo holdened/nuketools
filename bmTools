@@ -1,0 +1,2308 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Group {
+ name ExponentialLightwrap
+ help "This gizmo is a port of Stuart Lashley's popular Exponential \nGlow macro from Shake. Will glow the highs on the input and create a \nnice falloff. Main dependency with Viewer has been removed so should be \nok in stereo/mono views."
+ onCreate "this = nuke.thisNode()\nthis\['PixelAspectValue'].clearFlag(0x00000002)\nthis\['PixelAspectValue'].setFlag(nuke.READ_ONLY)\nthis\['PixelAspectValue'].setFlag(nuke.NO_ANIMATION)"
+ knobChanged "if nuke.thisKnob().name() == \"PixelAspectChoice\":\n    this = nuke.thisNode()\n    if this\['PixelAspectChoice'].value() == 'Input':\n        this\['PixelAspect'].setVisible(False)\n    else:\n        this\['PixelAspect'].setVisible(True)\n        \nif nuke.thisKnob().name() == \"Bbox\":\n    this = nuke.thisNode()\n    if this\['Bbox'].value() == 'Set Overscan':\n        this\['Overscan'].setVisible(True)\n    else:\n        this\['Overscan'].setVisible(False)"
+ tile_color 0xcc804eff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -33956
+ ypos -10608
+ mapsize {0.15 0.15}
+ addUserKnob {20 User l ExponentialLightwrap}
+ addUserKnob {6 IdentifierKnobExponential12345 l "" +STARTLINE +INVISIBLE +STARTLINE}
+ addUserKnob {4 PixelAspectChoice l "Pixel Aspect" t "\nInput - Uses pixel aspect from <b>FG</b> input unless <b>PixelAspect</b> input is plugged in then will use that input's aspect ratio.\n\nForce - User manually sets the aspect ratio." M {Input Force "" "" "" ""}}
+ addUserKnob {41 PixelAspectValue l "" -STARTLINE T Pixel.value}
+ addUserKnob {26 _2 l "                                                                                                     " -STARTLINE T " "}
+ addUserKnob {22 CopySettings l "Copy Settings to All" t "\nCopy all settings except for \"Add Source\" from this node to all other ExponentialGlow and ExponentialLightwrap nodes in the script." -STARTLINE T "this = nuke.thisNode()\nknobs = \['PixelAspectChoice','PixelAspect','Falloff','Intensity','Size','Bbox','Overscan','BlackOutside','Tolerance']\nchanged = \[]\nmessage = \"Updated these nodes:\\n\\n\"\n\nwith nuke.root():\n    allNodes = nuke.allNodes()\n    allNodes.remove(this)\n    \nfor node in allNodes:\n    if 'IdentifierKnobExponential12345' in node.knobs():\n        for knob in knobs:\n            node\[knob].fromScript(this\[knob].toScript())\n            if node.name() not in changed:\n                changed.append(node.name())\n            \nfor name in changed:\n    message = message+name+\"\\n\"\n    \nnuke.message(message)"}
+ addUserKnob {7 PixelAspect l Aspect +HIDDEN R 1 2}
+ PixelAspect 1.6
+ addUserKnob {26 ""}
+ addUserKnob {7 Falloff R 0 2}
+ Falloff 0.95
+ addUserKnob {7 Intensity R 0 10}
+ Intensity 0.4
+ addUserKnob {7 Size R 0 5}
+ Size 0.5
+ addUserKnob {6 AddSource l "Add Source" +STARTLINE}
+ AddSource true
+ addUserKnob {26 ""}
+ addUserKnob {4 Bbox l "Bounding Box" M {"Preserve bbox" "Crop to Format" "Set Overscan" "" "" "" "" ""}}
+ addUserKnob {6 BlackOutside l "Black Outside" -STARTLINE}
+ BlackOutside true
+ addUserKnob {7 Overscan l "Overscan %" +HIDDEN R 0 100}
+ Overscan 5
+ addUserKnob {26 ""}
+ addUserKnob {20 ToleranceGroup l "Tolerance Keyer" n 1}
+ ToleranceGroup 0
+ addUserKnob {41 Tolerance l "" +STARTLINE T Keyer1.range}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {26 _3 l "" +STARTLINE T "<font color=grey><b>v1.6</b><i> Created by <b>Daniel Bigaj</b> 28 February 2023"}
+}
+ Input {
+  inputs 0
+  name FG
+  xpos -828
+  ypos -582
+ }
+ Dot {
+  name Dot5
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -794
+  ypos -463
+ }
+set N81b9da60 [stack 0]
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -794
+  ypos -86
+ }
+set Ne5750b50 [stack 0]
+ Dot {
+  name Dot4
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -794
+  ypos -33
+ }
+set Ne474b820 [stack 0]
+ Dot {
+  name Dot7
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -794
+  ypos 15
+ }
+ Dot {
+  name Dot12
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -556
+  ypos 15
+ }
+set Nf9a4ba50 [stack 0]
+ Dot {
+  name Dot2
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -556
+  ypos 79
+ }
+push $Ne474b820
+push $Ne5750b50
+push $N81b9da60
+ Input {
+  inputs 0
+  name BG
+  xpos -490
+  ypos -583
+  number 1
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge10
+  xpos -490
+  ypos -467
+ }
+ Remove {
+  operation keep
+  channels rgb
+  name Remove1
+  xpos -115
+  ypos -467
+ }
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos -115
+  ypos -402
+ }
+ Premult {
+  name Premult1
+  xpos -115
+  ypos -364
+ }
+ Shuffle {
+  alpha black
+  name BlackAlpha
+  xpos -115
+  ypos -288
+ }
+ Multiply {
+  channels rgb
+  value {{parent.Intensity/10}}
+  name Intensity
+  xpos -115
+  ypos -262
+ }
+set N5aafe250 [stack 0]
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur9
+  xpos -278
+  ypos -144
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff9
+  xpos -384
+  ypos -144
+ }
+push $N5aafe250
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur8
+  xpos -278
+  ypos -170
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff8
+  xpos -384
+  ypos -170
+ }
+push $N5aafe250
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur7
+  xpos -278
+  ypos -196
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff7
+  xpos -384
+  ypos -196
+ }
+push $N5aafe250
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur6
+  xpos -278
+  ypos -222
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff6
+  xpos -384
+  ypos -222
+ }
+push $N5aafe250
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur5
+  xpos -278
+  ypos -248
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff5
+  xpos -384
+  ypos -248
+ }
+push $N5aafe250
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur4
+  xpos -278
+  ypos -274
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff4
+  xpos -384
+  ypos -274
+ }
+push $N5aafe250
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur3
+  xpos -278
+  ypos -300
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff3
+  xpos -384
+  ypos -300
+ }
+push $N5aafe250
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur2
+  xpos -278
+  ypos -326
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff2
+  xpos -384
+  ypos -326
+ }
+push $N5aafe250
+ Blur {
+  channels rgb
+  size {{width/3*(parent.Size/100) x1001 6.826666667e+10} {height/3*(parent.Size/Pixel.value/height*width)/100}}
+  crop false
+  name PercentBlur1
+  xpos -278
+  ypos -352
+ }
+ Multiply {
+  channels rgb
+  name Falloff1
+  xpos -384
+  ypos -352
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge2
+  xpos -490
+  ypos -326
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge3
+  xpos -490
+  ypos -300
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge4
+  xpos -490
+  ypos -274
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge5
+  xpos -490
+  ypos -248
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge6
+  xpos -490
+  ypos -222
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge7
+  xpos -490
+  ypos -196
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge8
+  xpos -490
+  ypos -170
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge9
+  xpos -490
+  ypos -144
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge11
+  xpos -490
+  ypos -90
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Bchannels rgb
+  name Merge1
+  xpos -490
+  ypos -37
+  disable {{!parent.AddSource}}
+ }
+push $Nf9a4ba50
+ Copy {
+  inputs 2
+  channels rgba
+  name Copy
+  xpos -490
+  ypos -1
+ }
+ Crop {
+  box {{parent.Bbox==2?(-width*(parent.Overscan/100)):0} {parent.Bbox==2?(-height*(parent.Overscan/100)):0} {parent.Bbox==2?(width*((parent.Overscan/100)+1)):width} {parent.Bbox==2?(height*((parent.Overscan/100)+1)):height}}
+  crop false
+  name Crop2
+  xpos -490
+  ypos 49
+  disable {{parent.Bbox>0?0:1}}
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox
+  xpos -490
+  ypos 75
+  disable {{!(parent.Bbox==0)}}
+ }
+ BlackOutside {
+  name BlackOutside
+  xpos -490
+  ypos 101
+  disable {{!parent.BlackOutside}}
+ }
+ Output {
+  name Output
+  xpos -490
+  ypos 184
+ }
+ Input {
+  inputs 0
+  name PixelAspect
+  xpos -278
+  ypos -585
+  number 2
+ }
+ NoOp {
+  name Pixel
+  selected true
+  xpos -278
+  ypos -559
+  addUserKnob {20 User}
+  addUserKnob {7 value R 0 3}
+  value {{"trunc((parent.PixelAspectChoice==1?parent.PixelAspect:(\[exists parent.input2]?format.pixel_aspect:parent.format.pixel_aspect))*100)/100"}}
+ }
+end_group
+push $cut_paste_input
+Group {
+ name ExponentialGlow
+ help "This gizmo is a port of Stuart Lashley's popular Exponential \nGlow macro from Shake. Will glow the highs on the input and create a \nnice falloff. Main dependency with Viewer has been removed so should be \nok in stereo/mono views."
+ onCreate "this = nuke.thisNode()\nthis\['PixelAspectValue'].clearFlag(0x00000002)\nthis\['PixelAspectValue'].setFlag(nuke.READ_ONLY)\nthis\['PixelAspectValue'].setFlag(nuke.NO_ANIMATION)"
+ knobChanged "if nuke.thisKnob().name() == \"PixelAspectChoice\":\n    this = nuke.thisNode()\n    if this\['PixelAspectChoice'].value() == 'Input':\n        this\['PixelAspect'].setVisible(False)\n    else:\n        this\['PixelAspect'].setVisible(True)\n        \nif nuke.thisKnob().name() == \"Bbox\":\n    this = nuke.thisNode()\n    if this\['Bbox'].value() == 'Set Overscan':\n        this\['Overscan'].setVisible(True)\n    else:\n        this\['Overscan'].setVisible(False)"
+ tile_color 0xcc804eff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -33959
+ ypos -10537
+ mapsize {0.15 0.15}
+ addUserKnob {20 User l ExponentialGlow}
+ addUserKnob {6 IdentifierKnobExponential12345 l "" +STARTLINE +INVISIBLE +STARTLINE}
+ addUserKnob {4 PixelAspectChoice l "Pixel Aspect" t "\nInput - Uses pixel aspect from <b>FG</b> input unless <b>PixelAspect</b> input is plugged in then will use that input's aspect ratio.\n\nForce - User manually sets the aspect ratio." M {Input Force "" "" ""}}
+ addUserKnob {41 PixelAspectValue l "" -STARTLINE T Pixel.value}
+ addUserKnob {26 _2 l "                                                                                                     " -STARTLINE T " "}
+ addUserKnob {22 CopySettings l "Copy Settings to All" t "\nCopy all settings except for \"Add Source\" from this node to all other ExponentialGlow and ExponentialLightwrap nodes in the script." -STARTLINE T "this = nuke.thisNode()\nknobs = \['PixelAspectChoice','PixelAspect','Falloff','Intensity','Size','Bbox','Overscan','BlackOutside','Tolerance']\nchanged = \[]\nmessage = \"Updated these nodes:\\n\\n\"\n\nwith nuke.root():\n    allNodes = nuke.allNodes()\n    allNodes.remove(this)\n    \nfor node in allNodes:\n    if 'IdentifierKnobExponential12345' in node.knobs():\n        for knob in knobs:\n            node\[knob].fromScript(this\[knob].toScript())\n            if node.name() not in changed:\n                changed.append(node.name())\n            \nfor name in changed:\n    message = message+name+\"\\n\"\n    \nnuke.message(message)"}
+ addUserKnob {7 PixelAspect l Aspect +HIDDEN R 1 2}
+ PixelAspect 1.62
+ addUserKnob {26 ""}
+ addUserKnob {7 Falloff R 0 2}
+ Falloff 0.95
+ addUserKnob {7 Intensity R 0 10}
+ Intensity 0.4
+ addUserKnob {7 Size R 0 5}
+ Size 0.5
+ addUserKnob {6 AddSource l "Add Source" +STARTLINE}
+ AddSource true
+ addUserKnob {26 ""}
+ addUserKnob {4 Bbox l "Bounding Box" M {"Preserve bbox" "Crop to Format" "Set Overscan" "" "" "" "" ""}}
+ addUserKnob {6 BlackOutside l "Black Outside" -STARTLINE}
+ BlackOutside true
+ addUserKnob {7 Overscan l "Overscan %" +HIDDEN R 0 100}
+ Overscan 5
+ addUserKnob {26 ""}
+ addUserKnob {20 ToleranceGroup l "Tolerance Keyer" n 1}
+ ToleranceGroup 0
+ addUserKnob {41 Tolerance l "" +STARTLINE T Keyer1.range}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {26 _3 l "" +STARTLINE T "<font color=grey><b>v1.4</b><i> Created by <b>Daniel Bigaj</b> 27 June 2022"}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -490
+  ypos -434
+ }
+ Dot {
+  name Dot3
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -456
+  ypos -374
+ }
+set N4dcf94e0 [stack 0]
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -556
+  ypos -374
+ }
+ Dot {
+  name Dot12
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -556
+  ypos -102
+ }
+set Nddff3930 [stack 0]
+ Dot {
+  name Dot2
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -556
+  ypos -38
+ }
+push $N4dcf94e0
+ Remove {
+  operation keep
+  channels rgb
+  name Remove1
+  xpos -115
+  ypos -378
+ }
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos -115
+  ypos -352
+ }
+ Premult {
+  name Premult1
+  xpos -115
+  ypos -314
+ }
+ Shuffle {
+  alpha black
+  name BlackAlpha
+  xpos -115
+  ypos -288
+ }
+ Multiply {
+  channels rgb
+  value {{parent.Intensity/10}}
+  name Intensity
+  xpos -115
+  ypos -262
+ }
+set Nbdefa4e0 [stack 0]
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur9
+  xpos -278
+  ypos -144
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff9
+  xpos -384
+  ypos -144
+ }
+push $Nbdefa4e0
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur8
+  xpos -278
+  ypos -170
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff8
+  xpos -384
+  ypos -170
+ }
+push $Nbdefa4e0
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur7
+  xpos -278
+  ypos -196
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff7
+  xpos -384
+  ypos -196
+ }
+push $Nbdefa4e0
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur6
+  xpos -278
+  ypos -222
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff6
+  xpos -384
+  ypos -222
+ }
+push $Nbdefa4e0
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur5
+  xpos -278
+  ypos -248
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff5
+  xpos -384
+  ypos -248
+ }
+push $Nbdefa4e0
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur4
+  xpos -278
+  ypos -274
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff4
+  xpos -384
+  ypos -274
+ }
+push $Nbdefa4e0
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur3
+  xpos -278
+  ypos -300
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff3
+  xpos -384
+  ypos -300
+ }
+push $Nbdefa4e0
+ Blur {
+  channels rgb
+  size {{"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.w]*2" x1001 6.826666667e+10} {"\[value PercentBlur\[expr \[lindex \[split \[value name] \"r\"] 2]-1].size.h]*2"}}
+  crop false
+  name PercentBlur2
+  xpos -278
+  ypos -326
+ }
+ Multiply {
+  channels rgb
+  value {{"\[value Falloff\[expr \[lindex \[split \[value name] \"ff\"] 2]-1].value]/Falloff"}}
+  name Falloff2
+  xpos -384
+  ypos -326
+ }
+push $N4dcf94e0
+push $Nbdefa4e0
+ Blur {
+  channels rgb
+  size {{width/3*(parent.Size/100) x1001 6.826666667e+10} {height/3*(parent.Size/Pixel.value/height*width)/100}}
+  crop false
+  name PercentBlur1
+  xpos -278
+  ypos -352
+ }
+ Multiply {
+  channels rgb
+  name Falloff1
+  xpos -384
+  ypos -352
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Bchannels rgb
+  name Merge1
+  xpos -490
+  ypos -352
+  disable {{!parent.AddSource}}
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge2
+  xpos -490
+  ypos -326
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge3
+  xpos -490
+  ypos -300
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge4
+  xpos -490
+  ypos -274
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge5
+  xpos -490
+  ypos -248
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge6
+  xpos -490
+  ypos -222
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge7
+  xpos -490
+  ypos -196
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge8
+  xpos -490
+  ypos -170
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge9
+  xpos -490
+  ypos -144
+ }
+push $Nddff3930
+ Copy {
+  inputs 2
+  channels rgba
+  name Copy
+  xpos -490
+  ypos -118
+ }
+ Crop {
+  box {{parent.Bbox==2?(-width*(parent.Overscan/100)):0} {parent.Bbox==2?(-height*(parent.Overscan/100)):0} {parent.Bbox==2?(width*((parent.Overscan/100)+1)):width} {parent.Bbox==2?(height*((parent.Overscan/100)+1)):height}}
+  crop false
+  name Crop2
+  xpos -490
+  ypos -68
+  disable {{parent.Bbox>0?0:1}}
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox
+  xpos -490
+  ypos -42
+  disable {{!(parent.Bbox==0)}}
+ }
+ BlackOutside {
+  name BlackOutside
+  xpos -490
+  ypos -16
+  disable {{!parent.BlackOutside}}
+ }
+ Output {
+  name Output1
+  xpos -490
+  ypos 45
+ }
+ Input {
+  inputs 0
+  name PixelAspect
+  xpos -279
+  ypos -436
+  number 1
+ }
+ NoOp {
+  name Pixel
+  xpos -279
+  ypos -410
+  addUserKnob {20 User}
+  addUserKnob {7 value R 0 3}
+  value {{"trunc((parent.PixelAspectChoice==1?parent.PixelAspect:(\[exists parent.input1]?format.pixel_aspect:parent.format.pixel_aspect))*100)/100"}}
+ }
+end_group
+push $cut_paste_input
+Group {
+ name bm_CameraShake
+ help "Gives more control than Nuke's built-in CameraShake gizmo.\n\nCamera float, shake & sub-frame jitter settings are defined independently, then all 3 curves are added together into a final, new expression so your output curve has plenty of detail (especially in the motion blur) & only filters your image once."
+ tile_color 0x222222ff
+ note_font Verdana
+ selected true
+ xpos -33959
+ ypos -10466
+ mapsize {0.15 0.15}
+ addUserKnob {20 Options}
+ addUserKnob {26 ""}
+ addUserKnob {6 switchCheckerboard l Test t "Replaces input image with checkerboard so you can see your camera shake uncontaminated." +STARTLINE}
+ addUserKnob {4 noiseType l "       Noise Type " t "Choose between 3 different noise functions to generate different types of camera shake." -STARTLINE M {fBm Turbulence Noise "" "" "" "" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {7 refFrame l "Reference Frame" t "Setting a reference frame is handy for scaling a curve's frequency around a specific point in time.\n\nNote: must be set prior to tweaking any parameters, as changing reference frame will offset your curve." R 1000 1100}
+ refFrame 1001
+ addUserKnob {22 setRef l "Set to current Frame" t "Set the Reference Frame to the current frame in the Viewer." T nuke.thisNode().knob('refFrame').setValue(nuke.frame()) +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {7 globalAmt l "Global Amount" t "Control the overall amount of camera shake in one go." R 0 5}
+ globalAmt 1
+ addUserKnob {26 ""}
+ addUserKnob {20 fineControl l "    C O N T R O L S" n 1}
+ addUserKnob {26 spacer01 l "" +STARTLINE T " "}
+ addUserKnob {6 toggleJitter l Jitter t "Turn Camera Shake Jitter on/off." +STARTLINE}
+ toggleJitter true
+ addUserKnob {7 jitterAmt l "  " t "Adjust the contribution of the Jitter animation curve into the overall camera shake." -STARTLINE R 0 5}
+ jitterAmt 1
+ addUserKnob {6 toggleShake l Shake t "Turn Camera Shake Shake on/off." +STARTLINE}
+ toggleShake true
+ addUserKnob {7 shakeAmt l "" t "Adjust the contribution of the Shake animation curve into the overall camera shake." -STARTLINE R 0 5}
+ shakeAmt 1
+ addUserKnob {6 toggleFloat l Float t "Turn Camera Shake Float on/off." +STARTLINE}
+ toggleFloat true
+ addUserKnob {7 floatAmt l "  " t "Adjust the contribution of the Float animation curve into the overall camera shake." -STARTLINE R 0 5}
+ floatAmt 1
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 weightGroup l "    E D G E   C O M P E N S A T I O N    //    G L O B A L   T R A N S F O R M" n 1}
+ weightGroup 0
+ addUserKnob {26 unnames l "" +STARTLINE T " "}
+ addUserKnob {4 edgePulldown l "Edge Type" t "For larger camera shakes, you will see edge encroachment issues.\n\nSpread will \"pixel smear\" the outer-most pixels to the edge of your format.\n\nMirror will flip/flop the input image around it's edges for more detail." M {None Spread Mirror "" "" ""}}
+ addUserKnob {26 edgeSpacer l " "}
+ addUserKnob {12 edgeTranslate l Translate t "Manually translate the image."}
+ addUserKnob {7 edgeRotate l Rotate t "Manually rotate the image." R 0 360}
+ addUserKnob {14 edgeScale l Scale t "Manually scale the image to prevent edge encroachment." R 0 100}
+ edgeScale 1
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 moblurGroup l "    M O T I O N   B L U R" n 1}
+ moblurGroup 0
+ addUserKnob {26 spacer_02 l "" +STARTLINE T " "}
+ addUserKnob {6 toggleMoblur l "Motion Blur" t "Turn motion blur on/off." +STARTLINE}
+ toggleMoblur true
+ addUserKnob {26 spacer_03 l "" +STARTLINE T " "}
+ addUserKnob {41 filter T jitterCTRL_fBm.filter}
+ addUserKnob {26 spacer_misc l "" +STARTLINE T " "}
+ addUserKnob {7 moblurSamples l INVISIBLE +INVISIBLE}
+ moblurSamples 1
+ addUserKnob {3 GUISamples l "GUI Samples" t "How many motion blur samples to display in the GUI. (keep this low for Nuke Script interactivity.)"}
+ GUISamples 1
+ addUserKnob {3 RenderSamples l "    Render Samples" t "How many motion blur samples to use in the render. (the higher the number, the better your result!)" -STARTLINE}
+ RenderSamples 16
+ addUserKnob {26 spacer_misc2 l "" +STARTLINE T " "}
+ addUserKnob {41 shutter T jitterCTRL_fBm.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T jitterCTRL_fBm.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T jitterCTRL_fBm.shuttercustomoffset}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {26 overallOutput l "" -STARTLINE T "Load these values into the curve editor to view the overall animation curve.\n"}
+ addUserKnob {12 outputOverallValue l " " t "The final animation curve of your camera shake."}
+ outputOverallValue {{(toggleJitter==1?jitterCTRL_fBm.translate.x:0)+(toggleShake==1?shakeCTRL_fBm.translate.x:0)+(toggleFloat==1?floatCTRL_fBm.translate.x:0)} {(toggleJitter==1?jitterCTRL_fBm.translate.y:0)+(toggleShake==1?shakeCTRL_fBm.translate.y:0)+(toggleFloat==1?floatCTRL_fBm.translate.y:0)}}
+ addUserKnob {26 ""}
+ addUserKnob {26 info_1 l "" +STARTLINE T "<font color='#777'><b>bm_CameraShake v4.0</b></font><font color='#555'> created by </font><b><a href=\"https://github.com/BenMcEwan/nuke_public\" style=\"color:#777;\">Ben McEwan</a></b>.<br>\n<font color='#555'>Thanks to</font> <a href=\"https://github.com/mileslauridsen\" style=\"color:#777;\">Miles Lauridsen</a><font color='#555'> &</font> <a href=\"https://www.linkedin.com/in/lukas-fabian-6a8184147/\" style=\"color:#777;\">Lukas Fabian</a><font color='#555'> for their contributions.<br>\n<b>Last updated:</b> 29th November, 2020.</font>"}
+ addUserKnob {20 jitterTab l Jitter}
+ addUserKnob {26 ""}
+ addUserKnob {14 jitterTranslate l Translate R 0 100}
+ jitterTranslate {4 3}
+ addUserKnob {7 jitterRotate l Rotate R 0 3}
+ addUserKnob {26 ""}
+ addUserKnob {3 jitterOctaves l Octaves}
+ jitterOctaves 3
+ addUserKnob {7 jitterSpeed l Frequency R 0 5}
+ jitterSpeed 3
+ addUserKnob {3 jitterSeed l Seed}
+ jitterSeed 71526
+ addUserKnob {22 jitterSeedRandomBtn l "  Random Seed  " -STARTLINE T "import random\nnuke.thisNode().knob('jitterSeed').setValue(random.randint(1,99999))"}
+ addUserKnob {26 ""}
+ addUserKnob {26 drg l "" +STARTLINE T "Load these values into the curve editor to view the jitter animation curve.\n"}
+ addUserKnob {12 outputJitterValue l " "}
+ outputJitterValue {{(jitterCTRL_fBm.translate.x)} {(jitterCTRL_fBm.translate.y)}}
+ addUserKnob {26 ""}
+ addUserKnob {20 shakeTab l Shake}
+ addUserKnob {26 ""}
+ addUserKnob {14 shakeTranslate l Translate R 0 100}
+ shakeTranslate {10 7}
+ addUserKnob {7 shakeRotate l Rotate R 0 3}
+ shakeRotate 0.2
+ addUserKnob {26 ""}
+ addUserKnob {3 shakeOctaves l Octaves}
+ shakeOctaves 2
+ addUserKnob {7 shakeSpeed l Frequency R 0 5}
+ shakeSpeed 1.5
+ addUserKnob {3 shakeSeed l Seed}
+ shakeSeed 16572
+ addUserKnob {22 shakeSeedRandomBtn l "  Random Seed  " -STARTLINE T "import random\nnuke.thisNode().knob('shakeSeed').setValue(random.randint(1,99999))"}
+ addUserKnob {26 ""}
+ addUserKnob {26 ehhkmlkjhg l "" +STARTLINE T "Load these values into the curve editor to view the shake animation curve.\n"}
+ addUserKnob {12 outputShakeValue l " "}
+ outputShakeValue {{(shakeCTRL_fBm.translate.x)} {(shakeCTRL_fBm.translate.y)}}
+ addUserKnob {26 ""}
+ addUserKnob {20 floatTab l Float}
+ addUserKnob {26 ""}
+ addUserKnob {14 floatTranslate l Translate R 0 100}
+ floatTranslate {40 32}
+ addUserKnob {7 floatRotate l Rotate R 0 3}
+ floatRotate 7
+ addUserKnob {26 ""}
+ addUserKnob {3 floatOctaves l Octaves}
+ floatOctaves 1
+ addUserKnob {7 floatSpeed l Frequency R 0 5}
+ floatSpeed 0.06
+ addUserKnob {3 floatSeed l Seed}
+ floatSeed 72424
+ addUserKnob {22 floatSeedRandomBtn l "  Random Seed  " -STARTLINE T "import random\nnuke.thisNode().knob('floatSeed').setValue(random.randint(1,99999))"}
+ addUserKnob {26 ""}
+ addUserKnob {26 wd l "" +STARTLINE T "Load these values into the curve editor to view the float animation curve.\n"}
+ addUserKnob {12 outputFloatValue l " "}
+ outputFloatValue {{(floatCTRL_fBm.translate.x)} {(floatCTRL_fBm.translate.y)}}
+ addUserKnob {26 ""}
+}
+ CheckerBoard2 {
+  inputs 0
+  linecolor 0
+  linewidth 60
+  name CheckerBoard1
+  xpos -144
+  ypos -391
+ }
+ Reformat {
+  type "to box"
+  box_width {{Input.width}}
+  box_height {{Input.height}}
+  box_fixed true
+  black_outside true
+  name Reformat1
+  xpos -144
+  ypos -319
+ }
+ Dot {
+  name Dot2
+  xpos -110
+  ypos -273
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos 17
+  ypos -374
+ }
+ Switch {
+  inputs 2
+  which {{switchCheckerboard i}}
+  name Switch1
+  xpos 17
+  ypos -277
+ }
+set N390f5100 [stack 0]
+ Dot {
+  name Dot11
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 298
+  ypos -219
+ }
+ Dot {
+  name Dot12
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 298
+  ypos 365
+ }
+push $N390f5100
+ Dot {
+  name Dot10
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -87
+  ypos -151
+ }
+set N39cfe460 [stack 0]
+ Mirror {
+  Horizontal true
+  name Mirror8
+  xpos -121
+  ypos -133
+ }
+ Transform {
+  translate {{-input.format.w} 0}
+  center {1075 860}
+  shutteroffset centred
+  name Transform8
+  xpos -121
+  ypos -107
+ }
+push $N39cfe460
+ Dot {
+  name Dot9
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -197
+  ypos -151
+ }
+set Naa5f6860 [stack 0]
+ Mirror {
+  Horizontal true
+  Vertical true
+  name Mirror7
+  xpos -228
+  ypos -131
+ }
+ Transform {
+  translate {{-input.format.w} {input.format.h}}
+  center {1075 860}
+  shutteroffset centred
+  name Transform7
+  xpos -228
+  ypos -105
+ }
+push $Naa5f6860
+ Dot {
+  name Dot8
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -315
+  ypos -151
+ }
+set Na97f2e20 [stack 0]
+ Dot {
+  name Dot7
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -425
+  ypos -151
+ }
+set Na9bface0 [stack 0]
+ Dot {
+  name Dot6
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -535
+  ypos -151
+ }
+set Na9bf3650 [stack 0]
+ Dot {
+  name Dot5
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -645
+  ypos -151
+ }
+set Na9ef3900 [stack 0]
+ Dot {
+  name Dot4
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -748
+  ypos -151
+ }
+set Nab7f4f50 [stack 0]
+ Mirror {
+  Vertical true
+  name Mirror2
+  xpos -782
+  ypos -134
+ }
+ Transform {
+  translate {0 {-input.format.h}}
+  center {1075 860}
+  shutteroffset centred
+  name Transform2
+  xpos -782
+  ypos -108
+ }
+push $Na9ef3900
+ Mirror {
+  Horizontal true
+  Vertical true
+  name Mirror3
+  xpos -679
+  ypos -133
+ }
+ Transform {
+  translate {{input.format.w} {-input.format.h}}
+  center {1075 860}
+  shutteroffset centred
+  name Transform3
+  xpos -679
+  ypos -107
+ }
+push $Na9bf3650
+ Mirror {
+  Horizontal true
+  name Mirror4
+  xpos -569
+  ypos -134
+ }
+ Transform {
+  translate {{input.format.w} 0}
+  center {1075 860}
+  shutteroffset centred
+  name Transform4
+  xpos -569
+  ypos -108
+ }
+push $Na9bface0
+ Mirror {
+  Horizontal true
+  Vertical true
+  name Mirror5
+  xpos -459
+  ypos -133
+ }
+ Transform {
+  translate {{input.format.w} {input.format.h}}
+  center {1075 860}
+  shutteroffset centred
+  name Transform5
+  xpos -459
+  ypos -107
+ }
+push 0
+push $Na97f2e20
+ Mirror {
+  Vertical true
+  name Mirror6
+  xpos -349
+  ypos -133
+ }
+ Transform {
+  translate {0 {input.format.h}}
+  center {1075 860}
+  shutteroffset centred
+  name Transform6
+  xpos -349
+  ypos -107
+ }
+push $Nab7f4f50
+ Dot {
+  name Dot3
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -851
+  ypos -151
+ }
+ Mirror {
+  Horizontal true
+  Vertical true
+  name Mirror1
+  xpos -885
+  ypos -133
+ }
+ Transform {
+  translate {{-input.format.w} {-input.format.h}}
+  center {1075 860}
+  shutteroffset centred
+  name Transform1
+  xpos -885
+  ypos -107
+ }
+ Merge2 {
+  inputs 8+1
+  name Merge1
+  xpos -459
+  ypos -49
+ }
+push $N390f5100
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 17
+  ypos -49
+  disable {{edgePulldown==2?0:1}}
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 51
+  ypos 50
+ }
+set Na89f6be0 [stack 0]
+ Transform {
+  translate {{noise((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),2.5,3.5)*jitterTranslate.w*globalAmt*jitterAmt} {noise(2.5,(base2-base2(refFrame))*(jitterSpeed/bfreq)+base2(refFrame),3.5)*jitterTranslate.h*globalAmt*jitterAmt}}
+  rotate {{noise((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),jitterOctaves,.5)*jitterRotate*globalAmt*jitterAmt}}
+  scale {1 1}
+  center {{toggleJitter==1?((noise(noise((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),2.5,3.5))*input.width)+input.width/2):(input.width/2)*globalAmt*jitterAmt} {toggleJitter==1?((noise(noise((base2-base2(refFrame))*(jitterSpeed/bfreq)+base2(refFrame),2.5,3.5))*input.height)+input.height/2):(input.height/2)*globalAmt*jitterAmt}}
+  filter {{jitterCTRL_fBm.filter}}
+  clamp {{jitterCTRL_fBm.clamp}}
+  black_outside {{jitterCTRL_fBm.black_outside}}
+  motionblur {{jitterCTRL_fBm.motionblur}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name jitterCTRL_noise
+  xpos 169
+  ypos 108
+  disable {{!toggleJitter}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{parent.jitterCTRL_fBm.base}}
+  addUserKnob {7 base2}
+  base2 {{parent.jitterCTRL_fBm.base2}}
+  addUserKnob {7 bfreq l "base frequancy"}
+  bfreq {{parent.jitterCTRL_fBm.bfreq}}
+ }
+ Transform {
+  translate {{noise((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),2.5,3.5)*jitterTranslate.w*globalAmt*jitterAmt} {noise(2.5,(base2-base2(refFrame))*(shakeSpeed/bfreq)+base2(refFrame),3.5)*jitterTranslate.h*globalAmt*jitterAmt}}
+  rotate {{noise(((frame-refFrame)*shakeSpeed)+shakeSeed+refFrame,shakeOctaves,.5)*shakeRotate*globalAmt*shakeAmt}}
+  scale {1 1}
+  center {{toggleShake==1?((noise(noise((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),2.5,3.5))*input.width)+input.width/2):(input.width/2)*globalAmt*shakeAmt} {toggleShake==1?((noise(noise((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),2.5,3.5))*input.height)+input.height/2):(input.height/2)*globalAmt*shakeAmt}}
+  filter {{jitterCTRL_fBm.filter}}
+  clamp {{jitterCTRL_fBm.clamp}}
+  black_outside {{jitterCTRL_fBm.black_outside}}
+  motionblur {{jitterCTRL_fBm.motionblur}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name shakeCTRL_noise
+  xpos 169
+  ypos 134
+  disable {{!toggleShake}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{parent.shakeCTRL_fBm.base}}
+  addUserKnob {7 base2}
+  base2 {{parent.shakeCTRL_fBm.base2}}
+  addUserKnob {7 bfreq l "base frequency"}
+  bfreq {{parent.shakeCTRL_fBm.bfreq}}
+ }
+ Transform {
+  translate {{noise((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),2.5,3.5)*jitterTranslate.w*globalAmt*jitterAmt} {noise(2.5,(base2-base2(refFrame))*(floatSpeed/bfreq)+base2(refFrame),3.5)*jitterTranslate.h*globalAmt*jitterAmt}}
+  rotate {{noise((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),floatOctaves,.5)*floatRotate*globalAmt*floatAmt}}
+  scale {1 1}
+  center {{toggleFloat==1?((noise(noise((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),2.5,3.5))*input.width)+input.width/2):(input.width/2)*globalAmt*floatAmt} {toggleFloat==1?((noise(noise((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),2.5,3.5))*input.height)+input.height/2):(input.height/2)*globalAmt*floatAmt}}
+  filter {{jitterCTRL_fBm.filter}}
+  clamp {{jitterCTRL_fBm.clamp}}
+  black_outside {{jitterCTRL_fBm.black_outside}}
+  motionblur {{jitterCTRL_fBm.motionblur}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name floatCTRL_noise
+  xpos 169
+  ypos 158
+  disable {{!toggleFloat}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{parent.floatCTRL_fBm.base}}
+  addUserKnob {7 base2}
+  base2 {{parent.floatCTRL_fBm.base2}}
+  addUserKnob {7 bfreq l "base frequency"}
+  bfreq {{parent.floatCTRL_fBm.bfreq}}
+ }
+ Transform {
+  translate {{edgeTranslate.x} {edgeTranslate.y}}
+  rotate {{edgeRotate}}
+  scale {{edgeScale} {edgeScale}}
+  center {{"width/2 - translate"} {"height/2 - translate"}}
+  filter {{jitterCTRL_fBm.filter}}
+  black_outside {{edgePulldown==0?1:0}}
+  motionblur {{"toggleMoblur==0?0:\$gui?GUISamples:RenderSamples"}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name edgeScale3
+  xpos 169
+  ypos 200
+ }
+push $Na89f6be0
+ Transform {
+  translate {{turbulence((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),2.5,3.5,jitterOctaves,2,.5)*jitterTranslate.w*globalAmt*jitterAmt} {turbulence((base2-base2(refFrame))*(jitterSpeed/bfreq)+base2(refFrame),10.5,11.5,jitterOctaves,2,.5)*jitterTranslate.h*globalAmt*jitterAmt}}
+  rotate {{turbulence((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),20.5,21.5,jitterOctaves,2,.5)*jitterRotate*globalAmt*jitterAmt}}
+  scale {1 1}
+  center {{toggleJitter==1?((turbulence((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),2.5,3.5,jitterOctaves,2,.5)*input.width)+input.width/2):(input.width/2)*globalAmt*jitterAmt} {toggleJitter==1?((turbulence((base2-base2(refFrame))*(jitterSpeed/bfreq)+base2(refFrame),10.5,11.5,jitterOctaves,2,.5)*input.height)+input.height/2):(input.height/2)*globalAmt*jitterAmt}}
+  filter {{jitterCTRL_fBm.filter x1 0}}
+  clamp {{jitterCTRL_fBm.clamp}}
+  black_outside {{jitterCTRL_fBm.black_outside}}
+  motionblur {{jitterCTRL_fBm.motionblur}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name jitterCTRL_turbulence
+  xpos 17
+  ypos 109
+  disable {{!toggleJitter}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{parent.jitterCTRL_fBm.base}}
+  addUserKnob {7 base2}
+  base2 {{parent.jitterCTRL_fBm.base2}}
+  addUserKnob {7 bfreq l "base frequency"}
+  bfreq {{parent.jitterCTRL_fBm.bfreq}}
+ }
+ Transform {
+  translate {{turbulence((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),2.5,3.5,shakeOctaves,2,.5)*shakeTranslate.w*globalAmt*shakeAmt} {turbulence((base2-base2(refFrame))*(shakeSpeed/bfreq)+base2(refFrame),10.5,11.5,shakeOctaves,2,.5)*shakeTranslate.h*globalAmt*shakeAmt}}
+  rotate {{turbulence((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),20.5,21.5,shakeOctaves,2,.5)*shakeRotate*globalAmt*shakeAmt x7 70}}
+  scale {1 1}
+  center {{toggleShake==1?((turbulence((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),2.5,3.5,shakeOctaves,2,.5)*input.width)+input.width/2):(input.width/2)*globalAmt*shakeAmt} {toggleShake==1?((turbulence((base2-base2(refFrame))*(shakeSpeed/bfreq)+base2(refFrame),10.5,11.5,shakeOctaves,2,.5)*input.height)+input.height/2):(input.height/2)*globalAmt*shakeAmt}}
+  filter {{jitterCTRL_fBm.filter x14 2}}
+  clamp {{jitterCTRL_fBm.clamp}}
+  black_outside {{jitterCTRL_fBm.black_outside}}
+  motionblur {{jitterCTRL_fBm.motionblur}}
+  shutter {{jitterCTRL_turbulence.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_turbulence.shuttercustomoffset}}
+  name shakeCTRL_turbulence
+  xpos 17
+  ypos 135
+  disable {{!toggleShake}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{parent.shakeCTRL_fBm.base}}
+  addUserKnob {7 base2}
+  base2 {{parent.shakeCTRL_fBm.base2}}
+  addUserKnob {7 bfreq l "base frequency"}
+  bfreq {{parent.shakeCTRL_fBm.bfreq}}
+ }
+ Transform {
+  translate {{turbulence((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),2.5,3.5,floatOctaves,2,.5)*floatTranslate.w*globalAmt*floatAmt} {turbulence((base2-base2(refFrame))*(floatSpeed/bfreq)+base2(refFrame),10.5,11.5,floatOctaves,2,.5)*floatTranslate.h*globalAmt*floatAmt}}
+  rotate {{turbulence((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),20.5,21.5,floatOctaves,2,.5)*floatRotate*globalAmt*floatAmt}}
+  scale {1 1}
+  center {{toggleFloat==1?((turbulence((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),2.5,3.5,floatOctaves,2,.5)*input.width)+input.width/2):(input.width/2)*globalAmt*floatAmt} {toggleFloat==1?((turbulence((base2-base2(refFrame))*(floatSpeed/bfreq)+base2(refFrame),10.5,11.5,floatOctaves,2,.5)*input.height)+input.height/2):(input.height/2)*globalAmt*floatAmt}}
+  filter {{jitterCTRL_fBm.filter x14 2}}
+  clamp {{jitterCTRL_fBm.clamp}}
+  black_outside {{jitterCTRL_fBm.black_outside}}
+  motionblur {{jitterCTRL_fBm.motionblur}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name floatCTRL_turbulence
+  xpos 17
+  ypos 159
+  disable {{!toggleFloat}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{parent.floatCTRL_fBm.base}}
+  addUserKnob {7 base2}
+  base2 {{parent.floatCTRL_fBm.base2}}
+  addUserKnob {7 bfreq l "base frequency"}
+  bfreq {{parent.floatCTRL_fBm.bfreq}}
+ }
+ Transform {
+  translate {{edgeTranslate.x} {edgeTranslate.y}}
+  rotate {{edgeRotate}}
+  scale {{edgeScale} {edgeScale}}
+  center {{"width/2 - translate"} {"height/2 - translate"}}
+  filter {{jitterCTRL_fBm.filter}}
+  black_outside {{edgePulldown==0?1:0}}
+  motionblur {{"toggleMoblur==0?0:\$gui?GUISamples:RenderSamples"}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name edgeScale2
+  xpos 17
+  ypos 204
+ }
+push $Na89f6be0
+ Transform {
+  translate {{fBm((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),2.5,3.5,jitterOctaves,2,.5)*jitterTranslate.w*globalAmt*jitterAmt} {fBm((base2-base2(refFrame))*(jitterSpeed/bfreq)+base2(refFrame),10.5,11.5,jitterOctaves,2,.5)*jitterTranslate.h*globalAmt*jitterAmt}}
+  rotate {{fBm((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),20.5,21.5,jitterOctaves,2,.5)*jitterRotate*globalAmt*jitterAmt}}
+  scale {1 1}
+  center {{toggleJitter==1?((fBm((base-base(refFrame))*(jitterSpeed/bfreq)+base(refFrame),2.5,3.5,jitterOctaves,2,.5)*input.width)+input.width/2):(input.width/2)*globalAmt*jitterAmt} {toggleJitter==1?((fBm((base2-base2(refFrame))*(jitterSpeed/bfreq)+base2(refFrame),10.5,11.5,jitterOctaves,2,.5)*input.height)+input.height/2):(input.height/2)*globalAmt*jitterAmt}}
+  black_outside {{edgePulldown==0?1:0}}
+  motionblur {{"toggleMoblur==0?0:\$gui?GUISamples:RenderSamples"}}
+  shutteroffset centred
+  name jitterCTRL_fBm
+  selected true
+  xpos -128
+  ypos 103
+  disable {{!toggleJitter}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{frame*bfreq+jitterSeed}}
+  addUserKnob {7 base2}
+  base2 {{frame*bfreq+jitterSeed+100}}
+  addUserKnob {7 bfreq l "base frequency"}
+  bfreq 3
+ }
+ Transform {
+  translate {{fBm((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),2.5,3.5,shakeOctaves,2,.5)*shakeTranslate.w*globalAmt*shakeAmt} {fBm((base2-base2(refFrame))*(shakeSpeed/bfreq)+base2(refFrame),10.5,11.5,shakeOctaves,2,.5)*shakeTranslate.h*globalAmt*shakeAmt}}
+  rotate {{fBm((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),20.5,21.5,shakeOctaves,2,.5)*shakeRotate*globalAmt*shakeAmt x7 70}}
+  scale {1 1}
+  center {{toggleShake==1?((fBm((base-base(refFrame))*(shakeSpeed/bfreq)+base(refFrame),2.5,3.5,shakeOctaves,2,.5)*input.width)+input.width/2):(input.width/2)*globalAmt*shakeAmt} {toggleShake==1?((fBm((base2-base2(refFrame))*(shakeSpeed/bfreq)+base2(refFrame),10.5,11.5,shakeOctaves,2,.5)*input.height)+input.height/2):(input.height/2)*globalAmt*shakeAmt}}
+  filter {{jitterCTRL_fBm.filter x14 2}}
+  clamp {{jitterCTRL_fBm.clamp}}
+  black_outside {{jitterCTRL_fBm.black_outside}}
+  motionblur {{jitterCTRL_fBm.motionblur}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name shakeCTRL_fBm
+  xpos -128
+  ypos 127
+  disable {{!toggleShake}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{frame*bfreq+shakeSeed}}
+  addUserKnob {7 base2}
+  base2 {{frame*bfreq+shakeSeed+100}}
+  addUserKnob {7 bfreq l "base frequancy"}
+  bfreq 1.5
+ }
+ Transform {
+  translate {{fBm((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),2.5,3.5,floatOctaves,2,.5)*floatTranslate.w*globalAmt*floatAmt} {fBm((base2-base2(refFrame))*(floatSpeed/bfreq)+base2(refFrame),10.5,11.5,floatOctaves,2,.5)*floatTranslate.h*globalAmt*floatAmt}}
+  rotate {{fBm((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),20.5,21.5,floatOctaves,2,.5)*floatRotate*globalAmt*floatAmt}}
+  scale {1 1}
+  center {{toggleFloat==1?((fBm((base-base(refFrame))*(floatSpeed/bfreq)+base(refFrame),2.5,3.5,floatOctaves,2,.5)*input.width)+input.width/2):(input.width/2)*globalAmt*floatAmt} {toggleFloat==1?((fBm((base2-base2(refFrame))*(floatSpeed/bfreq)+base2(refFrame),10.5,11.5,floatOctaves,2,.5)*input.height)+input.height/2):(input.height/2)*globalAmt*floatAmt}}
+  filter {{jitterCTRL_fBm.filter x14 2}}
+  clamp {{jitterCTRL_fBm.clamp}}
+  black_outside {{jitterCTRL_fBm.black_outside}}
+  motionblur {{jitterCTRL_fBm.motionblur}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name floatCTRL_fBm
+  xpos -128
+  ypos 151
+  disable {{!toggleFloat}}
+  addUserKnob {20 User}
+  addUserKnob {7 base}
+  base {{frame*bfreq+floatSeed}}
+  addUserKnob {7 base2}
+  base2 {{frame*bfreq+floatSeed+100}}
+  addUserKnob {7 bfreq l "base frequency"}
+  bfreq 0.06
+ }
+ Transform {
+  translate {{edgeTranslate.x} {edgeTranslate.y}}
+  rotate {{edgeRotate}}
+  scale {{edgeScale} {edgeScale}}
+  center {{"width/2 - translate"} {"height/2 - translate"}}
+  filter {{jitterCTRL_fBm.filter}}
+  black_outside {{edgePulldown==0?1:0}}
+  motionblur {{"toggleMoblur==0?0:\$gui?GUISamples:RenderSamples"}}
+  shutter {{jitterCTRL_fBm.shutter}}
+  shutteroffset {{jitterCTRL_fBm.shutteroffset}}
+  shuttercustomoffset {{jitterCTRL_fBm.shuttercustomoffset}}
+  name edgeScale1
+  xpos -128
+  ypos 206
+ }
+ Switch {
+  inputs 3
+  which {{noiseType i}}
+  name Switch4
+  xpos 17
+  ypos 242
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos 17
+  ypos 362
+ }
+ Output {
+  name Output1
+  xpos 17
+  ypos 460
+ }
+end_group
+Group {
+ inputs 0
+ name bm_NoiseGen
+ help "Generates a noise curve."
+ tile_color 0x222222ff
+ selected true
+ xpos -33958
+ ypos -10401
+ addUserKnob {20 optionsTab l Options}
+ addUserKnob {26 ""}
+ addUserKnob {4 pChoice l "Noise Type" M {Random Noise Sine Triangle Square Sawtooth Bounce Blip "" "" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {7 noiseMin l Minimum R -10 0}
+ addUserKnob {7 noiseMax l Maximum R 0 10}
+ noiseMax 1
+ addUserKnob {7 noiseFrequency l Frequency}
+ noiseFrequency 10
+ addUserKnob {7 noiseOffset l "Time Offset" R -10 10}
+ addUserKnob {3 noiseSeed l Seed}
+ noiseSeed 12345
+ addUserKnob {22 randomizeSeedBtn l "  Randomize Seed  " -STARTLINE T "import random\nnuke.thisNode().knob('noiseSeed').setValue(random.randint(1,99999))"}
+ addUserKnob {26 ""}
+ addUserKnob {7 noiseOutput l Output R -10 10}
+ noiseOutput {{"pChoice==0?random((frame+noiseSeed+noiseOffset)/noiseFrequency) * (noiseMax-noiseMin) + noiseMin:\npChoice==1?(noise((frame+noiseSeed+noiseOffset)/noiseFrequency)+1)/2 * (noiseMax-noiseMin) + noiseMin:\npChoice==2?(sin(2*pi*(frame+noiseSeed+noiseOffset)/noiseFrequency)+1)/2 * (noiseMax-noiseMin) + noiseMin:\npChoice==3?(asin(sin(2*pi*(frame+noiseSeed+noiseOffset)/noiseFrequency))/pi+0.5) * (noiseMax-noiseMin) + noiseMin:\npChoice==4?int(sin(2*pi*(frame+noiseSeed+noiseOffset)/noiseFrequency)+1) * (noiseMax-noiseMin) + noiseMin:\npChoice==5?((frame+noiseSeed+noiseOffset) % noiseFrequency)/noiseFrequency * (noiseMax-noiseMin) + noiseMin:\npChoice==6?abs(sin(pi*(frame+noiseSeed + noiseOffset)/noiseFrequency))* (noiseMax-noiseMin) + noiseMin:\npChoice==7?((frame+noiseSeed+(noiseOffset+noiseFrequency)) % (noiseFrequency+(noiseFrequency/5))/(noiseFrequency)) *(noiseFrequency/(noiseFrequency/5)) - (noiseFrequency/(noiseFrequency/5)) >= 0 ? noiseMax : noiseMin:\n0"}}
+ addUserKnob {26 ""}
+ addUserKnob {20 info l Info}
+ addUserKnob {26 ""}
+ addUserKnob {26 versionText l "" +STARTLINE T "\nCreated by Ben McEwan\nwww.benmcewan.com\n\nVersion 2.0\nLast Updated: January 23rd, 2018\n"}
+ addUserKnob {26 ""}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Output {
+  inputs 0
+  name Output1
+  xpos 3
+  ypos 300
+ }
+end_group
+Group {
+ inputs 0
+ name bm_CurveRemapper1
+ help "A simple, albeit handy tool to remap animation curves from arbitrary values to something more sensible & controllable. Made to help tackle the random output from the curve tool."
+ knobChanged "n = nuke.thisNode()\nif n\['curve_input'].isAnimated() == True:\n n\['curve_minimum'].setEnabled(True)\n n\['curve_maximum'].setEnabled(True)\n n\['new_minimum'].setEnabled(True)\n n\['new_maximum'].setEnabled(True)\n n\['helpText_02'].setEnabled(True)\n n\['curve_output'].setEnabled(True)\nelse:\n n\['curve_minimum'].setEnabled(False)\n n\['curve_maximum'].setEnabled(False)\n n\['new_minimum'].setEnabled(False)\n n\['new_maximum'].setEnabled(False)\n n\['helpText_02'].setEnabled(False)\n n\['curve_output'].setEnabled(False)\n"
+ tile_color 0x232323ff
+ selected true
+ xpos -33953
+ ypos -10342
+ addUserKnob {20 userTab l Options}
+ addUserKnob {26 ""}
+ addUserKnob {26 helpText_01 l "" +STARTLINE T "I N P U T  A N I M A T I O N  C U R V E  H E R E :\n"}
+ addUserKnob {7 curve_input l "Animation Curve" t "Paste animation, or expression-link another knob here to start..."}
+ addUserKnob {22 autoMinMax l "Find Minimum and Maximum Curve Values" t "This button will bake the input animation / expression, and find the min & max values of the curve. These values will be auto-set in the appropriate knobs below." T "#Bake expression link.\nname = nuke.thisNode().name()+\".curve_input\"\nnuke.animation(name, \"generate\", (nuke.knob('first_frame'), nuke.knob('last_frame'), \".01\", \"y\", name))\n\n#Adds python into expression knob, which evalutes and finds the answer\nnuke.thisNode().knob('curve_minimum').setExpression(\"\[python min((key.y for key in nuke.thisNode().knob('curve_input').animation(0).keys()))]\")\nnuke.thisNode().knob('curve_maximum').setExpression(\"\[python max((key.y for key in nuke.thisNode().knob('curve_input').animation(0).keys()))]\")\n\n#Remove the expression\nnuke.thisNode().knob('curve_minimum').clearAnimated()\nnuke.thisNode().knob('curve_maximum').clearAnimated()" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {7 curve_minimum l "Curve Minimum" t "Minimum value of the input curve.\n(use the button above to auto-set this value)" +DISABLED}
+ addUserKnob {7 curve_maximum l "Curve Maximum" t "Maximum value of the input curve.\n(use the button above to auto-set this value)" +DISABLED}
+ curve_maximum 1
+ addUserKnob {7 new_minimum l "New Minimum" t "Set the new minimum value of the curve." +DISABLED}
+ addUserKnob {7 new_maximum l "New Maximum" t "Set the new maxmum value of the curve." +DISABLED}
+ new_maximum 1
+ addUserKnob {26 ""}
+ addUserKnob {26 helpText_02 l "" +STARTLINE +DISABLED T "O U T P U T  R E M A P P E D  C U R V E  F R O M  H E R E :\n"}
+ addUserKnob {7 curve_output l Output t "Your remapped animation curve!" +DISABLED}
+ curve_output {{lerp(curve_minimum,new_minimum,curve_maximum,new_maximum,curve_input)}}
+ addUserKnob {26 ""}
+ addUserKnob {26 version_info l "" +STARTLINE T "<font color='#777'><b>bm_CurveRemapper v2.0</b></font><font color='#555'> created by </font><b><a href=\"https://github.com/BenMcEwan/nuke_public\" style=\"color:#777;\">Ben McEwan</a></b>.<br>\n<font color='#555'><b>Last updated:</b> 28th August, 2020.</font>"}
+}
+ Output {
+  inputs 0
+  name Output1
+  selected true
+  xpos -651
+  ypos -209
+ }
+end_group
+push $cut_paste_input
+Group {
+ name bm_OpticalGlow
+ help "bm_OpticalGlow uses common algorithms to produce an optically-correct exponential glow.\n\nCompletely rebuilt from v3.1 to be light-weight and easier to use."
+ tile_color 0x222222ff
+ selected true
+ xpos -33949
+ ypos -10267
+ addUserKnob {20 Options}
+ addUserKnob {52 algorithm_code l "" +STARTLINE T "def change_algorithm():\n\n\t# Get this node\n\tnode = nuke.thisNode()\n\n\t# Number sequences to drive iterative blur values.\n\talgorithm_double = \[2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024]\n\talgorithm_fibonacci = \[3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377]\n\n\t# Set algorithm based off user selection\n\tif node.knob('algorithm_choice').value() == \"Double\":\n\t\talgorithm = algorithm_double\n\telif node.knob('algorithm_choice').value() == \"Double\":\n\t\talgorithm = algorithm_fibonacci\n\telse:\n\t\tnuke.message(\"No algorithm selected\")\n\t\tbreak\n\n\t# Dive inside the ground and get the blur node controlling the glow.\n\tnuke.toNode(\"Group1\").begin()\n\tglow_blur = nuke.toNode(\"glow_blur\")\n\n\t# Make some space in the script editor...\n\tprint \"\\n\\n\\n\"\n\n\t# Find the glow_blur's keyframes\n\tkeyframes = glow_blur.knob('size').a.nimation(0).keys()\n\titeration = 0\n\n\t# Loop through the pre-set 11 keyframes and set the values to correspond with the number sequences we defined above.\n\tfor keyframe in keyframes:\n\t    n.knob('size').animation(0).setKey(keyframe.x, algorithm\[iteration])\n\t    iteration = iteration+1\n\n\t    # Print what is going on for visibility.\n\t    print \"keyframe at frame %s changed to value: %s\" % (round(keyframe.x, 1), round(keyframe.y, 1))\n\n\t# End being inside the group.\n\tnuke.toNode(\"Group1\").end()" +STARTLINE}
+ addUserKnob {4 algorithm_choice l "Glow Math" t "Glow is built with a sequence of exponentially-increasing sub-frame values on a Blur node, which are then combined with a TimeBlur to produce the end result." M {Inverse-Square Fibonacci Double Distributed "" "" "" "" "" "" ""}}
+ addUserKnob {26 spacer2 l "" -STARTLINE T "  "}
+ addUserKnob {6 effect_only l "effect only" t "Display the glow only." -STARTLINE}
+ addUserKnob {3 glow_divisions l Divisions t "How many glow layers to add up. A higher number will result in a smoother glow, but a slower processing time."}
+ glow_divisions 10
+ addUserKnob {26 spacer1 l "" -STARTLINE T "             "}
+ addUserKnob {6 use_threshold l "use luminance threshold" t "Enable the luminance threshold option, which allows you to isolate and only glow the highlights." -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {20 threshold l "Luminance Threshold Selector" n 1}
+ threshold 0
+ addUserKnob {6 view_luminance l "view luminance threshold" t "Internally shuffles the alpha to RGB for easy viewing." +STARTLINE}
+ addUserKnob {41 range l "" t "Use this to isolate the highlights in your image." +STARTLINE T Keyer1.range}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {7 glow_size l size t "Radius of the blur." R 0 300}
+ glow_size 200
+ addUserKnob {7 glow_intensity l intensity t "A multiplier to control the brightness of your blur." R 0 5}
+ glow_intensity 1
+ addUserKnob {19 glow_gamma l gamma t "Increase gamma to pump up the midtones.\n\nChanging the gamma will change the \"glow math\" algorithm, resulting in a less photorealistic glow. You probably only want to use this subtly in foggy, night-time shots." R 0 2}
+ glow_gamma 1
+ addUserKnob {6 glow_gamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 aspect t "Change the aspect ratio of your glow.\n• Higher value = horizontal stretch\n• Lower value = vertical stretch" R 0.5 2}
+ aspect 1
+ addUserKnob {26 ""}
+ addUserKnob {6 crop_bbox l "crop bbox to format" t "If the glow gets too big, your bbox might become crazy. Enabling this option will ensure your bbox is cropped to your format + any overscan you set." +STARTLINE}
+ addUserKnob {7 overscan t "If you use the \"crop bbox to format\" option, and then add lens distortion to the end of your comp, the glow won't reach the edge of your format.\n\nUse this value to increase the bbox size, as necessary." R 0 250}
+ overscan 100
+ addUserKnob {26 spacer l "" +STARTLINE T " "}
+ addUserKnob {7 mix}
+ mix 1
+ addUserKnob {26 ""}
+ addUserKnob {26 info l "" +STARTLINE T "<font color='#777'><b>bm_OpticalGlow v4.2</b></font><font color='#555'> created by </font><b><a href=\"https://github.com/BenMcEwan/nuke_public\" style=\"color:#777;\">Ben McEwan</a></b>.<br>\n<font color='#555'><b>Last updated:</b> 10th August, 2023.</font>"}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -260
+  ypos -217
+ }
+ NoTimeBlur {
+  name NoTimeBlur1
+  xpos -260
+  ypos -191
+ }
+ Dot {
+  name Dot2
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -226
+  ypos -115
+ }
+set N70861f60 [stack 0]
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos -170
+  ypos -50
+ }
+set Nf6cf7b10 [stack 0]
+push $Nf6cf7b10
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.red
+  from1 rgba.alpha
+  to1 rgba.green
+  from2 rgba.alpha
+  to2 rgba.blue
+  name Copy1
+  xpos -170
+  ypos -14
+ }
+ Dot {
+  name Dot6
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -136
+  ypos 365
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 535
+  ypos -218
+  number 2
+ }
+ NoTimeBlur {
+  name NoTimeBlur3
+  xpos 535
+  ypos -192
+ }
+ Expression {
+  expr3 a
+  name Expression1
+  xpos 535
+  ypos -166
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 569
+  ypos 339
+ }
+push $Nf6cf7b10
+ Input {
+  inputs 0
+  name area
+  xpos 27
+  ypos -218
+  number 1
+ }
+ NoTimeBlur {
+  name NoTimeBlur2
+  xpos 27
+  ypos -192
+ }
+ Expression {
+  expr3 a
+  name Expression2
+  xpos 27
+  ypos -166
+ }
+push $N70861f60
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge3
+  xpos 27
+  ypos -118
+  disable {{"!\[exists parent.input1]"}}
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox B
+  name Merge5
+  xpos 27
+  ypos -44
+  disable {{!use_threshold}}
+ }
+ Dot {
+  name Dot11
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 61
+  ypos 47
+ }
+set Na3ef0100 [stack 0]
+ Dot {
+  name Dot10
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 177
+  ypos 47
+ }
+set Na3fffb10 [stack 0]
+ Dot {
+  name Dot9
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 283
+  ypos 47
+ }
+set Na40ff160 [stack 0]
+ Dot {
+  name Dot8
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 399
+  ypos 47
+ }
+ Blur {
+  channels rgba
+  size {{aspect>1?curve(((frame-1)%(1-1+1))+1)*glow_size/25*aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 2.5 x1.100000024 7.5 15 x1.299999952 35 x1.399999976 70 150 350 750 x1.799999952 1250 x1.899999976 1500 2000} {aspect<1?curve(((frame-1)%(1-1+1))+1)*glow_size/25/aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 2.5 x1.100000024 7.5 15 x1.299999952 35 x1.399999976 70 150 350 750 x1.799999952 1250 x1.899999976 1500 2000}}
+  crop false
+  name glow_distributed
+  xpos 365
+  ypos 95
+ }
+push $Na40ff160
+ Blur {
+  channels rgba
+  size {{aspect>1?curve(((frame-1)%(1-1+1))+1)*glow_size/25*aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 2 x1.100000024 4 8 x1.299999952 16 x1.399999976 32 64 128 256 x1.799999952 512 x1.899999976 1024 2048} {aspect<1?curve(((frame-1)%(1-1+1))+1)*glow_size/25/aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 2 x1.100000024 4 8 x1.299999952 16 x1.399999976 32 64 128 256 x1.799999952 512 x1.899999976 1024 2048}}
+  crop false
+  name glow_double
+  xpos 249
+  ypos 95
+ }
+push $Na3fffb10
+ Blur {
+  channels rgba
+  size {{aspect>1?curve(((frame-1)%(1-1+1))+1)*glow_size/25*aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 3 x1.100000024 5 8 x1.299999952 13 x1.399999976 21 34 55 89 x1.799999952 144 x1.899999976 233 377} {aspect<1?curve(((frame-1)%(1-1+1))+1)*glow_size/25/aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 3 x1.100000024 5 8 x1.299999952 13 x1.399999976 21 34 55 89 x1.799999952 144 x1.899999976 233 377}}
+  crop false
+  name glow_fibonacci
+  xpos 143
+  ypos 95
+ }
+push $Na3ef0100
+ Blur {
+  channels rgba
+  size {{aspect>1?curve(((frame-1)%(1-1+1))+1)*glow_size/25*aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 1 x1.100000024 4 9 x1.299999952 16 x1.399999976 25 36 49 64 x1.799999952 81 x1.899999976 100 121} {aspect<1?curve(((frame-1)%(1-1+1))+1)*glow_size/25/aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 1 x1.100000024 4 9 x1.299999952 16 x1.399999976 25 36 49 64 x1.799999952 81 x1.899999976 100 121}}
+  crop false
+  name glow_inverseSquare
+  xpos 27
+  ypos 93
+ }
+ Switch {
+  inputs 4
+  which {{algorithm_choice}}
+  name Switch2
+  xpos 189
+  ypos 152
+ }
+ TimeBlur {
+  divisions {{glow_divisions}}
+  shutteroffset start
+  shuttercustomoffset 0.5
+  name TimeBlur1
+  xpos 27
+  ypos 202
+ }
+ Multiply {
+  value {{glow_intensity**2/2}}
+  name Multiply2
+  xpos 27
+  ypos 240
+ }
+ Gamma {
+  value {{glow_gamma}}
+  name Gamma1
+  xpos 27
+  ypos 276
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox B
+  name Merge4
+  xpos 27
+  ypos 336
+  disable {{"!\[exists parent.input2]"}}
+ }
+set Na79f6a00 [stack 0]
+ Dot {
+  name Dot5
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 61
+  ypos 405
+ }
+push $Na79f6a00
+push $N70861f60
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge1
+  xpos -260
+  ypos 336
+ }
+ Switch {
+  inputs 3
+  which {{"view_luminance == 1?2:effect_only"}}
+  name Switch1
+  xpos -260
+  ypos 402
+ }
+ Crop {
+  box {{-overscan} {-overscan} {Input.width+overscan} {Input.height+overscan}}
+  name Crop1
+  xpos -260
+  ypos 469
+  disable {{!crop_bbox}}
+ }
+push $N70861f60
+ Dot {
+  name Dot4
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -361
+  ypos -115
+ }
+ Dot {
+  name Dot3
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -361
+  ypos 511
+ }
+ Dissolve {
+  inputs 2
+  which {{parent.mix}}
+  name Dissolve2
+  xpos -260
+  ypos 502
+ }
+ Output {
+  name Output1
+  xpos -260
+  ypos 567
+ }
+end_group
+push $cut_paste_input
+Group {
+ name bm_OpticalLightwrap
+ help "bm_OpticalLightwrap uses common algorithms to produce an optically-correct exponential-glow-based lightwrap.\n\nCompletely rebuilt from v3.1 to be light-weight and easier to use."
+ tile_color 0x222222ff
+ selected true
+ xpos -33945
+ ypos -10198
+ addUserKnob {20 Options}
+ addUserKnob {52 algorithm_code l "" +STARTLINE T "def change_algorithm():\n\n\t# Get this node\n\tnode = nuke.thisNode()\n\n\t# Number sequences to drive iterative blur values.\n\talgorithm_double = \[2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024]\n\talgorithm_fibonacci = \[3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377]\n\n\t# Set algorithm based off user selection\n\tif node.knob('algorithm_choice').value() == \"Double\":\n\t\talgorithm = algorithm_double\n\telif node.knob('algorithm_choice').value() == \"Double\":\n\t\talgorithm = algorithm_fibonacci\n\telse:\n\t\tnuke.message(\"No algorithm selected\")\n\t\tbreak\n\n\t# Dive inside the ground and get the blur node controlling the glow.\n\tnuke.toNode(\"Group1\").begin()\n\tglow_blur = nuke.toNode(\"glow_blur\")\n\n\t# Make some space in the script editor...\n\tprint \"\\n\\n\\n\"\n\n\t# Find the glow_blur's keyframes\n\tkeyframes = glow_blur.knob('size').a.nimation(0).keys()\n\titeration = 0\n\n\t# Loop through the pre-set 11 keyframes and set the values to correspond with the number sequences we defined above.\n\tfor keyframe in keyframes:\n\t    n.knob('size').animation(0).setKey(keyframe.x, algorithm\[iteration])\n\t    iteration = iteration+1\n\n\t    # Print what is going on for visibility.\n\t    print \"keyframe at frame %s changed to value: %s\" % (round(keyframe.x, 1), round(keyframe.y, 1))\n\n\t# End being inside the group.\n\tnuke.toNode(\"Group1\").end()" +STARTLINE}
+ addUserKnob {4 algorithm_choice l "Glow Math" t "Glow is built with a sequence of exponentially-increasing sub-frame values on a Blur node, which are then combined with a TimeBlur to produce the end result." M {Inverse-Square Fibonacci Double Distributed "" "" "" "" "" "" ""}}
+ addUserKnob {26 spacer2 l "" -STARTLINE T "  "}
+ addUserKnob {6 effect_only l "effect only" t "Display the glow only." -STARTLINE}
+ addUserKnob {3 glow_divisions l Divisions t "How many glow layers to add up. A higher number will result in a smoother glow, but a slower processing time."}
+ glow_divisions 10
+ addUserKnob {26 spacer1 l "" -STARTLINE T "             "}
+ addUserKnob {6 use_threshold l "use luminance threshold" t "Enable the luminance threshold option, which allows you to isolate and only glow the highlights." -STARTLINE}
+ use_threshold true
+ addUserKnob {26 ""}
+ addUserKnob {20 threshold l "Luminance Threshold Selector" n 1}
+ threshold 0
+ addUserKnob {6 view_luminance l "view luminance threshold" t "Internally shuffles the alpha to RGB for easy viewing." +STARTLINE}
+ addUserKnob {41 range l "" t "Use this to isolate the highlights in your image." +STARTLINE T Keyer1.range}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {14 preblur_BG l "pre-blur BG" t "Blur the background before the lightwrap bets generated. This can help remove any high-contrast, detailed edges ghosting through." R 0 100}
+ preblur_BG 20
+ addUserKnob {26 ""}
+ addUserKnob {7 glow_size l size t "Radius of the blur." R 0 300}
+ glow_size 200
+ addUserKnob {7 glow_intensity l intensity t "A multiplier to control the brightness of your blur." R 0 5}
+ glow_intensity 1
+ addUserKnob {19 glow_gamma l gamma t "Increase gamma to pump up the midtones.\n\nChanging the gamma will change the \"glow math\" algorithm, resulting in a less photorealistic glow. You probably only want to use this subtly in foggy, night-time shots." R 0 2}
+ glow_gamma 1
+ addUserKnob {6 glow_gamma_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 aspect t "Change the aspect ratio of your glow.\n• Higher value = horizontal stretch\n• Lower value = vertical stretch" R 0.5 2}
+ aspect 1
+ addUserKnob {26 ""}
+ addUserKnob {7 mix}
+ mix 1
+ addUserKnob {26 ""}
+ addUserKnob {26 info l "" +STARTLINE T "<font color='#777'><b>bm_OpticalLightwrap v4.1</b></font><font color='#555'> created by </font><b><a href=\"https://github.com/BenMcEwan/nuke_public\" style=\"color:#777;\">Ben McEwan</a></b>.<br>\n<font color='#555'><b>Last updated:</b> 9th September, 2021.</font>"}
+}
+ Input {
+  inputs 0
+  name fg
+  xpos 585
+  ypos -246
+ }
+ NoTimeBlur {
+  name NoTimeBlur3
+  xpos 585
+  ypos -220
+ }
+ Expression {
+  expr3 a
+  name Expression3
+  xpos 585
+  ypos -178
+ }
+ Dot {
+  name Dot12
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 619
+  ypos -17
+ }
+set Nf40f1790 [stack 0]
+ Dot {
+  name Dot13
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 619
+  ypos 316
+ }
+set Na92fcbb0 [stack 0]
+ Dot {
+  name Dot14
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 619
+  ypos 522
+ }
+set Na75f5090 [stack 0]
+ Dot {
+  name Dot15
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 619
+  ypos 598
+ }
+set N9d6ff930 [stack 0]
+ Input {
+  inputs 0
+  name bg
+  xpos -259
+  ypos -252
+  number 1
+ }
+ NoTimeBlur {
+  name NoTimeBlur1
+  xpos -259
+  ypos -226
+ }
+ Blur {
+  channels rgba
+  size {{preblur_BG} {preblur_BG}}
+  name Blur1
+  xpos -259
+  ypos -167
+ }
+ Dot {
+  name Dot2
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -226
+  ypos -115
+ }
+set N2caed400 [stack 0]
+ Keyer {
+  operation "luminance key"
+  range {0.5 1 1 1}
+  name Keyer1
+  xpos -260
+  ypos -50
+ }
+set N2caf2200 [stack 0]
+push $N2caf2200
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.red
+  from1 rgba.alpha
+  to1 rgba.green
+  from2 rgba.alpha
+  to2 rgba.blue
+  name Copy1
+  xpos -260
+  ypos -14
+ }
+ Dot {
+  name Dot6
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -226
+  ypos 418
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 796
+  ypos -246
+  number 3
+ }
+ NoTimeBlur {
+  name NoTimeBlur4
+  selected true
+  xpos 796
+  ypos -220
+ }
+ Expression {
+  expr3 a
+  name Expression1
+  xpos 796
+  ypos -182
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 830
+  ypos 351
+ }
+push $Na92fcbb0
+push $Nf40f1790
+push $N2caf2200
+ Input {
+  inputs 0
+  name area
+  xpos 27
+  ypos -252
+  number 2
+ }
+ NoTimeBlur {
+  name NoTimeBlur2
+  xpos 27
+  ypos -226
+ }
+ Expression {
+  expr3 a
+  name Expression2
+  xpos 27
+  ypos -194
+ }
+push $N2caed400
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge3
+  xpos 27
+  ypos -118
+  disable {{"!\[exists parent.input2]"}}
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox B
+  name Merge5
+  xpos 27
+  ypos -44
+  disable {{!use_threshold}}
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  bbox B
+  name Merge8
+  xpos 27
+  ypos -20
+ }
+ Dot {
+  name Dot11
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 61
+  ypos 60
+ }
+set N9c2f1940 [stack 0]
+ Dot {
+  name Dot10
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 177
+  ypos 60
+ }
+set N9c2f6900 [stack 0]
+ Dot {
+  name Dot9
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 283
+  ypos 60
+ }
+set N9c2fb930 [stack 0]
+ Dot {
+  name Dot8
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 399
+  ypos 60
+ }
+ Blur {
+  channels rgba
+  size {{aspect>1?curve(((frame-1)%(1-1+1))+1)*glow_size/25*aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 2.5 x1.100000024 7.5 15 x1.299999952 35 x1.399999976 70 150 350 750 x1.799999952 1250 x1.899999976 1500 2000} {aspect<1?curve(((frame-1)%(1-1+1))+1)*glow_size/25/aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 x1 2.5 x1.100000024 7.5 15 x1.299999952 35 x1.399999976 70 150 350 750 x1.799999952 1250 x1.899999976 1500 2000}}
+  crop false
+  name glow_distributed
+  xpos 365
+  ypos 108
+ }
+push $N9c2fb930
+ Blur {
+  channels rgba
+  size {{aspect>1?curve(((frame-1)%(1-1+1))+1)*glow_size/25*aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 i x1 2 x1.100000024 4 8 x1.299999952 16 x1.399999976 32 64 128 256 x1.799999952 512 x1.899999976 1024 2048} {aspect<1?curve(((frame-1)%(1-1+1))+1)*glow_size/25/aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 i x1 2 x1.100000024 4 8 x1.299999952 16 x1.399999976 32 64 128 256 x1.799999952 512 x1.899999976 1024 2048}}
+  crop false
+  name glow_double
+  xpos 249
+  ypos 108
+ }
+push $N9c2f6900
+ Blur {
+  channels rgba
+  size {{aspect>1?curve(((frame-1)%(1-1+1))+1)*glow_size/25*aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 i x1 3 x1.100000024 5 8 x1.299999952 13 x1.399999976 21 34 55 89 x1.799999952 144 x1.899999976 233 377} {aspect<1?curve(((frame-1)%(1-1+1))+1)*glow_size/25/aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 i x1 3 x1.100000024 5 8 x1.299999952 13 x1.399999976 21 34 55 89 x1.799999952 144 x1.899999976 233 377}}
+  crop false
+  name glow_fibonacci
+  xpos 143
+  ypos 108
+ }
+push $N9c2f1940
+ Blur {
+  channels rgba
+  size {{aspect>1?curve(((frame-1)%(1-1+1))+1)*glow_size/25*aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 i x1 1 x1.100000024 4 9 x1.299999952 16 x1.399999976 25 36 49 64 x1.799999952 81 x1.899999976 100 121} {aspect<1?curve(((frame-1)%(1-1+1))+1)*glow_size/25/aspect:curve(((frame-1)%(1-1+1))+1)*glow_size/25 i x1 1 x1.100000024 4 9 x1.299999952 16 x1.399999976 25 36 49 64 x1.799999952 81 x1.899999976 100 121}}
+  crop false
+  name glow_inverseSquare
+  xpos 27
+  ypos 106
+ }
+ Switch {
+  inputs 4
+  which {{algorithm_choice}}
+  name Switch2
+  xpos 27
+  ypos 166
+ }
+ TimeBlur {
+  divisions {{glow_divisions}}
+  shutteroffset start
+  shuttercustomoffset 0.5
+  name TimeBlur1
+  xpos 27
+  ypos 202
+ }
+ Multiply {
+  value {{glow_intensity**2/2}}
+  name Multiply2
+  xpos 27
+  ypos 240
+ }
+ Gamma {
+  value {{glow_gamma}}
+  name Gamma1
+  xpos 27
+  ypos 276
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge7
+  xpos 27
+  ypos 313
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox B
+  name Merge4
+  xpos 27
+  ypos 348
+  disable {{"!\[exists parent.input3]"}}
+ }
+ Dot {
+  name Dot5
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 61
+  ypos 405
+ }
+set N9b8f0350 [stack 0]
+push $N9b8f0350
+push $Na75f5090
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels rgb
+  name Merge1
+  xpos 266
+  ypos 519
+ }
+ Switch {
+  inputs 3
+  which {{"view_luminance == 1?2:effect_only"}}
+  name Switch1
+  xpos -260
+  ypos 519
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -260
+  ypos 595
+ }
+push $N9d6ff930
+ Dissolve {
+  inputs 2
+  which {{parent.mix}}
+  name Dissolve2
+  xpos -260
+  ypos 619
+ }
+ Output {
+  name Output1
+  xpos -260
+  ypos 684
+ }
+end_group
