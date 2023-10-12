@@ -1,0 +1,68 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Group {
+ name PrefProject
+ selected true
+ xpos -1176
+ ypos 203
+ addUserKnob {20 User}
+ addUserKnob {3 ProjFrame l "Projection Frame"}
+}
+ Input {
+  inputs 0
+  name projection_Image
+  xpos 441
+  ypos 215
+  number 1
+ }
+ Input {
+  inputs 0
+  name Pref
+  xpos 259
+  ypos 199
+ }
+set N228c4350 [stack 0]
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha black
+  name Shuffle1
+  xpos 325
+  ypos 300
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge1
+  xpos 435
+  ypos 300
+ }
+push $N228c4350
+ Dot {
+  name Dot2
+  xpos 293
+  ypos 265
+ }
+set Nc2fe670 [stack 0]
+ FrameHold {
+  firstFrame {{parent.ProjFrame.main i}}
+  name FrameHold1
+  xpos 152
+  ypos 329
+ }
+push $Nc2fe670
+ ieSparseMapping {
+  inputs 3
+  name ieSparseMapping1_1
+  selected true
+  xpos 307
+  ypos 409
+ }
+ Output {
+  name Output1
+  xpos 307
+  ypos 509
+ }
+end_group
