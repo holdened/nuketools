@@ -1,0 +1,132 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name " "
+ tile_color 0x444444ff
+ label <center>TRANSFORMS
+ note_font Arial
+ note_font_size 60
+ note_font_color 0x7e7e7eff
+ selected true
+ xpos -33890
+ ypos -11347
+ bdwidth 415
+ bdheight 514
+ z_order -1
+}
+push $cut_paste_input
+Dot {
+ name Dot50
+ label "  CG Render"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -33791
+ ypos -11720
+}
+Dot {
+ name Dot51
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -33791
+ ypos -11580
+}
+set N909fab20 [stack 0]
+Group {
+ name STMapCreator1
+ selected true
+ xpos -33819
+ ypos -11440
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 175
+  ypos -103
+ }
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha black
+  name Shuffle4
+  label "\[value alpha] > \[value out]"
+  xpos 175
+  ypos -63
+ }
+ Expression {
+  expr0 (x+.5)/width
+  expr1 (y+.5)/height
+  name ST_map_creator
+  selected true
+  xpos 175
+  ypos -27
+ }
+ Output {
+  name Output1
+  xpos 175
+  ypos 73
+ }
+end_group
+Transform {
+ center {3335 1137}
+ shutteroffset centred
+ name Transform1
+ selected true
+ xpos -33819
+ ypos -11080
+}
+Transform {
+ center {3335 1137}
+ shutteroffset centred
+ name Transform2
+ selected true
+ xpos -33819
+ ypos -11054
+}
+Transform {
+ center {3335 1137}
+ shutteroffset centred
+ name Transform3
+ selected true
+ xpos -33819
+ ypos -11028
+}
+Transform {
+ center {3335 1137}
+ shutteroffset centred
+ name Transform4
+ selected true
+ xpos -33819
+ ypos -11002
+}
+push $N909fab20
+Dot {
+ name Dot52
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -33091
+ ypos -11580
+}
+STMap {
+ inputs 2
+ uv rgb
+ name STMap1
+ selected true
+ xpos -33119
+ ypos -11008
+}
+Dot {
+ name OUT
+ label "  OUT"
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -33091
+ ypos -10745
+}
