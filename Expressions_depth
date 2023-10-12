@@ -1,0 +1,172 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode26
+ tile_color 0xaaaaaa00
+ label "WORLD / CAMERA SPACE CONVERSION"
+ note_font " Bold"
+ note_font_size 100
+ selected true
+ xpos -34187
+ ypos -12222
+ bdwidth 1824
+ bdheight 1225
+}
+push $cut_paste_input
+Expression {
+ expr3 a>0.1
+ name Alpha_Grainmax
+ selected true
+ xpos -33858
+ ypos -10709
+}
+Camera2 {
+ inputs 0
+ translate {-52.25258636 22.00560188 17.90933609}
+ rotate {-18.56237779 -48.267936 19.64103541}
+ name Camera1
+ selected true
+ xpos -34037
+ ypos -11755
+}
+Sphere {
+ inputs 0
+ translate {0.1999999732 0.7 -32.40000153}
+ uniform_scale 5
+ name Sphere1
+ selected true
+ xpos -33848
+ ypos -11952
+}
+Normals {
+ name Normals1
+ selected true
+ xpos -33848
+ ypos -11847
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ overscan {193 54}
+ shutteroffset centred
+ motion_vectors_type distance
+ output_shader_vectors true
+ N_channel rgb
+ name ScanlineRender1
+ selected true
+ xpos -33848
+ ypos -11735
+}
+Dot {
+ name Dot58
+ selected true
+ xpos -33820
+ ypos -11639
+}
+set N8a7f2ef0 [stack 0]
+Dot {
+ name Dot140
+ label OUT_NORMAL_WORLD
+ note_font " Bold"
+ note_font_size 45
+ selected true
+ xpos -33500
+ ypos -11639
+}
+push $N8a7f2ef0
+ColorMatrix {
+ matrix {
+     {{parent.Camera1.world_matrix.0} {parent.Camera1.world_matrix.1} {parent.Camera1.world_matrix.2}}
+     {{parent.Camera1.world_matrix.4} {parent.Camera1.world_matrix.5} {parent.Camera1.world_matrix.6}}
+     {{parent.Camera1.world_matrix.8} {parent.Camera1.world_matrix.9} {parent.Camera1.world_matrix.10}}
+   }
+ invert true
+ name ColorMatrix2
+ selected true
+ xpos -33848
+ ypos -11495
+}
+Dot {
+ name Dot155
+ selected true
+ xpos -33820
+ ypos -11371
+}
+set N8a6faf90 [stack 0]
+Dot {
+ name Dot156
+ label OUT_NORMAL_CAMERA
+ note_font " Bold"
+ note_font_size 45
+ selected true
+ xpos -33502
+ ypos -11371
+}
+push $N8a6faf90
+ColorMatrix {
+ matrix {
+     {{parent.Camera1.world_matrix.0} {parent.Camera1.world_matrix.1} {parent.Camera1.world_matrix.2}}
+     {{parent.Camera1.world_matrix.4} {parent.Camera1.world_matrix.5} {parent.Camera1.world_matrix.6}}
+     {{parent.Camera1.world_matrix.8} {parent.Camera1.world_matrix.9} {parent.Camera1.world_matrix.10}}
+   }
+ name ColorMatrix3
+ selected true
+ xpos -33848
+ ypos -11153
+}
+Dot {
+ name Dot157
+ label OUT_NORMAL_WORLD
+ note_font " Bold"
+ note_font_size 45
+ selected true
+ xpos -33497
+ ypos -11155
+}
+Camera2 {
+ inputs 0
+ name Camera3
+ selected true
+ xpos -33490
+ ypos -11845
+}
+Expression {
+ inputs 0
+ channel0 depth
+ expr0 deep.front
+ channel1 none
+ name deepToDepth2
+ selected true
+ xpos -33861
+ ypos -10883
+}
+Expression {
+ inputs 0
+ channel0 depth
+ expr0 depth.Z!=0?1/depth.Z:0
+ channel1 none
+ name depth_Z
+ selected true
+ xpos -33859
+ ypos -10826
+}
+Expression {
+ inputs 0
+ channel3 depth
+ expr3 "z > 0 ? 1/z : 0"
+ name depth_Z_2
+ selected true
+ xpos -33858
+ ypos -10773
+}
+Expression {
+ inputs 0
+ channel0 depth
+ expr0 1/depth.Z
+ name Scanline_depth
+ selected true
+ xpos -33861
+ ypos -10650
+}
