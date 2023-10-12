@@ -1,0 +1,1506 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name " 2"
+ tile_color 0x444444ff
+ label "<center>WholeFrame\nRetime"
+ note_font Arial
+ note_font_size 42
+ note_font_color 0xc1c1c1ff
+ selected true
+ xpos -38500
+ ypos -10685
+ bdwidth 258
+ bdheight 301
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name " 22"
+ tile_color 0x444444ff
+ label "<center>Denoised Plate \nWithout Balance Grade"
+ note_font Arial
+ note_font_size 42
+ note_font_color 0xc1c1c1ff
+ selected true
+ xpos -37587
+ ypos -11332
+ bdwidth 501
+ bdheight 400
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name " 3"
+ tile_color 0x444444ff
+ label "<center>Edit Ref"
+ note_font Arial
+ note_font_size 42
+ note_font_color 0xc1c1c1ff
+ selected true
+ xpos -36924
+ ypos -9510
+ bdwidth 233
+ bdheight 297
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name " "
+ tile_color 0x5f426eff
+ label <center>REPO
+ note_font Arial
+ note_font_size 60
+ note_font_color 0xaf75baff
+ selected true
+ xpos -37482
+ ypos -10138
+ bdwidth 274
+ bdheight 695
+}
+BackdropNode {
+ inputs 0
+ name " 1"
+ tile_color 0x999999ff
+ label <center>RETIME
+ note_font Arial
+ note_font_size 60
+ note_font_color 0xb6b139ff
+ selected true
+ xpos -37479
+ ypos -10721
+ bdwidth 279
+ bdheight 384
+}
+BackdropNode {
+ inputs 0
+ name " 7"
+ tile_color 0x191919ff
+ label "\n      INSTRUCTIONS"
+ note_font "Arial Bold"
+ note_font_size 100
+ note_font_color 0x7e7e7eff
+ selected true
+ xpos -36527
+ ypos -11345
+ bdwidth 2433
+ bdheight 4023
+}
+BackdropNode {
+ inputs 0
+ name OutputBackdrop
+ tile_color 0x444444ff
+ label <center>Output
+ note_font Arial
+ note_font_size 42
+ note_font_color 0xc1c1c1ff
+ selected true
+ xpos -39211
+ ypos -9005
+ bdwidth 2083
+ bdheight 617
+}
+Read {
+ inputs 0
+ file_type exr
+ file /data/jobs/TDW/sequences/107-037/shots/TDW-107-037-440/.jabuka/assets/cine/bg/plate_denoised/versions/0003/TDW_107-037_TDW-107-037-440_plate_denoised_v0003.%06d.exr
+ first 961
+ last 1073
+ origfirst 961
+ origlast 1182
+ origset true
+ colorspace compositing_linear
+ name TDW_107_037_440_bgPlate_denoised_v0003_1
+ selected true
+ xpos -37386
+ ypos -11135
+ icon /software/apps/jabuka/7.245.1/tools/python/3.7/noarch/cortex/10.4/GafferJabukaUI/Resources/Icons/dynamic.png
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> ImageSequence\n<B>ieEntityId:</B> 3946013.0\n<B>ieAssetId:</B> 3874968.0\n<B>ieCopyId:</B> 1\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0.0" n 2}
+ Advanced 1
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType ImageSequence
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 3946013
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ ieAssetId 3874968
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "<span style=\"color:Silver\">Bundle Version </span>" t "\nThis entity is not part\nof a bundle." +DISABLED}
+ addUserKnob {1 ieDisplayName l Name +DISABLED}
+ ieDisplayName plate_denoised
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {4 3 2 1}}
+ ieEntityVersion 3
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+ ieVersionCreationDate "06-21-2023 16:04:54"
+ addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+ ieVersionCreator danielbi
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ ieRelativeToLocation true
+ addUserKnob {6 ieDefaultCineAssetUpdate l "Default Cine Asset update" +STARTLINE}
+ ieDefaultCineAssetUpdate true
+ addUserKnob {32 ieSourceScene l "Open Source Scene" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/jobs/TDW/sequences/107-037/shots/TDW-107-037-440/.jabuka/assets/cine/bg/plate_denoised/versions/0003/TDW_107-037_TDW-107-037-440_plate_denoised_v0003.%06d.exr
+ addUserKnob {32 ieDailyButton l "Create Daily" +STARTLINE}
+}
+Dot {
+ name Dot50
+ label "  "
+ note_font Arial
+ note_font_size 16
+ selected true
+ xpos -37352
+ ypos -10797
+}
+set N873f4ab0 [stack 0]
+Group {
+ name Respeed
+ onCreate "this = nuke.thisNode()\n\nknobs = \['referenceFramePlate','referenceFrameEdit','timingFrameSpeed']\n\n# Numbered flag is removing sliders from the float knobs\n\nfor k in knobs:\n    this\[k].clearFlag(0x00000002)\n    this\[k].setFlag(nuke.NO_ANIMATION)\n    \nthis\['timingFrameSpeed'].setFlag(nuke.READ_ONLY)\nthis\['timingFrame'].clearFlag(0x00000002)\n\n## Create function for converting % speed to frame numbers\n\ndef timingFrameSpeed():\n    this = nuke.thisNode()\n    \n    # Reset animation\n    this\['timingFrameSpeedHidden'].clearAnimated()\n    this\['timingFrameSpeedHidden'].setAnimated()\n    \n    # How many additional frames outside of the comp's root() frame range should curves be generated\n    padding = 100\n    \n    # Set frame variables\n    valueForward = this\['referenceFramePlate'].value()\n    valueBackward = this\['referenceFramePlate'].value()\n    \n    frameForward = this\['referenceFrameEdit'].value()\n    frameBackward = this\['referenceFrameEdit'].value()\n    \n    # Set first and last frames for limiting number of keyframes generated to available frame count\n    if this.input(0):\n        firstFrame = this.input(0).firstFrame()\n        lastFrame = this.input(0).lastFrame()\n    else:\n        firstFrame = nuke.root().firstFrame()\n        lastFrame = nuke.root().lastFrame()\n    \n    \n    # Build curve forwards in time from reference frame until run out of available frames from input\n    while valueForward < lastFrame and valueForward > firstFrame:\n        this\['timingFrameSpeedHidden'].setValueAt(valueForward, frameForward)\n        valueForward = valueForward+(this\['speed'].valueAt(frameForward+1)/100)\n        frameForward = frameForward+1\n    \n    # Build curve backwards in time from reference frame until run out of available frames from input\n    while valueBackward < lastFrame and valueBackward > firstFrame:\n        this\['timingFrameSpeedHidden'].setValueAt(valueBackward, frameBackward)\n        valueBackward = valueBackward-(this\['speed'].valueAt(frameBackward-1)/100)\n        frameBackward = frameBackward-1"
+ knobChanged "this = nuke.thisNode()\nk = nuke.thisKnob()\n\nif k.name() in \['speed','referenceFramePlate','referenceFrameEdit','inputChange']:\n    timingFrameSpeed()\n\nif k.name() == 'inputChange':\n    \n    # Set variables and conditions\n    input = this.input(1)\n    metadataKnobs = \['autoShutterTime','shutterSamples','shutterTime','timingFrame','interpolation']\n    linkMetadata = True  \n    prefix = this\['metadataPrefix'].value()\n    \n    if input:\n        channels = input.channels()\n        metadataFiltered = \{\}\n        \n        for key in input.metadata():\n            if prefix in key:\n                metadataFiltered\[key] = input.metadata()\[key]\n        \n        if 'forward.u' in channels and 'forward.v' in channels and 'backward.u' in channels and 'backward.v' in channels:\n            vectorsDetected = True\n        else:\n            vectorsDetected = False\n\n        for knob in metadataKnobs:\n            if metadataFiltered:\n                if prefix+'/'+knob not in str(metadataFiltered.keys()):\n                    linkMetadata = False\n            else:\n                linkMetadata = False\n\n    # Setup node when using retimeVector input and both vectors and metadata are detected\n    if input and vectorsDetected and linkMetadata:\n        \n        this\['retimeVectorText'].setValue('<font color=lime>Using retimeVector input')\n        \n        nuke.toNode('retimeVectorSwitch')\['which'].setValue(1)\n        \n        this\['retimeVectorText'].setVisible(True)\n        this\['refreshRetimeVectors'].setVisible(True)\n        this\['retimeVectorSpacer'].setVisible(True)\n        this\['timingFrame'].setVisible(True)\n        \n        this\['referenceFramePlate'].setVisible(False)\n        this\['setCurrentPlate'].setVisible(False)\n        this\['referenceFrameEdit'].setVisible(False)\n        this\['setCurrentEdit'].setVisible(False)\n        this\['speedSpacer1'].setVisible(False)\n        this\['speed'].setVisible(False)\n        this\['speedSpacer2'].setVisible(False)\n        this\['timingFrameSpeed'].setVisible(False)\n        this\['convertSpeed'].setVisible(False)\n        this\['MotionSettings'].setVisible(False)\n        this\['motionSpacer'].setVisible(False)\n        \n        this\['method'].setValue('Frame Number')\n        this\['method'].setEnabled(False)\n        this\['interpolation'].setEnabled(False)\n        this\['shutterSamples'].setEnabled(False)\n        this\['shutterTime'].setEnabled(False)\n        this\['autoShutterTime'].setEnabled(False)\n        this\['timingFrame'].setEnabled(False)\n        this\['Shutter'].setEnabled(False)\n        \n        this\['Shutter'].setValue(True)\n        \n        this\['shutterSamples'].setFlag(nuke.READ_ONLY)\n        this\['shutterTime'].setFlag(nuke.READ_ONLY)\n        this\['autoShutterTime'].setFlag(nuke.READ_ONLY)\n        this\['timingFrame'].setFlag(nuke.READ_ONLY)\n        this\['timingFrame'].setFlag(nuke.NO_ANIMATION)\n        \n        for key in metadataFiltered:\n            for knob in metadataKnobs:\n                if knob in key:\n                    if 'interpolation' in key:\n                        this\[knob].setValue(metadataFiltered\[key])\n                    else:\n                        this\[knob].clearAnimated()\n                        this\[knob].setExpression('\[metadata -n input1 '+key+']')\n                    break\n                        \n    \n    else:\n        # Setup node when using retimeVector input and both vectors and metadata are missing\n        nuke.toNode('retimeVectorSwitch')\['which'].setValue(0)\n        \n        if input:\n            if not vectorsDetected and not linkMetadata:\n                this\['retimeVectorText'].setValue('<font color=red>Error! Missing motion vectors and metadata from retimeVector input!')\n                this\['retimeVectorText'].setVisible(True)\n                this\['refreshRetimeVectors'].setVisible(True)\n                this\['retimeVectorSpacer'].setVisible(True)\n            elif not linkMetadata:\n                this\['retimeVectorText'].setValue('<font color=red>Error! Missing metadata from retimeVector input!')\n                this\['retimeVectorText'].setVisible(True)\n                this\['refreshRetimeVectors'].setVisible(True)\n                this\['retimeVectorSpacer'].setVisible(True)\n            elif not vectorsDetected:\n                this\['retimeVectorText'].setValue('<font color=red>Error! Missing motion vectors from retimeVector input!')\n                this\['retimeVectorText'].setVisible(True)\n                this\['refreshRetimeVectors'].setVisible(True)\n                this\['retimeVectorSpacer'].setVisible(True)\n        else:\n            this\['retimeVectorText'].setVisible(False)\n            this\['refreshRetimeVectors'].setVisible(False)\n            this\['retimeVectorSpacer'].setVisible(False)\n        \n        if this\['method'].value() == 'Frame Number':\n            this\['timingFrame'].setVisible(True)\n            this\['referenceFramePlate'].setVisible(False)\n            this\['setCurrentPlate'].setVisible(False)\n            this\['referenceFrameEdit'].setVisible(False)\n            this\['setCurrentEdit'].setVisible(False)\n            this\['speedSpacer1'].setVisible(False)\n            this\['speed'].setVisible(False)\n            this\['speedSpacer2'].setVisible(False)\n            this\['timingFrameSpeed'].setVisible(False)\n            this\['convertSpeed'].setVisible(False)\n        else:\n            this\['timingFrame'].setVisible(False)\n            this\['referenceFramePlate'].setVisible(True)\n            this\['setCurrentPlate'].setVisible(True)\n            this\['referenceFrameEdit'].setVisible(True)\n            this\['setCurrentEdit'].setVisible(True)\n            this\['speedSpacer1'].setVisible(True)\n            this\['speed'].setVisible(True)\n            this\['speedSpacer2'].setVisible(True)\n            this\['timingFrameSpeed'].setVisible(True)\n            this\['convertSpeed'].setVisible(True)\n        \n        if this\['interpolation'].value() == 'Motion':\n            this\['MotionSettings'].setVisible(True)\n            this\['motionSpacer'].setVisible(True)\n        else:\n            this\['MotionSettings'].setVisible(False)\n            this\['motionSpacer'].setVisible(False)\n        \n           \n        this\['method'].setEnabled(True)\n        this\['interpolation'].setEnabled(True)\n        this\['timingFrame'].setEnabled(True)\n        this\['shutterSamples'].setEnabled(True)\n        this\['shutterTime'].setEnabled(True)\n        this\['autoShutterTime'].setEnabled(True)\n        this\['Shutter'].setEnabled(True)\n        \n        this\['Shutter'].setValue(False)\n        \n        this\['shutterSamples'].clearFlag(nuke.READ_ONLY)\n        this\['shutterTime'].clearFlag(nuke.READ_ONLY)\n        this\['autoShutterTime'].clearFlag(nuke.READ_ONLY)\n        this\['timingFrame'].clearFlag(nuke.READ_ONLY)\n        this\['timingFrame'].clearFlag(nuke.NO_ANIMATION)\n        \n        \n        for key in metadataKnobs:\n            if this\[key].isAnimated():\n                if this\[key].animation(0).expression() == '\[metadata -n input1 exr/nuke/retime/'+key+']':\n                    this\[key].clearAnimated()\n                if key == 'shutterSamples':\n                    this\[key].setValue(1)\n                if key == 'timingFrame':\n                    this\[key].setValue(1001)\n\nif k.name() == 'motionEstimation':\n    \n    if k.value() == 'Regularized':\n        this\['vectorDetailLocal'].setVisible(False)\n        this\['smoothnessLocal'].setVisible(False)\n        this\['vectorDetailReg'].setVisible(True)\n        this\['strengthReg'].setVisible(True)\n    else:\n        this\['vectorDetailLocal'].setVisible(True)\n        this\['smoothnessLocal'].setVisible(True)\n        this\['vectorDetailReg'].setVisible(False)\n        this\['strengthReg'].setVisible(False)\n        \nif k.name() == 'showVectors':\n    if k.value():\n        this\['vectorSpacing'].setEnabled(True)\n    else:\n        this\['vectorSpacing'].setEnabled(False)\n        \nif k.name() == 'autoShutterTime':\n    if not k.value():\n        this\['shutterTime'].setEnabled(True)\n    else:\n        this\['shutterTime'].setEnabled(False)\n        \nif k.name() == 'interpolation':\n    \n    if k.value() == 'Motion':\n        if not this\['retimeVectorText'].visible():\n            this\['MotionSettings'].setVisible(True)\n            this\['motionSpacer'].setVisible(True)\n    elif k.value() == 'Frame':\n        this\['MotionSettings'].setVisible(False)\n        this\['motionSpacer'].setVisible(False)\n        \nif k.name() == 'method':\n    if k.value() == 'Frame Number':\n        this\['timingFrame'].setVisible(True)\n        this\['timingFrameSpeed'].setVisible(False)\n        this\['convertSpeed'].setVisible(False)\n        this\['speed'].setVisible(False)\n        this\['referenceFramePlate'].setVisible(False)\n        this\['referenceFrameEdit'].setVisible(False)\n        this\['setCurrentPlate'].setVisible(False)\n        this\['setCurrentEdit'].setVisible(False)\n        this\['speedSpacer1'].setVisible(False)\n        this\['speedSpacer2'].setVisible(False)\n    else:\n        this\['timingFrame'].setVisible(False)\n        this\['timingFrameSpeed'].setVisible(True)\n        this\['convertSpeed'].setVisible(True)\n        this\['speed'].setVisible(True)\n        this\['referenceFramePlate'].setVisible(True)\n        this\['referenceFrameEdit'].setVisible(True)\n        this\['setCurrentPlate'].setVisible(True)\n        this\['setCurrentEdit'].setVisible(True)\n        this\['speedSpacer1'].setVisible(True)\n        this\['speedSpacer2'].setVisible(True)"
+ autolabel "nuke.thisNode().name()+'\\n\\n'+('Speed: '+str(int(nuke.thisNode()\['speed'].value()*100)/100)+'% \\n\\n' if nuke.thisNode()\['method'].value() == 'Speed Percentage' else '')+'Frame: '+str(ceil((nuke.thisNode()\['timingFrame'].value() if nuke.thisNode()\['method'].value() == 'Frame Number' else nuke.thisNode()\['timingFrameSpeed'].value())*100)/100)+'\\n'"
+ label "Speed: \[value speed]\nFrame Speed: \[value timingFrameSpeed]\nFrame Speed: \[value timingFrame]"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 25
+ selected true
+ xpos -37386
+ ypos -10563
+ disable {{!RepoAndRetimeHelper.RetimeCurve}}
+ addUserKnob {20 Respeed}
+ addUserKnob {26 "" l " "}
+ addUserKnob {6 useGPUIfAvailable l "Use GPU if available" -STARTLINE}
+ useGPUIfAvailable true
+ addUserKnob {1 metadataPrefix +INVISIBLE}
+ metadataPrefix retime
+ addUserKnob {26 ""}
+ addUserKnob {3 firstFrame l "Input Range" +HIDDEN +INVISIBLE}
+ firstFrame {{"\[exists input]?input.first_frame:first_frame"}}
+ addUserKnob {3 lastFrame l "" -STARTLINE +HIDDEN +INVISIBLE R 0 100}
+ lastFrame {{"\[exists input]?input.last_frame:last_frame"}}
+ addUserKnob {22 refreshRetimeVectors l Refresh +HIDDEN T "this = nuke.thisNode()\n\nwith nuke.root():\n    inputRefresh = this.input(1)\n    this.setInput(1, None)\n    this.setInput(1, inputRefresh)" +STARTLINE}
+ addUserKnob {26 retimeVectorText l " " -STARTLINE +HIDDEN T "<font color=lime>Using retimeVector input"}
+ addUserKnob {26 retimeVectorSpacer l "" +STARTLINE +HIDDEN}
+ addUserKnob {4 method l Method M {"Frame Number" "Speed Percentage" "" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {7 referenceFramePlate l "Ref Frame Plate" t "\nSet to your chosen reference frame on the Plate\n\n<i>Typically the frame of the plate that matches the first frame of edit ref" +HIDDEN}
+ referenceFramePlate 1009
+ addUserKnob {22 setCurrentPlate l "Set to Current Frame" -STARTLINE +HIDDEN T "nuke.thisNode()\['referenceFramePlate'].setValue(nuke.frame())"}
+ addUserKnob {7 referenceFrameEdit l "Ref Frame Edit" t "\nSet to your chosen reference frame on the Edit\n\n<i>Typically the first frame of the cut" +HIDDEN}
+ referenceFrameEdit 1009
+ addUserKnob {22 setCurrentEdit l "Set to Current Frame" -STARTLINE +HIDDEN T "nuke.thisNode()\['referenceFrameEdit'].setValue(nuke.frame())"}
+ addUserKnob {26 speedSpacer1 l "" +STARTLINE +HIDDEN T " "}
+ addUserKnob {7 speed l "Speed (%)" +HIDDEN R -500 500}
+ speed 100
+ addUserKnob {8 timingFrame l Frame R 0 1000}
+ timingFrame 1001
+ addUserKnob {26 speedSpacer2 l "" +STARTLINE +HIDDEN T " "}
+ addUserKnob {7 timingFrameSpeedHidden l "Speed Frame Dummy" +DISABLED +HIDDEN}
+ timingFrameSpeedHidden {{curve x962 962 963 964 965 966 967 968 969 970 971 972 973 974 975 976 977 978 979 980 981 982 983 984 985 986 987 988 989 990 991 992 993 994 995 996 997 998 999 1000 1001 1002 1003 1004 1005 1006 1007 1008 1009 1010 1011 1012 1013 1014 1015 1016 1017 1018 1019 1020 1021 1022 1023 1024 1025 1026 1027 1028 1029 1030 1031 1032 1033 1034 1035 1036 1037 1038 1039 1040 1041 1042 1043 1044 1045 1046 1047 1048 1049 1050 1051 1052 1053 1054 1055 1056 1057 1058 1059 1060 1061 1062 1063 1064 1065 1066 1067 1068 1069 1070 1071 1072}}
+ addUserKnob {7 timingFrameSpeed l Frame +HIDDEN}
+ timingFrameSpeed {{timingFrameSpeedHidden}}
+ addUserKnob {22 convertSpeed l Convert t "\nConvert speed percentage curve to frame number curve." -STARTLINE +HIDDEN T "this = nuke.thisNode()\n\nfirst = int(this\['firstFrame'].value())\nlast = int(this\['lastFrame'].value())\n\nthis\['timingFrame'].clearAnimated()\nthis\['timingFrame'].setAnimated()\nthis\['method'].setValue('Frame Number')\n\nfor i in range(last-first+1):\n    this\['timingFrame'].setValueAt(this\['timingFrameSpeed'].getValueAt(first+i),first+i)"}
+ addUserKnob {26 ""}
+ addUserKnob {4 interpolation l Interpolation M {Frame Motion "" "" "" "" ""}}
+ interpolation Motion
+ addUserKnob {26 motionSpacer l "" +STARTLINE T " "}
+ addUserKnob {20 MotionSettings l "Motion Vector Settings" n 1}
+ addUserKnob {4 motionEstimation l Motion M {Regularized Local ""}}
+ addUserKnob {8 vectorDetailReg l "Vector Detail" R 0.01 1}
+ vectorDetailReg 0.3
+ addUserKnob {8 strengthReg l Strength R 0 1.5}
+ strengthReg 1.5
+ addUserKnob {8 vectorDetailLocal l "Vector Detail" +HIDDEN R 0.01 1}
+ vectorDetailLocal 0.2
+ addUserKnob {8 smoothnessLocal l Smoothness +HIDDEN R 0.01 1}
+ smoothnessLocal 0.5
+ addUserKnob {4 resampleType l Filter M {Bilinear Lancosz4 Lancosz6}}
+ addUserKnob {20 Advanced n 2}
+ Advanced 1
+ addUserKnob {6 flickerCompensation l "Flicker Compensation" -STARTLINE}
+ addUserKnob {6 legacyModeNuke9 l "Legacy Mode" -STARTLINE +INVISIBLE}
+ addUserKnob {20 Tolerances n 2}
+ addUserKnob {8 weightRed l "Weight Red"}
+ weightRed 0.3
+ addUserKnob {8 weightGreen l "Weight Green"}
+ weightGreen 0.6
+ addUserKnob {8 weightBlue l "Weight Blue"}
+ weightBlue 0.1
+ addUserKnob {20 "" n -1}
+ addUserKnob {3 vectorSpacing l "Vector Spacing" +DISABLED +INVISIBLE R 4 100}
+ vectorSpacing 20
+ addUserKnob {6 showVectors l "Overlay Vectors" -STARTLINE +INVISIBLE}
+ addUserKnob {20 "" n -1}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 Shutter l "Shutter (add motionblur)" n 2}
+ Shutter 1
+ addUserKnob {3 shutterSamples l "Shutter Samples" R 0 20}
+ shutterSamples 1
+ addUserKnob {8 shutterTime l "Shutter Time" R 0 10}
+ addUserKnob {26 "" l " "}
+ addUserKnob {6 autoShutterTime l "Automatic Shutter Time" -STARTLINE}
+ addUserKnob {20 "" n -1}
+ addUserKnob {41 output l Output +INVISIBLE T Kronos.output}
+ addUserKnob {41 matteChannel l Matte +INVISIBLE T Kronos.matteChannel}
+ addUserKnob {26 _2 l "" +STARTLINE T " "}
+ addUserKnob {26 _1 l "" +STARTLINE T "<b>v1.04</b><font color=grey><i> Created by <b>Daniel Bigaj</b> 3 October 2023"}
+ addUserKnob {20 LinkTab l Link}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+ Input {
+  inputs 0
+  name retimeVectors
+  xpos 938
+  ypos 480
+  number 1
+ }
+ Input {
+  inputs 0
+  name source
+  xpos 756
+  ypos 288
+ }
+set Ne4943360 [stack 0]
+ VectorGenerator {
+  motionEstimation {{parent.motionEstimation}}
+  vectorDetailLocal {{parent.vectorDetailLocal}}
+  smoothnessLocal {{parent.smoothnessLocal}}
+  vectorDetailReg {{parent.vectorDetailReg}}
+  strengthReg {{parent.strengthReg}}
+  Advanced 1
+  flickerCompensation {{parent.flickerCompensation}}
+  Tolerances 1
+  weightRed {{parent.weightRed}}
+  weightGreen {{parent.weightGreen}}
+  weightBlue {{parent.weightBlue}}
+  name VectorGenerator
+  xpos 1146
+  ypos 524
+ }
+ Switch {
+  inputs 2
+  name retimeVectorSwitch
+  xpos 938
+  ypos 530
+ }
+set Ne48478b0 [stack 0]
+push $Ne48478b0
+push 0
+push 0
+push $Ne4943360
+ Kronos {
+  inputs 4
+  useGPUIfAvailable {{parent.useGPUIfAvailable}}
+  input.first {{parent.firstFrame}}
+  input.last {{parent.lastFrame}}
+  retimedChannels all
+  interpolation {{parent.interpolation?2:0}}
+  timing2 Frame
+  timingOutputSpeed 0
+  timingInputSpeed 0
+  timingFrame2 {{parent.method?parent.timingFrameSpeed:parent.timingFrame}}
+  motionEstimation {{parent.motionEstimation}}
+  vectorDetailLocal {{parent.vectorDetailLocal}}
+  smoothnessLocal {{parent.smoothnessLocal}}
+  vectorDetailReg {{parent.vectorDetailReg}}
+  strengthReg {{parent.strengthReg}}
+  Shutter 1
+  shutterSamples {{parent.shutterSamples}}
+  shutterTime {{parent.shutterTime}}
+  autoShutterTime {{parent.autoShutterTime}}
+  Advanced 1
+  flickerCompensation {{parent.flickerCompensation}}
+  legacyModeNuke9 {{parent.legacyModeNuke9}}
+  Tolerances 1
+  weightRed {{parent.weightRed}}
+  weightGreen {{parent.weightGreen}}
+  weightBlue {{parent.weightBlue}}
+  vectorSpacing {{parent.vectorSpacing}}
+  showVectors {{parent.showVectors}}
+  name Kronos
+  onCreate "if nuke.GUI:\n    knobs = \['retimedChannels','timing2','input.first','input.last','resetInputRange']\n    for k in knobs:\n        nuke.thisNode()\[k].setVisible(True)"
+  note_font "Bitstream Vera Sans"
+  selected true
+  xpos 756
+  ypos 524
+ }
+ ModifyMetaData {
+  metadata {
+   {set "\[value parent.metadataPrefix]/interpolation" "\[value parent.interpolation]"}
+   {set "\[value parent.metadataPrefix]/shutterSamples" "\[value parent.shutterSamples]"}
+   {set "\[value parent.metadataPrefix]/shutterTime" "\[value parent.shutterTime]"}
+   {set "\[value parent.metadataPrefix]/autoShutterTime" "\[value parent.autoShutterTime]"}
+   {set "\[value parent.metadataPrefix]/timingFrame" "\[if \{\[value parent.method] == \"Speed Percentage\"\} \{return \[value parent.timingFrameSpeed]\} \{return \[value parent.timingFrame]\}]"}
+  }
+  name ModifyMetaData
+  xpos 756
+  ypos 562
+ }
+ Copy {
+  inputs 2
+  channels motion
+  rangeinput All
+  name Copy
+  xpos 756
+  ypos 629
+ }
+ Output {
+  name Output1
+  xpos 756
+  ypos 810
+ }
+end_group
+Dot {
+ name Dot51
+ label "  "
+ note_font Arial
+ note_font_size 16
+ selected true
+ xpos -37352
+ ypos -10269
+}
+set Nee841830 [stack 0]
+OCIOColorSpace {
+ in_colorspace compositing_linear
+ out_colorspace compositing_log
+ name LogSandwichTop
+ onCreate "nuke.thisNode()\['label'].setFlag(nuke.READ_ONLY)"
+ tile_color 0x7f7f7fff
+ label Lin2Log
+ note_font "Bitstream Vera Sans"
+ note_font_size 20
+ selected true
+ xpos -37386
+ ypos -10039
+ disable {{!RepoAndRetimeHelper.CameraRepo}}
+ addUserKnob {20 User}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+Transform {
+ center {2048 1512}
+ shutteroffset centred
+ name Repo
+ onCreate "if nuke.GUI:\n    knobs = \['skewX','skewY','skew_order','invert_matrix','clamp','black_outside']\n    for k in knobs:\n        nuke.thisNode()\[k].setVisible(False)"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 25
+ selected true
+ xpos -37386
+ ypos -9796
+ disable {{!RepoAndRetimeHelper.CameraRepo}}
+ addUserKnob {20 User}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+set Nb3247710 [stack 0]
+OCIOColorSpace {
+ in_colorspace compositing_log
+ out_colorspace compositing_linear
+ name LogSandwichBottom
+ knobChanged "nuke.thisNode()\['label'].setFlag(nuke.READ_ONLY)"
+ tile_color 0x7f7f7fff
+ label Log2Lin
+ note_font_size 20
+ selected true
+ xpos -37386
+ ypos -9519
+ disable {{!RepoAndRetimeHelper.CameraRepo}}
+ addUserKnob {20 User}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+Dot {
+ name Dot52
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -37352
+ ypos -9319
+}
+set Nb2e50720 [stack 0]
+Crop {
+ box {0 0 {width} {height}}
+ crop false
+ name Crop_To_Input_Format2
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -37386
+ ypos -8825
+}
+Write {
+ colorspace compositing_linear
+ file_type exr
+ metadata "default metadata and exr/*"
+ first_part rgba
+ name Write_fg_plate_wipRetimeAndRepo_1
+ tile_color 0x7f7f7fff
+ label "\[python \{'Range: \{\} - \{\}'.format(int(nuke.thisNode().knob('first').getValue()), int(nuke.thisNode().knob('last').getValue())) if nuke.thisNode().knob('use_limit').getValue() else ' '\}]"
+ selected true
+ xpos -37386
+ ypos -8732
+ icon /software/apps/jabuka/7.198.0/tools/python/2.7/noarch/cortex/10.3/GafferJabukaUI/Resources/Icons/dynamic.png
+ disable {{"!(RepoAndRetimeHelper.CameraRepo && RepoAndRetimeHelper.RetimeCurve)"}}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> \n<B>ieEntityId:</B> 0\n<B>ieAssetId:</B> 0\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +DISABLED +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {20 ieFarmOverrides l "Farm Overrides"}
+ addUserKnob {6 ieFarmClumpingEnabled l Clumping +STARTLINE}
+ addUserKnob {3 ieFarmClumpingOverride l "" -STARTLINE +DISABLED}
+ ieFarmClumpingOverride 5
+ addUserKnob {6 ieFarmNotesEnabled l Notes +STARTLINE}
+ addUserKnob {1 ieFarmNotesOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {6 ieFarmMemoryEnabled l Memory +STARTLINE}
+ addUserKnob {3 ieFarmMemoryOverride l "" -STARTLINE +DISABLED}
+ ieFarmMemoryOverride 8
+ addUserKnob {6 ieFarmGroupsEnabled l " Groups" +STARTLINE}
+ addUserKnob {1 ieFarmGroupsOverride l "" -STARTLINE +DISABLED}
+ ieFarmGroupsOverride NUKE
+ addUserKnob {6 ieFarmNukeOptionalArgumentsEnabled l " Nuke Optional arguments" +STARTLINE}
+ addUserKnob {1 ieFarmNukeOptionalArgumentsOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {20 iePublisherInfo l "Publisher Information"}
+ addUserKnob {4 ieSetupMode l Mode +DISABLED M {"Advanced                 " "Default                  " "Plate Component          " "Hdri                     " "Image Card               "}}
+ ieSetupMode "Plate Component          "
+ addUserKnob {4 ieLocationMode l Location +DISABLED M {"User Defined             " "Current Environment      "}}
+ ieLocationMode "Current Environment      "
+ addUserKnob {1 ieLocation l "" -STARTLINE +INVISIBLE}
+ ieLocation /FS3/setup/FS3-setup-comp
+ addUserKnob {4 ieStage l Stage +DISABLED +INVISIBLE M {"compPrep                 " "animation                " "bgPrep                   " "creatureFX               " "comp                     " "crowd                    " "diMatte                  " "environment              " "finalling                " "fx                       " "gen                      " "grooming                 " "layout                   " "lighting                 " "lookDev                  " "matchMove                " "modelling                " "mp                       " "preAnim                  " "preComp                  " "preLight                 " "preVis                   " "postVis                  " "rendering                " "rigging                  " "setup                    " "shading                  " "stereo                   " "techAnim                 " "texturing                " "vendorIn                 " "qc                       " "bundleRender             " "testing                  " custom}}
+ addUserKnob {1 ieStageCustom l "" -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityName l Name +INVISIBLE M {"compPrep                 " "custom                   "}}
+ addUserKnob {1 ieEntityNameCustom l "" -STARTLINE +INVISIBLE}
+ ieEntityNameCustom custom
+ addUserKnob {4 iePlate l Plate +DISABLED M {"default/plate            " "balls/plate              " "bg/plate                 " "fg/plate                 "}}
+ addUserKnob {32 ieUpdatePlateListButton l Refresh -STARTLINE +DISABLED}
+ addUserKnob {4 iePlateComponent l "Plate Component" +DISABLED M {"animMatte                " "brpCardElement           " "denoised                 " "key                      " "mask                     " "matte                    " "matte_bg                 " "matte_bg2                " "matte_bg3                " "matte_fg                 " "matte_fg2                " "matte_fg3                " "matte_mg                 " "matte_mg2                " "matte_mg3                " "paint                    " "paint_alt_denoised       " "paint_denoised           " "premultiplied            " "premultiplied_bg         " "premultiplied_fg         " "premultiplied_mg         " "render_mask              " "wipRepo                  " "wipRetime                " "wipRetimeAndRepo         " "wipStitch                "}}
+ iePlateComponent "wipRetimeAndRepo         "
+ addUserKnob {26 ""}
+ addUserKnob {1 ieJabukaUrl l "Jabuka Path" +DISABLED}
+ ieJabukaUrl "\\\$\{jabuka:location\}/assets/cine/fg/plate_wipRetimeAndRepo"
+ addUserKnob {6 ieEntityVersionMoved l Hidden -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityVersion l "Entity Version" +DISABLED M {0}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE +DISABLED}
+ addUserKnob {1 ieFilePath l "Filesystem Path" +DISABLED}
+ addUserKnob {32 ieCreateEntityButton l "Create Entity" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoCreate l "Auto Create Entity" -STARTLINE +DISABLED}
+ ieAutoCreate true
+ addUserKnob {6 ieAutoMerge l "Automatically Merge Versions" t "Set this to automatically merge the new render with the set ieEntity version" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoDaily l "Auto Daily after Render" +DISABLED +STARTLINE}
+ ieAutoDaily true
+ addUserKnob {6 ieAutoApprove l "Auto Approve after Render" -STARTLINE +DISABLED}
+ ieAutoApprove true
+ addUserKnob {43 ieVersionDescription l "Version Description" +DISABLED}
+ ieVersionDescription "BG: wipRetime + wipRepo (denoised), for editRef-match QC."
+ addUserKnob {32 ieRenderButton l Render +DISABLED +STARTLINE}
+ addUserKnob {6 ieRunDependencies l "Run upstream dependencies" -STARTLINE +DISABLED}
+ addUserKnob {26 ""}
+ addUserKnob {32 ieMergeButton l "Merge with another version" +DISABLED +STARTLINE}
+ addUserKnob {32 ieCreateReadNodeButton l "Create Read Node" +STARTLINE}
+ addUserKnob {32 ieDailyButton l "Create Daily" +DISABLED +STARTLINE}
+ addUserKnob {26 ieAutoDailySep l "Auto Daily" +DISABLED}
+ addUserKnob {4 ieWhoFor l "Who For" t "Used for `whoFor` parameter of auto daily" +DISABLED M {"Department Lead" "Asset Supervisor" "Environment Supervisor" "Anim Supervisor" "CG Supervisor" "2D Supervisor" "VFX Supervisor" "DFX Supervisor" "Rigging Supervisor" Artist}}
+ addUserKnob {4 ieAutoDailyLUT l LUT t "Used for `LUT` parameter of auto daily" +DISABLED M {Auto Show_LUT_CDL Show_LUT Facility_LUT rec709 sRGB None}}
+ addUserKnob {32 __ieRemoveExpressionLinks l "internal remove expression links" -STARTLINE +INVISIBLE}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+NoOp {
+ name RepoAndRetimeHelperAnchor13
+ autolabel "nuke.thisNode()\['AssetChoice'].value()"
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 30
+ selected true
+ xpos -37386
+ ypos -8636
+ addUserKnob {20 RepoAndRetimeHelperAnchor l "Repo And Retime Helper Anchor"}
+ addUserKnob {4 AssetChoice l Asset M {CameraRepo RetimeCurve retimeVectors wipRetime_wholeFrames wipRetime wipRepo wipRetimeAndRepo "" "" "" "" "" ""}}
+ AssetChoice wipRetimeAndRepo
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+push $Nb2e50720
+Dot {
+ name Dot53
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -37608
+ ypos -9319
+}
+Crop {
+ box {0 0 {width} {height}}
+ crop false
+ name Crop_To_Input_Format4
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -37642
+ ypos -8825
+}
+Write {
+ colorspace compositing_linear
+ file_type exr
+ first_part rgba
+ name Write_fg_plate_wipRepo_1
+ tile_color 0x7f7f7fff
+ label "\[python \{'Range: \{\} - \{\}'.format(int(nuke.thisNode().knob('first').getValue()), int(nuke.thisNode().knob('last').getValue())) if nuke.thisNode().knob('use_limit').getValue() else ' '\}]"
+ selected true
+ xpos -37642
+ ypos -8732
+ icon /software/apps/jabuka/7.198.0/tools/python/2.7/noarch/cortex/10.3/GafferJabukaUI/Resources/Icons/dynamic.png
+ disable {{"!(RepoAndRetimeHelper.CameraRepo && !RepoAndRetimeHelper.RetimeCurve)"}}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> \n<B>ieEntityId:</B> 0\n<B>ieAssetId:</B> 0\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +DISABLED +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {20 ieFarmOverrides l "Farm Overrides"}
+ addUserKnob {6 ieFarmClumpingEnabled l Clumping +STARTLINE}
+ addUserKnob {3 ieFarmClumpingOverride l "" -STARTLINE +DISABLED}
+ ieFarmClumpingOverride 5
+ addUserKnob {6 ieFarmNotesEnabled l Notes +STARTLINE}
+ addUserKnob {1 ieFarmNotesOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {6 ieFarmMemoryEnabled l Memory +STARTLINE}
+ addUserKnob {3 ieFarmMemoryOverride l "" -STARTLINE +DISABLED}
+ ieFarmMemoryOverride 8
+ addUserKnob {6 ieFarmGroupsEnabled l " Groups" +STARTLINE}
+ addUserKnob {1 ieFarmGroupsOverride l "" -STARTLINE +DISABLED}
+ ieFarmGroupsOverride NUKE
+ addUserKnob {6 ieFarmNukeOptionalArgumentsEnabled l " Nuke Optional arguments" +STARTLINE}
+ addUserKnob {1 ieFarmNukeOptionalArgumentsOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {20 iePublisherInfo l "Publisher Information"}
+ addUserKnob {4 ieSetupMode l Mode +DISABLED M {"Advanced                 " "Default                  " "Plate Component          " "Hdri                     " "Image Card               "}}
+ ieSetupMode "Plate Component          "
+ addUserKnob {4 ieLocationMode l Location +DISABLED M {"User Defined             " "Current Environment      "}}
+ ieLocationMode "Current Environment      "
+ addUserKnob {1 ieLocation l "" -STARTLINE +INVISIBLE}
+ ieLocation /FS3/setup/FS3-setup-comp
+ addUserKnob {4 ieStage l Stage +DISABLED +INVISIBLE M {"compPrep                 " "animation                " "bgPrep                   " "creatureFX               " "comp                     " "crowd                    " "diMatte                  " "environment              " "finalling                " "fx                       " "gen                      " "grooming                 " "layout                   " "lighting                 " "lookDev                  " "matchMove                " "modelling                " "mp                       " "preAnim                  " "preComp                  " "preLight                 " "preVis                   " "postVis                  " "rendering                " "rigging                  " "setup                    " "shading                  " "stereo                   " "techAnim                 " "texturing                " "vendorIn                 " "qc                       " "bundleRender             " "testing                  " custom}}
+ addUserKnob {1 ieStageCustom l "" -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityName l Name +INVISIBLE M {"compPrep                 " "custom                   "}}
+ addUserKnob {1 ieEntityNameCustom l "" -STARTLINE +INVISIBLE}
+ ieEntityNameCustom custom
+ addUserKnob {4 iePlate l Plate +DISABLED M {"default/plate            " "balls/plate              " "bg/plate                 " "fg/plate                 "}}
+ addUserKnob {32 ieUpdatePlateListButton l Refresh -STARTLINE +DISABLED}
+ addUserKnob {4 iePlateComponent l "Plate Component" +DISABLED M {"animMatte                " "brpCardElement           " "denoised                 " "key                      " "mask                     " "matte                    " "matte_bg                 " "matte_bg2                " "matte_bg3                " "matte_fg                 " "matte_fg2                " "matte_fg3                " "matte_mg                 " "matte_mg2                " "matte_mg3                " "paint                    " "paint_alt_denoised       " "paint_denoised           " "premultiplied            " "premultiplied_bg         " "premultiplied_fg         " "premultiplied_mg         " "render_mask              " "wipRepo                  " "wipRetime                " "wipRetimeAndRepo         " "wipStitch                "}}
+ iePlateComponent "wipRepo                  "
+ addUserKnob {26 ""}
+ addUserKnob {1 ieJabukaUrl l "Jabuka Path" +DISABLED}
+ ieJabukaUrl "\\\$\{jabuka:location\}/assets/cine/fg/plate_wipRepo"
+ addUserKnob {6 ieEntityVersionMoved l Hidden -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityVersion l "Entity Version" +DISABLED M {0}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE +DISABLED}
+ addUserKnob {1 ieFilePath l "Filesystem Path" +DISABLED}
+ addUserKnob {32 ieCreateEntityButton l "Create Entity" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoCreate l "Auto Create Entity" -STARTLINE +DISABLED}
+ ieAutoCreate true
+ addUserKnob {6 ieAutoMerge l "Automatically Merge Versions" t "Set this to automatically merge the new render with the set ieEntity version" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoDaily l "Auto Daily after Render" +DISABLED +STARTLINE}
+ ieAutoDaily true
+ addUserKnob {6 ieAutoApprove l "Auto Approve after Render" -STARTLINE +DISABLED}
+ ieAutoApprove true
+ addUserKnob {43 ieVersionDescription l "Version Description" +DISABLED}
+ ieVersionDescription "BG: wipRepo (denoised), for editRef-match QC."
+ addUserKnob {32 ieRenderButton l Render +DISABLED +STARTLINE}
+ addUserKnob {6 ieRunDependencies l "Run upstream dependencies" -STARTLINE +DISABLED}
+ addUserKnob {26 ""}
+ addUserKnob {32 ieMergeButton l "Merge with another version" +DISABLED +STARTLINE}
+ addUserKnob {32 ieCreateReadNodeButton l "Create Read Node" +STARTLINE}
+ addUserKnob {32 ieDailyButton l "Create Daily" +DISABLED +STARTLINE}
+ addUserKnob {26 ieAutoDailySep l "Auto Daily" +DISABLED}
+ addUserKnob {4 ieWhoFor l "Who For" t "Used for `whoFor` parameter of auto daily" +DISABLED M {"Department Lead" "Asset Supervisor" "Environment Supervisor" "Anim Supervisor" "CG Supervisor" "2D Supervisor" "VFX Supervisor" "DFX Supervisor" "Rigging Supervisor" Artist}}
+ addUserKnob {4 ieAutoDailyLUT l LUT t "Used for `LUT` parameter of auto daily" +DISABLED M {Auto Show_LUT_CDL Show_LUT Facility_LUT rec709 sRGB None}}
+ addUserKnob {32 __ieRemoveExpressionLinks l "internal remove expression links" -STARTLINE +INVISIBLE}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+NoOp {
+ name RepoAndRetimeHelperAnchor5
+ autolabel "nuke.thisNode()\['AssetChoice'].value()"
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 30
+ selected true
+ xpos -37642
+ ypos -8636
+ addUserKnob {20 RepoAndRetimeHelperAnchor l "Repo And Retime Helper Anchor"}
+ addUserKnob {4 AssetChoice l Asset M {CameraRepo RetimeCurve retimeVectors wipRetime_wholeFrames wipRetime wipRepo wipRetimeAndRepo "" "" "" "" "" ""}}
+ AssetChoice wipRepo
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+push $Nee841830
+Dot {
+ name Dot54
+ label "  "
+ note_font "Arial Black"
+ note_font_size 16
+ selected true
+ xpos -37825
+ ypos -10269
+}
+set Nc6ef16b0 [stack 0]
+Crop {
+ box {0 0 {width} {height}}
+ crop false
+ name Crop_To_Input_Format1
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -37859
+ ypos -8825
+}
+Write {
+ colorspace compositing_linear
+ file_type exr
+ metadata "default metadata and exr/*"
+ first_part rgba
+ name Write_fg_plate_wipRetime_1
+ tile_color 0x7f7f7fff
+ label "\[python \{'Range: \{\} - \{\}'.format(int(nuke.thisNode().knob('first').getValue()), int(nuke.thisNode().knob('last').getValue())) if nuke.thisNode().knob('use_limit').getValue() else ' '\}]"
+ selected true
+ xpos -37859
+ ypos -8733
+ icon /software/apps/jabuka/7.198.0/tools/python/2.7/noarch/cortex/10.3/GafferJabukaUI/Resources/Icons/dynamic.png
+ disable {{!RepoAndRetimeHelper.RetimeCurve}}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> \n<B>ieEntityId:</B> 0\n<B>ieAssetId:</B> 0\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +DISABLED +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {20 ieFarmOverrides l "Farm Overrides"}
+ addUserKnob {6 ieFarmClumpingEnabled l Clumping +STARTLINE}
+ addUserKnob {3 ieFarmClumpingOverride l "" -STARTLINE +DISABLED}
+ ieFarmClumpingOverride 5
+ addUserKnob {6 ieFarmNotesEnabled l Notes +STARTLINE}
+ addUserKnob {1 ieFarmNotesOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {6 ieFarmMemoryEnabled l Memory +STARTLINE}
+ addUserKnob {3 ieFarmMemoryOverride l "" -STARTLINE +DISABLED}
+ ieFarmMemoryOverride 8
+ addUserKnob {6 ieFarmGroupsEnabled l " Groups" +STARTLINE}
+ addUserKnob {1 ieFarmGroupsOverride l "" -STARTLINE +DISABLED}
+ ieFarmGroupsOverride NUKE
+ addUserKnob {6 ieFarmNukeOptionalArgumentsEnabled l " Nuke Optional arguments" +STARTLINE}
+ addUserKnob {1 ieFarmNukeOptionalArgumentsOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {20 iePublisherInfo l "Publisher Information"}
+ addUserKnob {4 ieSetupMode l Mode +DISABLED M {"Advanced                 " "Default                  " "Plate Component          " "Hdri                     " "Image Card               "}}
+ ieSetupMode "Plate Component          "
+ addUserKnob {4 ieLocationMode l Location +DISABLED M {"User Defined             " "Current Environment      "}}
+ ieLocationMode "Current Environment      "
+ addUserKnob {1 ieLocation l "" -STARTLINE +INVISIBLE}
+ ieLocation /FS3/setup/FS3-setup-comp
+ addUserKnob {4 ieStage l Stage +DISABLED +INVISIBLE M {"compPrep                 " "animation                " "bgPrep                   " "creatureFX               " "comp                     " "crowd                    " "diMatte                  " "environment              " "finalling                " "fx                       " "gen                      " "grooming                 " "layout                   " "lighting                 " "lookDev                  " "matchMove                " "modelling                " "mp                       " "preAnim                  " "preComp                  " "preLight                 " "preVis                   " "postVis                  " "rendering                " "rigging                  " "setup                    " "shading                  " "stereo                   " "techAnim                 " "texturing                " "vendorIn                 " "qc                       " "bundleRender             " "testing                  " custom}}
+ addUserKnob {1 ieStageCustom l "" -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityName l Name +INVISIBLE M {"compPrep                 " "custom                   "}}
+ addUserKnob {1 ieEntityNameCustom l "" -STARTLINE +INVISIBLE}
+ ieEntityNameCustom custom
+ addUserKnob {4 iePlate l Plate +DISABLED M {"default/plate            " "balls/plate              " "bg/plate                 " "fg/plate                 "}}
+ addUserKnob {32 ieUpdatePlateListButton l Refresh -STARTLINE +DISABLED}
+ addUserKnob {4 iePlateComponent l "Plate Component" +DISABLED M {"animMatte                " "brpCardElement           " "denoised                 " "key                      " "mask                     " "matte                    " "matte_bg                 " "matte_bg2                " "matte_bg3                " "matte_fg                 " "matte_fg2                " "matte_fg3                " "matte_mg                 " "matte_mg2                " "matte_mg3                " "paint                    " "paint_alt_denoised       " "paint_denoised           " "premultiplied            " "premultiplied_bg         " "premultiplied_fg         " "premultiplied_mg         " "render_mask              " "wipRepo                  " "wipRetime                " "wipRetimeAndRepo         " "wipStitch                "}}
+ iePlateComponent "wipRetime                "
+ addUserKnob {26 ""}
+ addUserKnob {1 ieJabukaUrl l "Jabuka Path" +DISABLED}
+ ieJabukaUrl "\\\$\{jabuka:location\}/assets/cine/fg/plate_wipRetime"
+ addUserKnob {6 ieEntityVersionMoved l Hidden -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityVersion l "Entity Version" +DISABLED M {0}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE +DISABLED}
+ addUserKnob {1 ieFilePath l "Filesystem Path" +DISABLED}
+ addUserKnob {32 ieCreateEntityButton l "Create Entity" +STARTLINE}
+ addUserKnob {6 ieAutoCreate l "Auto Create Entity" -STARTLINE +DISABLED}
+ ieAutoCreate true
+ addUserKnob {6 ieAutoMerge l "Automatically Merge Versions" t "Set this to automatically merge the new render with the set ieEntity version" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoDaily l "Auto Daily after Render" +DISABLED +STARTLINE}
+ ieAutoDaily true
+ addUserKnob {6 ieAutoApprove l "Auto Approve after Render" -STARTLINE +DISABLED}
+ ieAutoApprove true
+ addUserKnob {43 ieVersionDescription l "Version Description" +DISABLED}
+ ieVersionDescription "BG: wipRetime (denoised), for ingest as Rt plate."
+ addUserKnob {32 ieRenderButton l Render +DISABLED +STARTLINE}
+ addUserKnob {6 ieRunDependencies l "Run upstream dependencies" -STARTLINE +DISABLED}
+ addUserKnob {26 ""}
+ addUserKnob {32 ieMergeButton l "Merge with another version" +DISABLED +STARTLINE}
+ addUserKnob {32 ieCreateReadNodeButton l "Create Read Node" +STARTLINE}
+ addUserKnob {32 ieDailyButton l "Create Daily" +DISABLED +STARTLINE}
+ addUserKnob {26 ieAutoDailySep l "Auto Daily" +DISABLED}
+ addUserKnob {4 ieWhoFor l "Who For" t "Used for `whoFor` parameter of auto daily" +DISABLED M {"Department Lead" "Asset Supervisor" "Environment Supervisor" "Anim Supervisor" "CG Supervisor" "2D Supervisor" "VFX Supervisor" "DFX Supervisor" "Rigging Supervisor" Artist}}
+ addUserKnob {4 ieAutoDailyLUT l LUT t "Used for `LUT` parameter of auto daily" +DISABLED M {Auto Show_LUT_CDL Show_LUT Facility_LUT rec709 sRGB None}}
+ addUserKnob {32 __ieRemoveExpressionLinks l "internal remove expression links" -STARTLINE +INVISIBLE}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+NoOp {
+ name RepoAndRetimeHelperAnchor4
+ autolabel "nuke.thisNode()\['AssetChoice'].value()"
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 30
+ selected true
+ xpos -37859
+ ypos -8636
+ addUserKnob {20 RepoAndRetimeHelperAnchor l "Repo And Retime Helper Anchor"}
+ addUserKnob {4 AssetChoice l Asset M {CameraRepo RetimeCurve retimeVectors wipRetime_wholeFrames wipRetime wipRepo wipRetimeAndRepo "" "" "" "" "" ""}}
+ AssetChoice wipRetime
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+push $Nc6ef16b0
+Dot {
+ name Dot55
+ label "  "
+ note_font Arial
+ note_font_size 16
+ selected true
+ xpos -38051
+ ypos -10269
+}
+Shuffle {
+ in motion
+ name Shuffle
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -38085
+ ypos -8914
+}
+Crop {
+ box {0 0 {width} {height}}
+ crop false
+ name Crop_To_Input_Format5
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -38085
+ ypos -8825
+}
+Write {
+ channels all
+ colorspace compositing_linear
+ file_type exr
+ datatype "32 bit float"
+ metadata "all metadata"
+ first_part rgba
+ first 961
+ last 1073
+ use_limit true
+ name Write_fg_plate_animMatte_1
+ tile_color 0x7f7f7fff
+ label "\[python \{'Range: \{\} - \{\}'.format(int(nuke.thisNode().knob('first').getValue()), int(nuke.thisNode().knob('last').getValue())) if nuke.thisNode().knob('use_limit').getValue() else ' '\}]"
+ selected true
+ xpos -38085
+ ypos -8734
+ icon /software/apps/jabuka/7.198.0/tools/python/2.7/noarch/cortex/10.3/GafferJabukaUI/Resources/Icons/dynamic.png
+ disable {{!RepoAndRetimeHelper.RetimeCurve}}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> \n<B>ieEntityId:</B> 0\n<B>ieAssetId:</B> 0\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +DISABLED +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {20 ieFarmOverrides l "Farm Overrides"}
+ addUserKnob {6 ieFarmClumpingEnabled l Clumping +STARTLINE}
+ addUserKnob {3 ieFarmClumpingOverride l "" -STARTLINE +DISABLED}
+ ieFarmClumpingOverride 5
+ addUserKnob {6 ieFarmNotesEnabled l Notes +STARTLINE}
+ addUserKnob {1 ieFarmNotesOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {6 ieFarmMemoryEnabled l Memory +STARTLINE}
+ addUserKnob {3 ieFarmMemoryOverride l "" -STARTLINE +DISABLED}
+ ieFarmMemoryOverride 8
+ addUserKnob {6 ieFarmGroupsEnabled l " Groups" +STARTLINE}
+ addUserKnob {1 ieFarmGroupsOverride l "" -STARTLINE +DISABLED}
+ ieFarmGroupsOverride NUKE
+ addUserKnob {6 ieFarmNukeOptionalArgumentsEnabled l " Nuke Optional arguments" +STARTLINE}
+ addUserKnob {1 ieFarmNukeOptionalArgumentsOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {20 iePublisherInfo l "Publisher Information"}
+ addUserKnob {4 ieSetupMode l Mode +DISABLED M {"Advanced                 " "Default                  " "Plate Component          " "Hdri                     " "Image Card               "}}
+ ieSetupMode "Plate Component          "
+ addUserKnob {4 ieLocationMode l Location +DISABLED M {"User Defined             " "Current Environment      "}}
+ ieLocationMode "Current Environment      "
+ addUserKnob {1 ieLocation l "" -STARTLINE +INVISIBLE}
+ ieLocation /FS3/setup/FS3-setup-comp
+ addUserKnob {4 ieStage l Stage +DISABLED +INVISIBLE M {"compPrep                 " "animation                " "bgPrep                   " "creatureFX               " "comp                     " "crowd                    " "diMatte                  " "environment              " "finalling                " "fx                       " "gen                      " "grooming                 " "layout                   " "lighting                 " "lookDev                  " "matchMove                " "modelling                " "mp                       " "preAnim                  " "preComp                  " "preLight                 " "preVis                   " "postVis                  " "rendering                " "rigging                  " "setup                    " "shading                  " "stereo                   " "techAnim                 " "texturing                " "vendorIn                 " "qc                       " "bundleRender             " "testing                  " custom}}
+ addUserKnob {1 ieStageCustom l "" -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityName l Name +INVISIBLE M {"compPrep                 " "custom                   "}}
+ addUserKnob {1 ieEntityNameCustom l "" -STARTLINE +INVISIBLE}
+ ieEntityNameCustom custom
+ addUserKnob {4 iePlate l Plate +DISABLED M {"default/plate            " "balls/plate              " "bg/plate                 " "fg/plate                 "}}
+ addUserKnob {32 ieUpdatePlateListButton l Refresh -STARTLINE +DISABLED}
+ addUserKnob {4 iePlateComponent l "Plate Component" +DISABLED M {"animMatte                " "brpCardElement           " "denoised                 " "key                      " "mask                     " "matte                    " "matte_bg                 " "matte_bg2                " "matte_bg3                " "matte_fg                 " "matte_fg2                " "matte_fg3                " "matte_mg                 " "matte_mg2                " "matte_mg3                " "paint                    " "paint_alt_denoised       " "paint_denoised           " "premultiplied            " "premultiplied_bg         " "premultiplied_fg         " "premultiplied_mg         " "render_mask              " "wipRepo                  " "wipRetime                " "wipRetimeAndRepo         " "wipStitch                "}}
+ addUserKnob {26 ""}
+ addUserKnob {1 ieJabukaUrl l "Jabuka Path" +DISABLED}
+ ieJabukaUrl "\\\$\{jabuka:location\}/assets/cine/fg/plate_animMatte"
+ addUserKnob {6 ieEntityVersionMoved l Hidden -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityVersion l "Entity Version" +DISABLED M {0}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE +DISABLED}
+ addUserKnob {1 ieFilePath l "Filesystem Path" +DISABLED}
+ addUserKnob {32 ieCreateEntityButton l "Create Entity" +STARTLINE}
+ addUserKnob {6 ieAutoCreate l "Auto Create Entity" -STARTLINE +DISABLED}
+ ieAutoCreate true
+ addUserKnob {6 ieAutoMerge l "Automatically Merge Versions" t "Set this to automatically merge the new render with the set ieEntity version" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoDaily l "Auto Daily after Render" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoApprove l "Auto Approve after Render" -STARTLINE +DISABLED}
+ ieAutoApprove true
+ addUserKnob {43 ieVersionDescription l "Version Description" +DISABLED}
+ ieVersionDescription "BG: Retime motionVectors and metadata derived from denoise plate for matching retime."
+ addUserKnob {32 ieRenderButton l Render +DISABLED +STARTLINE}
+ addUserKnob {6 ieRunDependencies l "Run upstream dependencies" -STARTLINE +DISABLED}
+ addUserKnob {26 ""}
+ addUserKnob {32 ieMergeButton l "Merge with another version" +DISABLED +STARTLINE}
+ addUserKnob {32 ieCreateReadNodeButton l "Create Read Node" +STARTLINE}
+ addUserKnob {32 ieDailyButton l "Create Daily" +DISABLED +STARTLINE}
+ addUserKnob {26 ieAutoDailySep l "Auto Daily" +DISABLED}
+ addUserKnob {4 ieWhoFor l "Who For" t "Used for `whoFor` parameter of auto daily" +DISABLED M {"Department Lead" "Asset Supervisor" "Environment Supervisor" "Anim Supervisor" "CG Supervisor" "2D Supervisor" "VFX Supervisor" "DFX Supervisor" "Rigging Supervisor" Artist}}
+ addUserKnob {4 ieAutoDailyLUT l LUT t "Used for `LUT` parameter of auto daily" +DISABLED M {Auto Show_LUT_CDL Show_LUT Facility_LUT rec709 sRGB None}}
+ addUserKnob {32 __ieRemoveExpressionLinks l "internal remove expression links" -STARTLINE +INVISIBLE}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+NoOp {
+ name RepoAndRetimeHelperAnchor3
+ autolabel "nuke.thisNode()\['AssetChoice'].value()"
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 30
+ selected true
+ xpos -38085
+ ypos -8637
+ addUserKnob {20 RepoAndRetimeHelperAnchor l "Repo And Retime Helper Anchor"}
+ addUserKnob {4 AssetChoice l Asset M {CameraRepo RetimeCurve retimeVectors wipRetime_wholeFrames wipRetime wipRepo wipRetimeAndRepo "" "" "" "" "" ""}}
+ AssetChoice retimeVectors
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+push $N873f4ab0
+Dot {
+ name Dot56
+ label "  "
+ note_font Arial
+ note_font_size 16
+ selected true
+ xpos -38377
+ ypos -10797
+}
+FrameHold {
+ firstFrame {{"(!Respeed.method?Respeed.timingFrame:Respeed.timingFrameSpeed) - floor(!Respeed.method?Respeed.timingFrame:Respeed.timingFrameSpeed) >= 0.5 ? ceil(!Respeed.method?Respeed.timingFrame:Respeed.timingFrameSpeed) : floor(!Respeed.method?Respeed.timingFrame:Respeed.timingFrameSpeed)"}}
+ name WholeFrameRetime
+ onCreate "if nuke.GUI:\n    knobs = \['setToCurrentFrame','increment']\n    for k in knobs:\n        nuke.thisNode()\[k].setVisible(False)\n    nuke.thisNode()\['first_frame'].setFlag(nuke.READ_ONLY)"
+ autolabel nuke.thisNode().name()
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans Bold"
+ selected true
+ xpos -38411
+ ypos -10505
+ addUserKnob {20 User}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+Crop {
+ box {0 0 {width} {height}}
+ crop false
+ name Crop_To_Input_Format3
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -38411
+ ypos -8825
+}
+Write {
+ colorspace compositing_linear
+ file_type exr
+ metadata "default metadata and exr/*"
+ first_part rgba
+ name Write_fg_plate_animMatte_2
+ tile_color 0x7f7f7fff
+ label "\[python \{'Range: \{\} - \{\}'.format(int(nuke.thisNode().knob('first').getValue()), int(nuke.thisNode().knob('last').getValue())) if nuke.thisNode().knob('use_limit').getValue() else ' '\}]"
+ selected true
+ xpos -38411
+ ypos -8732
+ icon /software/apps/jabuka/7.198.0/tools/python/2.7/noarch/cortex/10.3/GafferJabukaUI/Resources/Icons/dynamic.png
+ disable {{!RepoAndRetimeHelper.RetimeCurve}}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> \n<B>ieEntityId:</B> 0\n<B>ieAssetId:</B> 0\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +DISABLED +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {20 ieFarmOverrides l "Farm Overrides"}
+ addUserKnob {6 ieFarmClumpingEnabled l Clumping +STARTLINE}
+ addUserKnob {3 ieFarmClumpingOverride l "" -STARTLINE +DISABLED}
+ ieFarmClumpingOverride 5
+ addUserKnob {6 ieFarmNotesEnabled l Notes +STARTLINE}
+ addUserKnob {1 ieFarmNotesOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {6 ieFarmMemoryEnabled l Memory +STARTLINE}
+ addUserKnob {3 ieFarmMemoryOverride l "" -STARTLINE +DISABLED}
+ ieFarmMemoryOverride 8
+ addUserKnob {6 ieFarmGroupsEnabled l " Groups" +STARTLINE}
+ addUserKnob {1 ieFarmGroupsOverride l "" -STARTLINE +DISABLED}
+ ieFarmGroupsOverride NUKE
+ addUserKnob {6 ieFarmNukeOptionalArgumentsEnabled l " Nuke Optional arguments" +STARTLINE}
+ addUserKnob {1 ieFarmNukeOptionalArgumentsOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {20 iePublisherInfo l "Publisher Information"}
+ addUserKnob {4 ieSetupMode l Mode +DISABLED M {"Advanced                 " "Default                  " "Plate Component          " "Hdri                     " "Image Card               "}}
+ ieSetupMode "Plate Component          "
+ addUserKnob {4 ieLocationMode l Location +DISABLED M {"User Defined             " "Current Environment      "}}
+ ieLocationMode "Current Environment      "
+ addUserKnob {1 ieLocation l "" -STARTLINE +INVISIBLE}
+ ieLocation /FS3/setup/FS3-setup-comp
+ addUserKnob {4 ieStage l Stage +DISABLED +INVISIBLE M {"compPrep                 " "animation                " "bgPrep                   " "creatureFX               " "comp                     " "crowd                    " "diMatte                  " "environment              " "finalling                " "fx                       " "gen                      " "grooming                 " "layout                   " "lighting                 " "lookDev                  " "matchMove                " "modelling                " "mp                       " "preAnim                  " "preComp                  " "preLight                 " "preVis                   " "postVis                  " "rendering                " "rigging                  " "setup                    " "shading                  " "stereo                   " "techAnim                 " "texturing                " "vendorIn                 " "qc                       " "bundleRender             " "testing                  " custom}}
+ addUserKnob {1 ieStageCustom l "" -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityName l Name +INVISIBLE M {"compPrep                 " "custom                   "}}
+ addUserKnob {1 ieEntityNameCustom l "" -STARTLINE +INVISIBLE}
+ ieEntityNameCustom custom
+ addUserKnob {4 iePlate l Plate +DISABLED M {"default/plate            " "balls/plate              " "bg/plate                 " "fg/plate                 "}}
+ addUserKnob {32 ieUpdatePlateListButton l Refresh -STARTLINE +DISABLED}
+ addUserKnob {4 iePlateComponent l "Plate Component" +DISABLED M {"animMatte                " "brpCardElement           " "denoised                 " "key                      " "mask                     " "matte                    " "matte_bg                 " "matte_bg2                " "matte_bg3                " "matte_fg                 " "matte_fg2                " "matte_fg3                " "matte_mg                 " "matte_mg2                " "matte_mg3                " "paint                    " "paint_alt_denoised       " "paint_denoised           " "premultiplied            " "premultiplied_bg         " "premultiplied_fg         " "premultiplied_mg         " "render_mask              " "wipRepo                  " "wipRetime                " "wipRetimeAndRepo         " "wipStitch                "}}
+ addUserKnob {26 ""}
+ addUserKnob {1 ieJabukaUrl l "Jabuka Path" +DISABLED}
+ ieJabukaUrl "\\\$\{jabuka:location\}/assets/cine/fg/plate_animMatte"
+ addUserKnob {6 ieEntityVersionMoved l Hidden -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityVersion l "Entity Version" +DISABLED M {0}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE +DISABLED}
+ addUserKnob {1 ieFilePath l "Filesystem Path" +DISABLED}
+ addUserKnob {32 ieCreateEntityButton l "Create Entity" +STARTLINE}
+ addUserKnob {6 ieAutoCreate l "Auto Create Entity" -STARTLINE +DISABLED}
+ ieAutoCreate true
+ addUserKnob {6 ieAutoMerge l "Automatically Merge Versions" t "Set this to automatically merge the new render with the set ieEntity version" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoDaily l "Auto Daily after Render" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoApprove l "Auto Approve after Render" -STARTLINE +DISABLED}
+ ieAutoApprove true
+ addUserKnob {43 ieVersionDescription l "Version Description" +DISABLED}
+ ieVersionDescription "BG: wipRetime_wholeFrames (denoised), for use by bgPrep."
+ addUserKnob {32 ieRenderButton l Render +DISABLED +STARTLINE}
+ addUserKnob {6 ieRunDependencies l "Run upstream dependencies" -STARTLINE +DISABLED}
+ addUserKnob {26 ""}
+ addUserKnob {32 ieMergeButton l "Merge with another version" +DISABLED +STARTLINE}
+ addUserKnob {32 ieCreateReadNodeButton l "Create Read Node" +STARTLINE}
+ addUserKnob {32 ieDailyButton l "Create Daily" +DISABLED +STARTLINE}
+ addUserKnob {26 ieAutoDailySep l "Auto Daily" +DISABLED}
+ addUserKnob {4 ieWhoFor l "Who For" t "Used for `whoFor` parameter of auto daily" +DISABLED M {"Department Lead" "Asset Supervisor" "Environment Supervisor" "Anim Supervisor" "CG Supervisor" "2D Supervisor" "VFX Supervisor" "DFX Supervisor" "Rigging Supervisor" Artist}}
+ addUserKnob {4 ieAutoDailyLUT l LUT t "Used for `LUT` parameter of auto daily" +DISABLED M {Auto Show_LUT_CDL Show_LUT Facility_LUT rec709 sRGB None}}
+ addUserKnob {32 __ieRemoveExpressionLinks l "internal remove expression links" -STARTLINE +INVISIBLE}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+NoOp {
+ name RepoAndRetimeHelperAnchor2
+ autolabel "nuke.thisNode()\['AssetChoice'].value()"
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 30
+ selected true
+ xpos -38411
+ ypos -8636
+ addUserKnob {20 RepoAndRetimeHelperAnchor l "Repo And Retime Helper Anchor"}
+ addUserKnob {4 AssetChoice l Asset M {CameraRepo RetimeCurve retimeVectors wipRetime_wholeFrames wipRetime wipRepo wipRetimeAndRepo "" "" "" "" "" ""}}
+ AssetChoice wipRetime_wholeFrames
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+NoOp {
+ inputs 0
+ name RepoAndRetimeHelperAnchor1
+ autolabel "nuke.thisNode()\['AssetChoice'].value()"
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 30
+ selected true
+ xpos -38758
+ ypos -8636
+ addUserKnob {20 RepoAndRetimeHelperAnchor l "Repo And Retime Helper Anchor"}
+ addUserKnob {4 AssetChoice l Asset M {CameraRepo RetimeCurve retimeVectors wipRetime_wholeFrames wipRetime wipRepo wipRetimeAndRepo "" "" "" "" "" ""}}
+ AssetChoice RetimeCurve
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+NoOp {
+ inputs 0
+ name RepoAndRetimeHelperAnchor
+ autolabel "nuke.thisNode()\['AssetChoice'].value()"
+ tile_color 0x7f7f7fff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 30
+ selected true
+ xpos -39027
+ ypos -8636
+ addUserKnob {20 RepoAndRetimeHelperAnchor l "Repo And Retime Helper Anchor"}
+ addUserKnob {4 AssetChoice l Asset M {CameraRepo RetimeCurve retimeVectors wipRetime_wholeFrames wipRetime wipRepo wipRetimeAndRepo "" "" "" "" "" ""}}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+ieBundlePublisher {
+ inputs 7
+ name BundlePublisher_compPrep_out__2
+ tile_color 0x7f7f7fff
+ selected true
+ xpos -38135
+ ypos -8481
+ icon /software/apps/jabuka/7.211.0/tools/python/2.7/noarch/cortex/10.3/GafferJabukaUI/Resources/Icons/dynamic.png
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> \n<B>ieEntityId:</B> 0\n<B>ieAssetId:</B> 0\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType Bundle
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 3299516
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 2
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "Bundle Version" +DISABLED}
+ addUserKnob {4 ieUpdateMode l "Update Mode" +INVISIBLE M {locked latest latestApproved default}}
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +DISABLED +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {20 ieFarmOverrides l "Farm Overrides"}
+ addUserKnob {6 ieFarmClumpingEnabled l Clumping +INVISIBLE +STARTLINE}
+ addUserKnob {3 ieFarmClumpingOverride l "" -STARTLINE +DISABLED +INVISIBLE}
+ ieFarmClumpingOverride 5
+ addUserKnob {6 ieFarmNotesEnabled l Notes +STARTLINE}
+ addUserKnob {1 ieFarmNotesOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {6 ieFarmMemoryEnabled l Memory +STARTLINE}
+ addUserKnob {3 ieFarmMemoryOverride l "" -STARTLINE +DISABLED}
+ ieFarmMemoryOverride 8
+ addUserKnob {6 ieFarmGroupsEnabled l " Groups" +STARTLINE}
+ addUserKnob {1 ieFarmGroupsOverride l "" -STARTLINE +DISABLED}
+ ieFarmGroupsOverride NUKE
+ addUserKnob {6 ieFarmNukeOptionalArgumentsEnabled l " Nuke Optional arguments" +STARTLINE}
+ addUserKnob {1 ieFarmNukeOptionalArgumentsOverride l "" -STARTLINE +DISABLED}
+ addUserKnob {20 iePublisherInfo l "Publisher Information"}
+ addUserKnob {4 ieSetupMode l Mode +DISABLED M {"Advanced                 " "Default                  " "Cine Asset               "}}
+ ieSetupMode "Default                  "
+ addUserKnob {4 ieLocationMode l Location +DISABLED M {"User Defined             " "Current Environment      "}}
+ ieLocationMode "Current Environment      "
+ addUserKnob {1 ieLocation l "" -STARTLINE +INVISIBLE}
+ ieLocation /FS3/setup/FS3-setup-comp
+ addUserKnob {26 ieSeparatorLocation l "   "}
+ addUserKnob {4 ieStage l Stage +DISABLED M {"animation                " "art                      " "assets                   " "bgPrep                   " "cine                     " "comp                     " "compPrep                 " "coordination             " "creatureFX               " "crowd                    " "editorial                " "environment              " "finalling                " "fx                       " "gen                      " "grooming                 " "io                       " "layout                   " "lighting                 " "lookDev                  " "matchMove                " "mattePainting            " "ml                       " "modelling                " "rigging                  " "rnd                      " "stereo                   " "texturing                "}}
+ ieStage "compPrep                 "
+ addUserKnob {4 ieSourceBundle l "Source Bundle" t "The bundle used as a source for the bundle being published, important when doing a bundle render" +DISABLED M {compPrep_denoise_in compPrep_in comp_in}}
+ ieSourceBundle compPrep_in
+ addUserKnob {4 ieTargetBundle l "Target Bundle" t "The bundle being published, available options sourced from the location workflow template." +DISABLED M {animation_out animation_render_out cine_neutral_out cine_plateCard_out compPrep_denoise_out compPrep_out comp_out creatureFX_out creatureFX_preroll_out crowd_out editorial_out finalling_out fx_out io_out layout_out lighting_out matchMove_bg_out mattePainting_out}}
+ ieTargetBundle compPrep_out
+ addUserKnob {32 ieUpdateTargetBundlesButton l Refresh t "Refresh the target bundle list from the current workflow template." -STARTLINE +DISABLED}
+ addUserKnob {4 ieAsset l "Cine Asset" +INVISIBLE M {}}
+ addUserKnob {32 ieUpdateAssetListButton l Refresh -STARTLINE +INVISIBLE}
+ addUserKnob {26 ""}
+ addUserKnob {1 ieJabukaUrl l "Jabuka Path" +DISABLED}
+ ieJabukaUrl "\\\$\{jabuka:location\}/bundleLibrary/compPrep_out"
+ addUserKnob {6 ieEntityVersionMoved l Hidden -STARTLINE +INVISIBLE}
+ addUserKnob {4 ieEntityVersion l "Entity Version" +DISABLED +INVISIBLE M {}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE +DISABLED +INVISIBLE}
+ addUserKnob {32 ieCreateEntityButton l "Create Entity" +DISABLED +STARTLINE}
+ addUserKnob {6 ieAutoCreate l "Auto Create Entity" -STARTLINE +DISABLED}
+ ieAutoCreate true
+ addUserKnob {6 ieAutoApprove l "Auto Approve after Render" -STARTLINE +DISABLED}
+ ieAutoApprove true
+ addUserKnob {43 ieVersionDescription l "Version Description" +DISABLED}
+ ieVersionDescription "BG cine asset Retime publish:\n - RetimeCurve\n - wipRetime\n - wipRetime_wholeFrames\n\n(Published with Repo and Retime Helper)"
+ addUserKnob {4 ieBundleRenderProfile l "bundle render profile" +DISABLED M {"assets                        " "bgPrep_annotation_out         " "bgPrep_out                    " "bgPrep_outsource_in           " "bgPrep_outsource_out          " "bgPrep_publish_in             " "blasterExample                " "cine_brpBackground_in         " "cine_brpBackground_out        " "cine_neutral_in               " "cine_neutral_out              " "cine_plateCard_in             " "cine_plateCard_inNoUse        " "cine_plateCard_out            " "cine_workingMask_in           " "cine_workingMask_out          " "compPrep_denoise_in           " "compPrep_out                  " "comp_out                      " "creatureFX_in                 " "crowd_setup_out               " "editorial                     " "fx                            " "fx_comp                       " "fx_gen                        " "fx_out_qc                     " "fx_render_out                 " "fx_tdw_test                   " "fx_template                   " "fx_wip                        " "genericQC                     " "geometryQC                    " "grooming_out                  " "lighting_in                   " "lighting_inDebug              " "lighting_out                  " "lighting_out_cleanup          " "lighting_out_fromSNP4         " "lighting_platemask            " "lighting_refball              " "lookDev                       " "matchMove                     " "matchMoveConeQC               " "matchMoveRetime               " "matchMove_Outlinetest         " "mattePainting                 " "ml_in                         " "ml_segmentationTraining_in    " "ml_segmentationTraining_out   " "ml_segmentation_in            " "ml_segmentation_out           " "modelling                     " "modelling_groom_out           " "plateQC                       " "renderQC                      " "rigging                       " "sampleBRP                     " "texturing                     " "vendor_out                    " "vendor_qc                     " "witnessCamQC                  " "witnessQC                     "}}
+ ieBundleRenderProfile "compPrep_out                  "
+ addUserKnob {6 ieBundleRenderEnabled l "run bundle render" -STARTLINE +DISABLED}
+ addUserKnob {6 ieBundleRenderUseNukeRange l "use nuke frame range" t "Use nuke's global (or dispatcher) frame range for the bundle render. If not selected the bundle render profile's default frame range mode will be used, which will produce correct results in most cases." -STARTLINE +DISABLED}
+ addUserKnob {32 ieEditProfileSettings l "Edit Profile Settings" +DISABLED +STARTLINE}
+ addUserKnob {1 __ieProfileSettings l "Internal knob to store profile settings" +INVISIBLE}
+ __ieProfileSettings "\{\}"
+ addUserKnob {26 ieSeparatorBRP l "  "}
+ addUserKnob {6 ieClearPreviousValues l "clear previous values" t "If checked, only the node's entities connected will be added to the bundle, clearing all previous added components.\nIf you want to add to the bundle, uncheck. If you want to reset the bundle from scratch with only the content\nin your scene, then check it." -STARTLINE +DISABLED}
+ addUserKnob {6 ieRunDependencies l "Run upstream dependencies" -STARTLINE +DISABLED}
+ ieRunDependencies true
+ addUserKnob {32 ieRenderButton l Publish +DISABLED +STARTLINE}
+ addUserKnob {26 link l Link +DISABLED T RepoAndRetimeHelper}
+}
+NoOp {
+ name RepoAndRetimeHelper
+ onCreate "import nuke \nimport nukescripts\nimport JabukaNuke\nimport Jabuka\nfrom ShotgunDatabase import IEShotgunApi\nimport threading\nimport math\nimport IECore\nimport datetime\n\n##################################################################################################################################################################################################################\n\n###############                                   BEGIN MERGE TRANSFORMS FUNCTIONS                                                      ##########################################################################\n\n##################################################################################################################################################################################################################\n\ndef sort_nodes(node_list):\n    # Sorts selected nodes by number of parents of an allowed class\n    nodes_in_list = 0\n    sorted_list = \[]\n    for n in node_list:\n        has_parents = True\n        number_of_nodes = 1\n        list_of_nodes = \[n]\n        # we count how many parents the node has\n        while has_parents:\n            p = n.input(0)\n            if p:\n                if p\['selected'].value():\n                    n = p\n                    number_of_nodes += 1\n                    list_of_nodes.append(n)\n                else:\n                    has_parents = False\n            else:\n                has_parents = False\n\n                # the node with the biggest number of parents is our last node\n        if number_of_nodes > nodes_in_list:\n            nodes_in_list = number_of_nodes\n            sorted_list = list_of_nodes\n\n    # We want our first node first though, so we reverse the list\n    sorted_list.reverse()\n    return sorted_list\n\n##################################################################################################################################################################################################################\n\ndef decompose_matrix(m, center_x=0, center_y=0):\n    # Solve Translation\n    vector = nuke.math.Vector3(center_x, center_y, 0)\n    vector_trans = m.transform(vector)\n    translate_x = vector_trans\[0] - center_x\n    translate_y = vector_trans\[1] - center_y\n    # Solve Rotation/Scale/Skew\n    # Skew Y is never solved, will be reflected in Rotation instead.\n    delta = (m\[0] * m\[5]) - (m\[4] * m\[1])\n    r = pow(m\[0], 2) + pow(m\[1], 2)\n    rotation = math.degrees(math.atan2(m\[1], m\[0]))\n    scale_x = math.sqrt(r)\n    scale_y = delta / scale_x\n    skew_x = (m\[0] * m\[4] + m\[1] * m\[5]) / delta\n    return translate_x, translate_y, rotation, scale_x, scale_y, skew_x\n\n\ndef get_matrix_at_frame(node, frame):\n    matrix = None\n    if node.Class() == 'Transform' or node.Class() == 'Tracker4':\n        k = node.knob('matrix')\n        context = nuke.OutputContext()\n        context.setFrame(frame)\n        matrix = k.value(context)\n\n    return matrix\n\n\ndef check_classes(nodes, allowed_classes):\n    valid = True\n    for n in nodes:\n        if n.Class() not in allowed_classes:\n            nuke.message(\"Please select only supported Nodes:\"+', '.join(allowed_classes))\n            valid = False\n            break\n    return valid\n\n##################################################################################################################################################################################################################\n\ndef fuse_transforms():\n    this = nuke.thisNode()\n    nodes = nuke.selectedNodes()\n    \n    valid_nodes = check_classes(nodes, \['Transform', 'Tracker4'])\n    if valid_nodes:\n        transform_list = sort_nodes(nodes)\n    else:\n        return 0\n\n    # We check that we have at least 2 transforms, otherwise no point in merging\n    if len(transform_list) < 1:\n        nuke.message(\"You need at least 1 transform selected\")\n        return 0\n    elif len(transform_list) != len(nodes):\n        nuke.message(\"Please make sure all nodes form a single Branch\")\n        return 0\n\n    first = int(this\['FirstFrame'].value())\n    last = int(this\['LastFrame'].value())\n\n    task = nuke.ProgressTask(\"Merging Transforms\")\n    task.setMessage(\"Checking Settings\")\n\n    # Our nodes resolution might be useful too\n    height = transform_list\[0].height()\n    width = transform_list\[0].width()\n    center_x = width/2\n    center_y = height/2\n\n    # Create the node to receive the baked transformations\n    new_node = nuke.nodes.Transform(inputs=\[transform_list\[0].input(0)],\n                                    xpos=transform_list\[0]\['xpos'].value() + 100,\n                                    ypos=transform_list\[0]\['ypos'].value(),\n                                    label='Merged Transform')\n    new_node\['center'].setValue(width/2, 0)\n    new_node\['center'].setValue(height/2, 1)\n    if not first == last:\n        # More than one frame, enable animation\n        new_node\['translate'].setAnimated()\n        new_node\['rotate'].setAnimated()\n        new_node\['scale'].setAnimated()\n        new_node\['skewX'].setAnimated()\n\n    task.setMessage(\"Merging transforms\")\n\n    # We need the calculation for each frame\n    try:\n        for frame in range(first, last + 1):\n            if task.isCancelled():\n                break\n            current_matrix = get_matrix_at_frame(transform_list\[0], frame)\n            task.setMessage('Calculating Frame: \{\}'.format(frame))\n            # We merge the nodes 2 by two\n            if len(transform_list) != 1:\n                for i in range(1, len(transform_list)):\n                    transform_matrix = get_matrix_at_frame(transform_list\[i], frame)\n                    current_matrix = transform_matrix * current_matrix\n                    \n            # If the pixel aspect ratio is not 1, a Transform would take it into account,\n            # resulting in a different result than our Matrix. Compensate for it.\n            par = transform_list\[0].format().pixelAspect()\n            if par != 1.0:\n                # The transform already sandwiches our transform with 2 pixel aspect transforms:\n                # First is applies the pixel aspect ratio, then puts the matrix, then un-applies it.\n                # In order to compensate, we need to do the opposite.\n\n                # We start by centering our center (putting it a 0, 0)\n                ctr_m = nuke.math.Matrix4()\n                ctr_m.makeIdentity()\n                ctr_m.translate(center_x, center_y, 0)\n                # Prepare the matrix to stretch the PAR\n                par_m = nuke.math.Matrix4()\n                par_m.makeIdentity()\n                par_m.scale(par, 1, 1)\n                # To un_apply properly, we move center to 0, stretch, move center back in place.\n                un_apply_par = ctr_m * par_m.inverse() * ctr_m.inverse()\n                # To re-apply the transform, we need to do the opposite, but the center may have moved.\n                # Get the new center\n                vector = nuke.math.Vector3(center_x, center_y, 0)\n                offset = current_matrix.transform(vector)\n                ctr_m.translate(offset\[0] - center_x, offset\[1] - center_y, 0)\n                # Now undo the PAR transformed, base don the new center\n                apply_par = ctr_m * par_m * ctr_m.inverse()\n                # Prep the final matrix\n                current_matrix = apply_par * current_matrix * un_apply_par\n\n            translate_x, translate_y, rotation, scale_x, scale_y, skew_x = decompose_matrix(current_matrix,\n                                                                                            center_x, center_y)\n            new_node\['translate'].setValueAt(round(translate_x,6), frame, 0)\n            new_node\['translate'].setValueAt(round(translate_y,6), frame, 1)\n            new_node\['rotate'].setValueAt(round(rotation,6), frame)\n            new_node\['scale'].setValueAt(round(scale_x,6), frame, 0)\n            new_node\['scale'].setValueAt(round(scale_y,6), frame, 1)\n            new_node\['skewX'].setValueAt(round(skew_x,6), frame)\n\n            # set thread progress\n            task.setProgress(int((frame - first) / ((last - first) * 0.01)))\n    except:\n        raise\n    finally:\n        task.setProgress(100)\n        del task\n        \n    return new_node\n\n######################################################################################################################################################\n\ndef mergeTransforms(publish=False):\n    this = nuke.thisNode()\n    mergedTransform = None\n    \n    if this.input(0) == None:\n        nuke.message('<font color=red>Error!</font>\\n\\nThis Repo and Retime Helper node is not plugged into the Retime/Repo template.')\n        return\n    \n    Lin2Log = None\n    Log2Lin = None\n    \n    connected = getConnectedUpstream(this)\n    \n    for node in connected:\n        if node.Class() == 'OCIOColorSpace':\n            if node\['label'].value() == 'Lin2Log':\n                Lin2Log = node\n            elif node\['label'].value() == 'Log2Lin':\n                Log2Lin = node\n               \n    if not Lin2Log and Log2Lin:\n        nuke.message('<font color=red>Error!</font>\\n\\nLog sandwhich is missing!\\n\\nTransform merging function uses the the log sandwhich to decide what transform nodes to merge.')\n        return\n    else:\n        transforms = \[]\n        cont = True\n        input = Log2Lin\n        \n        while cont == True:\n            if input.input(0).Class() in \['Transform','Tracker4']:\n                input = input.input(0)\n                transforms.append(input)\n            else:\n                cont = False\n                \n    if not transforms:\n        nuke.message('<font color=red>Error!</font>\\n\\nNo Transform or Tracker4 nodes found in the repo log sandwich in the template, nothing to merge.')\n        return\n    else:\n               \n        if not publish:\n            nuke.selectAll(); nuke.invertSelection()\n            for t in transforms:\n                t.setSelected(True)\n                t\['xpos'].setValue(((Lin2Log\['xpos'].value()+Log2Lin\['xpos'].value())/2)-400)\n            \n            mergedTransform = fuse_transforms()\n                \n            Log2Lin.setInput(0, mergedTransform)\n            \n            mergedTransform\['xpos'].setValue((Lin2Log\['xpos'].value()+Log2Lin\['xpos'].value())/2)\n            mergedTransform\['ypos'].setValue((Lin2Log\['ypos'].value()+Log2Lin\['ypos'].value())/2)\n            \n            nuke.selectAll(); nuke.invertSelection()\n            for t in transforms:\n                t.setSelected(True)\n            \n            sn = nuke.createNode('StickyNote', inpanel=False)\n            sn\['label'].setValue('Unmerged Repo Nodes')\n            sn\['note_font_size'].setValue(30)\n            sn\['xpos'].setValue(((Lin2Log\['xpos'].value()+Log2Lin\['xpos'].value())/2)-525)\n            sn\['ypos'].setValue(Lin2Log\['ypos'].value())\n            \n        else:\n            nuke.selectAll(); nuke.invertSelection()\n            \n            for t in transforms:\n                t.setSelected(True)\n            \n            mergedTransform = fuse_transforms()\n            \n        repoKnobs = \['filter','motionblur','shutter','shutteroffset','shuttercustomoffset']\n        \n        for k in repoKnobs:\n            mergedTransform\[k].setValue(this\[k].value())\n        \n        return mergedTransform\n            \n##################################################################################################################################################################################################################\n\n###############                                     END MERGE TRANSFORMS FUNCTIONS                                                      ##########################################################################\n\n##################################################################################################################################################################################################################\n\ndef loadNodes(knobName):\n    nuke.selectAll(); nuke.invertSelection()\n    clipboard = QtWidgets.QApplication.clipboard()\n    clipboard.setText(nuke.thisNode()\[knobName].value())\n    nuke.selectAll(); nuke.invertSelection()\n    nuke.nodePaste('%clipboard%')\n    \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n\ndef setPublishButtonLabel():\n    this = nuke.thisNode()\n    \n    fontStyle = 'size=5 style=text-transform:uppercase'\n    \n    if this\['PublishChoice'].value() != 'Auto Detect':\n        if (this\['PublishChoice'].value() == 'Repo' and not this\['RepoCheck'].value()) or (this\['PublishChoice'].value() == 'Retime' and not this\['RetimeCheck'].value()) or (this\['PublishChoice'].value() == 'Retime and Repo' and (not this\['RetimeCheck'].value() or  not this\['RepoCheck'].value())):\n            fontColor = 'yellow'\n        else:\n            fontColor = 'lime'\n        this\['Publish'].setLabel('<font '+fontStyle+' color='+fontColor+'><b>Publish '+this\['PublishChoice'].value())\n    else:\n        if this\['RepoCheck'].value() and this\['RetimeCheck'].value():\n            this\['Publish'].setLabel('<font '+fontStyle+' color=lime><b>Publish Retime and Repo')\n        elif this\['RepoCheck'].value():\n            this\['Publish'].setLabel('<font '+fontStyle+' color=lime><b>Publish Repo')\n        elif this\['RetimeCheck'].value():\n            this\['Publish'].setLabel('<font '+fontStyle+' color=lime><b>Publish Retime')\n        else:\n            this\['Publish'].setLabel('<font '+fontStyle+' color=red><b>Nothing to Publish')\n            \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n\ndef shotgunRespeedRepoCheck():\n    this = nuke.thisNode()\n    \n    pathSplit = os.environ\['IEENV_WORKING_PATH'].split('/')\n    show = pathSplit\[3]\n    seq = pathSplit\[5]\n    shot = pathSplit\[7]\n    \n    this\['Shot'].setValue('<font size=4>'+shot)\n    \n    shotEntity = IEShotgunApi.Shot.query(code=shot).one(columns=\['sg_re_speed','sg_repo'])\n    \n    if shotEntity\['sg_re_speed'] == None or shotEntity\['sg_re_speed'] == 'No' or shotEntity\['sg_re_speed'] == 'N/A':\n        this\['Retime'].setValue('<font color=red size=4>Retime NOT Flagged')\n        this\['RetimeCheck'].setValue(False)\n        retime = False\n    else:\n        this\['Retime'].setValue('<font color=lime size=4>Retime Flagged')\n        this\['RetimeCheck'].setValue(True)\n        retime = True\n    \n    if shotEntity\['sg_repo'] == None or shotEntity\['sg_repo'] == 'No' or shotEntity\['sg_repo'] == 'N/A':\n        this\['Repo'].setValue('<font color=red size=4>Repo NOT Flagged')\n        this\['RepoCheck'].setValue(False)\n        repo = False\n    else:\n        this\['Repo'].setValue('<font color=lime size=4>Repo Flagged')\n        this\['RepoCheck'].setValue(True)\n        repo = True\n    \n    setPublishButtonLabel()\n \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################   \n    \ndef loadLineupNotes():\n    this = nuke.thisNode()\n    \n    pathSplit = os.environ\['IEENV_WORKING_PATH'].split('/')\n    show = pathSplit\[3]\n    seq = pathSplit\[5]\n    shot = pathSplit\[7]\n    \n    shotEntity = IEShotgunApi.Shot.query(code=shot).one(columns=\['sg_lineup_notes'])\n    \n    if shotEntity\['sg_lineup_notes']:\n        lineupNotes = 'Lineup Notes\\n\\n'+shotEntity\['sg_lineup_notes']+'\\n\\n'\n    else:\n        lineupNotes = '\"Lineup Notes\" field in ShotGrid for this shot is empty!\\n\\nPlease reach out to your editorial team\\n\\n'\n    \n    for node in nuke.allNodes('StickyNote'):\n        if node.knob('link'):\n            if this.name() == node\['link'].value():\n                nuke.delete(node)\n    \n    stickyNote = nuke.createNode('StickyNote', inpanel=False)\n    \n    stickyNote\['label'].setValue(lineupNotes)\n    stickyNote\['note_font_size'].setValue(50)\n    stickyNote\['xpos'].setValue(this\['xpos'].value()-500)\n    stickyNote\['ypos'].setValue(this\['ypos'].value()+500)\n    \n    knob = nuke.Text_Knob('link','Link',this.name())\n    stickyNote.addKnob(knob)\n    \n    nuke.zoom( .4, \[ stickyNote.xpos(), stickyNote.ypos() ])\n    \n    \n##################################################################################################################################################################################################################\n\ndef setShotFrameRange():\n    shotPathSplit = os.environ\['IEENV_WORKING_PATH'].split('/')\n    shotPath = shotPathSplit\[3]+'/'+shotPathSplit\[5]+'/'+shotPathSplit\[7]\n    shot = Jabuka.findEntity(shotPath, onlyBase=False, throwException=False)\n    \n    frameStart = shot\[\"frameStart\"].getTypedValue()\n    frameEnd = shot\[\"frameEnd\"].getTypedValue()\n    \n    cutStart = shot\[\"frameIn\"].getTypedValue()\n    cutEnd = shot\[\"frameOut\"].getTypedValue()\n    \n    nuke.root()\['first_frame'].setValue(frameStart)\n    nuke.root()\['last_frame'].setValue(frameEnd)\n    nuke.thisNode()\['FirstFrameCut'].setValue(cutStart)\n    nuke.thisNode()\['LastFrameCut'].setValue(cutEnd)\n    \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n\ndef getConnectedUpstream(node):\n    dependencies = \[]\n    nodes_to_process = node.dependencies(nuke.INPUTS | nuke.HIDDEN_INPUTS)\n    while nodes_to_process:\n        node = nodes_to_process.pop(0)\n        if node not in dependencies:\n            dependencies.append(node)\n            nodes_to_process.extend(node.dependencies(nuke.INPUTS | nuke.HIDDEN_INPUTS))\n    return dependencies\n    \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n\ndef getConnectedDownstream(node):\n    dependencies = \[]\n    nodes_to_process = node.dependent(nuke.INPUTS | nuke.HIDDEN_INPUTS)\n    while nodes_to_process:\n        node = nodes_to_process.pop(0)\n        if node not in dependencies:\n            dependencies.append(node)\n            nodes_to_process.extend(node.dependent(nuke.INPUTS | nuke.HIDDEN_INPUTS))\n    return dependencies\n    \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n    \ndef roundToInt(number):\n    import math\n    \n    roundUp = math.ceil(float(number))\n    roundDown = math.floor(float(number))\n    \n    if (number-roundDown) >= 0.5:\n        return roundUp\n    else:\n        return roundDown\n    \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n\ndef saveNukeScript(role='compPrep', name='retimeAndRepo'):\n\n    shotPathSplit = os.environ\['IEENV_WORKING_PATH'].split('/')\n    shotPath = shotPathSplit\[3]+'/'+shotPathSplit\[5]+'/'+shotPathSplit\[7]\n    shot = Jabuka.findEntity(shotPath, onlyBase=True, throwException=False)\n    \n    libraryPath = os.path.join( shot.virtualPath(), \"sceneLibrary\", \"nuke\" )\n    newEntityPath = os.path.join( libraryPath, role, name )\n    \n    entity = Jabuka.createEntity( newEntityPath, entityType=\"Scene\")\n    \n    sceneEntity = Jabuka.getEntity(entity.getId())\n    \n    sceneEntity.setVersion(None)\n    \n    sceneEntity\['extension'].setTypedValue(\"nk\")\n    sceneEntity\[\"application\"].setTypedValue(\"nuke\")\n    \n    jfn = Jabuka.JFnEntity.create(sceneEntity)\n    \n    # setting the modification date\n    jfn.setModificationDate(IECore.DateTimeData(datetime.datetime.now()))\n    \n    try:\n        sceneEntity.store(dbReadData=True, updateSearch=False)\n    except:\n        sceneEntity.storeBase()\n    \n    # updating the baseOn field\n    basedOnEntity = sceneEntity\n    if basedOnEntity:\n    \tsceneEntity\['basedOn'].setConnection(basedOnEntity.getId(), basedOnEntity.getVersion())\n    \tsceneEntity.storeBase(updateSearch=False)\n    \n    # mark as wip\n    sceneEntity.setFileSystemStatus(Jabuka.EntityTypes.VersionedEntity.FileSystemStatus.wip)\n    sceneEntity.storeBase(updateSearch=True)\n    \n    # saving the scene with the proper name\n    scenePath = str(jfn.mainSceneFile(create=True))\n    \n    # ask Nuke to save the file\n    nuke.scriptSaveAs(filename=scenePath)\n    \n    JabukaNuke.JFn.JFnScene.addRecentFile(scenePath)\n    \n    # set contents on the entity\n    jfn.setContents()\n    \n    # making the backup\n    jfn.createSceneBackupFile(markAsReadOnly=False, forceCreation=False)\n\n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n\ndef setUpTemplate(firstSetup=True):\n            \n    setShotFrameRange()\n    shotgunRespeedRepoCheck()\n    \n    this = nuke.thisNode()\n    connected = getConnectedUpstream(this)\n    denoisePlate = None\n    cineAsset = None\n    \n    if firstSetup:\n        \n        clearRepo = this\['ClearRepo'].value()\n        clearRetime = this\['ClearRetime'].value()\n        \n        loadLineupNotes()\n        \n        with Jabuka.Utils.ScopedRole(\"compPrep\"):\n            \n            # Update all Dynamic nodes in the template to this shot environment\n            update = JabukaNuke.UI.NukeApplicationUI.functools.partial(JabukaNuke.JNFn.JNFnAssetNode.updateAllToLocation, selectedOnly=True)\n            nuke.selectAll(); nuke.invertSelection()\n            this.setSelected(True)\n            nuke.selectConnectedNodes()\n            update()\n            nuke.selectAll(); nuke.invertSelection()\n    \n    lockKnobs = \['ieAutoDaily','ieAutoApprove','ieRunDependencies','iePlateComponent','iePlate','ieLocationMode','ieSetupMode','ieMergeButton','ieDailyButton','ieWhoFor','ieAutoDailyLUT','ieStage','ieSourceBundle','ieTargetBundle','ieUpdateTargetBundlesButton','ieAutoCreate','ieBundleRenderProfile','ieBundleRenderEnabled','ieBundleRenderUseNukeRange','ieEditProfileSettings','ieClearPreviousValues','ieRunDependencies','ieRenderButton','ieJabukaUrl','ieUpdatePlateListButton','ieEntityVersion','ieUpdateVersions','ieFilePath','ieCreateEntityButton','ieAutoMerge','ieAutoDailySep','ieVersionDescription']\n    \n    # Find denoise plate\n    for node in connected:\n        if node.Class() == 'Read':\n            if node.knob('ieDisplayName'):\n                if 'plate' in node\['ieDisplayName'].value():\n                    denoisePlate = node\n                    # Save plate cine asset variable for write nodes\n                    cineAsset = denoisePlate\['file'].evaluate().split('/')\[11]\n                    denoisePlateCineAssetPlate = cineAsset+'/plate'\n                    \n    if this.input(0):\n        if not cineAsset:\n            nuke.message('<font color=red>Error!</font> Setup failed, no cine asset (denoise plate) detected upstream.')\n            return\n                    \n    # Define artist notes to add to write node and bundlePublisher nodes\n    retimeRepoArtistNotes = ''\n    retimeArtistNotes = ''\n    repoArtistNotes = ''\n    \n    if this\['ArtistNotes'].value().strip():\n        if this\['ArtistNotesChoice'].value() == 'Retime and Repo':\n            retimeRepoArtistNotes = '\\n\\nArtist Notes:\\n'+this\['ArtistNotes'].value().strip()\n            repoArtistNotes = '\\n\\nArtist Notes:\\n'+this\['ArtistNotes'].value().strip()\n            retimeArtistNotes = '\\n\\nArtist Notes:\\n'+this\['ArtistNotes'].value().strip()\n        elif this\['ArtistNotesChoice'].value() == 'Retime':\n            retimeRepoArtistNotes = '\\n\\nArtist Notes:\\n'+this\['ArtistNotes'].value().strip()\n            retimeArtistNotes = '\\n\\nArtist Notes:\\n'+this\['ArtistNotes'].value().strip()\n        elif this\['ArtistNotesChoice'].value() == 'Repo':\n            retimeRepoArtistNotes = '\\n\\nArtist Notes:\\n'+this\['ArtistNotes'].value().strip()\n            repoArtistNotes = '\\n\\nArtist Notes:\\n'+this\['ArtistNotes'].value().strip()\n    \n    ####################### Set knob settings on upstream nodes #######################\n    for node in nuke.allNodes():\n        if node in connected:\n            if node.Class() in \['Write','ieBundlePublisher','NoOp','Group','Transform','Tracker4','OCIOColorSpace','FrameHold']:\n\n                if not node.knob('link'):\n                    knob = nuke.Text_Knob('link','Link',this.name())\n                    node.addKnob(knob)\n                    node\['link'].setEnabled(False)\n                else:\n                    node\['link'].setValue(this.name())\n                    \n                if node.Class() in \['Write','ieBundlePublisher','NoOp','OCIOColorSpace','FrameHold']:\n                    node\['tile_color'].setValue(2139062271)\n                \n                # Lock knobs\n                for k in lockKnobs:\n                    if node.knob(k):\n                        node\[k].setEnabled(False)\n                        \n                ### Set Respeed node knobs #######################\n                if node.Class() == 'Group':\n                    if node.knob('Respeed'):\n                        node\['disable'].setExpression('!'+this.name()+'.RetimeCurve')\n                        if not this\['RetimeCurve'].value():\n                            node\['tile_color'].setValue(2139062271)\n                        else:\n                            node\['tile_color'].setValue(0)\n                        \n                        if firstSetup:\n                            if clearRetime:\n                                # Set respeed animation curve to match shot \n                                node\['method'].setValue('Frame Number')\n                                node\['interpolation'].setValue('Motion')\n                                node\['referenceFramePlate'].setValue(this\['FirstFrameCut'].value())\n                                node\['referenceFrameEdit'].setValue(this\['FirstFrameCut'].value())\n                                node\['speed'].clearAnimated()\n                                node\['speed'].setValue(100)\n                                node\['timingFrame'].clearAnimated()\n                                node\['timingFrame'].setAnimated()\n                                node\['timingFrame'].setValueAt(nuke.root()\['first_frame'].value(), nuke.root()\['first_frame'].value())\n                                node\['timingFrame'].setValueAt(nuke.root()\['last_frame'].value(), nuke.root()\['last_frame'].value())           \n                    \n                ### Set Transform and OCIOColorSpace node knobs #######################\n                if node.Class() in \['Transform','OCIOColorSpace','Tracker4']:\n                    node\['disable'].setExpression('!'+this.name()+'.CameraRepo')\n                    if node.Class() in \['Transform','Tracker4']:\n                        if firstSetup:\n                            if clearRepo:\n                                if node.Class() == 'Transform':\n                                    node\['center'].clearAnimated()\n                                    node\['center'].setValue(node.width()/2,0)\n                                    node\['center'].setValue(node.height()/2,1)\n                                    \n                                    node\['translate'].clearAnimated()\n                                    node\['translate'].setValue(0,0)\n                                    node\['translate'].setValue(0,1)\n                                    \n                                    node\['rotate'].clearAnimated()\n                                    node\['rotate'].setValue(0)\n                                    \n                                    node\['scale'].clearAnimated()\n                                    node\['scale'].setValue(1)\n                        \n                        if not this\['CameraRepo'].value():\n                            node\['tile_color'].setValue(2139062271)\n                        else:\n                            node\['tile_color'].setValue(0)\n                        \n                ### Set Write node knobs #######################\n                if node.Class() == 'Write':\n                    if node.knob('ieRenderButton'):\n                    \n                        # Set Plate Component\n                        dependent = node.dependent(nuke.INPUTS | nuke.HIDDEN_INPUTS)\n                        for d in dependent:\n                            if d.Class() == 'NoOp':\n                                if d.knob('RepoAndRetimeHelperAnchor'):\n                                    assetChoice = d\['AssetChoice'].value()\n                                    \n                            \n                        # Add correct descriptions to the write nodes in the script and set auto daily variables\n                        writeDescription = None\n                        autoDaily = True\n                        \n                        node\['channels'].setValue('rgb')\n                        \n                        if assetChoice == 'wipRetime_wholeFrames':\n                            writeDescription = cineAsset.upper()+': wipRetime_wholeFrames (denoised), for use by bgPrep.'\n                            autoDaily = False\n                        elif assetChoice == 'wipRetime':\n                            writeDescription = cineAsset.upper()+': wipRetime (denoised), for ingest as Rt plate.'+retimeArtistNotes\n                        elif assetChoice == 'wipRepo':\n                            writeDescription = cineAsset.upper()+': wipRepo (denoised), for editRef-match QC.'+repoArtistNotes\n                        elif assetChoice == 'wipRetimeAndRepo':\n                            writeDescription = cineAsset.upper()+': wipRetime + wipRepo (denoised), for editRef-match QC.'+retimeRepoArtistNotes\n                        elif assetChoice == 'retimeVectors':\n                            writeDescription = cineAsset.upper()+': Retime motionVectors and metadata derived from denoise plate for matching retime.'+retimeArtistNotes\n                            node\['channels'].setValue('all')\n                            node\['use_limit'].setValue(True)\n                            node\['first'].setValue(denoisePlate.firstFrame()); node\['last'].setValue(denoisePlate.lastFrame())\n                            node\['datatype'].setValue('32 bit float')\n                            node\['metadata'].setValue('all metadata')\n                            autoDaily = False\n                            \n                        node\['ieAutoDaily'].setValue(autoDaily)\n                            \n                        if writeDescription:\n                            node\['ieVersionDescription'].setValue(writeDescription)\n                        \n                        # Set plate component for write nodes and then refresh them\n                        if assetChoice in str(node\['iePlateComponent'].values()):\n                            node\['iePlateComponent'].setValue(assetChoice)\n                            JNFnWriteNode = JabukaNuke.JNFn.JNFnWriteNode(node)\n                            JNFnWriteNode.buildJabukaUrl()\n                            \n                            # Set write node disable expressions\n                            if assetChoice in \['wipRetime_wholeFrames','wipRetime','retimeVectors']:\n                                node\['disable'].setExpression('!'+this.name()+'.RetimeCurve')\n                            elif assetChoice == 'wipRepo':\n                                node\['disable'].setExpression('!('+this.name()+'.CameraRepo && !'+this.name()+'.RetimeCurve)')\n                            elif assetChoice == 'wipRetimeAndRepo':\n                                node\['disable'].setExpression('!('+this.name()+'.CameraRepo && '+this.name()+'.RetimeCurve)')\n                        else:\n                            nuke.message('<font color=red>Error!\\n\\n</font>'+assetChoice+' plate component has not been setup on your show, please contact your supervisor.')\n                        \n                        # Set Plate\n                        if denoisePlate:\n                            JNFnWriteNode = JabukaNuke.JNFn.JNFnWriteNode(node)\n                            JNFnWriteNode.updatePlateList()\n                            \n                            plateOptions = node\['iePlate'].values()\n                            \n                            if node\['iePlate'].value().strip() != denoisePlateCineAssetPlate:\n                                if denoisePlateCineAssetPlate not in str(plateOptions):\n                                    nuke.message('<font color=red>Error!\\n\\n</font>'+denoisePlateCineAssetPlate.split('/')\[0]+' cine asset does not exist for this shot code, please check you are using the correct denoise plate for this shot.')\n                                    return\n                                else:\n                                    node\['iePlate'].setValue(denoisePlateCineAssetPlate)\n                                    JNFnWriteNode.buildJabukaUrl()\n                            \n                        # Set non dynamic knob settings\n                        node\['ieSetupMode'].setValue('Plate Component')\n                        node\['ieLocationMode'].setValue('Current Environment') \n                        node\['ieAutoCreate'].setValue(True) \n                        node\['ieAutoMerge'].setValue(False) \n                        node\['ieAutoApprove'].setValue(True)\n                        node\['ieRunDependencies'].setValue(False)\n                        \n                ### Set bundle publisher knobs ##################\n                if node.Class() == 'ieBundlePublisher':\n                    \n                    if this\['CameraRepo'].value() and this\['RetimeCurve'].value():\n                        description = cineAsset.upper()+' cine asset Retime and Repo publish:\\n - RetimeCurve\\n - CameraRepo\\n - wipRetimeAndRepo\\n - wipRetime\\n - wipRetime_wholeFrames'+'\\n\\n(Published with Repo and Retime Helper)'+retimeRepoArtistNotes\n                    elif this\['CameraRepo'].value():\n                        description = cineAsset.upper()+' cine asset Repo publish:\\n - CameraRepo\\n -wipRepo'+'\\n\\n(Published with Repo and Retime Helper)'+repoArtistNotes\n                    elif this\['RetimeCurve'].value():\n                        description = cineAsset.upper()+' cine asset Retime publish:\\n - RetimeCurve\\n - wipRetime\\n - wipRetime_wholeFrames'+'\\n\\n(Published with Repo and Retime Helper)'+retimeArtistNotes\n                    else:\n                        description = cineAsset.upper()+' cine asset Retime and Repo publish:\\n - RetimeCurve\\n - CameraRepo\\n - wipRetimeAndRepo\\n - wipRetime\\n - wipRetime_wholeFrames'+'\\n\\n(Published with Repo and Retime Helper)'+retimeRepoArtistNotes\n                        \n                    node\['ieVersionDescription'].setValue(description)\n                    \n                    # Set non dynamic knob settings\n                    node\['ieVersionDescription'].setEnabled(False)\n                    node\['ieSetupMode'].setValue('Default')\n                    node\['ieLocationMode'].setValue('Current Environment')\n                    node\['ieStage'].setValue('compPrep')\n                    node\['ieSourceBundle'].setValue('compPrep_in')\n                    node\['ieTargetBundle'].setValue('compPrep_out')\n                    node\['ieAutoCreate'].setValue(True) \n                    node\['ieAutoApprove'].setValue(True)\n                    node\['ieBundleRenderProfile'].setValue('compPrep_out')\n                    node\['ieBundleRenderEnabled'].setValue(False)\n                    node\['ieBundleRenderUseNukeRange'].setValue(False)\n                    node\['ieClearPreviousValues'].setValue(False)\n                    node\['ieRunDependencies'].setValue(True)\n        else:\n            \n            # Reset nodes in the script that are not connected to this helper node\n            if node.Class() in \['Write','ieBundlePublisher','NoOp','Group','Transform','Tracker4','OCIOColorSpace','FrameHold']:\n                if node.knob('link'):\n                    if node\['link'].value() == this.name():\n                        \n                        for k in lockKnobs:\n                            if node.knob(k):\n                                node\[k].setEnabled(True)\n                        \n                        if node.Class() == 'ieBundlePublisher':\n                            node\['tile_color'].setValue(4282650367)\n                        else:\n                            node\['tile_color'].setValue(0)\n                        \n                        if node.knob('disable'):\n                            node\['disable'].clearAnimated()\n                            \n                        if node.knob('link'):\n                            knobs = node.knobs(); node.removeKnob(knobs\['link'])\n                            if 'User' in knobs.keys():\n                                node.removeKnob(knobs\['User'])\n                                \n    if firstSetup:\n        \n        # Set script name and confirmation message\n        if this\['RetimeCurve'].value() and this\['CameraRepo'].value():\n            scriptName = 'retimeAndRepo'\n        elif this\['RetimeCurve'].value():\n            scriptName = 'retime'\n        elif this\['CameraRepo'].value():\n            scriptName = 'repo'\n        else:\n            scriptName = False\n            \n        # Save the script with the correct naming\n        if scriptName:\n            saveNukeScript(role='compPrep', name=scriptName)\n        else:\n            nuke.message('<font color=red>Error!</font>\\n\\nScript not saved, no retime or repo flagged for this shot so unable to determine correct naming.\\n\\nTo force script save/naming please change the template mode from Auto Detect.')\n            return\n        \n        # Confirmation message\n        scriptName = scriptName+'_v'+nuke.root().name().split('/')\[-1].split('_v')\[-1].split('.')\[0]\n        nuke.message(\"<font color=lime>Template setup successful!</font>\\n\\nScript saved as <b>compPrep_\"+scriptName+\"</b>.\")\n        return\n\n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n\ndef nukeAssetNodeAction(node, actionName, frameRange, forceCheckout=False, forceDiscard=False, publishApproved=False, publishDescription='updated'):\n\n    jnfn = JabukaNuke.JNFn.JNFnAssetNode(node)\n    jnfnEntity = jnfn.getJabukaEntity()\n    jfn = Jabuka.JFnEntity.create(jnfnEntity)\n\n    checkedOutByUser = jnfnEntity.readNonVersionedField(\"checkedOutByUser\").value\n    currentUser = Jabuka.Environment.getCurrentUser()\n\n    if actionName == 'discard':\n        action = jfn.getAction(\"release\")\n        if checkedOutByUser != currentUser and forceDiscard:\n            if action:\n                action()\n        elif checkedOutByUser == currentUser:\n            if action:\n                action()\n\n    elif actionName == 'checkOut':\n        if checkedOutByUser and checkedOutByUser != currentUser and not forceCheckout:\n            IECore.warning(\"Skipping node \{\}, entity is checked out by another user.\".format(node.name()))\n            return\n    \n        elif checkedOutByUser and checkedOutByUser != currentUser and forceCheckout:\n            forceDiscard = jfn.getAction(\"release\")\n            if forceDiscard:\n                IECore.warning(\"Force discard entity of '\{\}', previously checked out by '\{\}'.\".format(node.name(), checkedOutByUser))\n                forceDiscard()\n            else:\n                IECore.warning(\"Another user checked out the entity of node \{\}.\".format(node.name()))\n                return\n    \n        action = jfn.getAction(\"checkOut\")\n        if action:\n            action()\n\n    elif actionName == 'publish':\n        if checkedOutByUser and checkedOutByUser == currentUser:\n            action = jfn.getAction( \"publish\" )\n            if action:\n                action\[\"publishDescription\"].setTypedValue(publishDescription)\n                action\[\"frameRange\"].setTypedValue(frameRange)\n                action\[\"publishApproved\"].setTypedValue(publishApproved)\n                action\[\"assetId\"].setTypedValue(node\['ieAssetId'].value())\n                action()\n        else:\n            IECore.warning(\"To publish, the entity of node \{\} needs to be checked out by you.\".format(node.name()))\n            \n    # example uses\n    #node = nuke.selectedNode()\n\n    #nukeAssetNodeAction(node, 'checkOut')\n    #nukeAssetNodeAction(node, 'discard')\n    #nukeAssetNodeAction(node, 'publish', publishApproved=True, publishDescription='cdlFunctions test')\n\n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n\ndef getComponentFromCineAssetNode(cineAssetNode, componentType, componentName, componentDescription='new ComponentCurve', createMissingComponent=False):\n    # get cineAsset from getComponentFromCineAssetNode (e.g. plate)\n    node = cineAssetNode\n    jnfn = JabukaNuke.JNFn.JNFnAssetNode(node)\n    jnfnEntity = jnfn.getJabukaEntity()\n    connectedNodes = \[]\n    shot = node\['ieSequencePath'].value().split(\"/\")\[7]\n    \n    asset = jnfnEntity.typeSpecificAncestor( \"Asset\" )\n    \n    if asset:\n        isCineAsset = asset.readNonVersionedField( \"assetClass\" ).value == \"cine\"\n        if isCineAsset:\n            jfn = None\n            # check for existing ComponentCurves\n            for child in asset.children():\n                if  componentName == child.name:\n                    jfn = Jabuka.JFnEntity.create(child)\n                    componentEntity = child\n                    \n                    break\n            if not jfn:\n                if not createMissingComponent:\n                    IECore.warning(\"Skipping node \{\}, no Component with name \{\} could be found.\".format(node.name(), componentName))\n                    return\n                # create new ComponentCurve\n                createComponentAction = Jabuka.JFnEntity.create(asset).getAction('create'+componentType)\n                componentId = createComponentAction(entityType=componentType, name=componentName, description=componentDescription).value\n                newComponent = Jabuka.getEntity(componentId)\n                componentEntity = newComponent\n                jfn = Jabuka.JFnEntity.create(newComponent)\n                \n            checkedOutByUser = componentEntity.readNonVersionedField(\"checkedOutByUser\").value\n            currentUser = Jabuka.Environment.getCurrentUser()               \n            \n            if checkedOutByUser != \"\" and checkedOutByUser != currentUser:\n                forceDiscard = nuke.ask(\"<font color='red'>Warning!</font>\\n\\n<b>\"+shot+\"'s</b> Component named <b>\"+componentName+\"</b> is currently <b>v0</b> and can only be loaded by being checked out.\\n\\nCurrently checked out by <b><font color='yellow'>\"+checkedOutByUser+\"</font></b>.\\n\\nDo you want to force discard and check out yourself?\")\n            \n                if forceDiscard:\n                    forceDiscard = jfn.getAction(\"release\")\n                \n                if forceDiscard:\n                    forceDiscard()\n                \n            action = jfn.getAction(\"checkOut\")\n                    \n            if action:\n                action()\n                component = action.nukeNodes()\[0]\n                \n                entityId = componentEntity.getId()\n                assetId = Jabuka.EntityTypes.Entity.classTypeSpecificAncestorInfo( entityId, \"Asset\" )\['id']\n                component\['ieAssetId'].setValue(assetId)\n                \n                component.setInput(0, None)\n                return component\n                \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n                \ndef publishRepoRetime():\n    \n    publishProgress = nuke.ProgressTask('Repo / Retime Publisher')\n    publishProgress.setMessage('Checking scene save status...')\n    publishProgress.setProgress(1)\n    \n    # Check if scene is saved as a Jabuka Scene\n    scenePath = JabukaNuke.JFn.JFnScene.currentScenePath()\n\n    if not scenePath:\n        JabukaNuke.Environment.warning('This scene is untitled and has never been saved. Please save it as a Jabuka scene and try again.')\n    \n    sceneEntity = Jabuka.JFn.JFnScene.getSceneEntity(scenePath)\n    \n    if not sceneEntity:\n        JabukaNuke.Environment.warning('%s is not a valid Jabuka scene entity. Please save it as a Jabuka scene and try again.' % (scenePath))\n\n    publishProgress.setMessage('Syncing with ShotGrid...')\n    publishProgress.setProgress(2)\n    \n    shotgunRespeedRepoCheck()\n    \n    publishProgress.setMessage('Running checks...')\n    publishProgress.setProgress(3)\n    \n    setUpTemplate(firstSetup=False)\n    \n    # Assign variable for this node\n    this = nuke.thisNode()\n    \n    # Assign assorted variables for this node\n    shotPathSplit = os.environ\['IEENV_WORKING_PATH'].split('/')\n    firstFrame = int(this\['FirstFrame'].value())\n    lastFrame = int(this\['LastFrame'].value())\n    shotLength = lastFrame-firstFrame\n    frameRange = str(firstFrame)+'-'+str(lastFrame)\n    \n    # Ask about missing repo and retime from shotgrid\n    missingRepoRetime = True\n    \n    if not this\['RepoCheck'].value() and not this\['RetimeCheck'].value() and this\['PublishChoice'].value() == 'Auto Detect':\n        nuke.message('<font color=red>Error!</font>\\n\\nThe publisher is set to <b>Auto Detect</b> and the <b>retime and repo flags</b> are both missing from ShotGrid for <b>'+shotPathSplit\[7]+'</b> there is nothing to publish.\\n\\n<font color=grey><i>TIP: If you want to forcefully publish a retime or repo to this shot even though it is not flagged in ShotGrid then you can set the <b>PublishChoice</b> dropdown accordingly.')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n    \n    elif not this\['RepoCheck'].value() and not this\['RetimeCheck'].value() and this\['PublishChoice'].value() == 'Retime and Repo':\n        missingRepoRetime = nuke.ask('<font color=yellow>Warning!</font>\\n\\nThe <b>retime</b> and <b>repo</b> flags are both missing from ShotGrid for <b>'+shotPathSplit\[7]+'</b> are you sure you want to continue?')\n    \n    elif not this\['RetimeCheck'].value() and (this\['PublishChoice'].value() == 'Retime' or this\['PublishChoice'].value() == 'Retime and Repo'):\n        missingRepoRetime = nuke.ask('<font color=yellow>Warning!</font>\\n\\nThe <b>retime</b> flag is missing from ShotGrid for <b>'+shotPathSplit\[7]+'</b> are you sure you want to continue?')\n        \n    elif not this\['RepoCheck'].value() and (this\['PublishChoice'].value() == 'Repo' or this\['PublishChoice'].value() == 'Retime and Repo'):\n        missingRepoRetime = nuke.ask('<font color=yellow>Warning!</font>\\n\\nThe <b>repo</b> flag is missing from ShotGrid for <b>'+shotPathSplit\[7]+'</b> are you sure you want to continue?')\n    \n    if not missingRepoRetime:\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n        \n    # Check if artist notes exist and if they will be used (warning if exists and will not be used)\n    artistNotesWarningContinue = True\n    \n    if this\['ArtistNotes'].value().strip():\n        if this\['CameraRepo'].value() and not this\['RetimeCurve'].value() and this\['ArtistNotesChoice'].value() == 'Retime':\n            artistNotesWarningContinue = nuke.ask('<font color=yellow>Warning!</font>\\n\\nYour additional artist notes are set to <b>Retime</b> and you are only publishing a <b>Repo</b> so your notes will note be included in the publish descriptions.\\n\\nAre you sure you want to continue?')\n        elif this\['RetimeCurve'].value() and not this\['CameraRepo'].value() and this\['ArtistNotesChoice'].value() == 'Repo':\n            artistNotesWarningContinue = nuke.ask('<font color=yellow>Warning!</font>\\n\\nYour additional artist notes are set to <b>Repo</b> and you are only publishing a <b>Retime</b> so your notes will note be included in the publish descriptions.\\n\\nAre you sure you want to continue?')\n            \n    if not artistNotesWarningContinue:\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n    \n    # Check frame range vs Jabuka\n    shotPath = shotPathSplit\[3]+'/'+shotPathSplit\[5]+'/'+shotPathSplit\[7]\n    shot = Jabuka.findEntity(shotPath, onlyBase=False, throwException=False)\n    \n    jabukaFrameStart = shot\[\"frameStart\"].getTypedValue()\n    jabukaFrameEnd = shot\[\"frameEnd\"].getTypedValue()\n    \n    if nuke.root()\['first_frame'].value() != jabukaFrameStart or nuke.root()\['last_frame'].value() != jabukaFrameEnd:\n        updateRange = nuke.ask(\"<font color=red>Error!</font>\\n\\nScript frame range is not matching Jabuka's frame range for this shot, would you like to update it?\")\n        \n        if updateRange:\n            setShotFrameRange()\n            nuke.message('Frame range has been updated, please check your retime/repo is still correct.')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n    \n    # Get nodes connected upstream \n    connected = getConnectedUpstream(this)\n    \n    # Get all nodes connected to this node\n    nuke.selectAll(); nuke.invertSelection()\n    this.setSelected(True)\n    nuke.selectConnectedNodes()\n    allConnected = nuke.selectedNodes()\n    nuke.selectAll(); nuke.invertSelection()\n    \n    \n    # Check if plugged into BundlePublisher node  ###########################################################################################################\n    \n    if this.input(0).Class() == 'ieBundlePublisher':\n        bundlePublisher = this.input(0)\n    else:\n        nuke.message('<font color=red>Error!</font>\\n\\nThis Repo and Retime Helper node should be plugged directly into the <b>BundlePublisher</b> node.')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n        \n    for node in connected:\n        if node.Class() == 'ieBundlePublisher' and node != bundlePublisher:\n            nuke.message('<font color=red>Error!</font>\\n\\nMore than one <b>BundlePublisher</b> node in the template, there should only be 1, please reload the template.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n    \n    # Check how many write nodes exist in the template  #####################################################################################################\n    \n    writes = \[]\n    \n    for node in connected:\n        if node.Class() == 'Write':\n            writes.append(node)\n            \n    if len(writes) != 5:\n        nuke.message('<font color=red>Error!</font>\\n\\nThere are '+str(int(len(writes)))+' <b>Write</b> nodes in the template, there should be 5, please reload the template.')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n        \n    # Check for whole frame retime node  ####################################################################################################################\n    \n    wholeFrameRetime = False\n    \n    for node in connected:\n        if node.Class() == 'FrameHold' and 'WholeFrameRetime' in node.name():\n            wholeFrameRetime = node\n            \n    if not wholeFrameRetime:\n        nuke.message('<font color=red>Error!</font>\\n\\nThe WholeFrameRetime node is missing from the template, please reload the template.')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n    \n    # Check for all the anchors that should exist in the template ###########################################################################################\n    \n    anchorsRequired = \['CameraRepo','RetimeCurve','wipRetime_wholeFrames','wipRetime','wipRepo','wipRetimeAndRepo','retimeVectors']\n    anchorsExisting = \[]\n    \n    for node in connected:\n        if node.knob('AssetChoice'):\n            anchorsExisting.append(node\['AssetChoice'].value())\n            \n    if set(anchorsRequired) != set(anchorsExisting):\n        nuke.message('<font color=red>Error!</font>\\n\\nThe template is either missing some asset anchors or has duplicates, please reload the template.')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n        \n    # Find Denoise Plate and flag if any issues arise #######################################################################################################\n    denoisePlates = \[]\n    for node in connected:\n        if node.Class() == 'Read':\n            if node.knob('ieDisplayName'):\n                if node\['ieDisplayName'].value() == 'plate_denoised':\n                    denoisePlates.append(node)\n                    \n    # Error if more than 1 denoise plate connected upstream\n    if len(denoisePlates) > 1:\n        nuke.message('<font color=red>Error!</font>\\n\\nMore than 1 Denoise Plate detected upstream from RetimeAndRepoHelper node.\\n\\nPlease remove the extra Denoise Plates from the tree.')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n    \n    # Error if no denoise plate connected upstream\n    if len(denoisePlates) == 0:\n        nuke.message('<font color=red>Error!</font>\\n\\nNo Denoise Plate detected upstream from RetimeAndRepoHelper node.')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n        \n    denoise = denoisePlates\[0]\n\n    # Make sure denoise plate is not an Rt cine asset\n    if 'Rt' in denoise\['file'].value().split('/')\[11]:\n        nuke.message(\"<font color=red>Error!</font>\\n\\nDenoise Plate in use is from a Rt cine asset.\\n\\nPlease substitue your denoise plate for one that is not published to a retimed cine asset.\")\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n        \n    # Check to see if latest approved version of denoise plate is in use\n    denoisePlatePathSplit = denoise\['file'].evaluate().split('/')      \n    denoisePlateShotPath = '/'+denoisePlatePathSplit\[3]+'/'+denoisePlatePathSplit\[5]+'/'+denoisePlatePathSplit\[7]\n    denoisePlateJabukaPath = denoisePlateShotPath+'/assets/cine/'+denoisePlatePathSplit\[11]+'/plate_denoised'\n    \n    denoisePlateLatestApprovedVersion = int(str(Jabuka.findEntity(denoisePlateJabukaPath, onlyApproved=True, onlyBase=False)).split('version=')\[-1])\n    denoisePlateCurrentVersion = int(denoise\['ieEntityVersion'].value().strip())\n    \n    # Make sure denoise shotcode matches script   \n    if denoise\['file'].value().split('/')\[7] != os.environ\['IEENV_WORKING_PATH'].split('/')\[7]:\n        updateDenoisePlate = nuke.ask(\"<font color=red>Error!</font>\\n\\nDenosie plate's shot code is not matching this script's saved location, would you like to dynamic update it?.\")\n        if updateDenoisePlate:\n            update = JabukaNuke.UI.NukeApplicationUI.functools.partial(JabukaNuke.JNFn.JNFnAssetNode.updateAllToLocation, selectedOnly=True)\n            nuke.selectAll(); nuke.invertSelection()\n            denoise.setSelected(True)\n            update()\n            nuke.selectAll(); nuke.invertSelection()\n            nuke.message('Successfully updated denoise plate to this shot environment.\\n\\nPlease check to make sure your retime/repo is still correct before trying to publish again!')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n    \n    # Make sure denoise is latest approved version\n    if denoisePlateCurrentVersion != denoisePlateLatestApprovedVersion:\n        updateDenoisePlate = nuke.ask(\"<font color=red>Error!</font>\\n\\nYou are not using the latest approved denoise plate, do you want to update to the latest approved version?\")\n        if updateDenoisePlate:\n            denoise\['ieUpdateVersions'].execute()\n            denoise\['ieEntityVersion'].setValue(str(denoisePlateLatestApprovedVersion))\n            nuke.message('Successfully updated to the latest approved denoise version.\\n\\nPlease check to make sure your retime/repo is still correct before trying to publish again!')\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n    \n    # Find editref and flag if any issues arise #######################################################################################################\n    shotCutRefs = \[]\n    for node in allConnected:\n        if node.Class() == 'Read':\n            if node.knob('ieDisplayName'):\n                if node\['ieDisplayName'].value() == 'shotCutRef':\n                    shotCutRefs.append(node)\n        \n    shotCutRef = shotCutRefs\[0]\n    \n    for shotCutRef in shotCutRefs:\n        \n        shotCutRefPathSplit = shotCutRef\['file'].evaluate().split('/')      \n        shotCutRefShotPath = '/'+shotCutRefPathSplit\[3]+'/'+shotCutRefPathSplit\[5]+'/'+shotCutRefPathSplit\[7]\n        shotCutRefJabukaPath = shotCutRefShotPath+'/imageSequenceLibrary/editorial/shotCutRef'\n        \n        shotCutRefLatestApprovedVersion = int(str(Jabuka.findEntity(shotCutRefJabukaPath, onlyApproved=True, onlyBase=False)).split('version=')\[-1])\n        shotCutRefCurrentVersion = int(shotCutRef\['ieEntityVersion'].value().strip())\n        \n        # Make sure shotCutRef shotcode matches script   \n        if shotCutRef\['file'].value().split('/')\[7] != os.environ\['IEENV_WORKING_PATH'].split('/')\[7]:\n            updateShotCutRef = nuke.ask(\"<font color=red>Error!</font>\\n\\n\"+shotCutRef.name()+\"'s shot code is not matching this script's saved location, would you like to dynamic update it?.\")\n            if updateShotCutRef:\n                update = JabukaNuke.UI.NukeApplicationUI.functools.partial(JabukaNuke.JNFn.JNFnAssetNode.updateAllToLocation, selectedOnly=True)\n                nuke.selectAll(); nuke.invertSelection()\n                shotCutRef.setSelected(True)\n                update()\n                nuke.selectAll(); nuke.invertSelection()\n                nuke.message('Successfully updated shotCutRef to this shot environment.\\n\\nPlease check to make sure your retime/repo is still correct before trying to publish again!')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n        \n        # Make sure shotCutRef is latest approved version\n        if shotCutRefCurrentVersion != shotCutRefLatestApprovedVersion:\n            updateShotCutRef = nuke.ask(\"<font color=yellow>Warning!</font>\\n\\n\"+shotCutRef.name()+\" is not the latest approved version, do you want to update to the latest approved version?\")\n            if updateShotCutRef:\n                shotCutRef\['ieUpdateVersions'].execute()\n                shotCutRef\['ieEntityVersion'].setValue(str(shotCutRefLatestApprovedVersion))\n                nuke.message('Successfully updated to the latest approved shotCutRef version.\\n\\nPlease check to make sure your retime/repo is still correct before trying to publish again!')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n    \n    # Find Respeed node and flag if any issues arise #######################################################################################################\n    if this\['RetimeCurve'].value():\n        \n        publishProgress.setMessage('Checking retime...')\n        publishProgress.setProgress(10)\n        \n        # Create list of all Respeed nodes connected Upstream\n        respeedNodes = \[]\n        for node in connected:\n            if node.Class() == 'Group':\n                if node.knob('Respeed'):\n                    respeedNodes.append(node)\n                \n        # Error if more than 1 Respeed node connected upstream\n        if len(respeedNodes) > 1:\n            nuke.message('<font color=red>Error!</font>\\n\\nMore than 1 Respeed node detected upstream from RetimeAndRepoHelper node.\\n\\nPlease remove the extra Respeed node/s from the tree.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n        \n        # Error if no Respeed nodes connected upstream\n        if len(respeedNodes) == 0:\n            nuke.message('<font color=red>Error!</font>\\n\\nNo Respeed node detected upstream from RetimeAndRepoHelper node.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n            \n        respeed = respeedNodes\[0]\n        \n        if respeed\['method'].value() == 'Frame Number':\n            timingFrame = 'timingFrame'\n        else:\n            timingFrame = 'timingFrameSpeed'  \n        \n        # Set expression on wholeFrameRetime node\n        wholeFrameRetime\['firstFrame'].clearAnimated()\n        wholeFrameRetime\['firstFrame'].setExpression('(!'+respeed.name()+'.method?'+respeed.name()+'.timingFrame:'+respeed.name()+'.timingFrameSpeed) - floor(!'+respeed.name()+'.method?'+respeed.name()+'.timingFrame:'+respeed.name()+'.timingFrameSpeed) >= 0.5 ? ceil(!'+respeed.name()+'.method?'+respeed.name()+'.timingFrame:'+respeed.name()+'.timingFrameSpeed) : floor(!'+respeed.name()+'.method?'+respeed.name()+'.timingFrame:'+respeed.name()+'.timingFrameSpeed)')\n        \n        # Check for empty retime              \n        emptyRetime = True\n        \n        for i in range(int(shotLength+1)):\n            if respeed\[timingFrame].valueAt(firstFrame+i) != firstFrame+i:\n                emptyRetime = False\n                break\n                \n        if emptyRetime:     \n            nuke.message('<font color=red>Error!</font>\\n\\nYour retime is matching the original frames for every frame of the publish range, nothing to publish.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return   \n        \n        # Check for duplicate frames\n        duplicateFrames = \[]\n        \n        for i in range(int(shotLength)):\n            \n            if not this\['AllowDuplicate'].value():      \n                \n                if respeed\['interpolation'].value() == 'Frame':\n                    if roundToInt(respeed\[timingFrame].valueAt(firstFrame+i)) == roundToInt(respeed\[timingFrame].valueAt(firstFrame+i+1)):\n                        duplicateFrames.append(int(firstFrame+i))\n                        duplicateFrames.append(int(firstFrame+i+1))\n                else:\n                    if respeed\[timingFrame].valueAt(firstFrame+i) == respeed\[timingFrame].valueAt(firstFrame+i+1):\n                        duplicateFrames.append(int(firstFrame+i))\n                        duplicateFrames.append(int(firstFrame+i+1))   \n                    \n        if duplicateFrames:\n            \n            message = '<font color=yellow>Warning!</font>\\n\\nDuplicate frames present in your retime curve:\\n'\n            \n            duplicateFrames = set(duplicateFrames)\n            duplicateFrames = list(duplicateFrames)\n            duplicateFrames.sort()\n            \n            for frame in duplicateFrames:\n                message = message+'\\n'+str(frame)\n            \n            nuke.message(message+'\\n\\nIf you are intentionally publishing double frames you can enable that in the Advanced tab of the Repo and Retime Helper node.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n        \n    # Find Transform node and flag if any issues arise #######################################################################################################\n    if this\['CameraRepo'].value():\n        \n        publishProgress.setMessage('Checking repo...')\n        publishProgress.setProgress(25)\n        \n        Lin2Log = None\n        Log2Lin = None\n        \n        for node in connected:\n            if node.Class() == 'OCIOColorSpace':\n                if node\['label'].value() == 'Lin2Log':\n                    Lin2Log = node\n                elif node\['label'].value() == 'Log2Lin':\n                    Log2Lin = node\n                   \n        if not Lin2Log or not Log2Lin:\n            nuke.message('<font color=red>Error!</font>\\n\\nLog sandwhich is missing!\\n\\nTransform merging function uses the the log sandwhich to decide what transform nodes to merge.\\n\\nPlease reload the template.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n        else:\n            transformNodes = \[]\n            cont = True\n            input = Log2Lin\n            \n            while cont == True:\n                if input.input(0).Class() in \['Transform','Tracker4'] and input.input(0) != None:\n                    input = input.input(0)\n                    transformNodes.append(input)\n                else:\n                    cont = False\n                    if input.input(0).Class() != 'OCIOColorSpace':\n                        nuke.message('<font color=red>Error!</font>\\n\\nOnly Transform and Tracker nodes are permitted to be sandwiched in your Repo Log Sandwich.')\n                        publishProgress.setMessage('Cancelling...')\n                        publishProgress.setProgress(100)\n                        return\n        \n        # Error if no Transform / Tracker4 nodes connected upstream\n        if len(transformNodes) == 0:\n            nuke.message('<font color=red>Error!</font>\\n\\nNo Repo detected in the Repo Log Sandwich.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n            \n        transform = mergeTransforms(publish=True)\n        \n        # Check for issues with values in the merged Transform\n        emptyRepo = True\n        \n        for i in range(shotLength+1):\n            if transform\['skewX'].valueAt(firstFrame+i) != 0 or transform\['skewY'].valueAt(firstFrame+i) != 0:\n                nuke.delete(transform)\n                nuke.message(\"<font color=red>Error!</font>\\n\\nRepo transformation's <b>skew X</b> and <b>skew Y</b> knobs must be 0 on all frames for all nodes.\")\n                publishProgress.setMessage('Cancelling...')\n                publishProgress.setProgress(100)\n                return\n            if transform\['scale'].valueAt(firstFrame+i,0) != transform\['scale'].valueAt(firstFrame+i,1):\n                nuke.delete(transform)\n                nuke.message(\"<font color=red>Error!</font>\\n\\nRepo transformation's <b>Scale</b> knob <b>width</b> must match the <b>height</b> on all frames for all nodes.\")\n                publishProgress.setMessage('Cancelling...')\n                publishProgress.setProgress(100)\n                return\n            if transform\['scale'].valueAt(firstFrame+i,0) != 1 or transform\['rotate'].valueAt(firstFrame+i) != 0 or transform\['translate'].valueAt(firstFrame+i,0) != 0 or transform\['translate'].valueAt(firstFrame+i,1) != 0:\n                emptyRepo = False\n                \n        if emptyRepo:\n            nuke.delete(transform)\n            nuke.message('<font color=red>Error!</font>\\n\\nYour repo is matching the original frames for every frame of the publish range, nothing to publish.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return   \n                \n    # Generate confirmation message for Publish #######################################################################################################\n    \n    if this\['CameraRepo'].value() and this\['RetimeCurve'].value():\n        questionWhich = ' - wipRetimeAndRepo\\n - wipRetime_wholeFrames\\n - wipRetime\\n - RetimeCurve\\n - CameraRepo\\n'\n    elif this\['CameraRepo'].value():\n        questionWhich = ' - CameraRepo\\n - wipRepo'\n    elif this\['RetimeCurve'].value():\n        questionWhich = ' - RetimeCurve\\n - wipRetime\\n - wipRetime_wholeFrames'\n    \n    question = \"Performing this action will render and publish the following components for the <b>\"+denoisePlatePathSplit\[11]+\"</b> cine asset:\\n\\n\"+questionWhich+\"\\n\\nAre you sure you want to continue?\"\n    \n    publishProgress.setMessage('Awaiting user input...')\n    publishProgress.setProgress(40)\n    \n    proceed = nuke.ask(question)\n    \n    if not proceed:\n        if this\['CameraRepo'].value():\n            nuke.delete(transform)\n        publishProgress.setMessage('Cancelling...')\n        publishProgress.setProgress(100)\n        return\n    \n    # Create retime component and copy values from respeed and then publish #######################################################################################################\n    if this\['RetimeCurve'].value():\n        \n        publishProgress.setMessage('Publishing retime curve component...')\n        publishProgress.setProgress(40)\n        \n        retimePlugs = \[]\n       \n        for node in connected:\n            if node.Class() == 'NoOp':\n                if node.knob('AssetChoice'):\n                    if node\['AssetChoice'].value() == 'RetimeCurve':\n                        retimePlugs.append(node)\n                \n        # Error if more than 1 retime plug connected upstream\n        if len(retimePlugs) > 1:\n            nuke.delete(transform)\n            nuke.message('<font color=red>Error!</font>\\n\\nMore than 1 RetimeCurve anchor detected upstream from RetimeAndRepoHelper node.\\n\\nPlease remove the extra RetimeCurve anchor from the tree.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n        \n        # Error if no retime plugs connected upstream\n        if len(retimePlugs) == 0:\n            nuke.delete(transform)\n            nuke.message('<font color=red>Error!</font>\\n\\nNo RetimeCurve anchor detected upstream from RetimeAndRepoHelper node.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n        \n        retimePlug = retimePlugs\[0]\n        \n        retimePlugInput = retimePlug.input(0)\n        \n        if retimePlugInput:\n            if retimePlugInput.knob('ieEntityType'):\n                if retimePlugInput\['ieEntityType'].value() == 'RetimeCurve':\n                    connected.remove(retimePlugInput)\n                    nuke.delete(retimePlugInput)\n        \n        with Jabuka.Utils.ScopedRole(\"compPrep\"):\n            retimeCurve = getComponentFromCineAssetNode(denoise, 'RetimeCurve', 'compPrep_RetimeCurve', 'Retime curve automatically created by RepoAndRetime helper node from Respeed node in script.', True)\n        \n        retimePlug.setInput(0, retimeCurve)\n        \n        retimeCurve\['ieTimeCurve'].clearAnimated(); retimeCurve\['ieTimeCurve'].setAnimated()\n        \n        for i in range(shotLength+1):\n            if respeed\['interpolation'].value() == 'Frame':\n                retimeCurve\['ieTimeCurve'].setValueAt(roundToInt(respeed\[timingFrame].getValueAt(firstFrame+i)),firstFrame+i)\n            else:\n                retimeCurve\['ieTimeCurve'].setValueAt(respeed\[timingFrame].getValueAt(firstFrame+i),firstFrame+i)\n        \n        with Jabuka.Utils.ScopedRole(\"compPrep\"):    \n            nukeAssetNodeAction(retimeCurve, 'publish', frameRange, publishApproved=True, publishDescription='Retime curve automatically created by RepoAndRetimeHelper node from Respeed node upstream in script.')\n        \n        retimeCurve\['xpos'].setValue(retimePlug\['xpos'].value())\n        retimeCurve\['ypos'].setValue(retimePlug\['ypos'].value()-50)\n    \n    # Create cameraRepo component and copy values from repo and then publish #######################################################################################################\n    if this\['CameraRepo'].value():\n        \n        publishProgress.setMessage('Publishing camera repo component...')\n        publishProgress.setProgress(60)\n        \n        repoPlugs = \[]\n       \n        for node in connected:\n            if node.Class() == 'NoOp':\n                if node.knob('AssetChoice'):\n                    if node\['AssetChoice'].value() == 'CameraRepo':\n                        repoPlugs.append(node)\n                \n        # Error if more than 1 retime plug connected upstream\n        if len(repoPlugs) > 1:\n            nuke.delete(transform)\n            nuke.message('<font color=red>Error!</font>\\n\\nMore than 1 CameraRepo anchor detected upstream from RetimeAndRepoHelper node.\\n\\nPlease remove the extra CameraRepo anchor from the tree.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n        \n        # Error if no retime plugs connected upstream\n        if len(repoPlugs) == 0:\n            nuke.delete(transform)\n            nuke.message('<font color=red>Error!</font>\\n\\nNo CameraRepo anchor detected upstream from RetimeAndRepoHelper node.')\n            publishProgress.setMessage('Cancelling...')\n            publishProgress.setProgress(100)\n            return\n        \n        repoPlug = repoPlugs\[0]\n        \n        repoPlugInput = repoPlug.input(0)\n        \n        if repoPlugInput:\n            if repoPlugInput.knob('ieEntityType'):\n                if repoPlugInput\['ieEntityType'].value() == 'CameraRepo':\n                    nuke.delete(repoPlugInput)\n        \n        with Jabuka.Utils.ScopedRole(\"compPrep\"):\n            cameraRepo = getComponentFromCineAssetNode(denoise, 'CameraRepo', 'compPrep_CameraRepo', 'Camera Repo automatically created by RepoAndRetime helper node from repo Transform/s upstream in script.', True)\n    \n        repoPlug.setInput(0, cameraRepo)\n        \n        cameraRepo\['ieOffset'].clearAnimated(); cameraRepo\['ieOffset'].setAnimated()\n        cameraRepo\['ieRotate'].clearAnimated(); cameraRepo\['ieRotate'].setAnimated()\n        cameraRepo\['ieScale'].clearAnimated(); cameraRepo\['ieScale'].setAnimated()\n        \n        for i in range(shotLength+1):\n            cameraRepo\['ieOffset'].setValueAt((transform\['translate'].getValueAt(firstFrame+i,0)/transform.width()/transform\['scale'].getValueAt(firstFrame+i,0)/-1),firstFrame+i,0)\n            cameraRepo\['ieOffset'].setValueAt((transform\['translate'].getValueAt(firstFrame+i,1)/transform.height()/transform\['scale'].getValueAt(firstFrame+i,0)/-1),firstFrame+i,1)\n            cameraRepo\['ieRotate'].setValueAt(transform\['rotate'].getValueAt(firstFrame+i),firstFrame+i)\n            cameraRepo\['ieScale'].setValueAt(transform\['scale'].getValueAt(firstFrame+i,0),firstFrame+i)\n        \n        with Jabuka.Utils.ScopedRole(\"compPrep\"):\n            nukeAssetNodeAction(cameraRepo, 'publish', frameRange, publishApproved=True, publishDescription='Camera Repo automatically created by RepoAndRetimeHelper node from repo Transform/s upstream in script.')\n        \n        cameraRepo\['xpos'].setValue(repoPlug\['xpos'].value())\n        cameraRepo\['ypos'].setValue(repoPlug\['ypos'].value()-50)\n        \n        # Connect to merged repo node #####################################################################################\n        \n        Log2LinInput = Log2Lin.input(0)\n        Log2Lin.setInput(0, transform)\n        \n    # Run BundlePublisher node ########################################################################################\n    \n    publishProgress.setMessage('Dispatching BundlePublisher node...')\n    publishProgress.setProgress(80)\n    \n    with Jabuka.Utils.ScopedRole(\"compPrep\"):\n    \n        fn = JabukaNuke.JNFn.JNFnPublisher.getRegisteredNodeFn( bundlePublisher.Class() )\n        op = fn._dispatchOp(\[bundlePublisher], sceneEntity, scenePath)()\n    \n    # Remove merged repo node #####################################################################################\n    \n    publishProgress.setMessage('Removing temporary nodes...')\n    publishProgress.setProgress(99)\n    \n    if this\['CameraRepo'].value():\n        Log2Lin.setInput(0, Log2LinInput)\n        nuke.delete(transform)\n        \n    publishProgress.setMessage('Publish complete!')\n    publishProgress.setProgress(100)\n    \n    nuke.message(\"<font color=lime>Publish successful!</font>\\n\\nThe following components for the <b>\"+denoisePlatePathSplit\[11]+\"</b> cine asset were sent to the farm:\\n\\n\"+questionWhich+\"\\n\\nYour bundle will be automatically created and approved once the renders have completed.\")\n        \n##################################################################################################################################################################################################################\n##################################################################################################################################################################################################################\n            \nif nuke.GUI:\n    \n    this = nuke.thisNode()\n    \n    shotgunRespeedRepoCheck()\n    \n    this\['label'].setVisible(False)\n    this\['hide_input'].setVisible(False)\n    this\['hide_input'].setValue(False)\n    \n    if this\['FrameChoice'].value() == 'Custom':\n        this\['Padding'].setVisible(False)\n        this\['FirstFrame'].clearFlag(nuke.READ_ONLY)\n        this\['LastFrame'].clearFlag(nuke.READ_ONLY)\n    elif this\['FrameChoice'].value() == 'Shot Range':\n        this\['Padding'].setVisible(False)\n        this\['FirstFrame'].setFlag(nuke.READ_ONLY)\n        this\['LastFrame'].setFlag(nuke.READ_ONLY)\n    elif this\['FrameChoice'].value() == 'Padded Range':\n        this\['Padding'].setVisible(True)\n        nuke.thisNode()\['FirstFrame'].setFlag(nuke.READ_ONLY)\n        nuke.thisNode()\['LastFrame'].setFlag(nuke.READ_ONLY)\n        \n    "
+ knobChanged "if nuke.thisKnob().name() == 'inputChange':\n    shotgunRespeedRepoCheck()\n    setUpTemplate(firstSetup=False)\n\nif nuke.thisKnob().name() == 'FrameChoice':\n    setShotFrameRange()\n    if nuke.thisKnob().value() == 'Shot Range':\n        nuke.thisNode()\['FirstFrame'].clearAnimated()\n        nuke.thisNode()\['LastFrame'].clearAnimated()\n        nuke.thisNode()\['FirstFrame'].setExpression('root.first_frame')\n        nuke.thisNode()\['LastFrame'].setExpression('root.last_frame')\n        nuke.thisNode()\['FirstFrame'].setFlag(nuke.READ_ONLY)\n        nuke.thisNode()\['LastFrame'].setFlag(nuke.READ_ONLY)\n        nuke.thisNode()\['Padding'].setVisible(False)\n        \n    elif nuke.thisKnob().value() == 'Padded Range':\n        nuke.thisNode()\['FirstFrame'].clearAnimated()\n        nuke.thisNode()\['LastFrame'].clearAnimated()\n        nuke.thisNode()\['FirstFrame'].setExpression('root.first_frame-Padding')\n        nuke.thisNode()\['LastFrame'].setExpression('root.last_frame+Padding')\n        nuke.thisNode()\['FirstFrame'].setFlag(nuke.READ_ONLY)\n        nuke.thisNode()\['LastFrame'].setFlag(nuke.READ_ONLY)\n        nuke.thisNode()\['Padding'].setVisible(True)\n        \n    elif nuke.thisKnob().value() == 'Custom':\n        nuke.thisNode()\['FirstFrame'].clearAnimated()\n        nuke.thisNode()\['LastFrame'].clearAnimated()\n        nuke.thisNode()\['Padding'].setVisible(False)\n        nuke.thisNode()\['FirstFrame'].clearFlag(nuke.READ_ONLY)\n        nuke.thisNode()\['LastFrame'].clearFlag(nuke.READ_ONLY)\n        \nif nuke.thisKnob().name() == 'PublishChoice':\n    shotgunRespeedRepoCheck()\n    setUpTemplate(firstSetup=False)\n\nif nuke.thisKnob().name() == 'ArtistNotesChoice':\n    setUpTemplate(firstSetup=False)\n    \nif nuke.thisKnob().name() == 'shutteroffset':\n    if nuke.thisKnob().value() == 'custom':\n        nuke.thisNode()\['shuttercustomoffset'].setEnabled(True)\n    else:\n        nuke.thisNode()\['shuttercustomoffset'].setEnabled(False)"
+ autolabel "'<center>Repo And Retime Helper\\n\\n'+nuke.thisNode()\['label'].evaluate()"
+ tile_color 0xffff00ff
+ label "<center><center><font color=dodgerblue size=4>\[value FirstFrame]-\[value LastFrame]\n\n<font color=lime size=5>&nbsp;&nbsp;  \[value PublishChoice] Mode &nbsp;&nbsp; \n\n<center>\[if \{\[value PublishChoice]==\"Auto Detect\"\} \{\[if \{\[value RepoCheck]\} \{return \"<font color=lime>Repo\"\} \{return \"\"\}]\} \{return \"\"\}]\[if \{\[value PublishChoice]==\"Auto Detect\"\} \{\[if \{\[value RepoCheck] && \[value RetimeCheck]\} \{return \"<font color=lime> and \"\} \{return \"\"\}]\} \{return \"\"\}]\[if \{\[value PublishChoice]==\"Auto Detect\"\} \{\[if \{\[value RetimeCheck]\} \{return \"<font color=lime>Retime\"\} \{return \"\"\}]\} \{return \"\"\}]\[if \{\[value PublishChoice]==\"Auto Detect\"\} \{\[if \{\[value RepoCheck]==false && \[value RetimeCheck]==false\} \{return \"<font color=red>NO REPO/RETIME FLAGGED IN SHOTGRID\"\} \{return \"\"\}]\} \{return \"\"\}]"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 50
+ selected true
+ xpos -38085
+ ypos -8086
+ addUserKnob {20 RepoAndRetimeHelper l "Repo And Retime Helper"}
+ addUserKnob {26 ""}
+ addUserKnob {26 _5 l " " T "<font size=5><b>Template Mode"}
+ addUserKnob {26 _18 l "" +STARTLINE T " "}
+ addUserKnob {4 PublishChoice l " " t "\nChoose what you want to Publish. \n\nAuto Detect will automatically publlish what ever is flagged in ShotGrid. " M {"Auto Detect" "Retime and Repo" Retime Repo "" "" "" "" "" "" "" "" ""}}
+ addUserKnob {26 _19 l "" +STARTLINE T " "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _25 l "" +STARTLINE T "<font size=5 color=red>PLEASE UPDATE YOUR COMPPREP_IN BUNDLE BEFORE RUNNING</font>"}
+ addUserKnob {26 _20 l "" +STARTLINE T " "}
+ addUserKnob {22 SetupScript l "<font size=5 color=dodgerblue><b>SETUP TEMPLATE" t "\nUpdates all of the connected dynamic nodes to this shot environment, re-links the template to this helper node, saves the script with the correct naming and resets the repo and retime nodes." T "shotgunRespeedRepoCheck()\nsetUpTemplate(firstSetup=True)" +STARTLINE}
+ addUserKnob {26 _21 l " " T " "}
+ addUserKnob {6 ClearRepo l "Clear Repo" -STARTLINE}
+ ClearRepo true
+ addUserKnob {6 ClearRetime l "Clear Retime" -STARTLINE}
+ ClearRetime true
+ addUserKnob {26 _22 l "" +STARTLINE T " "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _3 l " " T "<font size=5><b>ShotGrid Retime / Repo Check&nbsp; "}
+ addUserKnob {22 Refresh t "\nPulls the repo and retime fields from ShotGrid to show what has been flagged as required in ShotGrid." -STARTLINE T shotgunRespeedRepoCheck()}
+ addUserKnob {26 _2 l "" +STARTLINE T " "}
+ addUserKnob {26 Shot l " " t "\nThe shot environment that this script is saved in." T "<font size=4>SPI-RD-0840"}
+ addUserKnob {26 Retime l " " t "\nShows whether or not a retime is flagged in ShotGrid" T "<font color=red size=4>Retime NOT Flagged"}
+ addUserKnob {26 Repo l " " t "\nShows whether or not a repo is flagged in ShotGrid" T "<font color=red size=4>Repo NOT Flagged"}
+ addUserKnob {26 _1 l "" +STARTLINE T " "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _23 l "" +STARTLINE T " "}
+ addUserKnob {26 ArtistNotesTitle l " " T "Additional Artist Notes for "}
+ addUserKnob {4 ArtistNotesChoice l "" t "\nChoose which renders you would like to add your additional artist notes to." -STARTLINE M {"Retime and Repo" Retime Repo "" "" "" "" ""}}
+ addUserKnob {26 _24 l "          " -STARTLINE T "<font color=grey><i>Not Required"}
+ addUserKnob {43 ArtistNotes l " " t "\n<b>This Field is NOT required and can be left blank.</b>\n\nAdd additional notes to the standard descriptions for your retime / repo dailies, just in case you have any special once off information to add. "}
+ addUserKnob {26 _15 l "" +STARTLINE T " "}
+ addUserKnob {22 Publish l "<font size=5 style=text-transform:uppercase color=red><b>Nothing to Publish" t "\nThe label on this button shows what components will be published when executed." T publishRepoRetime() +STARTLINE}
+ addUserKnob {26 _6 l "" +STARTLINE T " "}
+ addUserKnob {26 ""}
+ addUserKnob {26 text l "" +STARTLINE T "<b>v1.06</b><font color=grey><i> Created by <b>Daniel Bigaj</b> 6 October 2023"}
+ addUserKnob {20 Advanced}
+ addUserKnob {26 _9 l "" +STARTLINE T "<font size=5><b>Utilities<br>"}
+ addUserKnob {22 RelinkTemplate l "Relink Template" t "\nUse me if any nodes become unlinked from this Repo and Retime Helper node." T "this = nuke.thisNode()\ninput = this.input(0)\n\nthis.setInput(0, None,)\nthis.setInput(0, input,)" +STARTLINE}
+ addUserKnob {22 ReloadLineupNotes l "Reload Lineup Notes" -STARTLINE T loadLineupNotes()}
+ addUserKnob {26 _4 l "" +STARTLINE T " "}
+ addUserKnob {22 LoadAnchor l "Load Asset Anchor" t "\nLoad a new Asset Anchor node incase you accidentally deleted one in the template." T loadNodes('Anchor') +STARTLINE}
+ addUserKnob {22 LoadLog l "Load Log Sandwhich" t "\nLoad a new Log Sandwich incase you accidentally deleted the one in the template." -STARTLINE T loadNodes('LogSandwich')}
+ addUserKnob {26 _10 l "" +STARTLINE T " "}
+ addUserKnob {22 MergeTransforms l "Merge Repo Transforms" t "\nMerge all of the Transform and Tracker nodes that are sandwiched in the Repo's Log Sandwich in this template." T mergeTransforms(publish=False) +STARTLINE}
+ addUserKnob {26 _11 l "" +STARTLINE T " "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _8 l "" +STARTLINE T "<font size=5><b>Frame Range Settings<br>"}
+ addUserKnob {4 FrameChoice l "Frame Choice" t "\nChoose what frame range you want to use to publish your retime/repo curves. \n\nRenders will always be rendered to the shot's frame range." M {"Shot Range" "Padded Range" Custom "" "" "" ""}}
+ addUserKnob {3 Padding l "" -STARTLINE +HIDDEN}
+ Padding 10
+ addUserKnob {3 FirstFrame l "Frame Range"}
+ FirstFrame {{root.first_frame}}
+ addUserKnob {3 LastFrame l "" -STARTLINE}
+ LastFrame {{root.last_frame}}
+ addUserKnob {3 FirstFrameCut l "Cut Range"}
+ FirstFrameCut 1001
+ addUserKnob {3 LastFrameCut l "" -STARTLINE}
+ LastFrameCut 1100
+ addUserKnob {26 _17 l "" +STARTLINE T " "}
+ addUserKnob {22 UpdateFrameRange l "Update Frame Range from Jabuka" t "\nUpdates the script's frame range to match what is set in Jabuka." T setShotFrameRange() +STARTLINE}
+ addUserKnob {26 _12 l "" +STARTLINE T " "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _13 l "" +STARTLINE T "<font size=5><b>Retime Settings<br>"}
+ addUserKnob {6 AllowDuplicate l "Allow duplicate frames for retimes" t "\nEnable if you want to intentionally have held frames in your retime." +STARTLINE}
+ addUserKnob {26 _16 l "" +STARTLINE T " "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _7 l "" +STARTLINE T "<font size=5><b>Repo Settings<br>"}
+ addUserKnob {4 filter M {"impulse\t\t\tImpulse,Nearest" "cubic\t\t\tCubic,Bilinear,Bicubic" Keys Simon Rifman Mitchell Parzen "notch\t\t\tNotch" "Lanczos4\t\t\tLanczos" Lanczos6 "sinc4\t\t\tSinc4,Sinc" ""}}
+ filter cubic
+ addUserKnob {7 motionblur R 0 4}
+ addUserKnob {7 shutter R 0 2}
+ shutter 0.5
+ addUserKnob {4 shutteroffset l "shutter offset" M {centred start end custom}}
+ addUserKnob {7 shuttercustomoffset l "" -STARTLINE +DISABLED R -1 1}
+ addUserKnob {26 _14 l "" +STARTLINE T " "}
+ addUserKnob {26 ""}
+ addUserKnob {6 RetimeCurve +INVISIBLE +STARTLINE}
+ RetimeCurve {{"\[python -execlocal this\\ =\\ nuke.thisNode()\\n\\nif\\ this\\\['PublishChoice'\\].value()\\ ==\\ 'Auto\\ Detect':\\n\\ \\ \\ \\ if\\ this\\\['RetimeCheck'\\].value():\\n\\ \\ \\ \\ \\ \\ \\ \\ ret\\ =\\ True\\n\\ \\ \\ \\ else:\\n\\ \\ \\ \\ \\ \\ \\ \\ ret\\ =\\ False\\n\\nelif\\ 'Retime'\\ in\\ this\\\['PublishChoice'\\].value():\\n\\ \\ \\ \\ ret\\ =\\ True\\nelse:\\n\\ \\ \\ \\ ret\\ =\\ False]"}}
+ addUserKnob {6 CameraRepo +INVISIBLE +STARTLINE}
+ CameraRepo {{"\[python -execlocal this\\ =\\ nuke.thisNode()\\n\\nif\\ this\\\['PublishChoice'\\].value()\\ ==\\ 'Auto\\ Detect':\\n\\ \\ \\ \\ if\\ this\\\['RepoCheck'\\].value():\\n\\ \\ \\ \\ \\ \\ \\ \\ ret\\ =\\ True\\n\\ \\ \\ \\ else:\\n\\ \\ \\ \\ \\ \\ \\ \\ ret\\ =\\ False\\n\\nelif\\ 'Repo'\\ in\\ this\\\['PublishChoice'\\].value():\\n\\ \\ \\ \\ ret\\ =\\ True\\nelse:\\n\\ \\ \\ \\ ret\\ =\\ False]"}}
+ addUserKnob {6 RetimeCheck l "Retime flagged in Shotgrid?" +INVISIBLE +STARTLINE}
+ addUserKnob {6 RepoCheck l "Repo flagged in Shotgrid?" +INVISIBLE +STARTLINE}
+ addUserKnob {43 Anchor l AnchorCode +INVISIBLE}
+ Anchor "set cut_paste_input \[stack 0]\nversion 13.2 v8\npush \$cut_paste_input\nNoOp \{\n name RepoAndRetimeHelperAnchor\n autolabel \"nuke.thisNode()\\\['AssetChoice'].value()\"\n note_font \"Bitstream Vera Sans Bold\"\n note_font_size 30\n selected true\n xpos 6109\n ypos 9323\n addUserKnob \{20 RepoAndRetimeHelperAnchor l \"Repo And Retime Helper Anchor\"\}\n addUserKnob \{4 AssetChoice l Asset M \{CameraRepo RetimeCurve retimeVectors wipRetime_wholeFrames wipRetime wipRepo wipRetimeAndRepo \"\" \"\" \"\" \"\" \"\" \"\"\}\}\n\}\n"
+ addUserKnob {1 LogSandwich l "Log Sandwich Code" +INVISIBLE}
+ LogSandwich "set cut_paste_input \[stack 0]\nversion 13.2 v8\npush \$cut_paste_input\nOCIOColorSpace \{\nin_colorspace compositing_linear\nout_colorspace compositing_log\nname LogSandwichTop\nonCreate \"nuke.thisNode()\\\['label'].setFlag(nuke.READ_ONLY)\"\nlabel Lin2Log\nnote_font \"Bitstream Vera Sans\"\nnote_font_size 20\nselected true\nxpos 9584\nypos 1141\n\}\nOCIOColorSpace \{\nin_colorspace compositing_log\nout_colorspace compositing_linear\nname LogSandwichBottom\nknobChanged \"nuke.thisNode()\\\['label'].setFlag(nuke.READ_ONLY)\"\nlabel Log2Lin\nnote_font_size 20\nselected true\nxpos 9584\nypos 1661\n\}\n"
+}
+set N843fcf80 [stack 0]
+Dot {
+ name Dot57
+ label "<font color=white>\n<font size=5><b>STEP 5 - Press the <font color=lime>PUBLISH</font> Button</b></font>\nOpen the properties for the <b><font color=yellow>Repo And Retime Helper<font color=white></b> node and press the <b><font color=lime>PUBLISH</font></b> button.\n\n<font color=grey><i>Tip: The Publish button's label will show whether it will be publishing a retime, repo or both.\n\n<font color=grey><i>Tip: If the Publish button says NOTHING TO PUBLISH it means there is no repo or retime  flagged\nin ShotGrid for this shot. You can forcefully publish in this scenario by choosing what you want to publish\ninstead of using Auto Detect mode. \n\n<font color=grey><i>Tip: If the Publish button is yellow instead of green that means you are choosing to publish a repo or \nretime that is not flagged in ShotGrid."
+ note_font Arial
+ note_font_size 50
+ note_font_color 0xffffffff
+ selected true
+ xpos -36392
+ ypos -7933
+}
+Read {
+ inputs 0
+ file_type jpeg
+ file /data/jobs/TDW/sequences/107-037/shots/TDW-107-037-440/.jabuka/imageSequenceLibrary/editorial/shotCutRef/versions/0002/TDW_107-037_TDW-107-037-440_shotCutRef_v0002.%06d.jpg
+ first 1009
+ last 1025
+ origfirst 1009
+ origlast 1025
+ origset true
+ colorspace view-rec1886-client
+ name TDW_107_037_440_shotCutRef_v0002_1
+ selected true
+ xpos -36848
+ ypos -9382
+ icon /software/apps/jabuka/7.245.1/tools/python/3.7/noarch/cortex/10.4/GafferJabukaUI/Resources/Icons/dynamic.png
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> ImageSequence\n<B>ieEntityId:</B> 3894664.0\n<B>ieAssetId:</B> 0.0\n<B>ieCopyId:</B> 1\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0.0" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType ImageSequence
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 3894664
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "<span style=\"color:Silver\">Bundle Version </span>" t "\nThis entity is not part\nof a bundle." +DISABLED}
+ addUserKnob {1 ieDisplayName l Name +DISABLED}
+ ieDisplayName shotCutRef
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {2 1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+ ieVersionCreationDate "09-26-2023 12:35:41"
+ addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+ ieVersionCreator jeremysz
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ ieRelativeToLocation true
+ addUserKnob {32 ieSourceScene l "Open Source Scene" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {1 ieSequencePath l SequencePath}
+ ieSequencePath /data/jobs/TDW/sequences/107-037/shots/TDW-107-037-440/.jabuka/imageSequenceLibrary/editorial/shotCutRef/versions/0002/TDW_107-037_TDW-107-037-440_shotCutRef_v0002.%06d.jpg
+ addUserKnob {32 ieDailyButton l "Create Daily" +STARTLINE}
+}
+push $Nb2e50720
+JobCrop {
+ name JobCrop
+ selected true
+ xpos -37123
+ ypos -9323
+ framing editorial
+ mode crop
+}
+Reformat {
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ black_outside true
+ name Reformat3
+ selected true
+ xpos -37123
+ ypos -9244
+}
+Group {
+ name TDW_107_037_440_bgBalanceGrade_v0002_1
+ tile_color 0x4f009901
+ label "invert: \[value invert]"
+ selected true
+ xpos -37123
+ ypos -9171
+ icon /software/apps/jabuka/7.245.1/tools/python/3.7/noarch/cortex/10.4/GafferJabukaUI/Resources/Icons/dynamic.png
+ addUserKnob {20 JabukaCDL}
+ addUserKnob {6 Unpremult -STARTLINE}
+ addUserKnob {41 slope T CDL.slope}
+ addUserKnob {41 offset T CDL.offset}
+ addUserKnob {41 power T CDL.power}
+ addUserKnob {41 saturation T CDL.saturation}
+ addUserKnob {6 invert l "invert direction" t "Apply the cdl in the inverse direction." +STARTLINE}
+ addUserKnob {41 colorspace T CDL.working_space}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> CDL\n<B>ieEntityId:</B> 3898552.0\n<B>ieAssetId:</B> 3874968.0\n<B>ieCopyId:</B> 1\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0.0" n 2}
+ Advanced 1
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType CDL
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 3898552
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ ieAssetId 3874968
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 1
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "<span style=\"color:Silver\">Bundle Version </span>" t "\nThis entity is not part\nof a bundle." +DISABLED}
+ addUserKnob {1 ieDisplayName l Name +DISABLED}
+ ieDisplayName balanceGrade
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {2 1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+ ieVersionCreationDate "04-12-2023 17:35:13"
+ addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+ ieVersionCreator jeds
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ ieRelativeToLocation true
+ addUserKnob {6 ieDefaultCineAssetUpdate l "Default Cine Asset update" +STARTLINE}
+ ieDefaultCineAssetUpdate true
+ addUserKnob {32 ieSourceScene l "Open Source Scene" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+ addUserKnob {6 ieEditable -STARTLINE +HIDDEN}
+}
+ Input {
+  inputs 0
+  name Input
+ }
+ Unpremult {
+  name Unpremult
+  disable {{!Unpremult}}
+ }
+ OCIOCDLTransform {
+  slope {0.6777202487 0.8342587352 1.078148007}
+  offset {0 0 0}
+  power {1 1 1}
+  invert {{parent.invert}}
+  working_space compositing_linear
+  name CDL
+ }
+ Premult {
+  name Premult
+  disable {{!Unpremult}}
+ }
+ Output {
+  name Output
+  selected true
+ }
+end_group
+Dot {
+ name Dot58
+ selected true
+ xpos -37095
+ ypos -9082
+}
+Merge2 {
+ inputs 2
+ operation difference
+ name Merge20
+ selected true
+ xpos -36848
+ ypos -9080
+}
+Dot {
+ name Dot59
+ label QC
+ note_font "Arial Bold"
+ note_font_size 200
+ selected true
+ xpos -36814
+ ypos -8938
+}
+Dot {
+ name Dot60
+ label "<font color=white>\n<font size=5><b>STEP 4 - QC</b></font>\n- Make sure that your repo / retime is matching the Edit Ref by viewing the difference here. \n\n- Retime / Repo should not match in the handles of the shot because Edit Ref's are rendered to cut range.\n\n- Make sure that all of your animation curves are extended through the handles so that you dont have any <br>frozen frames for retimes or animated repos."
+ note_font Arial
+ note_font_size 50
+ note_font_color 0xffffffff
+ selected true
+ xpos -36397
+ ypos -8653
+}
+push $Nb3247710
+push $N873f4ab0
+Dot {
+ inputs 2
+ name Dot61
+ label "  <font color=white>\n<font size=5><b>STEP 3 - Match the Edit Ref</b></font>\nMatch the Edit Ref's Retime and or Repo using the supplied retime and repo nodes.\n\n<font color=red>The publisher will error if you adjust skew X, skew Y or change the aspect ratio of your scale from 1:1.\n\n<font color=grey><i>Tip: You can use any combination of Transform and Tracker nodes inside the <b>Repo Log Sandwich</b> and the <br>publisher will automatically merge them all and publish the resulting curves. \n\n<font color=grey><i>Tip: If you want to preview the merged result the publisher has a <b>Merge Repo Transforms</b> button in the <br><b>Advanced</b> tab.\n"
+ note_font Arial
+ note_font_size 50
+ selected true
+ xpos -36406
+ ypos -9421
+}
+push $N843fcf80
+Dot {
+ name Dot62
+ label "<font color=white>\n<font size=5><b>STEP 2 - Press the <font color=dodgerblue>SETUP TEMPLATE</font> Button</b></font>\nOpen the properties for the <b><font color=yellow>Repo And Retime Helper<font color=white></b> node and press the <b><font color=dodgerblue>SETUP TEMPLATE</font></b> button.\n\n<font color=lightgrey>This action updates all the dynamic nodes in this template, re-links the template to the helper node\nresets the retime node and saves the script with the correct naming.\n\n<font color=grey><i>Tip: Inside the node it will be shown whether the current shot has a Repo or Retime flagged in ShotGrid.\n"
+ note_font Arial
+ note_font_size 50
+ note_font_color 0xffffffff
+ selected true
+ xpos -36415
+ ypos -10112
+ hide_input true
+}
+Dot {
+ inputs 0
+ name Dot63
+ label "<font color=white>\n<font size=5><b>STEP 1 - Update your CompPrep_in bundle.</b></font>\nOpen Jabuka, ensure your Role is set to <b>CompPrep</b> in the Config menu.\nThen go to the <b>CompPrep View</b> tab, and press the red update button.\n\n<font color=lightgrey>This will ensure the template & QC dailies function correctly.</font>\n"
+ note_font Arial
+ note_font_size 50
+ note_font_color 0xffffffff
+ selected true
+ xpos -36416
+ ypos -10661
+ hide_input true
+}
