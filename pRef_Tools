@@ -1,0 +1,4493 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+add_layer {pref pref.red pref.green pref.blue pref.alpha}
+Group {
+ name P_Ramp7
+ help "<b>P_Ramp</b> creates a gradient matte based on a pass/layer containing position data"
+ knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\ns = nuke.toNode('SphereMatte')\nr = nuke.toNode('Start_End')\n\nif k.name() == \"falloffType\":\n    n\['falloff'].setVisible( k.value() != 'None' )\n    n\['exp'].setVisible( k.value() == 'Exponential' )\n\nif k.name() == \"rampDirection\":\n    for knob in \[n\['rotDivider'], n\['rotateAround'], n\['rot_order'], n\['rotate']]:\n        knob.setVisible(k.value() == 'Custom')\n\n"
+ selected true
+ xpos -33049
+ ypos -12686
+ addUserKnob {20 User}
+ addUserKnob {41 in l "position data" t "Choose a layer from the input that contains position data" T Shuffle_Input_Channels.in}
+ addUserKnob {41 output t "Resulting matte will be written to this layer only" T OutChannel.out}
+ addUserKnob {6 unpremultiply t "Check if your position layer is premultiplied" +STARTLINE}
+ addUserKnob {6 useAlpha l "ignore outside alpha" t "If your input has an alpha channel, checking this will force everything outside that alpha channel to be black" -STARTLINE}
+ useAlpha true
+ addUserKnob {26 ""}
+ addUserKnob {4 rampDirection t "Choose the axis/direction of the ramp\n\nX : ramp along the X axis\nY : ramp along the Y axis\nZ : ramp along the Z axis\nCustom : starting with a ramp along the Z axis, rotate the ramp at will using the rotation controls\nStart to End: ramp along the vector that goes from start to end points" M {X Y Z Custom "Start to End" "" "" "" ""}}
+ rampDirection "Start to End"
+ addUserKnob {41 end l start T Start_End.end}
+ addUserKnob {41 start l end T Start_End.start}
+ addUserKnob {26 rotDivider l "" +STARTLINE +HIDDEN}
+ addUserKnob {4 rotateAround l "rotate around" +HIDDEN M {"start\t" center end}}
+ rotateAround center
+ addUserKnob {4 rot_order l "rotation order" +HIDDEN M {XYZ XZY YXZ YZX ZXY ZYX "" "" ""}}
+ rot_order XZY
+ addUserKnob {13 rotate +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {4 falloffType M {None Linear Smooth Quadratic Cubic Exponential ""}}
+ falloffType Smooth
+ addUserKnob {7 falloff}
+ falloff 1
+ addUserKnob {7 exp +HIDDEN R 0.1 10}
+ exp 4.5
+}
+ Input {
+  inputs 0
+  name img
+  xpos -828
+  ypos -365
+ }
+ AddChannels {
+  channels alpha
+  color 1
+  name AddChannels1
+  xpos -828
+  ypos -271
+ }
+ Shuffle {
+  in pref
+  alpha blue
+  out rgb
+  name Shuffle_Input_Channels
+  xpos -828
+  ypos -210
+ }
+set N98e10a90 [stack 0]
+ Unpremult {
+  name Unpremult1
+  xpos -646
+  ypos -210
+  disable {{!parent.unpremultiply i}}
+ }
+ Dot {
+  name Dot4
+  xpos -278
+  ypos -205
+ }
+ NoOp {
+  name Ramps
+  xpos -312
+  ypos -187
+ }
+set N950f60c0 [stack 0]
+ Add {
+  channels rgb
+  value {{-parent.start i} {-parent.start i} {-parent.start i} {curve i}}
+  name Set_Origin
+  xpos 133
+  ypos -187
+ }
+ ColorMatrix {
+  matrix {
+      {{tt*wnorm.x**2+d i} {tt*wnorm.x*wnorm.y-s*wnorm.z i} {"tt*wnorm.x*wnorm.z + s*wnorm.y" i}}
+      {{"tt*wnorm.x*wnorm.y + s*wnorm.z" i} {tt*wnorm.y**2+d i} {"tt*wnorm.y*wnorm.z - wnorm.x*s" i}}
+      {{"tt*wnorm.x*wnorm.z - s*wnorm.y" i} {tt*wnorm.y*wnorm.z+s*wnorm.x i} {"tt*wnorm.z**2 + d" i}}
+    }
+  name Rotate_Scale_Skew1
+  xpos 133
+  ypos -100
+  disable {{hasError i x200 1}}
+  addUserKnob {20 User}
+  addUserKnob {7 length}
+  length {{"sqrt ( ( (parent.end.r - parent.start.r) ** 2 )  + ( (parent.end.g - parent.start.g) ** 2 )  +  ( (parent.end.b - parent.start.b) ** 2 ))" i}}
+  addUserKnob {13 u}
+  u {0 1 0}
+  addUserKnob {13 v}
+  v {{"(parent.end.r - parent.start.r) / length" i} {"(parent.end.g - parent.start.g) / length" i} {"(parent.end.b - parent.start.b) / length" i}}
+  addUserKnob {13 w}
+  w {{"u.y * v.z - u.z * v.y" i} {"u.z * v.x - u.x * v.z" i} {"u.x * v.y - u.y * v.x" i}}
+  addUserKnob {13 wnorm}
+  wnorm {{"w.x / sqrt(w.x**2+w.y**2+w.z**2)" i} {"w.y / sqrt(w.x**2+w.y**2+w.z**2)" i} {"w.z / sqrt(w.x**2+w.y**2+w.z**2)" i}}
+  addUserKnob {7 phi}
+  phi {{acos(u.x*v.x+u.y*v.y+u.z*v.z) i}}
+  addUserKnob {7 tt}
+  tt {{1-cos(phi) i}}
+  addUserKnob {7 s}
+  s {{-sin(phi) i}}
+  addUserKnob {7 d}
+  d {{cos(phi) i}}
+ }
+ Multiply {
+  channels rgb
+  value {{1/Rotate_Scale_Skew1.length i}}
+  name Multiply1
+  xpos 133
+  ypos -64
+ }
+ Clamp {
+  channels rgb
+  name Clamp1
+  xpos 133
+  ypos -28
+ }
+ Expression {
+  expr0 "parent.useAlpha && a==0.0 ? 0 : r"
+  expr1 "parent.useAlpha && a==0.0 ? 0 : g"
+  expr2 "parent.useAlpha && a==0.0 ? 0 : b"
+  name IgnoreOutsideAlpha1
+  xpos 133
+  ypos 12
+ }
+ Shuffle {
+  alpha green
+  name Shuffle3
+  xpos 133
+  ypos 72
+ }
+push $N950f60c0
+ Grade {
+  blackpoint {{start} {start} {start} {curve}}
+  whitepoint {{end} {end} {end} {curve}}
+  black_clamp false
+  maskChannelInput -rgba.alpha
+  unpremult -rgba.alpha
+  name Start_End
+  selected true
+  xpos -312
+  ypos -145
+  addUserKnob {20 User}
+  addUserKnob {18 start}
+  start {-0.8128094673 12.157839 -1.220680118}
+  addUserKnob {6 start_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 end}
+  end {-1.766836166 4.301094 -0.7720335722}
+  addUserKnob {6 end_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+set N94af40b0 [stack 0]
+ Dot {
+  name Dot2
+  xpos -141
+  ypos -141
+ }
+ Add {
+  channels rgb
+  value {{-Axis1.world_matrix.3} {-Axis1.world_matrix.7} {-Axis1.world_matrix.11} {curve}}
+  name Translate1
+  xpos -175
+  ypos -89
+ }
+ ColorMatrix {
+  matrix {
+      {{Axis1.world_matrix.0} {Axis1.world_matrix.1} {Axis1.world_matrix.2}}
+      {{Axis1.world_matrix.4} {Axis1.world_matrix.5} {Axis1.world_matrix.6}}
+      {{Axis1.world_matrix.8} {Axis1.world_matrix.9} {Axis1.world_matrix.10}}
+    }
+  invert true
+  name Rotate_Scale_Skew3
+  xpos -175
+  ypos -61
+  disable {{hasError x200 1}}
+ }
+ Expression {
+  expr0 "parent.useAlpha && a==0.0 ? 0 : r"
+  expr1 "parent.useAlpha && a==0.0 ? 0 : g"
+  expr2 "parent.useAlpha && a==0.0 ? 0 : b"
+  name IgnoreOutsideAlpha3
+  xpos -175
+  ypos -33
+ }
+ Shuffle {
+  alpha blue
+  name Shuffle4
+  xpos -175
+  ypos 2
+ }
+push $N94af40b0
+ Expression {
+  expr0 "parent.useAlpha && a==0.0 ? 0 : r"
+  expr1 "parent.useAlpha && a==0.0 ? 0 : g"
+  expr2 "parent.useAlpha && a==0.0 ? 0 : b"
+  name IgnoreOutsideAlpha
+  xpos -312
+  ypos -109
+ }
+set N945f5bb0 [stack 0]
+ Shuffle {
+  alpha blue
+  name Z
+  xpos -312
+  ypos -30
+ }
+push $N945f5bb0
+ Shuffle {
+  alpha green
+  name Y
+  xpos -412
+  ypos -28
+ }
+push $N945f5bb0
+ Shuffle {
+  alpha red
+  name X
+  xpos -518
+  ypos -28
+ }
+ Switch {
+  inputs 5
+  which {{parent.rampDirection i}}
+  name Switch3
+  xpos -371
+  ypos 72
+ }
+ Grade {
+  channels alpha
+  whitepoint {{falloffType?falloff:0}}
+  white_clamp true
+  name Falloff
+  xpos -366
+  ypos 124
+ }
+set N940ef100 [stack 0]
+ Expression {
+  expr3 pow(a,parent.exp)
+  name Exponential
+  xpos -81
+  ypos 229
+ }
+push $N940ef100
+ Expression {
+  expr3 clamp((a**3),0,1)
+  name Cubic
+  xpos -175
+  ypos 228
+ }
+push $N940ef100
+ Expression {
+  expr3 clamp(pow2(a),0,1)
+  name Quadratic
+  xpos -269
+  ypos 227
+ }
+push $N940ef100
+ Expression {
+  expr3 smoothstep(0,1,a)
+  name Smooth
+  xpos -366
+  ypos 230
+ }
+push $N940ef100
+ NoOp {
+  name Linear
+  xpos -457
+  ypos 231
+ }
+push $N940ef100
+ NoOp {
+  name None
+  xpos -557
+  ypos 231
+ }
+ Switch {
+  inputs 6
+  which {{falloffType i}}
+  name Switch2
+  xpos -366
+  ypos 318
+ }
+ Remove {
+  operation keep
+  channels alpha
+  name Remove1
+  xpos -366
+  ypos 378
+ }
+ Shuffle {
+  in alpha
+  name OutChannel
+  xpos -366
+  ypos 439
+ }
+push $N98e10a90
+ Dot {
+  name Dot1
+  xpos -794
+  ypos 527
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy1
+  xpos -366
+  ypos 508
+ }
+ Output {
+  name Output1
+  xpos -366
+  ypos 637
+ }
+ Axis2 {
+  inputs 0
+  rot_order {{parent.rot_order i}}
+  rotate {{parent.rotate i} {parent.rotate i} {parent.rotate i}}
+  pivot_translate {{parent.rotateAround/2 i} {parent.rotateAround/2 i} {parent.rotateAround/2 i}}
+  name Axis1
+  xpos -20
+  ypos -93
+ }
+end_group
+push $cut_paste_input
+Group {
+ name P_Matte
+ help "<b>P_Matte</b> creates a sphere or cube shaped 3D matte based on a pass/layer containing position data"
+ knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\ns = nuke.toNode('SphereMatte')\nr = nuke.toNode('Start_End')\n\nif k.name() == \"falloffType\":\n    n\['falloff'].setVisible( k.value() != 'None' )\n    n\['exp'].setVisible( k.value() == 'Exponential' )\n\n"
+ selected true
+ xpos -33050
+ ypos -12637
+ addUserKnob {20 User}
+ addUserKnob {41 in l "position data" t "Choose a layer from the input that contains position data" T Shuffle_Input_Channels.in}
+ addUserKnob {41 output t "Resulting matte will be written to this layer only" T OutChannel.out}
+ addUserKnob {6 unpremultiply t "Check if your position layer is premultiplied" +STARTLINE}
+ unpremultiply true
+ addUserKnob {6 useAlpha l "ignore outside alpha" t "If your input has an alpha channel, checking this will force everything outside that alpha channel to be black" -STARTLINE}
+ useAlpha true
+ addUserKnob {26 ""}
+ addUserKnob {4 matteShape t "Choose the shape of the 3D matte. Current options are \"Sphere\" and \"Cube\"" M {Sphere Cube ""}}
+ matteShape Cube
+ addUserKnob {41 center t "Sample the viewer or copy XYZ coordinates here to choose the center of the 3D sphere or cube" T Center.center}
+ addUserKnob {26 ""}
+ addUserKnob {41 rot_order l "rotation order" T Axis1.rot_order}
+ addUserKnob {41 rotate T Axis1.rotate}
+ addUserKnob {41 scaling l scale T Axis1.scaling}
+ addUserKnob {41 uniform_scale l "uniform scale" T Axis1.uniform_scale}
+ addUserKnob {41 skew T Axis1.skew}
+ addUserKnob {41 pivot +INVISIBLE T Axis1.pivot}
+ addUserKnob {26 ""}
+ addUserKnob {4 falloffType M {None Linear Smooth Quadratic Cubic Exponential ""}}
+ falloffType Smooth
+ addUserKnob {7 falloff}
+ falloff 1
+ addUserKnob {7 exp +HIDDEN R 0.1 10}
+ exp 8
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Input {
+  inputs 0
+  name img
+  xpos -828
+  ypos -353
+ }
+ AddChannels {
+  channels alpha
+  color 1
+  name AddChannels1
+  xpos -828
+  ypos -259
+ }
+ Shuffle {
+  in pref
+  name Shuffle_Input_Channels
+  xpos -828
+  ypos -198
+ }
+set N49914100 [stack 0]
+ Unpremult {
+  name Unpremult1
+  xpos -646
+  ypos -198
+  disable {{!parent.unpremultiply}}
+ }
+ Dot {
+  name Dot2
+  xpos -326
+  ypos -193
+ }
+ Add {
+  channels rgb
+  value {{-center} {-center} {-center} {curve}}
+  name Center
+  xpos -360
+  ypos -160
+  addUserKnob {20 User}
+  addUserKnob {18 center}
+  center {0 0 0}
+  addUserKnob {6 center_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ Add {
+  channels rgb
+  value {{-Axis1.world_matrix.3 i} {-Axis1.world_matrix.7 i} {-Axis1.world_matrix.11 i} {curve i}}
+  name Translate_Pivot
+  xpos -360
+  ypos -116
+ }
+ ColorMatrix {
+  matrix {
+      {{Axis1.world_matrix.0} {Axis1.world_matrix.1} {Axis1.world_matrix.2}}
+      {{Axis1.world_matrix.4} {Axis1.world_matrix.5} {Axis1.world_matrix.6}}
+      {{Axis1.world_matrix.8} {Axis1.world_matrix.9} {Axis1.world_matrix.10}}
+    }
+  invert true
+  name Rotate_Scale_Skew
+  xpos -360
+  ypos -88
+  disable {{hasError x200 1}}
+ }
+set N4961c500 [stack 0]
+ Expression {
+  expr3 "(parent.useAlpha &&  a == 0.0 )? 0 : 1-max(abs(r),abs(g),abs(b))"
+  name CubeMatte
+  xpos -285
+  ypos -11
+ }
+push $N4961c500
+ Expression {
+  expr3 "(parent.useAlpha &&  a == 0.0 )? 0 : 1-(sqrt((r*r)+(g*g)+(b*b)))"
+  name SphereMatte
+  xpos -442
+  ypos -12
+ }
+ Switch {
+  inputs 2
+  which {{matteShape i}}
+  name Switch1
+  xpos -366
+  ypos 58
+ }
+ Grade {
+  channels alpha
+  whitepoint {{falloffType?falloff:0}}
+  white_clamp true
+  name Falloff
+  xpos -366
+  ypos 124
+ }
+set N4931edc0 [stack 0]
+ Expression {
+  expr3 pow(a,parent.exp)
+  name Exponential
+  xpos -81
+  ypos 229
+ }
+push $N4931edc0
+ Expression {
+  expr3 clamp((a**3),0,1)
+  name Cubic
+  xpos -175
+  ypos 228
+ }
+push $N4931edc0
+ Expression {
+  expr3 clamp(pow2(a),0,1)
+  name Quadratic
+  xpos -269
+  ypos 227
+ }
+push $N4931edc0
+ Expression {
+  expr3 smoothstep(0,1,a)
+  name Smooth
+  xpos -366
+  ypos 230
+ }
+push $N4931edc0
+ NoOp {
+  name Linear
+  xpos -457
+  ypos 231
+ }
+push $N4931edc0
+ NoOp {
+  name None
+  xpos -557
+  ypos 231
+ }
+ Switch {
+  inputs 6
+  which {{falloffType i}}
+  name Switch2
+  xpos -366
+  ypos 318
+ }
+ Remove {
+  operation keep
+  channels alpha
+  name Remove1
+  xpos -366
+  ypos 378
+ }
+ Shuffle {
+  in alpha
+  out alpha
+  name OutChannel
+  xpos -366
+  ypos 439
+ }
+push $N49914100
+ Dot {
+  name Dot1
+  xpos -794
+  ypos 527
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy1
+  xpos -366
+  ypos 508
+ }
+ Output {
+  name Output1
+  xpos -366
+  ypos 637
+ }
+ Axis2 {
+  inputs 0
+  xform_order STR
+  rot_order ZYX
+  name Axis1
+  xpos -86
+  ypos -102
+ }
+end_group
+push $cut_paste_input
+Group {
+ name jb_Matte
+ knobChanged "this = nuke.thisNode()\n\ndef remove_knobs():    \n    \n    # Get knob name of the remove button.\n    knob_name = nuke.thisKnob().name()\[:-7]\n    #print (\"removing knobs with the name \"+knob_name)\n\n\n    # Iterate through all knobs and find that matches knob_name()\n    for knb in this.knobs():\n        # Check if the knob names match the pattern for removal\n        if knb.startswith(knob_name):\n            #print (knb)\n            this.removeKnob(this.knobs()\[knb])\n\n    \n    # Dive into the group and find the node with the label that matches the knobs that were\n    # just removed. DELETE THE NODE!\n\n    this.begin()\n    # delete nodes that matches the knob_name()\n    for node in nuke.allNodes():\n        if node.name() == knob_name:\n            nuke.delete(node)\n\n    this.end()"
+ tile_color 0xb79e00ff
+ selected true
+ xpos -33044
+ ypos -12561
+ addUserKnob {20 jbMatte}
+ addUserKnob {26 Info l "" t "Log:\n1.1 - fix remove button not working after script open.\n1.0 - initial release\n\nContributors:\nbenm@image-engine.com" +STARTLINE T "<b><font color=grey size=3>Create a matte(s) using pref or position data.\n<br>version: 1.1</br>\n<br>Created by: Jeff Baldemoro</br>\n<br>jeffb@image-engine.com</br>"}
+ addUserKnob {26 ""}
+ addUserKnob {41 in1 l "position data" T Shuffle1.in1}
+ addUserKnob {6 input_alpha l "input alpha" -STARTLINE}
+ addUserKnob {6 clean_extra l "clean extra channels" t "remove extra channels except position data and output." -STARTLINE}
+ clean_extra true
+ addUserKnob {4 output M {"Pref + Matte" "RGBA + Red Overlay"}}
+ output "RGBA + Red Overlay"
+ addUserKnob {22 addMatte l "Add Matte" t "Create a matte." T "this = nuke.thisNode()\nmatteList = \[]\n\n# We have to define this function first, so that we can add it to the \"remove\" button.\n\n## execute code within the group\nthis.begin()\n\nnukescripts.clear_selection_recursive()\n\npmatte = nuke.toNode('P_Matte')\npmatte.setSelected(True)\nnuke.nodeCopy('%Clipboard%')\n\n\n# Check if 'P_Matte' node is selected\nif any(node.name() == 'P_Matte' for node in nuke.selectedNodes()):\n    \n    # Select 'Output1' node's input 0\n    nuke.toNode('Dot2').input(0).setSelected(True)\n    \n    # Paste nodes from clipboard\n    nuke.nodePaste('%Clippord%')\n    \n    for newNode in nuke.selectedNodes():\n        kn = newNode.name()\n        #print (kn)\n        # add knobs and link them to the root group node\n\n        # P_matte group start\n        this.addKnob(nuke.Tab_Knob(kn+\"_group\", kn, nuke.TABBEGINGROUP))\n\n        #operation over plus stencil\n        opKnob = nuke.Link_Knob(kn+\"_operation\", \"operation\")\n        opKnob.setLink(kn+'.operation')\n        this.addKnob(opKnob)\n        \n        #mix knob\n        this.addKnob(nuke.Double_Knob(kn+\"_mix\", \"mix\"))\n        this.knob(kn+\"_mix\").setValue(1)\n        newNode.knob('mix').setExpression(kn+\"_mix\")\n\n        #matteShape\n        msKnob = nuke.Link_Knob(kn+\"_matteShape\", \"matteShape\")\n        msKnob.setLink(kn+'.matteShape')\n        #msknob.setFlag(nuke.ENDLINE)\n        this.addKnob(msKnob)\n\n        #center\n        cKnob = nuke.Link_Knob(kn+\"_center\", \"center\")\n        cKnob.setLink(kn+'.center')\n        this.addKnob(cKnob)\n        \n        #divider line\n        this.addKnob(nuke.Text_Knob(kn+\"_divider\", \"\"))\n        \n        #rotate\n        rKnob = nuke.Link_Knob(kn+\"_rotate\", \"rotate\")\n        rKnob.setLink(kn+'.rotate')\n        this.addKnob(rKnob)\n        \n        #scale\n        sKnob = nuke.Link_Knob(kn+\"_scaling\", \"scaling\")\n        sKnob.setLink(kn+'.scaling')\n        this.addKnob(sKnob)\n        \n        #uniform scale\n        usKnob = nuke.Link_Knob(kn+\"_uniform_scale\", \"uniform_scale\")\n        usKnob.setLink(kn+'.uniform_scale')\n        this.addKnob(usKnob)\n        \n        #divider line\n        this.addKnob(nuke.Text_Knob(kn+\"_divider2\", \"\"))\n        \n        #falloff type\n        ftKnob = nuke.Link_Knob(kn+\"_falloffType\", \"falloffType\")\n        ftKnob.setLink(kn+'.falloffType')\n        this.addKnob(ftKnob) \n\n        #fallofff\n        fKnob = nuke.Link_Knob(kn+\"_falloff\", \"falloff\")\n        fKnob.setLink(kn+'.falloff')\n        this.addKnob(fKnob)\n\n        #disable checkbox\n        dKnob = nuke.Link_Knob(kn+\"_disable\", \"disable\")\n        dKnob.setLink(kn+'.disable')\n        this.addKnob(dKnob)\n                \n        # Remove button -- this holds the fucntion we defined at the start1.\n        rKnob = nuke.PyScript_Knob(kn+\"_remove\", \"remove\", \"remove_knobs()\")\n        this.addKnob(rKnob)\n\n        # P_matte group end\n        this.addKnob(nuke.Tab_Knob(kn+\"_endGroup\", kn+\"_endGroup\", nuke.TABENDGROUP))\n\nthis.end()" +STARTLINE}
+ addUserKnob {26 ""}
+}
+ Input {
+  inputs 0
+  name img
+  xpos 70
+  ypos -75
+ }
+set N1e6f53d0 [stack 0]
+ Shuffle2 {
+  fromInput1 {{0} B}
+  in1 pref
+  fromInput2 {{0} B}
+  mappings "4 pref.red 0 0 rgba.red 0 0 pref.green 0 1 rgba.green 0 1 pref.blue 0 2 rgba.blue 0 2 pref.alpha 0 3 rgba.alpha 0 3"
+  name Shuffle1
+  label "\[value in1] to \[value out1]"
+  xpos 70
+  ypos -16
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  label "\[value in1] to \[value out1]"
+  xpos 70
+  ypos 49
+  disable {{parent.input_alpha}}
+ }
+set N4091d5f0 [stack 0]
+ Dot {
+  name Dot2
+  xpos 98
+  ypos 2523
+ }
+set N40816d70 [stack 0]
+push $N40816d70
+push $N1e6f53d0
+ Dot {
+  name Dot1
+  xpos -232
+  ypos -77
+ }
+ Grade {
+  inputs 1+1
+  white {4 1 1 1}
+  black_clamp false
+  name Grade1
+  xpos -260
+  ypos 2525
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -260
+  ypos 2584
+ }
+push $N40816d70
+ Switch {
+  inputs 2
+  which {{output}}
+  name Switch1
+  xpos -260
+  ypos 2655
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove1
+  xpos -260
+  ypos 2718
+  disable {{"parent.clean_extra? 0:1"}}
+ }
+ Output {
+  name Output1
+  xpos -260
+  ypos 2785
+ }
+push $N4091d5f0
+ Group {
+  inputs 0
+  name P_Matte
+  help "<b>P_Matte</b> creates a sphere or cube shaped 3D matte based on a pass/layer containing position data"
+  knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\ns = nuke.toNode('SphereMatte')\nr = nuke.toNode('Start_End')\n\nif k.name() == \"falloffType\":\n    n\['falloff'].setVisible( k.value() != 'None' )\n    n\['exp'].setVisible( k.value() == 'Exponential' )\n\n"
+  xpos 410
+  ypos -16
+  addUserKnob {20 User}
+  addUserKnob {41 operation T ChannelMerge1.operation}
+  addUserKnob {6 inputRGB l "input RGB" t "Retain input RGB channel or not." -STARTLINE}
+  inputRGB true
+  addUserKnob {6 inputAlpha l "input alpha" -STARTLINE}
+  addUserKnob {6 unpremultiply t "Check if your position layer is premultiplied" -STARTLINE}
+  addUserKnob {41 output t "Resulting matte will be written to this layer only" T OutChannel.out}
+  addUserKnob {7 mix t "Control mix of input A to B,"}
+  mix 1
+  addUserKnob {26 ""}
+  addUserKnob {4 matteShape t "Choose the shape of the 3D matte. Current options are \"Sphere\" and \"Cube\"" M {Sphere Cube ""}}
+  matteShape Cube
+  addUserKnob {41 center t "Sample the viewer or copy XYZ coordinates here to choose the center of the 3D sphere or cube" T Center.center}
+  addUserKnob {26 ""}
+  addUserKnob {41 rot_order l "rotation order" T Axis1.rot_order}
+  addUserKnob {41 rotate T Axis1.rotate}
+  addUserKnob {41 scaling l scale T Axis1.scaling}
+  addUserKnob {41 uniform_scale l "uniform scale" T Axis1.uniform_scale}
+  addUserKnob {41 skew T Axis1.skew}
+  addUserKnob {41 pivot +INVISIBLE T Axis1.pivot}
+  addUserKnob {26 ""}
+  addUserKnob {4 falloffType M {None Linear Smooth Quadratic Cubic Exponential ""}}
+  falloffType Smooth
+  addUserKnob {7 falloff}
+  falloff 1
+  addUserKnob {7 exp +HIDDEN R 0.1 10}
+  exp 8
+  addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+  Scriplet_Info central
+ }
+  Axis2 {
+   inputs 0
+   xform_order STR
+   rot_order ZYX
+   name Axis1
+   xpos -140
+   ypos -95
+  }
+  Input {
+   inputs 0
+   name img
+   xpos -1360
+   ypos -270
+  }
+set N40217520 [stack 0]
+  AddChannels {
+   channels alpha
+   color 1
+   name AddChannels1
+   xpos -700
+   ypos -276
+  }
+  Unpremult {
+   name Unpremult1
+   xpos -700
+   ypos -205
+   disable {{!parent.unpremultiply}}
+  }
+  Dot {
+   name Dot2
+   xpos -342
+   ypos -207
+  }
+  Add {
+   channels rgb
+   value {{-center} {-center} {-center} {curve}}
+   name Center
+   xpos -370
+   ypos -156
+   addUserKnob {20 User}
+   addUserKnob {18 center}
+   center {0 0 0}
+   addUserKnob {6 center_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  }
+  Add {
+   channels rgb
+   value {{-Axis1.world_matrix.3} {-Axis1.world_matrix.7} {-Axis1.world_matrix.11} {curve}}
+   name Translate_Pivot
+   xpos -370
+   ypos -107
+  }
+  ColorMatrix {
+   matrix {
+       {{Axis1.world_matrix.0} {Axis1.world_matrix.1} {Axis1.world_matrix.2}}
+       {{Axis1.world_matrix.4} {Axis1.world_matrix.5} {Axis1.world_matrix.6}}
+       {{Axis1.world_matrix.8} {Axis1.world_matrix.9} {Axis1.world_matrix.10}}
+     }
+   invert true
+   name Rotate_Scale_Skew
+   xpos -370
+   ypos -75
+   disable {{hasError x200 1}}
+  }
+set N3ff1c920 [stack 0]
+  Expression {
+   expr3 "(parent.inputAlpha &&  a == 0.0 )? 0 : 1-max(abs(r),abs(g),abs(b))"
+   name CubeMatte
+   xpos -260
+   ypos -10
+  }
+push $N3ff1c920
+  Expression {
+   expr3 "(parent.inputAlpha &&  a == 0.0 )? 0 : 1-(sqrt((r*r)+(g*g)+(b*b)))"
+   name SphereMatte
+   xpos -480
+   ypos -10
+  }
+  Switch {
+   inputs 2
+   which {{matteShape i}}
+   name Switch1
+   xpos -370
+   ypos 55
+  }
+  Grade {
+   channels alpha
+   whitepoint {{falloffType?falloff:0}}
+   white_clamp true
+   name Falloff
+   xpos -370
+   ypos 114
+  }
+set N3fc1f000 [stack 0]
+  Expression {
+   expr3 pow(a,parent.exp)
+   name Exponential
+   xpos -40
+   ypos 250
+  }
+push $N3fc1f000
+  Expression {
+   expr3 clamp((a**3),0,1)
+   name Cubic
+   xpos -150
+   ypos 250
+  }
+push $N3fc1f000
+  Expression {
+   expr3 clamp(pow2(a),0,1)
+   name Quadratic
+   xpos -260
+   ypos 250
+  }
+push $N3fc1f000
+  Expression {
+   expr3 smoothstep(0,1,a)
+   name Smooth
+   xpos -370
+   ypos 250
+  }
+push $N3fc1f000
+  NoOp {
+   name Linear
+   xpos -480
+   ypos 250
+  }
+push $N3fc1f000
+  NoOp {
+   name None
+   xpos -590
+   ypos 250
+  }
+  Switch {
+   inputs 6
+   which {{falloffType}}
+   name Switch2
+   xpos -370
+   ypos 315
+  }
+  Shuffle2 {
+   fromInput1 {{0} B}
+   fromInput2 {{0} B}
+   mappings "4 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 rgba.alpha 0 3 rgba.alpha 0 3"
+   name Shuffle1
+   label "\[value in1] to \[value out1]"
+   xpos -370
+   ypos 453
+  }
+  Shuffle {
+   in alpha
+   out alpha
+   name OutChannel
+   xpos -370
+   ypos 510
+  }
+push $N40217520
+  Remove {
+   channels rgb
+   name Remove2
+   xpos -1360
+   ypos 573
+   disable {{parent.inputRGB}}
+  }
+  ChannelMerge {
+   inputs 2
+   mix {{parent.mix}}
+   name ChannelMerge1
+   xpos -370
+   ypos 561
+  }
+  Output {
+   name Output1
+   xpos -370
+   ypos 640
+  }
+ end_group
+ Viewer {
+  inputs 2
+  frame_range 1001-1033
+  center_fstop 0
+  colour_sample_bbox {0.05126953125 0.2802734375 0.0517578125 0.2807617188}
+  samplepoints {{0.05322265625 0.25}
+    }
+  viewerProcess "Show_LUT_CDL (rec709)"
+  name Viewer1
+  xpos 1170
+  ypos -10
+  hide_input true
+ }
+end_group
+push $cut_paste_input
+Group {
+ name jb_UVMatte
+ knobChanged "node = nuke.thisNode()\n\nif nuke.thisNode().knob(\"Output\").value() == \"Solid\":\n    node.knob('Ramp_text').setVisible(False)\n    node.knob('rtranslate').setVisible(False)\n    node.knob('rrotate').setVisible(False)\n    node.knob('rsoftness').setVisible(False)\nelse:\n    node.knob('Ramp_text').setVisible(True)\n    node.knob('rtranslate').setVisible(True)\n    node.knob('rrotate').setVisible(True)\n    node.knob('rsoftness').setVisible(True)"
+ tile_color 0xb79e00ff
+ selected true
+ xpos -33045
+ ypos -12491
+ addUserKnob {20 UVMatte}
+ addUserKnob {26 ToolTip l "Tool Tip:" T "Creates a matte using the 'uv_layer' of an AOV.\nUse the 'pos' in the nuke viewer to pick the UV \nto output a solid alpha or a ramp."}
+ addUserKnob {26 ""}
+ addUserKnob {4 Output M {Solid Ramp}}
+ Output Ramp
+ addUserKnob {4 Overlay_View l "Overlay View" t "Set matte overlay on sampled UV" M {"Red Overlay" "Checker Board"}}
+ addUserKnob {41 sample_frame l "Sample Frame:" t "The Reference frame of the sampled UV using the pos point via viewer." T Normalize_UV.sample_frame}
+ addUserKnob {41 pos l "Sample Position:" t "Move the pos point to your UV's area of interest on the Viewer. This will normalize the UV and generate a matte and automatically set the current frame as the reference point." T Normalize_UV.pos}
+ addUserKnob {26 ""}
+ addUserKnob {26 Ramp_text l "" -STARTLINE T "Ramp Options"}
+ addUserKnob {12 rtranslate l translate t "translate ramp in x/y"}
+ rtranslate {256 226}
+ addUserKnob {7 rrotate l rotate t "Rotate ramp" R 0 360}
+ addUserKnob {7 rsoftness l softness t "ramp softness"}
+ rsoftness 0.1
+ addUserKnob {20 About}
+ addUserKnob {26 About_1 l About T "<center><br>jb_UVMatte</br>\n<br>version: 1.0</br>\n<br>Created by: Jeff Baldemoro</br>\n<br>jeffb@image-engine.com</br>\n<br></br>\n<br>Contributors:</br>\n<br>benm@image-engine.com</br>\n<br>rays@image-engine.com</br>\n</center>"}
+}
+ Input {
+  inputs 0
+  name img
+  xpos -40
+  ypos -10
+ }
+add_layer {uv_layer uv_layer.red uv_layer.green uv_layer.blue uv_layer.alpha}
+ Remove {
+  operation keep
+  channels rgba
+  channels2 uv_layer
+  name Remove1
+  xpos -40
+  ypos 185
+ }
+set N1e6f0a40 [stack 0]
+ Shuffle2 {
+  fromInput1 {{0} B}
+  in1 uv_layer
+  fromInput2 {{0} B}
+  mappings "4 uv_layer.red 0 0 rgba.red 0 0 uv_layer.green 0 1 rgba.green 0 1 uv_layer.blue 0 2 rgba.blue 0 2 uv_layer.alpha 0 3 rgba.alpha 0 3"
+  name Shuffle21
+  label "\[value in1] to \[value out1]"
+  xpos -370
+  ypos 179
+ }
+ Group {
+  name Normalize_UV
+  xpos -370
+  ypos 315
+  addUserKnob {20 User}
+  addUserKnob {41 sample_frame l "Sample Frame:" T Grade1.sample_frame}
+  addUserKnob {41 pos l "Sample Position:" T Grade1.pos}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 521
+   ypos -502
+  }
+  Grade {
+   add {{floor(uv_data.u(sample_frame))*-1} {floor(uv_data.v(sample_frame))*-1} 0 0}
+   black_clamp false
+   name Grade1
+   knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\n\nif k.name() == 'pos':\n        this_frame = nuke.frame()\n        n\['sample_frame'].setValue(this_frame)\n        \n        u_value = n.knob('uv_data').value(0)\n        v_value = n.knob('uv_data').value(1)\n        n.knob('uv_value').setValue(u_value, 0)\n        n.knob('uv_value').setValue(u_value, 1)"
+   label "Normalize\n"
+   xpos 521
+   ypos -435
+   addUserKnob {20 User}
+   addUserKnob {6 uv_data_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+   addUserKnob {3 sample_frame +DISABLED}
+   sample_frame 1052
+   addUserKnob {12 pos}
+   pos {1981 1523}
+   addUserKnob {30 uv_data}
+   uv_data {{"\[sample input r pos.x pos.y]" x1058 8.3125} {"\[sample input g pos.x pos.y]" x1058 8.3125}}
+   addUserKnob {30 uv_value}
+   uv_value {8.24219 8.24219}
+   addUserKnob {18 uv_offset l "uv offset"}
+   uv_offset {{floor(uv_value.u(sample_frame))*-1} {floor(uv_data.v(sample_frame))*-1} 0}
+   addUserKnob {6 uv_offset_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  }
+set N92ff6d30 [stack 0]
+  Viewer {
+   frame_range 1001-1067
+   center_fstop 0
+   viewerProcess "Show_LUT_CDL (rec709)"
+   name Viewer1
+   xpos 290
+   ypos -725
+   hide_input true
+  }
+push $N92ff6d30
+  Output {
+   name Output1
+   xpos 521
+   ypos -362
+  }
+ end_group
+set N92ffc7c0 [stack 0]
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant5
+  xpos -1360
+  ypos -358
+ }
+ Reformat {
+  format "512 512 0 0 512 512 1 square_512"
+  name Reformat16
+  xpos -1360
+  ypos -211
+ }
+ Crop {
+  box {0 0 512 512}
+  name Crop16
+  xpos -1360
+  ypos -140
+ }
+ Expression {
+  temp_name0 pi
+  temp_expr0 3.14152965
+  temp_name1 rampX
+  temp_expr1 x/width
+  temp_name2 rampY
+  temp_expr2 y/height
+  channel0 rgb
+  expr0 "(clamp(((rampX-(center.x/width))) * sin ((rotate*pi*2/360)) + ((rampY-(center.y/height))) * (cos (rotate*pi*2/360))))*(1/ramp_softness)"
+  expr3 x
+  name spinny_ramp
+  xpos -1360
+  ypos -75
+  addUserKnob {20 User}
+  addUserKnob {12 center}
+  center {{parent.rtranslate} {parent.rtranslate}}
+  addUserKnob {7 rotate R 0 360}
+  rotate {{parent.rrotate}}
+  addUserKnob {7 ramp_softness R 1e-05 1}
+  ramp_softness {{parent.rsoftness}}
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+  name Shuffle1
+  label "\[value in1] to \[value out1]"
+  xpos -1360
+  ypos -16
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap1
+  xpos -1360
+  ypos 309
+ }
+ Dot {
+  name Dot4
+  xpos -1332
+  ypos 833
+ }
+push $N92ffc7c0
+ Read {
+  inputs 0
+  file_type png
+  file /data/textures/TEXTURES/uvgrid.png
+  format "512 512 0 0 512 512 1 square_512"
+  origset true
+  in_colorspace scene_linear
+  out_colorspace scene_linear
+  name Read2
+  xpos -1690
+  ypos -347
+  postage_stamp false
+ }
+ Expression {
+  expr3 1
+  name Expression1
+  xpos -1690
+  ypos -205
+  addUserKnob {20 User}
+  addUserKnob {22 nan_to_black l "Nan To Black" -STARTLINE T nan_expressions.nan_fix('black')}
+ }
+ Crop {
+  box {0 0 512 512}
+  name Crop1
+  xpos -1690
+  ypos -140
+ }
+ Dot {
+  name Dot2
+  xpos -1662
+  ypos 508
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap16
+  xpos -370
+  ypos 504
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Mask
+  selected true
+  xpos -370
+  ypos 835
+  disable {{"Output != 0? 0:1"}}
+ }
+set N3d416770 [stack 0]
+ Dot {
+  name Dot3
+  xpos -342
+  ypos 1223
+ }
+set N3d317200 [stack 0]
+ Dot {
+  name Dot1
+  xpos -342
+  ypos 1353
+ }
+push $N3d317200
+push $N3d416770
+push $N1e6f0a40
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge1
+  xpos -40
+  ypos 835
+  disable {{"Overlay_View != 1? 1:0"}}
+ }
+ Grade {
+  inputs 1+1
+  channels {rgba.red -rgba.green -rgba.blue none}
+  white 5
+  black_clamp false
+  name Grade1
+  xpos -40
+  ypos 1225
+  disable {{"Overlay_View != 0? 1:0"}}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -40
+  ypos 1349
+ }
+ Output {
+  name Output1
+  xpos -40
+  ypos 1485
+ }
+end_group
+push $cut_paste_input
+Group {
+ name ProjectionBuddy
+ tile_color 0xdb2e5dff
+ label "\[value aovSelectionCHNKNB]"
+ selected true
+ xpos -33044
+ ypos -12424
+ addUserKnob {20 optionsTAB l Options}
+ addUserKnob {41 aovSelectionCHNKNB l AOV t "Select what type of position data you'd like to project onto" T InputAOV.in}
+ addUserKnob {6 enableInputAOVsCHK l All -STARTLINE}
+ enableInputAOVsCHK true
+ addUserKnob {6 unpremultCHK l Unpremult t "Unpremulits the input data" +STARTLINE}
+ addUserKnob {6 useImageAlphaCHK l Preview t "Disables BW Preview image" -STARTLINE}
+ useImageAlphaCHK true
+ addUserKnob {6 previewCheckerBoardCHK l "Calibration Image" t "Enables a calibration preview for 3D projections to help with orientation of the image" -STARTLINE}
+ addUserKnob {6 edgeFixCHK l "Precision Fix" -STARTLINE}
+ addUserKnob {26 projectionTXT l "<b><p style=\"color:#DF538C\">Projection</p></b>"}
+ addUserKnob {41 filter2DPDC l Filter +HIDDEN T STMap2DMode.filter}
+ addUserKnob {41 filter3DPDC l Filter T STMap3DMode.filter}
+ addUserKnob {41 positonSampleCKNB l Position t "Hold \"Ctrl + Alt\" and select a point in the viewer to set the center of your 3D projection" T Center3D.center}
+ addUserKnob {13 rotation3DKNB l Rotation t "Rotate your 3D projection"}
+ addUserKnob {13 scale3DKNB l Scale t "Use to adjust scale along an axis for your 3D projection"}
+ scale3DKNB {1 1 1}
+ addUserKnob {7 uniScaleSLD l "Uni Scale" t "Use to adjust overall scale" R 0.001 10}
+ uniScaleSLD 1
+ addUserKnob {13 skew3DKNB l Skew t "Use to skew your 3D projection"}
+ addUserKnob {13 pivot3DKNB l Pivot t "Use to offset or pivot your 3D projection"}
+ addUserKnob {3 refFrameINKNB l "Reference Frame" +HIDDEN}
+ refFrameINKNB 1001
+ addUserKnob {22 setCurrentFrameBTN l "Set Current" -STARTLINE +HIDDEN T nuke.thisNode().knob('refFrameINKNB').setValue(nuke.frame())}
+ addUserKnob {22 goToCurrentFrameBTN l "Go To Frame" -STARTLINE +HIDDEN T "refFrame = nuke.thisNode().knob('refFrameINKNB').getValue()\nnuke.frame(refFrame)"}
+ addUserKnob {26 noiseTXT l <b>Noise +HIDDEN}
+ addUserKnob {7 scaleSLD l Scale +HIDDEN R 1e-05 0.04999}
+ scaleSLD 0.03
+ addUserKnob {7 falloffSLD l Falloff +HIDDEN}
+ falloffSLD 1
+ addUserKnob {7 blurResultSLD l Blur +HIDDEN R 0 100}
+ blurResultSLD 2
+ addUserKnob {26 offsetTXT l <b>Offset +HIDDEN}
+ addUserKnob {41 Roffset l X +HIDDEN T Expression_3dnoise.Roffset}
+ addUserKnob {41 Goffset l Y +HIDDEN T Expression_3dnoise.Goffset}
+ addUserKnob {41 Boffset l Z +HIDDEN T Expression_3dnoise.Boffset}
+ addUserKnob {6 txtColour_panelDropped l "panel dropped state" +HIDDEN +STARTLINE}
+ addUserKnob {26 mask l "<b><p style=\"color:#DF538C\">Mask</p></b>"}
+ addUserKnob {41 maskSelectionCHNKNB l "&nbsp;" T MaskMult.maskChannelMask}
+ addUserKnob {6 maskInvertCHK l Invert t "Use to invert mask alpha" -STARTLINE}
+ addUserKnob {7 maskValueSLD l Value t "Use to adjust mask value \n0 = Off\n1 = On"}
+ addUserKnob {20 advancedTAB l Advanced}
+ addUserKnob {26 fixesTXT l "<b><p style=\"color:#DF538C\">Fixes</p></b>"}
+ addUserKnob {6 blackOutsideCHK l "Black Outside" +STARTLINE}
+ blackOutsideCHK true
+ addUserKnob {6 copyInputAlphaCHK l "Repair Alpha" -STARTLINE}
+ copyInputAlphaCHK true
+ addUserKnob {6 extendUtilityCHK l "Extend Utility" -STARTLINE}
+ addUserKnob {7 dilateFixSizeSLD l Erode R -10 10}
+ addUserKnob {7 edgeBlurSLD l "Edge Blur" R 0 10}
+ edgeBlurSLD 2
+ addUserKnob {7 edgeFixFalloffSLD l "Blur Falloff"}
+ edgeFixFalloffSLD 0.2
+ addUserKnob {7 alphaErodeSLD l Alpha R -5 5}
+ addUserKnob {7 softenDataSLD l Smooth t "Use to blur the input AOV data to soften it overall" R 0 25}
+ addUserKnob {26 previewTXT l "<b><p style=\"color:#DF538C\">Preview</p></b>"}
+ addUserKnob {6 previewBwCHK l "Black And White" +STARTLINE}
+ previewBwCHK true
+ addUserKnob {6 previewClampCHK l Clamp -STARTLINE}
+ addUserKnob {18 previewColourCKNB l Colour}
+ previewColourCKNB {0.9 0.04500000924 0.2020843774}
+ addUserKnob {6 previewColourCKNB_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 inputAOVsTXT l "<b><p style=\"color:#DF538C\">Input AOVs</p></b>"}
+ addUserKnob {41 inputAOV1CHKNB l "&nbsp;" T Remove1.channels}
+ addUserKnob {41 inputAOV2CHKNB l "&nbsp;" T Remove1.channels2}
+ addUserKnob {41 inputAOV3CHKNB l "&nbsp;" T Remove1.channels3}
+ addUserKnob {41 inputAOV4CHKNB l "&nbsp;" T Remove1.channels4}
+ addUserKnob {26 calibrationImageTXT l "<b><p style=\"color:#DF538C\">Calibration</p></b>"}
+ addUserKnob {6 autoCalImageCHK l "Match to Image Input" +STARTLINE}
+ autoCalImageCHK true
+ addUserKnob {6 worldSpaceCHK l "Convert \"Z Up\" to \"Y Up\"" +STARTLINE}
+ worldSpaceCHK true
+ addUserKnob {7 globalScaleSLD l "Global Scale" R 1 100}
+ globalScaleSLD 1
+ addUserKnob {20 Info}
+ addUserKnob {26 aboutTXT l "&nbsp;" T "<h3>About</h3> \n<p>This is a tool that can project images, and masks into world position/PRef\n<br>Useful for replacing screens/textures, adding gobo shapes, or creating masks</p> \n<hr>\n <h3>How To Use</h3> \n<p>Step 1: Connect the primary input to a render or pipe that contains Position data</p>\n<p>Step 2: Connect the image you want to have on the card to the Image input</p>\n<p>Step 3: Use the Position sampler while holding Ctrl+Alt to sample an area in your viewer, to place the projection there</p>\n<p>Step 4: Disable preview/calibration, and merge the result back into your scene</p>\n<hr>"}
+ addUserKnob {26 help1TXT l "&nbsp;" T "Press the "}
+ addUserKnob {22 helpBTN l Help -STARTLINE T nukescripts.start('https://www.hiramgifford.com/buddy-system/projectionbuddy')}
+ addUserKnob {26 help2TXT l "&nbsp;" -STARTLINE T "button to view the full documentation"}
+ addUserKnob {26 classTXT l "&nbsp;" T "<font color=grey><i>ProjectionBuddy</i>"}
+ addUserKnob {26 versionTXT l "&nbsp;" -STARTLINE T "<font color=grey><i>v1.0</i>"}
+ addUserKnob {26 infoTXT l "&nbsp;" T "<font color=grey><i>Hiram Gifford - 28/06/2023 - hiramgifford.com</i>"}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x742439ff
+  label <center>Image
+  note_font_size 42
+  xpos -3168
+  ypos -1472
+  bdwidth 582
+  bdheight 1177
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x742439ff
+  label <center>Projections
+  note_font_size 42
+  xpos -2568
+  ypos -1472
+  bdwidth 1215
+  bdheight 1940
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x742439ff
+  label <center>Mask
+  note_font_size 42
+  xpos -1335
+  ypos -1472
+  bdwidth 363
+  bdheight 1525
+ }
+ Crop {
+  inputs 0
+  box {0 0 1000 1000}
+  reformat true
+  crop false
+  name Crop
+  xpos -2790
+  ypos -1066
+  hide_input true
+ }
+ Roto {
+  cliptype none
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x447a0000 x43fa0000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Arrow 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43eedc38 x445664de}
+        {}
+        {}
+        {x43f435d2 x445662ac}
+        {}
+        {}
+        {x43fb1c36 x445eea2c}
+        {}
+        {}
+        {x44010e1b x445664de}
+        {}
+        {}
+        {x4403dae9 x44566452}
+        {}
+        {}
+        {x43fdcf66 x4461dd5e}
+        {}
+        {}
+        {x43f8dc36 x4461dd5e}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44802ea1 x44321508}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Arrow_Line 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43f8502e x443d1d5e}
+        {}
+        {}
+        {x43fd5cfa x443d1d5e}
+        {}
+        {}
+        {x43fd5cfa x445616f8}
+        {}
+        {}
+        {x43f8502e x445616f8}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44801e66 x4415899a}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x41100000}}
+    {curvegroup BezierCusped3 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x44060819 x443a76f8}
+        {}
+        {}
+        {x440601b1 x4432e3c4}
+        {}
+        {xbd520000 xc178e0c0}
+        {x440abe41 x4436809e}
+        {x3d520000 x4178e080}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xbd520000 xc178e0c0}
+        {}
+        {x3d520000 x4178e080}}}}
+     {t x44852ccd x44029111}
+     {a bm x41400000 osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped2 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43ffd02e x442a537e}
+        {}
+        {}
+        {x44086e7d x442a540a}
+        {}
+        {}
+        {x440874e5 x442b5fd6}
+        {}
+        {}
+        {x4405e1b1 x442b606c}
+        {}
+        {}
+        {x4405ee7d x44315d5e}
+        {}
+        {}
+        {x4409bb49 x44318a2b}
+        {}
+        {xbe198000 xc1a00000}
+        {x440ee1b1 x44369d5e}
+        {x3e264000 x419fffc0}
+        {}
+        {x440aa1b1 x443b8644}
+        {}
+        {}
+        {x43ffd02e x443b8644}
+        {}
+        {}
+        {x43ffd02e x443a91f6}
+        {}
+        {}
+        {x4401bb49 x443a8a2c}
+        {}
+        {}
+        {x4401ee7d x442b606c}
+        {}
+        {}
+        {x43ffc362 x442b614e}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xbe198000 xc1a00000}
+        {}
+        {x3e264000 x419fffc0}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x4483fe86 x43fb92b5}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43d84e80 x443b911e}
+        {}
+        {}
+        {x43e8502c x443b91ac}
+        {}
+        {}
+        {x43e84df0 x443a9a2c}
+        {}
+        {}
+        {x43e4835e x443a9a2c}
+        {}
+        {}
+        {x43e48360 x442e0a2b}
+        {}
+        {xc14c0040 x3e19a000}
+        {x43ea9cfa x442b76f8}
+        {x414c0040 xbe19a000}
+        {}
+        {x43f0e9c6 x442e6a2b}
+        {}
+        {}
+        {x43f0a9c4 x443a9a2c}
+        {}
+        {}
+        {x43ed29c4 x443a9a2c}
+        {}
+        {}
+        {x43ed29c4 x443b8f78}
+        {}
+        {}
+        {x43fcc362 x443b8f78}
+        {}
+        {}
+        {x43fcbea6 x443a9bda}
+        {}
+        {}
+        {x43f8b692 x443a9a2c}
+        {}
+        {}
+        {x43f869c6 x442e5092}
+        {}
+        {x41eb5240 xbf115800}
+        {x43ea69c6 x442a2a2a}
+        {xc1eb3300 x3f19a000}
+        {}
+        {x43dc502e x442e9092}
+        {}
+        {}
+        {x43dc29c4 x443a9a2c}
+        {}
+        {}
+        {x43d8435e x443a9a2c}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xc14c0040 x3e19a000}
+        {}
+        {x414c0040 xbe19a000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x41eb5240 xbf115800}
+        {}
+        {xc1eb3300 x3f19a000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x447819f5 x440241c6}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1000 500}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  view {}
+  motionblur_on true
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Up
+  xpos -2790
+  ypos -1042
+ }
+ Roto {
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x447a0000 x43fa0000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup BezierCusped4 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x441ab9d0 x437ff1c3}
+        {}
+        {}
+        {x4414c368 x437fe1c3}
+        {}
+        {}
+        {x4414c368 x4381e207}
+        {}
+        {}
+        {x44166368 x4381e207}
+        {}
+        {}
+        {x44169038 x43a02daf}
+        {}
+        {}
+        {x4414c368 x43a029d9}
+        {}
+        {}
+        {x4414c368 x43a2482b}
+        {}
+        {}
+        {x441a9034 x43a24635}
+        {}
+        {}
+        {x44228368 x438aaa7b}
+        {}
+        {}
+        {x44229684 x43a0318b}
+        {}
+        {}
+        {x44200368 x43a0303f}
+        {}
+        {}
+        {x442009cc x43a24635}
+        {}
+        {}
+        {x4425f2cc x43a24063}
+        {}
+        {}
+        {x4425f0ac x43a037eb}
+        {}
+        {}
+        {x44244368 x43a0303f}
+        {}
+        {}
+        {x44241d04 x437fa1c3}
+        {}
+        {}
+        {x442169d0 x437fa1c3}
+        {}
+        {}
+        {x44181038 x439b8417}
+        {}
+        {}
+        {x441849d0 x4381e47d}
+        {}
+        {}
+        {x441abd04 x4381e621}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x448f09ac x439b8669}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped3 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43f54722 x43a23c73}
+        {}
+        {}
+        {x4401f501 x43a23c71}
+        {}
+        {}
+        {x4401f501 x43a07a79}
+        {}
+        {}
+        {x44000835 x43a07fd9}
+        {}
+        {}
+        {x440341d0 x43881c49}
+        {}
+        {}
+        {x440641d0 x43a232bb}
+        {}
+        {}
+        {x44092834 x43a23563}
+        {}
+        {}
+        {x440c7500 x43882253}
+        {}
+        {}
+        {x440f81cc x43a08427}
+        {}
+        {}
+        {x440d2e98 x43a07ca1}
+        {}
+        {}
+        {x440d2e9c x43a23f19}
+        {}
+        {}
+        {x4412cc7c x43a23c73}
+        {}
+        {}
+        {x4412ca54 x43a080ed}
+        {}
+        {}
+        {x44117b68 x43a08427}
+        {}
+        {}
+        {x440cee98 x43801115}
+        {}
+        {}
+        {x4409f500 x43801283}
+        {}
+        {}
+        {x4406bb68 x43975283}
+        {}
+        {}
+        {x4403a1cc x43801377}
+        {}
+        {}
+        {x44007b67 x438013f1}
+        {}
+        {}
+        {x43f7ea04 x43a07ca1}
+        {}
+        {}
+        {x43f5401a x43a07ca1}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x4485441e x43a0b5a3}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Ellipse2 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc1940320}
+        {x43e41e60 x4381d469}
+        {x41940320}
+        {}
+        {x43eca8e0 x4390d40d}
+        {}
+        {x41940320}
+        {x43e41e60 x43a0a5cf}
+        {xc1940320}
+        {}
+        {x43dba6f8 x4390c0f1}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {xc1940320}
+        {}
+        {x41940320}
+        {}
+        {}
+        {}
+        {x41940320}
+        {}
+        {xc1940320}
+        {}
+        {}
+        {}}}}
+     {t x4475d99a x439aa666}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40e00000 bm x41400000}}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc1940320}
+        {x43e40b44 x437f7afb}
+        {x41940320}
+        {0 xc1c52580}
+        {x43f5c3a0 x439159c7}
+        {xb8800000 x41c52560}
+        {x41940320}
+        {x43e40b44 x43a34277}
+        {xc1940320}
+        {xbc150000 x41c5f540}
+        {x43d35e60 x43917ffd}
+        {x3c280000 xc1c5f560}}}
+      {cc
+       {f 8192}
+       {p
+        {xc1940320}
+        {}
+        {x41940320}
+        {0 xc1c52580}
+        {}
+        {xb8800000 x41c52560}
+        {x41940320}
+        {}
+        {xc1940320}
+        {xbc150000 x41c5f540}
+        {}
+        {x3c280000 xc1c5f560}}}}
+     {t x4475d99a x439aa666}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40e00000}}
+    {curvegroup BezierCusped2 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43b7906a x439fdf51}
+        {}
+        {}
+        {x43b7839e x4382ec1b}
+        {}
+        {xbdccc000 xc2086680}
+        {x43c5f6d0 x43911871}
+        {x3db00000 x42086670}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xbdccc000 xc2086680}
+        {}
+        {x3db00000 x42086670}}}}
+     {t x44618444 x4399cccd}
+     {a bm x41400000 mbo 1 osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43ab7fee x438005b3}
+        {}
+        {}
+        {x43c13540 x43801281}
+        {}
+        {xbeccd000 xc1fe6680}
+        {x43cf2a04 x439133c1}
+        {x3ec05000 x41fe6720}
+        {}
+        {x43c12b92 x43a245b7}
+        {}
+        {}
+        {x43ab839e x43a29283}
+        {}
+        {}
+        {x43ab874e x43a06c1d}
+        {}
+        {}
+        {x43af83a0 x43a078eb}
+        {}
+        {}
+        {x43af83a0 x4381f8e9}
+        {}
+        {}
+        {x43ab874e x438205b3}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xbeccd000 xc1fe6680}
+        {}
+        {x3ec05000 x41fe6720}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x445deccc x4399f60b}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Arrow 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x440300cc x430247a7}
+        {}
+        {}
+        {x44005401 x43025073}
+        {}
+        {}
+        {x43f9c19e x42c064e6}
+        {}
+        {}
+        {x43f2c19e x430247a7}
+        {}
+        {}
+        {x43ed2802 x430249df}
+        {}
+        {}
+        {x43f70e6e x42a8cb4c}
+        {}
+        {}
+        {x43fc019a x42a8cb4c}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44802ea1 x44321508}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Arrow_Line 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43fc8da2 x436765a7}
+        {}
+        {}
+        {x43f780da x436765a7}
+        {}
+        {}
+        {x43f780da x43037f43}
+        {}
+        {}
+        {x43fc8da2 x43037f43}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44801e66 x4415899a}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1000 500}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  view {}
+  motionblur_on true
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Down
+  xpos -2790
+  ypos -1018
+ }
+ Roto {
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x447a0000 x43fa0000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup BezierCusped7 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x444f593a x44028980}
+        {}
+        {}
+        {x444f593c x4405a230}
+        {}
+        {}
+        {x444dd2d6 x44059beb}
+        {}
+        {}
+        {x444bc93a x440289fd}
+        {}
+        {}
+        {x444a0fa0 x44028888}
+        {}
+        {}
+        {x444a0938 x4401337c}
+        {}
+        {}
+        {x444bbf9e x44013438}
+        {}
+        {}
+        {x444b9c6c x43f0c7b4}
+        {}
+        {xc12b3880 xbc068000}
+        {x444e92d4 x43ec27b4}
+        {x41319980}
+        {}
+        {x4452c50a x43f014fe}
+        {}
+        {x40199a00 xbf0ccc00}
+        {x4450893a x43efee1a}
+        {xc076a600 x3f621600}
+        {}
+        {x444f6fa0 x43f23ae6}
+        {}
+        {}
+        {x444f6604 x44013438}
+        {}
+        {}
+        {x4451ef9e x4401337c}
+        {}
+        {}
+        {x4451f93a x44028750}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xc12b3880 xbc068000}
+        {}
+        {x41319980}
+        {}
+        {}
+        {}
+        {x40199a00 xbf0ccc00}
+        {}
+        {xc076a600 x3f621600}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44b51800 x43dcb4e7}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped6 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x443a003c x43ed07b2}
+        {}
+        {}
+        {x4440c93c x43ed09b6}
+        {}
+        {}
+        {x4440cf9e x43eeee1a}
+        {}
+        {}
+        {x443f4938 x43eeee1a}
+        {}
+        {}
+        {x443f3fa0 x43feb480}
+        {}
+        {xc120cd00 xbf199c00}
+        {x4441d93a x44013d74}
+        {x40f7e300 x3eecc800}
+        {}
+        {x4443d2d4 x43ff27b4}
+        {}
+        {}
+        {x4443f604 x43eeee1a}
+        {}
+        {}
+        {x44427938 x43eeee1a}
+        {}
+        {}
+        {x4442793c x43ed0881}
+        {}
+        {}
+        {x44492fa2 x43ed09b6}
+        {}
+        {}
+        {x44493004 x43eeea1a}
+        {}
+        {}
+        {x444792d2 x43eeee1a}
+        {}
+        {}
+        {x44478fa0 x440053da}
+        {}
+        {x412f9300 xbe6bf000}
+        {x44449c6c x44031a40}
+        {xc13e6600 x3e800000}
+        {}
+        {x443f6c6c x44018a40}
+        {}
+        {}
+        {x443f5c6c x4408e70d}
+        {}
+        {}
+        {x443a1c6c x440850a6}
+        {}
+        {}
+        {x443a1c6c x440763da}
+        {}
+        {}
+        {x443b92d4 x44076d74}
+        {}
+        {}
+        {x443b92d2 x43eeee1a}
+        {}
+        {}
+        {x443a0104 x43eef01a}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xc120cd00 xbf199c00}
+        {}
+        {x40f7e300 x3eecc800}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x412f9300 xbe6bf000}
+        {}
+        {xc13e6600 x3e800000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44ae4ec3 x43d85129}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Ellipse2 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc0923f00}
+        {x4432d13a x43f81480}
+        {x40923f00}
+        {0 xc0d64940}
+        {x4434e2d4 x43fe2480}
+        {0 x40d64900}
+        {x40923f00}
+        {x4432d13a x44021a40}
+        {xc0923f00}
+        {0 x40d64900}
+        {x4430bfa0 x43fe2480}
+        {0 xc0d64940}}}
+      {cc
+       {f 8192}
+       {p
+        {xc0923f00}
+        {}
+        {x40923f00}
+        {0 xc0d64940}
+        {}
+        {0 x40d64900}
+        {x40923f00}
+        {}
+        {xc0923f00}
+        {0 x40d64900}
+        {}
+        {0 xc0d64940}}}}
+     {t x44a748cd x43dcb666}
+     {a bm x41400000 osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40e00000}}
+    {curvegroup BezierCusped5 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {x41199980 xbd4cc000}
+        {x4433393a x43ebe14d}
+        {xc1199980 x3d5de000}
+        {xbe41c000 x40542e00}
+        {x443062d4 x43e7f7f3}
+        {x3e41c000 xc0542e00}
+        {xc10b3300 xbe4cd000}
+        {x44337606 x43e38e1a}
+        {x40f1ab00 x3e327000}
+        {x3e6a2000 xc0804340}
+        {x4436c606 x43e8214d}
+        {xbe6a2000 x40804340}}}
+      {cc
+       {f 8192}
+       {p
+        {x41199980 xbd4cc000}
+        {}
+        {xc1199980 x3d5de000}
+        {xbe41c000 x40542e00}
+        {}
+        {x3e41c000 xc0542e00}
+        {xc10b3300 xbe4cd000}
+        {}
+        {x40f1ab00 x3e327000}
+        {x3e6a2000 xc0804340}
+        {}
+        {xbe6a2000 x40804340}}}}
+     {t x44a79b34 x43c6919a}
+     {a bm x41400000 osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped4 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x44368606 x440263da}
+        {}
+        {}
+        {x4439f9b8 x44039418}
+        {}
+        {}
+        {x44394fa0 x440113da}
+        {}
+        {}
+        {x4437c606 x440100a6}
+        {}
+        {0 x40700000}
+        {x44386c6c x43fd7ae6}
+        {x3a600000 xc15667e0}
+        {x400fca00 x3f2a0e00}
+        {x443443ee x43f5b9cc}
+        {xc002b400 xbf1a9600}
+        {x3f89d400 x3e98f000}
+        {x4431793a x43f59480}
+        {xbf89d400 xbe98f000}
+        {x3e198000 x40266680}
+        {x4430a2d4 x43f3b480}
+        {xbe172000 xc023b500}
+        {xbfbfe800 x3e78f000}
+        {x44321c6c x43f1fae6}
+        {x3fbfe800 xbe78f000}
+        {xc04b3600 x3ef51400}
+        {x4435b93a x43f20e1a}
+        {x41599980 xc0033300}
+        {x3ee4f000 x40a1cec0}
+        {x4439948c x43e9a1cc}
+        {xbfb6a400 xc1813b20}
+        {x402d6600 x3dc64000}
+        {x4434793a x43e13480}
+        {xc0333400 xbdccc000}
+        {x402d7c00 x3c530000}
+        {x44316c6c x43e13ae7}
+        {xc1333300 xbd4ce000}
+        {xbe2c8000 xc0d66d40}
+        {x442cd702 x43e7d18c}
+        {x3e3d2000 x40ea56c0}
+        {}
+        {x442fa2d4 x43ec9480}
+        {}
+        {x3f000000 xc0d00000}
+        {x442d52d4 x43f1614e}
+        {xbe686000 x403d0a80}
+        {xc10f3300 xc0233380}
+        {x44302fa0 x43f647b4}
+        {xc0db3300 x3fc66600}
+        {x3f1b4000 xc119a560}
+        {x442d093a x43fdb480}
+        {xbe99a000 x40980000}
+        {xc1866680 x3f1bec00}
+        {x4432893a x44032012}
+        {x4163ea80 xbf05f800}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {0 x40700000}
+        {}
+        {x3a600000 xc15667e0}
+        {x400fca00 x3f2a0e00}
+        {}
+        {xc002b400 xbf1a9600}
+        {x3f89d400 x3e98f000}
+        {}
+        {xbf89d400 xbe98f000}
+        {x3e198000 x40266680}
+        {}
+        {xbe172000 xc023b500}
+        {xbfbfe800 x3e78f000}
+        {}
+        {x3fbfe800 xbe78f000}
+        {xc04b3600 x3ef51400}
+        {}
+        {x41599980 xc0033300}
+        {x3ee4f000 x40a1cec0}
+        {}
+        {xbfb6a400 xc1813b20}
+        {x402d6600 x3dc64000}
+        {}
+        {xc0333400 xbdccc000}
+        {x402d7c00 x3c530000}
+        {}
+        {xc1333300 xbd4ce000}
+        {xbe2c8000 xc0d66d40}
+        {}
+        {x3e3d2000 x40ea56c0}
+        {}
+        {}
+        {}
+        {x3f000000 xc0d00000}
+        {}
+        {xbe686000 x403d0a80}
+        {xc10f3300 xc0233380}
+        {}
+        {xc0db3300 x3fc66600}
+        {x3f1b4000 xc119a560}
+        {}
+        {xbe99a000 x40980000}
+        {xc1866680 x3f1bec00}
+        {}
+        {x4163ea80 xbf05f800}}}}
+     {t x44a79910 x43d44829}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped3 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x442512d2 x43eceb07}
+        {}
+        {}
+        {x442512d6 x43ef01ce}
+        {}
+        {}
+        {x44269c6e x43eefec6}
+        {}
+        {}
+        {x4426afa0 x4401370d}
+        {}
+        {}
+        {x44251c6c x440140a6}
+        {}
+        {}
+        {x44252198 x44024bba}
+        {}
+        {}
+        {x442a6c6c x4402e70d}
+        {}
+        {}
+        {x442a6c6e x43eeff2a}
+        {}
+        {}
+        {x442befa2 x43ef03d4}
+        {}
+        {}
+        {x442bef9e x43ecf793}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44a1cb0a x43d5816d}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc099c200}
+        {x4428546c x44045572}
+        {x4099c200}
+        {0 xc099c200}
+        {x442a8138 x44068240}
+        {0 x4099c100}
+        {x4099c200}
+        {x4428546c x4408af0c}
+        {xc099c200}
+        {0 x4099c100}
+        {x442627a0 x44068240}
+        {0 xc099c200}}}
+      {cc
+       {f 8192}
+       {p
+        {xc099c200}
+        {}
+        {x4099c200}
+        {0 xc099c200}
+        {}
+        {0 x4099c100}
+        {x4099c200}
+        {}
+        {xc099c200}
+        {0 x4099c100}
+        {}
+        {0 xc099c200}}}}
+     {t x44a1a666 x43ed2666}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40e00000}}
+    {curvegroup BezierCusped2 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x441a0c6c x43ff87b4}
+        {}
+        {}
+        {x441a0c6c x440680a6}
+        {}
+        {0 x41751ac0}
+        {x441f0206 x44034bda}
+        {0 xc1751ac0}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {0 x41751ac0}
+        {}
+        {0 xc1751ac0}}}}
+     {t x449bb2ab x43e4f778}
+     {a bm x41400000 osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x4413f93a x43ed07e3}
+        {}
+        {}
+        {x441c4c6c x43ed1454}
+        {}
+        {}
+        {x441c4c6a x43ef2db2}
+        {}
+        {}
+        {x441a142a x43ef290e}
+        {}
+        {}
+        {x441a137e x43fcf4d6}
+        {}
+        {xc0b66700 x40966640}
+        {x441d12d4 x43fb3a3a}
+        {x408e4500 xc06aab80}
+        {xbf0cc800 x40233300}
+        {x441e0c6c x43f547b4}
+        {x3ef7a000 xc00f7b80}
+        {xc0072600 x403b6580}
+        {x441ed328 x43f05bea}
+        {x40b10300 xc0f57940}
+        {}
+        {x4420e606 x43ecee1a}
+        {}
+        {}
+        {x4424c606 x43ecee1a}
+        {}
+        {}
+        {x4424b93a x43eef4fa}
+        {}
+        {x40360400 xc0ae6dc0}
+        {x4423193a x43f0fae6}
+        {xc0400000 x40b80000}
+        {x3fc15c00 xc0b86bc0}
+        {x44221226 x43f6e964}
+        {xc06a2e00 x415f5fa0}
+        {}
+        {x441f193a x43fe87b4}
+        {}
+        {x3e0be000 xc17702e0}
+        {x442337a0 x44035574}
+        {xbe0be000 x41770280}
+        {}
+        {x441f0606 x4407c832}
+        {}
+        {}
+        {x44140c6c x4407c5e9}
+        {}
+        {}
+        {x44140c6c x4406b0a6}
+        {}
+        {}
+        {x44161b9a x4406a9c6}
+        {}
+        {}
+        {x44160604 x43ef2020}
+        {}
+        {}
+        {x4413fa34 x43ef1dc6}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xc0b66700 x40966640}
+        {}
+        {x408e4500 xc06aab80}
+        {xbf0cc800 x40233300}
+        {}
+        {x3ef7a000 xc00f7b80}
+        {xc0072600 x403b6580}
+        {}
+        {x40b10300 xc0f57940}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x40360400 xc0ae6dc0}
+        {}
+        {xc0400000 x40b80000}
+        {x3fc15c00 xc0b86bc0}
+        {}
+        {xc06a2e00 x415f5fa0}
+        {}
+        {}
+        {}
+        {x3e0be000 xc17702e0}
+        {}
+        {xbe0be000 x41770280}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x449c0d42 x43d734be}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Arrow 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x4463a952 x4402b735}
+        {}
+        {}
+        {x4463a71e x44000a69}
+        {}
+        {}
+        {x446c2e9e x43f92e6e}
+        {}
+        {}
+        {x4463a952 x43f22e6e}
+        {}
+        {}
+        {x4463a8c4 x43ec94d2}
+        {}
+        {}
+        {x446f21d2 x43f67b3e}
+        {}
+        {}
+        {x446f21d2 x43fb6e6a}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44802ea1 x44321508}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Arrow_Line 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x44599592 x43fbfe9e}
+        {}
+        {}
+        {x44599592 x43f6f1d8}
+        {}
+        {}
+        {x44635b6a x43f6edaa}
+        {}
+        {}
+        {x44635b6a x43fbfa72}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44801e66 x4415899a}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1000 500}
+  colorOverlay {0 0 0 0}
+  blending_mode minus
+  lifetime_type "all frames"
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Right
+  xpos -2790
+  ypos -992
+ }
+ Roto {
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x447a0000 x43fa0000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup BezierCusped4 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43a8defa x440792c3}
+        {}
+        {}
+        {x43c67576 x440791f8}
+        {}
+        {}
+        {x43c66fa4 x4402dc3c}
+        {}
+        {}
+        {x43c4893e x4402dedc}
+        {}
+        {x4108ccc0 xbd670000}
+        {x43bf62d4 x44067042}
+        {xbfe4e200 x3c410000}
+        {}
+        {x43bb5c6c x440672f7}
+        {}
+        {}
+        {x43bb4f9e x43eeb77a}
+        {}
+        {}
+        {x43c08606 x43eeb48f}
+        {}
+        {}
+        {x43c08606 x43ec9002}
+        {}
+        {}
+        {x43aefeca x43ec8f3b}
+        {}
+        {}
+        {x43af0076 x43eeb0ab}
+        {}
+        {}
+        {x43b3a938 x43eebb5e}
+        {}
+        {}
+        {x43b37606 x440670b6}
+        {}
+        {x40064f00 x3c460000}
+        {x43af42d4 x44066f5a}
+        {xc0eb3380 xbd2d0000}
+        {}
+        {x43ab02d8 x4402e02c}
+        {}
+        {}
+        {x43a8f60a x4402dedc}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x4108ccc0 xbd670000}
+        {}
+        {xbfe4e200 x3c410000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x40064f00 x3c460000}
+        {}
+        {xc0eb3380 xbd2d0000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x4454a77c x43de2f71}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped3 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x438c6fa0 x44078fce}
+        {}
+        {}
+        {x43a7293a x44078c9c}
+        {}
+        {}
+        {x43a73c6c x4402df9a}
+        {}
+        {}
+        {x43a51c6c x4402e002}
+        {}
+        {x40e19980 xbdcce000}
+        {x43a0893a x44066c9c}
+        {xc0666200 x3d548000}
+        {}
+        {x43986fa0 x44067302}
+        {}
+        {}
+        {x43984fa0 x43ff4604}
+        {}
+        {xc0136c00 xb8000000}
+        {x43a06ab4 x43ff287a}
+        {x40a19980}
+        {}
+        {x43a2af9e x4401b4c8}
+        {}
+        {}
+        {x43a49c6a x4401b46e}
+        {}
+        {}
+        {x43a49608 x43f82eca}
+        {}
+        {}
+        {x43a29608 x43f83071}
+        {}
+        {x40499a00 xbdccd000}
+        {x43a07606 x43fc9938}
+        {xc00a4900 x3d8c9000}
+        {}
+        {x43985606 x43fc9938}
+        {}
+        {}
+        {x43985608 x43ee99e9}
+        {}
+        {}
+        {x439d3200 x43ee9392}
+        {}
+        {}
+        {x439d3a10 x43ecb937}
+        {}
+        {}
+        {x438ccf9e x43ecb938}
+        {}
+        {}
+        {x438ccfa2 x43ee9674}
+        {}
+        {}
+        {x439097a2 x43ee9a0e}
+        {}
+        {}
+        {x43907c6c x44068c9c}
+        {}
+        {}
+        {x438c7606 x44069066}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x40e19980 xbdcce000}
+        {}
+        {xc0666200 x3d548000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xc0136c00 xb8000000}
+        {}
+        {x40a19980}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x40499a00 xbdccd000}
+        {}
+        {xc00a4900 x3d8c9000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44465e96 x43dcf3dd}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped2 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x4358f578 x44078aac}
+        {}
+        {}
+        {x4387a2d4 x44078b2c}
+        {}
+        {}
+        {x43877c6c x4402f7ce}
+        {}
+        {}
+        {x4385bc6c x4402f7ce}
+        {}
+        {x41166680 xbe828000}
+        {x43802fa0 x44068352}
+        {xc0576700 x3dbb8000}
+        {}
+        {x43711554 x44068442}
+        {}
+        {}
+        {x4370f600 x44001636}
+        {}
+        {xc014a300 xbdb38000}
+        {x437fb8d8 x44002568}
+        {x40299a00 x3dcce000}
+        {}
+        {x43821c6c x44023206}
+        {}
+        {}
+        {x4383e9b4 x440230c9}
+        {}
+        {}
+        {x4383ef24 x43f90c6b}
+        {}
+        {}
+        {x4382093a x43f912d1}
+        {}
+        {x40800000 xbe800000}
+        {x437fc5a8 x43fd8604}
+        {xc0346200 x3e346800}
+        {}
+        {x4370f600 x43fd8603}
+        {}
+        {}
+        {x437105a8 x43ef32d0}
+        {}
+        {xc0842e00 xbe327000}
+        {x4381cfa0 x43eeff9e}
+        {x4104ccc0 x3eb33400}
+        {}
+        {x43871c6c x43f6ec6b}
+        {}
+        {}
+        {x4388fc6c x43f6f2d1}
+        {}
+        {}
+        {x43889c6a x43ecd9ae}
+        {}
+        {}
+        {x4358ffc4 x43ecd25a}
+        {}
+        {}
+        {x43590b8c x43eec79f}
+        {}
+        {}
+        {x43614f14 x43eeba90}
+        {}
+        {}
+        {x436138d8 x44068210}
+        {}
+        {}
+        {x4358fa34 x440681c0}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x41166680 xbe828000}
+        {}
+        {xc0576700 x3dbb8000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xc014a300 xbdb38000}
+        {}
+        {x40299a00 x3dcce000}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {x40800000 xbe800000}
+        {}
+        {xc0346200 x3e346800}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xc0842e00 xbe327000}
+        {}
+        {x4104ccc0 x3eb33400}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44372f4d x43dcb2fd}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup BezierCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x431df774 x44079635}
+        {}
+        {}
+        {x433f1f44 x44079635}
+        {}
+        {}
+        {x433f2120 x440690ee}
+        {}
+        {}
+        {x43365270 x44068e8e}
+        {}
+        {}
+        {x43361f40 x43ef3938}
+        {}
+        {xc05a6500 xbe322000}
+        {x4347ec0c x43ef2c6b}
+        {x4103d700 x3ed70800}
+        {}
+        {x43516274 x43f6ca04}
+        {}
+        {}
+        {x43554274 x43f6be04}
+        {}
+        {}
+        {x435453cc x43eca7b3}
+        {}
+        {}
+        {x431dec0c x43ecac6b}
+        {}
+        {}
+        {x431deebc x43eef5d9}
+        {}
+        {}
+        {x43256c0c x43eef938}
+        {}
+        {}
+        {x43261f3c x44068d50}
+        {}
+        {}
+        {x431dec08 x4406924e}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {xc05a6500 xbe322000}
+        {}
+        {x4103d700 x3ed70800}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x442642c3 x43db5fab}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Arrow 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x42af8e1c x43ed0536}
+        {}
+        {}
+        {x42af9fbc x43f25ece}
+        {}
+        {}
+        {x4256c758 x43f94532}
+        {}
+        {}
+        {x42af8e1c x44002299}
+        {}
+        {}
+        {x42af928c x4402ef66}
+        {}
+        {}
+        {x42279418 x43fbf863}
+        {}
+        {}
+        {x42279418 x43f70537}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44802ea1 x44321508}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x40a00000}}
+    {curvegroup Arrow_Line 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x4300160c x43f67501}
+        {}
+        {}
+        {x4300160c x43fb81c9}
+        {}
+        {}
+        {x42b1fd5c x43fb85f6}
+        {}
+        {}
+        {x42b1fd5c x43f6792e}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x44801e66 x4415899a}
+     {a osw x41200000 osf 0 str 1 spx x447a0000 spy x43fa0000 sb 1 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { addPoints str 1 ssx 1 ssy 1 sf 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1000 500}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  view {}
+  motionblur_on true
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Left
+  xpos -2790
+  ypos -968
+ }
+ Dilate {
+  channels alpha
+  size 6
+  name Stroke
+  xpos -2790
+  ypos -936
+ }
+ Reformat {
+  type "to box"
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  box_width {{parent.ImageCrop.box.r}}
+  box_height {{parent.ImageCrop.box.t}}
+  box_fixed true
+  resize fit
+  name Reformat
+  xpos -2790
+  ypos -886
+  disable {{!autoCalImageCHK}}
+ }
+ Reformat {
+  resize fit
+  name Reformat2
+  xpos -2790
+  ypos -862
+  disable {{autoCalImageCHK}}
+ }
+ CheckerBoard2 {
+  inputs 0
+  boxsize 104
+  color0 {0.3 0.3 0.3 1}
+  color2 {0.3 0.3 0.3 1}
+  centerlinecolor 1
+  centerlinewidth 6
+  name CheckerBoard
+  xpos -2922
+  ypos -1082
+ }
+ Grade {
+  white {{previewColourCKNB} {previewColourCKNB} {previewColourCKNB} 1}
+  name PreviewGRD
+  xpos -2922
+  ypos -986
+ }
+ Reformat {
+  type "to box"
+  box_width {{parent.ImageCrop.box.r}}
+  box_height {{parent.ImageCrop.box.t}}
+  box_fixed true
+  resize fill
+  black_outside {{blackOutsideCHK}}
+  name PreviewReformat1
+  xpos -2922
+  ypos -945
+  disable {{!autoCalImageCHK}}
+ }
+ Merge2 {
+  inputs 2
+  name PreviewMergeTXT
+  xpos -2922
+  ypos -862
+ }
+ Reformat {
+  type "to box"
+  box_width {{parent.ImageCrop.box.r}}
+  box_height {{parent.ImageCrop.box.t}}
+  box_fixed true
+  resize fill
+  black_outside {{blackOutsideCHK}}
+  name PreviewReformat2
+  xpos -2922
+  ypos -825
+  disable {{!autoCalImageCHK}}
+ }
+ Reformat {
+  black_outside true
+  name Reformat1
+  xpos -2922
+  ypos -801
+  disable {{autoCalImageCHK}}
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos -3109
+  ypos -1389
+  number 2
+ }
+ Shuffle {
+  name FixEmpty1
+  xpos -3109
+  ypos -1365
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  intersect true
+  crop {{blackOutsideCHK}}
+  name ImageCrop
+  xpos -3109
+  ypos -1324
+ }
+ Switch {
+  inputs 2
+  which 1
+  name PreviewSwitch
+  xpos -3109
+  ypos -801
+  disable {{!previewCheckerBoardCHK}}
+ }
+ Dot {
+  name Dot7
+  xpos -3075
+  ypos -583
+ }
+set N3721bac0 [stack 0]
+ NoOp {
+  name GetFormat
+  xpos -2999
+  ypos -586
+  addUserKnob {20 User}
+  addUserKnob {14 format R 0 100}
+  format {{format.w} {format.h}}
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos -2007
+  ypos -1396
+ }
+ Crop {
+  box {{curve} {curve} {input.width} {input.height}}
+  intersect true
+  name InputCrop
+  xpos -2007
+  ypos -1365
+ }
+ Dot {
+  name Dot3
+  xpos -1973
+  ypos -1199
+ }
+set N37016410 [stack 0]
+ Dot {
+  name Dot6
+  xpos -2254
+  ypos -1199
+ }
+ Dot {
+  name Dot8
+  xpos -2254
+  ypos -1100
+ }
+set N37020210 [stack 0]
+ Dot {
+  name Dot1
+  xpos -2254
+  ypos -9
+ }
+set N36f153b0 [stack 0]
+ Saturation {
+  saturation 0
+  name PreviewSaturation
+  xpos -2288
+  ypos 101
+  disable {{!previewBwCHK}}
+ }
+set N36f1a1f0 [stack 0]
+ Clamp {
+  channels rgba
+  name PreviewClamp
+  xpos -2288
+  ypos 125
+  disable {{!previewClampCHK}}
+ }
+ Dot {
+  name Dot5
+  xpos -2254
+  ypos 192
+ }
+set N36d15830 [stack 0]
+ Dot {
+  name Dot2
+  xpos -2254
+  ypos 280
+ }
+push $N36d15830
+push $N36f153b0
+ Expression {
+  channel0 alpha
+  expr0 "a == 0 ? 1 :0"
+  channel1 none
+  channel2 none
+  channel3 {none none none -rgba.alpha}
+  name CleanAlpha
+  xpos -2129
+  ypos -13
+ }
+ Input {
+  inputs 0
+  name Mask
+  xpos -1196
+  ypos -1389
+  number 1
+ }
+ Shuffle {
+  name FixEmpty
+  xpos -1196
+  ypos -1365
+ }
+ Dot {
+  name Dot22
+  xpos -1162
+  ypos -58
+ }
+push $N37020210
+push $N37016410
+ Remove {
+  operation keep
+  channels none
+  name Remove1
+  xpos -2007
+  ypos -1161
+  disable {{enableInputAOVsCHK}}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos -2007
+  ypos -1109
+ }
+ Shuffle {
+  in pref
+  in2 rgba
+  alpha alpha2
+  name InputAOV
+  xpos -2007
+  ypos -1062
+ }
+ ColorMatrix {
+  matrix {
+      {1 0 0}
+      {0 -4e-08 1}
+      {0 -1 -4e-08}
+    }
+  name YUpWorld
+  xpos -2007
+  ypos -1038
+  disable {{!worldSpaceCHK}}
+ }
+ Unpremult {
+  name Unpremult1
+  xpos -2007
+  ypos -1009
+  disable {{!unpremultCHK}}
+ }
+ EdgeExtend {
+  detailAmount 0
+  premultiply false
+  name EdgeExtend1
+  xpos -2007
+  ypos -971
+  disable {{!extendUtilityCHK}}
+ }
+ Blur {
+  channels rgb
+  size {{softenDataSLD}}
+  name SoftenData
+  xpos -2007
+  ypos -943
+ }
+ Add {
+  channels rgb
+  value {{-center} {-center} {-center} 0}
+  name Center3D
+  xpos -2007
+  ypos -821
+  addUserKnob {20 User}
+  addUserKnob {18 center}
+  center {0 0 0}
+  addUserKnob {6 center_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ Add {
+  channels rgb
+  value {{-Axis3D.world_matrix.3} {-Axis3D.world_matrix.7} {-Axis3D.world_matrix.11} 0}
+  name TranslatePivot
+  xpos -2007
+  ypos -758
+ }
+ ColorMatrix {
+  matrix {
+      {{parent.Axis3D.world_matrix.0} {parent.Axis3D.world_matrix.1} {parent.Axis3D.world_matrix.2}}
+      {{parent.Axis3D.world_matrix.4} {parent.Axis3D.world_matrix.5} {parent.Axis3D.world_matrix.6}}
+      {{parent.Axis3D.world_matrix.8} {parent.Axis3D.world_matrix.9} {parent.Axis3D.world_matrix.10}}
+    }
+  invert true
+  name ColorMatrix
+  xpos -2007
+  ypos -706
+  disable {{hasError}}
+ }
+ Expression {
+  expr0 "(r + (parent.GetFormat.format.w/2) ) / parent.GetFormat.format.w"
+  expr1 "(b + (parent.GetFormat.format.h/2) ) / parent.GetFormat.format.h"
+  channel2 none
+  name ToSTMap
+  xpos -2007
+  ypos -652
+ }
+push $N3721bac0
+ Dot {
+  name Dot4
+  xpos -3075
+  ypos -421
+ }
+ STMap {
+  inputs 2
+  channels rgba
+  uv rgb
+  name STMap3DMode
+  xpos -2007
+  ypos -424
+ }
+set N1231cb30 [stack 0]
+ Dot {
+  name Dot10
+  xpos -1854
+  ypos -421
+ }
+ Dilate {
+  channels alpha
+  size -1
+  name DilateFixIn
+  xpos -1888
+  ypos -378
+  disable {{!edgeFixCHK}}
+ }
+ Dilate {
+  channels alpha
+  size 1
+  name DilateFixOut
+  xpos -1888
+  ypos -342
+  disable {{!edgeFixCHK}}
+ }
+ Dot {
+  name Dot12
+  xpos -1854
+  ypos -287
+ }
+push $N1231cb30
+ Multiply {
+  inputs 1+1
+  channels rgba
+  value 0
+  invert_mask true
+  name Multiply2
+  xpos -2007
+  ypos -290
+ }
+ Group {
+  name ErodeFine
+  help "Erode an image with fine controls, as opposed to Nuke's default erode node."
+  note_font "DejaVu Sans"
+  xpos -2007
+  ypos -247
+  addUserKnob {20 optionsTAB l Options}
+  addUserKnob {26 erodeTXT l <b>Erode}
+  addUserKnob {7 size l Size R -10 10}
+  size {{dilateFixSizeSLD}}
+  addUserKnob {26 maskTXT l <b>Mask}
+  addUserKnob {7 maskValueSLD l Value}
+  addUserKnob {6 maskInvertCHK l Invert -STARTLINE}
+  addUserKnob {20 Info}
+  addUserKnob {26 classTXT l "" +STARTLINE T ErodeFine}
+  addUserKnob {26 versionTXT l "" +STARTLINE T "v01 - Hiram Gifford"}
+ }
+  Input {
+   inputs 0
+   name Mask
+   xpos 348
+   ypos 1141
+   number 1
+  }
+  Shuffle {
+   name FixEmpty
+   xpos 348
+   ypos 1165
+  }
+  Input {
+   inputs 0
+   name Input
+   xpos -11
+   ypos 152
+  }
+  Dot {
+   name Dot15
+   tile_color 0xcccccc00
+   xpos 23
+   ypos 287
+  }
+set N11d1bc30 [stack 0]
+  Dilate {
+   channels rgba
+   size {{int(parent.size)}}
+   name Dilate4
+   xpos -11
+   ypos 434
+  }
+  AdjBBox {
+   numpixels 1
+   name AdjBBox2
+   xpos -11
+   ypos 568
+  }
+  Dot {
+   name Dot6
+   tile_color 0xcccccc00
+   xpos 23
+   ypos 678
+  }
+set N11b14810 [stack 0]
+  Dot {
+   name Dot8
+   tile_color 0xcccccc00
+   xpos 175
+   ypos 678
+  }
+  Transform {
+   translate {{exp.expo(abs(parent.size-int(parent.size))*10)*-1} 0}
+   center {320 240}
+   black_outside false
+   shutteroffset centred
+   name Transform5
+   xpos 141
+   ypos 829
+  }
+push $N11b14810
+  Dot {
+   name Dot7
+   tile_color 0xcccccc00
+   xpos -127
+   ypos 678
+  }
+  Transform {
+   translate {{exp.expo(abs(parent.size-int(parent.size))*10)} 0}
+   center {320 240}
+   black_outside false
+   shutteroffset centred
+   name Transform4
+   xpos -161
+   ypos 789
+  }
+push $N11b14810
+  Merge2 {
+   inputs 2
+   operation {{parent.size>0?17:18}}
+   bbox B
+   also_merge all
+   name Merge2
+   xpos -11
+   ypos 789
+  }
+  Merge2 {
+   inputs 2
+   operation {{parent.size>0?17:18}}
+   bbox B
+   also_merge all
+   name Merge1
+   xpos -11
+   ypos 829
+  }
+  Dot {
+   name Dot9
+   xpos 23
+   ypos 910
+  }
+set N11622240 [stack 0]
+  Dot {
+   name Dot10
+   xpos 175
+   ypos 910
+  }
+  Transform {
+   translate {0 {exp.expo(abs(parent.size-int(parent.size))*10)*-1}}
+   center {320 240}
+   black_outside false
+   shutteroffset centred
+   name Transform6
+   xpos 141
+   ypos 1067
+  }
+push $N11622240
+  Dot {
+   name Dot11
+   xpos -127
+   ypos 910
+  }
+  Transform {
+   translate {0 {exp.expo(abs(parent.size-int(parent.size))*10)}}
+   center {320 240}
+   black_outside false
+   shutteroffset centred
+   name Transform7
+   xpos -161
+   ypos 1021
+  }
+push $N11622240
+  Merge2 {
+   inputs 2
+   operation {{parent.size>0?17:18}}
+   bbox B
+   also_merge all
+   name Merge3
+   xpos -11
+   ypos 1021
+  }
+  Merge2 {
+   inputs 2
+   operation {{parent.size>0?17:18}}
+   bbox B
+   also_merge all
+   name Merge4
+   xpos -11
+   ypos 1067
+  }
+  Multiply {
+   inputs 1+1
+   channels rgba
+   value {{maskValueSLD}}
+   invert_mask {{maskInvertCHK}}
+   name Multiply1
+   xpos -11
+   ypos 1165
+  }
+push $N11d1bc30
+  Dot {
+   name Dot13
+   tile_color 0xcccccc00
+   xpos -290
+   ypos 287
+  }
+  Dot {
+   name Dot12
+   tile_color 0xcccccc00
+   xpos -290
+   ypos 1261
+  }
+  NodeWrapper {
+   inputs 2
+   channels rgba
+   maskChannelMask none
+   name NodeWrapper1
+   xpos -11
+   ypos 1257
+  }
+  Output {
+   name Output1
+   xpos -11
+   ypos 1389
+  }
+  NoOp {
+   inputs 0
+   name exp
+   selected true
+   xpos 303
+   ypos 683
+   addUserKnob {20 User}
+   addUserKnob {7 expo}
+   expo {{parent.size>0?positive_curve:negative_curve}}
+   addUserKnob {7 positive_curve}
+   positive_curve {{curve 0 0.1037476063 0.1683235168 0.2209408283 0.2831250429 0.3357424736 0.3954704404 0.4731256962 0.5778000951 0.762029767 1}}
+   addUserKnob {7 negative_curve}
+   negative_curve {{curve 0 0.2209040523 0.3736710192 0.4841623592 0.5752981992 0.6541623592 0.7271137492 0.8043368459 0.8681262732 0.9249737263 1}}
+  }
+ end_group
+ EdgeBlur {
+  channels rgba
+  size {{edgeBlurSLD}}
+  edge_mult {{edgeFixFalloffSLD}}
+  name EdgeBlur
+  selected true
+  xpos -2007
+  ypos -213
+ }
+ Multiply {
+  inputs 1+1
+  channels rgba
+  value {{maskValueSLD}}
+  invert_mask {{maskInvertCHK}}
+  name MaskMult
+  xpos -2007
+  ypos -62
+  disable {{"\[expr \{\[exists parent.input1] ? 0 : 1\}]"}}
+ }
+ Multiply {
+  inputs 1+1
+  channels rgba
+  value 0
+  name MultAlpha
+  xpos -2007
+  ypos -13
+ }
+ Dot {
+  name Dot9
+  xpos -1973
+  ypos 38
+ }
+set N10b17900 [stack 0]
+ Dot {
+  name Dot11
+  xpos -2101
+  ypos 38
+ }
+ Group {
+  name ErodeFine1
+  help "Erode an image with fine controls, as opposed to Nuke's default erode node."
+  note_font "DejaVu Sans"
+  xpos -2135
+  ypos 75
+  addUserKnob {20 optionsTAB l Options}
+  addUserKnob {26 erodeTXT l <b>Erode}
+  addUserKnob {7 size l Size R -10 10}
+  size {{alphaErodeSLD}}
+  addUserKnob {26 maskTXT l <b>Mask}
+  addUserKnob {7 maskValueSLD l Value}
+  addUserKnob {6 maskInvertCHK l Invert -STARTLINE}
+ }
+  Input {
+   inputs 0
+   name Mask
+   xpos 348
+   ypos 1141
+   number 1
+  }
+  Shuffle {
+   name FixEmpty
+   xpos 348
+   ypos 1165
+  }
+  Input {
+   inputs 0
+   name Input
+   xpos -11
+   ypos 152
+  }
+  Dot {
+   name Dot15
+   tile_color 0xcccccc00
+   xpos 23
+   ypos 287
+  }
+set N10816830 [stack 0]
+  Dilate {
+   channels rgba
+   size {{int(parent.size)}}
+   name Dilate4
+   xpos -11
+   ypos 434
+  }
+  AdjBBox {
+   numpixels 1
+   name AdjBBox2
+   xpos -11
+   ypos 568
+  }
+  Dot {
+   name Dot6
+   tile_color 0xcccccc00
+   xpos 23
+   ypos 678
+  }
+set N1071f2a0 [stack 0]
+  Dot {
+   name Dot8
+   tile_color 0xcccccc00
+   xpos 175
+   ypos 678
+  }
+  Transform {
+   translate {{exp.expo(abs(parent.size-int(parent.size))*10)*-1} 0}
+   center {320 240}
+   black_outside false
+   shutteroffset centred
+   name Transform5
+   xpos 141
+   ypos 829
+  }
+push $N1071f2a0
+  Dot {
+   name Dot7
+   tile_color 0xcccccc00
+   xpos -127
+   ypos 678
+  }
+  Transform {
+   translate {{exp.expo(abs(parent.size-int(parent.size))*10)} 0}
+   center {320 240}
+   black_outside false
+   shutteroffset centred
+   name Transform4
+   selected true
+   xpos -161
+   ypos 789
+  }
+push $N1071f2a0
+  Merge2 {
+   inputs 2
+   operation {{parent.size>0?17:18}}
+   bbox B
+   also_merge all
+   name Merge2
+   xpos -11
+   ypos 789
+  }
+  Merge2 {
+   inputs 2
+   operation {{parent.size>0?17:18}}
+   bbox B
+   also_merge all
+   name Merge1
+   xpos -11
+   ypos 829
+  }
+  Dot {
+   name Dot9
+   xpos 23
+   ypos 910
+  }
+set N1021cd50 [stack 0]
+  Dot {
+   name Dot10
+   xpos 175
+   ypos 910
+  }
+  Transform {
+   translate {0 {exp.expo(abs(parent.size-int(parent.size))*10)*-1}}
+   center {320 240}
+   black_outside false
+   shutteroffset centred
+   name Transform6
+   xpos 141
+   ypos 1067
+  }
+push $N1021cd50
+  Dot {
+   name Dot11
+   xpos -127
+   ypos 910
+  }
+  Transform {
+   translate {0 {exp.expo(abs(parent.size-int(parent.size))*10)}}
+   center {320 240}
+   black_outside false
+   shutteroffset centred
+   name Transform7
+   xpos -161
+   ypos 1021
+  }
+push $N1021cd50
+  Merge2 {
+   inputs 2
+   operation {{parent.size>0?17:18}}
+   bbox B
+   also_merge all
+   name Merge3
+   xpos -11
+   ypos 1021
+  }
+  Merge2 {
+   inputs 2
+   operation {{parent.size>0?17:18}}
+   bbox B
+   also_merge all
+   name Merge4
+   xpos -11
+   ypos 1067
+  }
+  Multiply {
+   inputs 1+1
+   channels rgba
+   value {{maskValueSLD}}
+   invert_mask {{maskInvertCHK}}
+   name Multiply1
+   xpos -11
+   ypos 1165
+  }
+push $N10816830
+  Dot {
+   name Dot13
+   tile_color 0xcccccc00
+   xpos -290
+   ypos 287
+  }
+  Dot {
+   name Dot12
+   tile_color 0xcccccc00
+   xpos -290
+   ypos 1261
+  }
+  NodeWrapper {
+   inputs 2
+   channels rgba
+   maskChannelMask none
+   name NodeWrapper1
+   xpos -11
+   ypos 1257
+  }
+  Output {
+   name Output1
+   xpos -11
+   ypos 1389
+  }
+  NoOp {
+   inputs 0
+   name exp
+   xpos 303
+   ypos 683
+   addUserKnob {20 User}
+   addUserKnob {7 expo}
+   expo {{parent.size>0?positive_curve:negative_curve}}
+   addUserKnob {7 positive_curve}
+   positive_curve {{curve 0 0.1037476063 0.1683235168 0.2209408283 0.2831250429 0.3357424736 0.3954704404 0.4731256962 0.5778000951 0.762029767 1}}
+   addUserKnob {7 negative_curve}
+   negative_curve {{curve 0 0.2209040523 0.3736710192 0.4841623592 0.5752981992 0.6541623592 0.7271137492 0.8043368459 0.8681262732 0.9249737263 1}}
+  }
+ end_group
+push $N36f1a1f0
+ Multiply {
+  inputs 1+1
+  channels rgba
+  value 0
+  invert_mask true
+  name Multiply1
+  xpos -2135
+  ypos 101
+ }
+push $N10b17900
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name AlphaRepair
+  xpos -2007
+  ypos 95
+  disable {{!copyInputAlphaCHK}}
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  Achannels rgb
+  name PreviewMerge
+  xpos -2007
+  ypos 188
+  disable {{!useImageAlphaCHK}}
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove2
+  xpos -2007
+  ypos 235
+ }
+ Merge2 {
+  inputs 2
+  Achannels none
+  also_merge all
+  name Merge1
+  xpos -2007
+  ypos 277
+ }
+ Output {
+  name Output
+  xpos -2007
+  ypos 399
+ }
+ Axis2 {
+  inputs 0
+  display off
+  selectable false
+  xform_order STR
+  rotate {{rotation3DKNB} {rotation3DKNB} {rotation3DKNB}}
+  scaling {{scale3DKNB} {scale3DKNB} {scale3DKNB}}
+  uniform_scale {{(uniScaleSLD*0.001)*globalScaleSLD}}
+  skew {{skew3DKNB} {skew3DKNB} {skew3DKNB}}
+  pivot_translate {{pivot3DKNB} {pivot3DKNB} {pivot3DKNB}}
+  name Axis3D
+  xpos -2106
+  ypos -754
+  hide_input true
+ }
+end_group
