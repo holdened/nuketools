@@ -1,0 +1,297 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Group {
+ name AE_Bugz2
+ tile_color 0x51b4f0ff
+ selected true
+ xpos -456
+ ypos 837
+ addUserKnob {20 User}
+ addUserKnob {26 header l "" +STARTLINE T "<font><H1>&#x0243;&#x0244;&#x0193;&#x017E"}
+ addUserKnob {26 version_text l "" +STARTLINE T <b>v.1}
+ addUserKnob {35 presets l "" +STARTLINE M {presets/Idle "knobs this \{vertex_rate 0.01 lifetime 500 size 0.2 velocity 0.403 mass 1 gravity_ui -0.0005 strength 0.1 disable_1 1 maximum 1 znear 70 zfar 500 geo Sphere uniform_scale 150\}" presets/Idle2 "knobs this \{vertex_rate 0.21 lifetime 500 size 0.1 velocity 1 mass 1 gravity_ui -0.0003 strength 0.5 disable_1 1 maximum 1 znear 200 zfar 1000 geo Cube uniform_scale 240\}" presets/Snowing "knobs this \{vertex_rate 0.3 lifetime 500 size 0.2 velocity 0.104 mass 1 gravity_ui -0.002 strength 0.1 disable_1 1 maximum 1 znear 50 zfar 500 geo Sphere uniform_scale 150\}" "presets/Angry Bugs" "knobs this \{vertex_rate 0.3 lifetime 500 size 0.2 velocity 3 mass 90 gravity_ui -0.003 strength 0.6 disable_1 1 maximum 1 znear 140 zfar 1000 geo Sphere uniform_scale 140\}" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}}
+ addUserKnob {26 "" -STARTLINE}
+ addUserKnob {41 first_frame l "first frame" t "grabs the camera position from this frame" +INVISIBLE T FrameHold2.first_frame}
+ addUserKnob {41 start_frame l "start at" t "particle emittion start frame" -STARTLINE T ParticleEmitter3.start_frame}
+ addUserKnob {41 seed l "random seed" -STARTLINE T ParticleEmitter3.seed}
+ addUserKnob {26 _1 l "<b><h3><font color=\"lightblue\">Particle"}
+ addUserKnob {41 vertex_rate l "vertex emission rate" T ParticleEmitter3.vertex_rate}
+ addUserKnob {41 lifetime l "max lifetime" T ParticleEmitter3.lifetime}
+ addUserKnob {41 size T ParticleEmitter3.size}
+ addUserKnob {41 velocity T ParticleEmitter3.velocity}
+ addUserKnob {41 mass T ParticleEmitter3.mass}
+ addUserKnob {26 _2 l "<b><h3><font color=\"lightblue\">Gravity"}
+ addUserKnob {7 gravity_ui l Gravity R -0.5 0.5}
+ gravity_ui -0.0003
+ addUserKnob {26 _3 l "<b><h3><font color=\"lightblue\">Turbulence"}
+ addUserKnob {41 strength T ParticleTurbulence3.strength}
+ addUserKnob {26 _4 l "<b><h3><font color=\"lightblue\">Speed Limit"}
+ addUserKnob {41 disable_1 l disable T ParticleSpeedLimit1.disable}
+ addUserKnob {41 maximum T ParticleSpeedLimit1.maximum}
+ addUserKnob {26 _5 l "<b><h3><font color=\"lightblue\">Deep Crop"}
+ addUserKnob {41 znear T DeepCrop4.znear}
+ addUserKnob {41 zfar T DeepCrop4.zfar}
+ addUserKnob {26 _6 l "<b><h3><font color=\"lightblue\">Emitter Geo"}
+ addUserKnob {68 geo l "Emitter Geo" M {Cube Sphere}}
+ addUserKnob {41 uniform_scale l "uniform scale" -STARTLINE T TransformGeo1.uniform_scale}
+ addUserKnob {26 text_3 l "<b><h3><font color=\"lightblue\">Particle Geo"}
+ addUserKnob {68 particle_geo l " " M {Default Built-in Input "" "" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {26 author l "" +STARTLINE T "by <b>Ali Ehtemami"}
+ addUserKnob {20 rendering_tab l Rendering}
+ addUserKnob {41 antialiasing T ScanlineRender4.antialiasing}
+ addUserKnob {41 samples T ScanlineRender4.samples}
+ addUserKnob {41 shutter T ScanlineRender4.shutter}
+ addUserKnob {41 overscan T ScanlineRender4.overscan}
+ addUserKnob {26 ""}
+ addUserKnob {68 output_mode l Output M {RGBA Deep}}
+}
+ Input {
+  inputs 0
+  name Inputcam
+  xpos 829
+  ypos 187
+ }
+ Dot {
+  name Dot138
+  label cam
+  xpos 863
+  ypos 238
+ }
+ Dot {
+  name Dot136
+  xpos 863
+  ypos 325
+ }
+set N1e626930 [stack 0]
+ Dot {
+  name Dot137
+  xpos 964
+  ypos 325
+ }
+ Input {
+  inputs 0
+  name Inputparticle
+  xpos -97
+  ypos 444
+  number 1
+ }
+ Reformat {
+  inputs 0
+  format "512 512 0 0 512 512 1 square_512"
+  name Reformat1
+  xpos 139
+  ypos 225
+ }
+ Flare {
+  position {256 256}
+  size_mult 2
+  inner_color 1
+  name Flare1
+  xpos 139
+  ypos 263
+ }
+set N1b4c2520 [stack 0]
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.red 0 0 rgba.alpha 0 3 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2"
+  name Shuffle1
+  xpos 139
+  ypos 289
+ }
+ Dot {
+  inputs 0
+  name Dot1
+  xpos 28
+  ypos 376
+ }
+ Switch {
+  inputs 3
+  which {{particle_geo}}
+  name Switch1
+  xpos 139
+  ypos 444
+ }
+push $N1e626930
+ FrameHold {
+  firstFrame 1001
+  name FrameHold2
+  xpos 700
+  ypos 315
+ }
+ Sphere {
+  inputs 0
+  display wireframe
+  rows 5
+  columns 5
+  name Sphere2
+  xpos 565
+  ypos 265
+ }
+ Cube {
+  inputs 0
+  rows 1
+  columns 1
+  name Cube2
+  xpos 462
+  ypos 266
+ }
+ Switch {
+  inputs 2
+  which {{geo}}
+  name Switch2
+  xpos 462
+  ypos 321
+ }
+ TransformGeo {
+  uniform_scale 240
+  name TransformGeo1
+  xpos 462
+  ypos 374
+ }
+ TransformGeo {
+  inputs 2
+  name TransformGeo3
+  xpos 700
+  ypos 374
+ }
+push 0
+ ParticleEmitter {
+  inputs 3
+  start_frame 500
+  emit_order uniformly
+  randomize_type "randomized direction"
+  rate 3
+  vertex_rate 0.21
+  lifetime 500
+  mass_variation 1
+  seed 3
+  name ParticleEmitter3
+  xpos 700
+  ypos 444
+ }
+ ParticleGravity {
+  to {0 {parent.gravity_ui} 0}
+  name ParticleGravity3
+  xpos 700
+  ypos 477
+ }
+ ParticleTurbulence {
+  strength {0.5 0 0}
+  name ParticleTurbulence3
+  xpos 700
+  ypos 527
+ }
+ ParticleSpeedLimit {
+  maximum 1
+  name ParticleSpeedLimit1
+  xpos 700
+  ypos 641
+  disable true
+ }
+ Dot {
+  name Dot139
+  xpos 734
+  ypos 746
+ }
+push 0
+ ScanlineRender {
+  inputs 3
+  conservative_shader_sampling false
+  antialiasing high
+  overscan {45 16}
+  samples 4
+  shutteroffset centred
+  motion_vectors_type distance
+  name ScanlineRender4
+  xpos 930
+  ypos 742
+ }
+ DeepCrop {
+  znear 200
+  zfar 1000
+  bbox {889.5999756 619.2000122 3558.399902 2476.800049}
+  use_bbox false
+  name DeepCrop4
+  xpos 930
+  ypos 782
+ }
+ Group {
+  name DeepToImage_v0002_27
+  help "Composites deep image data to 2D image."
+  tile_color 0x60ff
+  xpos 930
+  ypos 822
+  disable {{output_mode}}
+  addUserKnob {20 DeepToImage l DeepHoldout}
+  addUserKnob {41 volumetric_composition l "volumetric composition" T DeepToImage1.volumetric_composition}
+  addUserKnob {20 ieAssetInfo l "Asset Information"}
+  addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> NukeScriptletPackage\n<B>ieEntityId:</B> 1678309.0\n<B>ieAssetId:</B> 0.0\n<B>ieCopyId:</B> 11\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0.0" n 2}
+  addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+  ieNodeType assetNode
+  addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+  ieEntityType NukeScriptletPackage
+  addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+  ieEntityId 1678309
+  addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+  addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+  ieCopyId 27
+  addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+  addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+  ieLinkedEntities "\[]"
+  addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+  addUserKnob {20 "" n -1}
+  addUserKnob {3 ieBundleVersion l "<span style=\"color:Silver\">Bundle Version </span>" t "\nThis entity is not part\nof a bundle." +DISABLED}
+  addUserKnob {4 ieEntityVersion l "Entity Version" M {2}}
+  addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+  addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+  ieVersionCreationDate "12-02-2019 16:35:46"
+  addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+  ieVersionCreator nicolasd
+  addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+  ieUpdateMode default
+  addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+  addUserKnob {26 ieSeparator l "  "}
+  addUserKnob {20 "" n -1}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 149
+   ypos -139
+  }
+  DeepToImage {
+   name DeepToImage1
+   xpos 149
+   ypos -102
+  }
+  ModifyMetaData {
+   metadata {
+    {remove exr/chunkCount ""}
+   }
+   name ModifyMetaData1
+   xpos 149
+   ypos -69
+  }
+  Output {
+   name Output1
+   xpos 149
+   ypos 31
+  }
+ end_group
+ Output {
+  name Output1
+  xpos 930
+  ypos 922
+ }
+push $N1b4c2520
+ Viewer {
+  frame_range 1006-1074
+  viewerProcess "Show_LUT_CDL (rec709)"
+  name Viewer1
+  xpos 1289
+  ypos 936
+ }
+end_group
