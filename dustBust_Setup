@@ -1,0 +1,56 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Dot {
+ name Dot363
+ selected true
+ xpos -32521
+ ypos -11659
+}
+set Na4ef6200 [stack 0]
+push $Na4ef6200
+Dot {
+ name Dot364
+ selected true
+ xpos -32374
+ ypos -11659
+}
+Blur {
+ size 10
+ name Blur47
+ selected true
+ xpos -32402
+ ypos -11574
+}
+set N66cfe710 [stack 0]
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge104
+ selected true
+ xpos -32549
+ ypos -11568
+}
+Median {
+ size 2
+ ignore_top_line false
+ name Median1
+ selected true
+ xpos -32549
+ ypos -11494
+}
+push $N66cfe710
+Dot {
+ name Dot365
+ selected true
+ xpos -32374
+ ypos -11430
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge105
+ selected true
+ xpos -32549
+ ypos -11428
+}
