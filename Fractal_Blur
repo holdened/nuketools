@@ -1,0 +1,513 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Group {
+ name FractalBlur7
+ selected true
+ xpos -1633
+ ypos 1468
+ addUserKnob {20 User}
+ addUserKnob {4 output l Output M {rgba alpha}}
+ output alpha
+ addUserKnob {26 ""}
+ addUserKnob {7 FractalBlur_UserDilate l Spread R 0 200}
+ FractalBlur_UserDilate -3
+ addUserKnob {7 FractalBlur_UserGrainSize l "Grain Size" R 0 100}
+ FractalBlur_UserGrainSize 6.5
+ addUserKnob {7 FractalBlur_UserContrast l Contrast}
+ addUserKnob {7 FractalBlur_UserGamma l Gamma R 0 5}
+ FractalBlur_UserGamma 1
+ addUserKnob {6 FractalBlur_UserBlackWhite l "Make black and white" +STARTLINE}
+ addUserKnob {7 FractalBlur_UserThreshold l Threshold}
+ addUserKnob {6 FractalBlur_UserBW l "Clamp output" +STARTLINE}
+ FractalBlur_UserBW true
+ addUserKnob {26 ""}
+ addUserKnob {7 FractalBlur_UserGrainEvolve l "Grain Evolution" t "Keyframe this value to animate the grain" R 0 10}
+ FractalBlur_UserGrainEvolve 1
+ addUserKnob {26 ""}
+ addUserKnob {26 instructions l "" +STARTLINE T "Plug a texture into Input2 to use that instead of noise"}
+ addUserKnob {26 ""}
+ addUserKnob {26 FractalBlur_Credit l "" +STARTLINE T "Fractal Blur v1.9 by Richard Frazer - www.richardfrazer.com\nmod-v1 by Holger Hummel - www.celluloid-vfx.com"}
+}
+ Input {
+  inputs 0
+  name TEXTURE
+  selected true
+  xpos 1874
+  ypos -423
+  number 1
+ }
+ Dot {
+  name Dot2
+  selected true
+  xpos 1908
+  ypos -118
+ }
+set N92e5cd80 [stack 0]
+ Input {
+  inputs 0
+  name ALPHA
+  selected true
+  xpos 1249
+  ypos -506
+ }
+ Dot {
+  name Dot4
+  selected true
+  xpos 1283
+  ypos -413
+ }
+set N3975a820 [stack 0]
+ Dot {
+  name Dot3
+  selected true
+  xpos 1550
+  ypos -370
+ }
+set N3af4e830 [stack 0]
+ Dot {
+  name Dot1
+  selected true
+  xpos 1748
+  ypos -370
+ }
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha black
+  name Shuffle10
+  selected true
+  xpos 1714
+  ypos -255
+ }
+ Noise {
+  cliptype none
+  size {{"\[value FractalBlur_UserGrainSize]" i}}
+  zoffset {{"\[value FractalBlur_UserGrainEvolve]" i}}
+  center {1024 778}
+  name Noise1
+  selected true
+  xpos 1714
+  ypos -166
+ }
+set N3a653aa0 [stack 0]
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input1]"}}
+  name Switch3
+  selected true
+  xpos 1714
+  ypos -122
+ }
+ Invert {
+  name Invert4
+  selected true
+  xpos 1714
+  ypos -72
+ }
+push $N3af4e830
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle1
+  selected true
+  xpos 1516
+  ypos -333
+ }
+ Blur {
+  size {{"\[value FractalBlur_UserDilate]" i x101 0}}
+  name Blur1
+  selected true
+  xpos 1516
+  ypos -283
+ }
+ FilterErode {
+  channels rgba
+  size {{"(-\[value FractalBlur_UserDilate])/2" i x1 0}}
+  filter gaussian
+  name FilterErode7
+  selected true
+  xpos 1516
+  ypos -216
+ }
+ Dot {
+  name Dot10
+  selected true
+  xpos 1550
+  ypos -133
+ }
+set N93559b00 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge2
+  selected true
+  xpos 1660
+  ypos -6
+ }
+ Invert {
+  name Invert3
+  selected true
+  xpos 1660
+  ypos 37
+ }
+push $N93559b00
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge13
+  selected true
+  xpos 1516
+  ypos 72
+ }
+set N3af51d90 [stack 0]
+ Clamp {
+  name Clamp1
+  selected true
+  xpos 1408
+  ypos 116
+ }
+ Grade {
+  channels rgba
+  blackpoint {{FractalBlur_UserThreshold i}}
+  whitepoint {{FractalBlur_UserThreshold i}}
+  name Grade1
+  selected true
+  xpos 1408
+  ypos 195
+ }
+push $N3af51d90
+ Switch {
+  inputs 2
+  which {{FractalBlur_UserBlackWhite i x47 1}}
+  name Switch1
+  selected true
+  xpos 1516
+  ypos 249
+ }
+ Grade {
+  channels rgba
+  blackpoint {{FractalBlur_UserContrast}}
+  whitepoint {{1-FractalBlur_UserContrast}}
+  gamma {{FractalBlur_UserGamma x101 0.985}}
+  black_clamp false
+  name Grade5
+  selected true
+  xpos 1516
+  ypos 329
+ }
+set N39a5a100 [stack 0]
+ Clamp {
+  name Clamp2
+  selected true
+  xpos 1426
+  ypos 394
+ }
+push $N39a5a100
+ Switch {
+  inputs 2
+  which {{FractalBlur_UserBW x47 0}}
+  name Switch2
+  selected true
+  xpos 1516
+  ypos 466
+ }
+ Dot {
+  name Dot6
+  selected true
+  xpos 1550
+  ypos 545
+ }
+set N39d59cd0 [stack 0]
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle2
+  selected true
+  xpos 1516
+  ypos 619
+ }
+push $N39d59cd0
+push $N3975a820
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy1
+  selected true
+  xpos 1249
+  ypos 575
+ }
+ Dot {
+  name Dot5
+  selected true
+  xpos 1283
+  ypos 636
+ }
+ Switch {
+  inputs 2
+  which {{parent.output}}
+  name Switch5
+  selected true
+  xpos 1516
+  ypos 751
+ }
+ Output {
+  name Output1
+  selected true
+  xpos 1516
+  ypos 851
+ }
+push $N92e5cd80
+push $N3a653aa0
+ Switch {
+  inputs 2
+  which {{parent.altInput}}
+  name Switch4
+  selected true
+  xpos 1874
+  ypos -65
+ }
+end_group
+push $cut_paste_input
+Group {
+ name FractalBlur
+ tile_color 0xca7f50ff
+ selected true
+ xpos -1630
+ ypos 1551
+ addUserKnob {20 fractalnoise l "fractal noise"}
+ addUserKnob {41 size_1 l x/ysize T animNoise3.size}
+ addUserKnob {7 FractalBlur_UserDilate l Spread R 0 200}
+ FractalBlur_UserDilate 90
+ addUserKnob {7 FractalBlur_UserContrast l Contrast}
+ addUserKnob {7 FractalBlur_UserGamma l Gamma R 0 5}
+ FractalBlur_UserGamma 1
+ addUserKnob {6 FractalBlur_UserBlackWhite l "Make black and white" +STARTLINE}
+ addUserKnob {7 FractalBlur_UserThreshold l Threshold}
+ addUserKnob {6 FractalBlur_UserBW l "Clamp output" +STARTLINE}
+ FractalBlur_UserBW true
+ addUserKnob {26 ""}
+ addUserKnob {26 instructions l "" +STARTLINE T "Plug a texture into Input2 to use that instead of noise"}
+ addUserKnob {20 "" l Transform}
+ addUserKnob {41 transform T animNoise3.transform}
+ addUserKnob {41 translate l INVISIBLE +INVISIBLE T animNoise3.translate}
+ addUserKnob {12 Translate}
+ addUserKnob {41 rotate T animNoise3.rotate}
+ addUserKnob {41 scale T animNoise3.scale}
+ addUserKnob {41 skewX l "skew X" T animNoise3.skewX}
+ addUserKnob {41 skewY l "skew Y" T animNoise3.skewY}
+ addUserKnob {41 skew_order l "skew order" T animNoise3.skew_order}
+ addUserKnob {41 center T animNoise3.center}
+ addUserKnob {41 xrotate T animNoise3.xrotate}
+ addUserKnob {41 yrotate T animNoise3.yrotate}
+ addUserKnob {20 ANIM l Anim}
+ addUserKnob {41 noiSpeed T animNoise3.noiSpeed}
+ addUserKnob {41 noiZSpeed T animNoise3.noiZSpeed}
+ addUserKnob {41 noiDirX T animNoise3.noiDirX}
+ addUserKnob {41 noiDirY T animNoise3.noiDirY}
+ addUserKnob {41 noiSpeedOffset T animNoise3.noiSpeedOffset}
+ addUserKnob {20 infoTab l Info}
+ addUserKnob {26 infoText l "" +STARTLINE T "FractalBlur\nlast modified on 24.06.2015 by Joel Delle-Vergin"}
+}
+ Input {
+  inputs 0
+  name texture
+  xpos 1874
+  ypos -442
+  number 1
+ }
+ Dot {
+  name Dot2
+  xpos 1908
+  ypos -118
+ }
+set N3ac4fc20 [stack 0]
+ Input {
+  inputs 0
+  name alpha
+  xpos 1516
+  ypos -447
+ }
+ Dot {
+  name Dot3
+  xpos 1550
+  ypos -370
+ }
+set N3ac587c0 [stack 0]
+ Dot {
+  name Dot1
+  xpos 1748
+  ypos -370
+ }
+ Shuffle {
+  red black
+  green black
+  blue black
+  alpha black
+  name Shuffle10
+  xpos 1714
+  ypos -238
+ }
+set N3a8518d0 [stack 0]
+ Noise {
+  size 30
+  zoffset {{noiZSpeed*t}}
+  lacunarity 1.72
+  gain 0.294
+  gamma 0.74
+  translate {{(noiDirX*(noiSpeed*t))+noiSpeedOffset+Translate.x} {(noiDirY*(noiSpeed*t))+noiSpeedOffset+Translate.y}}
+  center {1440 1080}
+  name animNoise3
+  tile_color 0x39b7d8ff
+  gl_color 0x2b3ba1ff
+  xpos 1714
+  ypos -187
+  addUserKnob {20 ANIM}
+  addUserKnob {7 noiSpeed t "Speed of animation" R 0 100}
+  addUserKnob {7 noiZSpeed t "speed of Z" R 0 0.1}
+  addUserKnob {7 noiDirX t "Direction of X" R -1 1}
+  noiDirX 1
+  addUserKnob {7 noiDirY t "Direction of X" R -1 1}
+  addUserKnob {7 noiSpeedOffset t "offset of direction" R -100 100}
+ }
+set N3a54ee80 [stack 0]
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input1.name]"}}
+  name Switch3
+  xpos 1714
+  ypos -122
+ }
+ Invert {
+  name Invert4
+  xpos 1714
+  ypos -66
+ }
+push $N3ac587c0
+ Blur {
+  size {{"\[value FractalBlur_UserDilate]" x101 0}}
+  name Blur1
+  xpos 1516
+  ypos -304
+ }
+ FilterErode {
+  channels rgba
+  size {{"(-\[value FractalBlur_UserDilate])/2" x1 0}}
+  filter gaussian
+  name FilterErode7
+  xpos 1516
+  ypos -218
+ }
+ Dot {
+  name Dot10
+  xpos 1550
+  ypos -133
+ }
+set N3605b280 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge2
+  xpos 1660
+  ypos -6
+ }
+ Invert {
+  name Invert3
+  xpos 1660
+  ypos 51
+ }
+push $N3605b280
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge13
+  xpos 1516
+  ypos 57
+ }
+set N35e57620 [stack 0]
+ Clamp {
+  name Clamp1
+  xpos 1408
+  ypos 115
+ }
+ Grade {
+  channels rgba
+  blackpoint {{FractalBlur_UserThreshold}}
+  whitepoint {{FractalBlur_UserThreshold}}
+  name Grade1
+  xpos 1408
+  ypos 194
+ }
+push $N35e57620
+ Switch {
+  inputs 2
+  which {{FractalBlur_UserBlackWhite i x47 1}}
+  name Switch1
+  xpos 1516
+  ypos 250
+ }
+ Grade {
+  channels rgba
+  blackpoint {{FractalBlur_UserContrast}}
+  whitepoint {{1-FractalBlur_UserContrast}}
+  gamma {{FractalBlur_UserGamma x101 0.985}}
+  name Grade5
+  xpos 1516
+  ypos 329
+ }
+set N35a4fa40 [stack 0]
+ Clamp {
+  name Clamp2
+  xpos 1415
+  ypos 371
+ }
+push $N35a4fa40
+ Switch {
+  inputs 2
+  which {{FractalBlur_UserBW i x47 0}}
+  name Switch2
+  xpos 1517
+  ypos 468
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle15
+  xpos 1517
+  ypos 532
+ }
+ Output {
+  name Output1
+  xpos 1517
+  ypos 611
+ }
+ Viewer {
+  frame_range 1009-1042
+  input_process false
+  name Viewer1
+  xpos 876
+  ypos 856
+ }
+push $N3ac4fc20
+push $N3a54ee80
+ Switch {
+  inputs 2
+  which {{parent.altInput}}
+  name Switch4
+  xpos 1874
+  ypos -65
+ }
+push $N3a8518d0
+ Noise {
+  size 51
+  zoffset {{noiZSpeed*t}}
+  rotate -4
+  center {1024 778}
+  name Noise1
+  xpos 1810
+  ypos -298
+ }
+end_group
