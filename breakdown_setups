@@ -1,0 +1,4149 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x3a4551ff
+ label INSPIRATION
+ note_font_size 222
+ note_font_color 0xffffffff
+ selected true
+ xpos -2924
+ ypos -3552
+ bdwidth 6090
+ bdheight 6784
+ z_order -3
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0x5e433aff
+ selected true
+ xpos -2633
+ ypos -3060
+ bdwidth 5527
+ bdheight 1866
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode8
+ tile_color 0x7c7b65ff
+ selected true
+ xpos -2652
+ ypos -967
+ bdwidth 4159
+ bdheight 3230
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name " 2"
+ tile_color 0x8c7800ff
+ label <center>Output
+ note_font Arial
+ note_font_size 42
+ note_font_color 0xe7ea2dff
+ selected true
+ xpos -5511
+ ypos 404
+ bdwidth 220
+ bdheight 328
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode10
+ tile_color 0x69624bff
+ label "Blank breakdownWipe "
+ note_font_size 42
+ selected true
+ xpos -3890
+ ypos -1866
+ bdwidth 642
+ bdheight 280
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x495f49ff
+ label "1)> Adjust Wipe Start Frame if the default isn't desired\n2)> Set Wipe Length Duration\n3)> Set Pause Length Duration\n4)> Adjust Line properties if needed\n5)> Break it on down."
+ note_font_size 33
+ selected true
+ xpos -4520
+ ypos -2170
+ bdwidth 594
+ bdheight 491
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode9
+ tile_color 0x607c60ff
+ label "This automatically sets the FrameHold \nto the input's last frame.\n\nIt will currently hold for 10 frames and \nthen the first wipe below will start.\n(You can change this amount by adjusting the\nInitial Holdframe Amount value) >>>\n"
+ note_font_size 33
+ selected true
+ xpos -5269
+ ypos -2316
+ bdwidth 736
+ bdheight 635
+}
+push $cut_paste_input
+Dot {
+ name Dot15
+ label "<left>\n\n- Stop on a frame, hold that frame for 10 or more frames and then do a wipe for about 12 frames maybe more.\n\n- For longer shots, do the wipes as the camera is traveling/ shot is playing\n\n- reference what was done on Mulan, /data/promo/demo/_reelMaterial/_film/MUL/ShowReels or other such as projects\n\nHow the magic happens:\nwipes\nstar wars wipes\ndeep front to back mask wipes\nmorph dissolves\nthat thing where the layers cascade down from the top or bottom\nthat other thing where you show a point cloud and make the camera go around to the side then back again\n\n\n\n\n\n\n\n\n\n\n"
+ note_font_size 99
+ selected true
+ xpos -2554
+ ypos -2371
+}
+Dot {
+ inputs 0
+ name Dot16
+ label "<left>\nINDUSTRY SECRETS OF HOW TO DO A BREAKDOWN - \n\nFinal Comp -> \nPlate -> \nFrom back to front or (wait for it....) front to back (bet you didn't see that coming)\n\nShow wireframes->\nShow greyshaded/ occlusion renders->\n(Env, Characters, Vehicles, Weapons etc)\n\nAny turntables? Any walk cycles? \nAnything extra cool to showcase how much money is wasted I mean well spent?\n\nRaw Anim renders over plate->\nRaw Lighting Renders over plate->\nMaybe Raw FX renders over plate->\n\nTransition to Comped Renders->\n(maybe 1-3+ stages if you have really gone crazy with the LGT.\n\nAny 2d Elements or Particles etc on top? Yup? Well add those.\n\nTransition to Final Comp or \nFinal Comp + Client Colour (Editorial may have to do this one)\n\n"
+ note_font_size 99
+ selected true
+ xpos -2520
+ ypos 131
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard1
+ selected true
+ xpos -5423
+ ypos -2381
+}
+Dot {
+ name Dot17
+ selected true
+ xpos -5395
+ ypos -1935
+}
+set N1a659d10 [stack 0]
+Dot {
+ name Dot18
+ selected true
+ xpos -5137
+ ypos -1935
+}
+set N1a65fc50 [stack 0]
+Dot {
+ name Dot19
+ selected true
+ xpos -4866
+ ypos -1935
+}
+Dot {
+ name Dot20
+ selected true
+ xpos -4866
+ ypos -46
+}
+push $N1a659d10
+push $N1a65fc50
+FrameHold {
+ firstFrame {{input.last_frame}}
+ name FrameHold4
+ tile_color 0xffbf00ff
+ selected true
+ xpos -5165
+ ypos -1844
+}
+Switch {
+ inputs 2
+ which 1
+ name Switch7
+ selected true
+ xpos -5423
+ ypos -1838
+ disable {{"frame >= FrameHold4.knob.first_frame" l 3}}
+}
+Group {
+ name breakdownWipe2
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -1707
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+   {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+   {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+   {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+   {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+      {{x448ec000 0 0 1 0 1 258}
+       {x448ee000 0 0 1 1 1 258}
+       {x448f0000 1 1 1 0 1 258}
+       {x449b6000 1 0 1 xbf800000 1 258}
+       {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { createOpenSpline str 1 ssx 1 ssy 1 sf 1 tt 10 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  openspline_start_end_type square
+  openspline_last_end_type square
+  source_black_outside true
+  name Roto1
+  selected true
+  xpos -42
+  ypos -426
+ }
+set N1a68c990 [stack 0]
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 92
+  ypos -426
+ }
+set N1a69f4f0 [stack 0]
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -42
+  ypos -540
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+push $N1a68c990
+push $N1a69f4f0
+push $N1a68c990
+ Viewer {
+  inputs 3
+  frame 1123
+  frame_range 1057-1400
+  input_number 2
+  viewerProcess "Show_LUT_CDL (rec709)"
+  name Viewer1
+  xpos 459
+  ypos -535
+ }
+end_group
+Group {
+ name breakdownWipe3
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -1511
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength)+(Wipes_Controller.Length)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  selected true
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Group {
+ name breakdownWipe11
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -1347
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength*2)+(Wipes_Controller.Length*2)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  selected true
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Group {
+ name breakdownWipe12
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -1170
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength*3)+(Wipes_Controller.Length*3)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  selected true
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Group {
+ name breakdownWipe13
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -1007
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength*4)+(Wipes_Controller.Length*4)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  selected true
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Group {
+ name breakdownWipe14
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -809
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength*5)+(Wipes_Controller.Length*5)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  selected true
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Group {
+ name breakdownWipe15
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -656
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength*6)+(Wipes_Controller.Length*6)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Group {
+ name breakdownWipe16
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -507
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength*7)+(Wipes_Controller.Length*7)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  selected true
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Group {
+ name breakdownWipe17
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -322
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength*8)+(Wipes_Controller.Length*8)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Group {
+ inputs 2
+ name breakdownWipe18
+ label "Start Fr\[value Retime1_output.first]"
+ selected true
+ xpos -5423
+ ypos -56
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first {{Wipes_Controller.bd_start+(Wipes_Controller.WipeLength*9)+(Wipes_Controller.Length*9)}}
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe {{parent.Wipes_Controller.WipeLength}}
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1196
+  ypos -534
+  number 1
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle2
+  xpos 1065
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -679
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 white -1 -1 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 948
+  ypos -619
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.parent.Wipes_Controller.Line_Opacity}}
+  name Merge2
+  selected true
+  xpos 948
+  ypos -426
+  disable {{parent.parent.Wipes_Controller.disable_line}}
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
+Reformat {
+ name Reformat2
+ selected true
+ xpos -5423
+ ypos 320
+}
+StickyNote {
+ inputs 0
+ name StickyNote4
+ label "Remember to use the 'dot_to_write' node to speed up creation of the write nodes "
+ note_font_size 111
+ selected true
+ xpos -7556
+ ypos -3133
+}
+push $cut_paste_input
+NoOp {
+ name Wipes_Controller
+ tile_color 0x111111ff
+ note_font_size 55
+ selected true
+ xpos -4244
+ ypos -1889
+ addUserKnob {20 User}
+ addUserKnob {3 bd_start l "Wipe Start Frame"}
+ bd_start {{parent.FrameHold4.knob.first_frame+(this.after_xframes)}}
+ addUserKnob {3 after_xframes l "Initial Holdframe Amount (frames)" -STARTLINE}
+ after_xframes 10
+ addUserKnob {26 ""}
+ addUserKnob {3 WipeLength l "Wipe Length"}
+ WipeLength 12
+ addUserKnob {3 Length l "Pause Length"}
+ Length 24
+ addUserKnob {3 Multiplier +INVISIBLE}
+ addUserKnob {26 ""}
+ addUserKnob {7 Line_Width l "Line Width"}
+ Line_Width 1
+ addUserKnob {7 Line_Opacity l "Line Opacity"}
+ Line_Opacity 1
+ addUserKnob {6 disable_line l "Turn Off Line" +STARTLINE}
+ addUserKnob {20 _1 l "" +STARTLINE}
+ addUserKnob {26 _2 l "" +STARTLINE T "ak share"}
+}
+Group {
+ inputs 0
+ name AJ_WipeBreakdown
+ tile_color 0xffbc01ff
+ label "start  fr \[value start]"
+ note_font_size 21
+ selected true
+ xpos -3751
+ ypos -1706
+ addUserKnob {20 User}
+ addUserKnob {3 start l "start wipe at"}
+ start 1105
+ addUserKnob {4 type l "Wipe Mode" M {"Horizontal Wipe" "Vertical  Wipe" "Horizontal Translate" "Vertical Translate" ""}}
+ addUserKnob {6 invertdirection l "invert direction" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {3 speed l "Wipe duration"}
+ speed 12
+ addUserKnob {4 interpolation M {smooth linear ""}}
+ interpolation linear
+ addUserKnob {20 Motionblur l "Motionblur (for Translate Mode)" n 1}
+ Motionblur 0
+ addUserKnob {41 motionblur T translate3.motionblur}
+ addUserKnob {41 shutter T translate3.shutter}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 operation l "Merge operation" T Merge2.operation}
+ addUserKnob {3 lineWidth l "line width"}
+ lineWidth 2
+ addUserKnob {41 white l "Line Color" T Grade1.white}
+ addUserKnob {6 noLine l "No line" +STARTLINE}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info "user Antoine Wipe_breakdown"
+}
+ Input {
+  inputs 0
+  name A
+  label A
+  xpos 730
+  ypos -1576
+  number 1
+ }
+ Dot {
+  name Dot5
+  xpos 758
+  ypos -1452
+ }
+set N6893d40 [stack 0]
+ Dot {
+  name Dot2
+  xpos -1002
+  ypos -1452
+ }
+set N1d1ebf70 [stack 0]
+ Transform {
+  translate {0 {"-(input.height-(interpolation == 0 ? ((smoothstep(0,1,(1*(t-start)/speed)))*input.height): (clamp((lerp(0,1,(1*(t-start)/speed))),0,1)*input.height)))"}}
+  center {1712 1101}
+  motionblur {{parent.translate3.motionblur}}
+  shutter {{parent.translate3.shutter}}
+  shutteroffset centred
+  name translate1
+  label "B to T"
+  xpos -920
+  ypos -1288
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  name Crop5
+  xpos -920
+  ypos -1234
+ }
+push $N1d1ebf70
+ Transform {
+  translate {0 {"input.height-(interpolation == 0 ? ((smoothstep(0,1,(1*(t-start)/speed)))*input.height): (clamp((lerp(0,1,(1*(t-start)/speed))),0,1)*input.height))"}}
+  center {1712 1101}
+  motionblur {{parent.translate3.motionblur}}
+  shutter {{parent.translate3.shutter}}
+  shutteroffset centred
+  name translate
+  label "T to B"
+  xpos -1030
+  ypos -1288
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  name Crop4
+  xpos -1030
+  ypos -1234
+ }
+ Switch {
+  inputs 2
+  which {{parent.invertdirection}}
+  name SwitchDirection2
+  xpos -920
+  ypos -1114
+ }
+push $N1d1ebf70
+ Transform {
+  translate {{"input.width-(interpolation == 0 ? ((smoothstep(0,1,(1*(t-start)/speed)))*input.width): (clamp((lerp(0,1,(1*(t-start)/speed))),0,1)*input.width))"} 0}
+  center {1712 1101}
+  motionblur {{parent.translate3.motionblur}}
+  shutter {{parent.translate3.shutter}}
+  shutteroffset centred
+  name translate2
+  label "R to L"
+  xpos -1140
+  ypos -1288
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  name Crop2
+  xpos -1140
+  ypos -1234
+ }
+push $N1d1ebf70
+ Transform {
+  translate {{"-(input.width-(interpolation == 0 ? ((smoothstep(0,1,(1*(t-start)/speed)))*input.width): (clamp((lerp(0,1,(1*(t-start)/speed))),0,1)*input.width)))"} 0}
+  center {1712 1101}
+  shutteroffset centred
+  name translate3
+  label "L to R"
+  xpos -1250
+  ypos -1288
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  name Crop3
+  xpos -1250
+  ypos -1234
+ }
+ Switch {
+  inputs 2
+  which {{parent.invertdirection}}
+  name SwitchDirection1
+  xpos -1140
+  ypos -1114
+ }
+push $N6893d40
+ Shuffle {
+  alpha white
+  name Shuffle1
+  xpos 730
+  ypos -1354
+ }
+set N1d871ec0 [stack 0]
+ Crop {
+  box {0 0 {input.width} {"interpolation == 0 ? ((smoothstep(0,1,(1*(t-start)/speed)))*input.height)+0.001: (clamp((lerp(0,1,(1*(t-start)/speed))),0,1)*input.height)+0.001"}}
+  name Vertical
+  label "B to T"
+  xpos 950
+  ypos -1264
+ }
+push $N1d871ec0
+ Crop {
+  box {0 {"input.height-(interpolation == 0 ? ((smoothstep(0,1,(1*(t-start)/speed)))*input.height)+0.001: (clamp((lerp(0,1,(1*(t-start)/speed))),0,1)*input.height))+0.001"} {input.width} {input.height}}
+  name Vertical1
+  label "T to B"
+  xpos 840
+  ypos -1264
+ }
+ Switch {
+  inputs 2
+  which {{parent.invertdirection}}
+  name SwitchDirection4
+  xpos 840
+  ypos -1114
+ }
+push $N1d871ec0
+ Crop {
+  box {{"input.width-(interpolation == 0 ? ((smoothstep(0,1,(1*(t-start)/speed)))*input.width)+0.001: (clamp((lerp(0,1,(1*(t-start)/speed))),0,1)*input.width))+0.001"} 0 {input.width} {input.height}}
+  name Horizontal2
+  label "R to L"
+  xpos 730
+  ypos -1264
+ }
+push $N1d871ec0
+ Crop {
+  box {0 0 {"interpolation == 0 ? ((smoothstep(0,1,(1*(t-start)/speed)))*input.width)+0.001: (clamp((lerp(0,1,(1*(t-start)/speed))),0,1)*input.width)+0.001"} {input.height}}
+  name Horizontal
+  label "L to R"
+  xpos 620
+  ypos -1264
+ }
+ Switch {
+  inputs 2
+  which {{parent.invertdirection}}
+  name SwitchDirection3
+  xpos 620
+  ypos -1114
+ }
+ Switch {
+  inputs 4
+  which {{parent.type}}
+  name SwitchMethod3
+  xpos -260
+  ypos -538
+ }
+ Dot {
+  name Dot1
+  xpos -232
+  ypos -324
+ }
+set N1d8c6cf0 [stack 0]
+push $N1d8c6cf0
+push $N1d8c6cf0
+ Dot {
+  name Dot6
+  xpos -452
+  ypos -324
+ }
+set N1d8cbbe0 [stack 0]
+push $N1d8cbbe0
+ Dot {
+  name Dot4
+  xpos -672
+  ypos -324
+ }
+set N1d8d0c10 [stack 0]
+ Dot {
+  name Dot3
+  xpos -1002
+  ypos -324
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle3
+  xpos -1030
+  ypos -274
+ }
+ Grade {
+  black_clamp false
+  name Grade1
+  xpos -1030
+  ypos -226
+ }
+set N1d8ec190 [stack 0]
+ Transform {
+  translate {0 {-lineWidth}}
+  center {1712 1101}
+  shutteroffset centred
+  name Transform3
+  label Vertical
+  xpos -1140
+  ypos -64
+ }
+push $N1d8ec190
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge4
+  xpos -1030
+  ypos -58
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  name Crop6
+  xpos -1030
+  ypos -10
+ }
+ Transform {
+  translate {0 {-parent.Transform3.translate.y}}
+  center {1712 1101}
+  shutteroffset centred
+  name Transform4
+  xpos -1030
+  ypos 38
+ }
+set N1d926a70 [stack 0]
+push $N1d8ec190
+ Transform {
+  translate {{-lineWidth} 0}
+  center {1712 1101}
+  shutteroffset centred
+  name Transform1
+  label Horizontal
+  xpos -920
+  ypos -136
+ }
+push $N1d8ec190
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge1
+  xpos -810
+  ypos -130
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  name Crop1
+  xpos -810
+  ypos -82
+ }
+ Transform {
+  translate {{-parent.Transform1.translate.x} 0}
+  center {1712 1101}
+  shutteroffset centred
+  name Transform2
+  xpos -920
+  ypos -58
+ }
+set N1d95f000 [stack 0]
+push $N1d926a70
+push $N1d95f000
+ Switch {
+  inputs 4
+  which {{parent.type}}
+  name SwitchMethod2
+  xpos -920
+  ypos 38
+ }
+push $N1d8d0c10
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos -700
+  ypos 38
+ }
+ Switch {
+  inputs 2
+  which {{parent.noLine}}
+  name Switch_Line
+  xpos -480
+  ypos 38
+ }
+set N1d986650 [stack 0]
+push $N1d986650
+ Switch {
+  inputs 4
+  which {{parent.type}}
+  name SwitchMethod1
+  xpos -260
+  ypos 38
+ }
+ Dot {
+  name Dot10
+  xpos -232
+  ypos 324
+ }
+ Input {
+  inputs 0
+  name B
+  label B
+  selected true
+  xpos 70
+  ypos 56
+ }
+ Shuffle {
+  alpha white
+  name Shuffle2
+  xpos 70
+  ypos 254
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 70
+  ypos 326
+ }
+ Output {
+  name Output1
+  xpos 70
+  ypos 446
+ }
+end_group
+push $cut_paste_input
+NoOp {
+ name Breakdownerizationer
+ knobChanged "if nuke.thisNode().knob(\"type\").value() == \"Wipe Left-to-Right\":\n    nuke.thisNode().knob(\"chk_white_line\").setVisible(True)\nelse:\n    nuke.thisNode().knob(\"chk_white_line\").setVisible(False)"
+ selected true
+ xpos -3577
+ ypos -1693
+ hide_input true
+ addUserKnob {20 Options}
+ addUserKnob {26 ""}
+ addUserKnob {26 spacer l "" -STARTLINE T " "}
+ addUserKnob {26 instructions_01 l "" -STARTLINE T "<b>Usage</b><br><br>\n\n<font color=#999><b>Note:</b> You will need to render precomps for any layers you<br> want to break down. This tool only works predictably with<br> Read nodes selected.</font>\n\n<p>1) Ensure your Project Settings' format matches your comp's format.\n<br>2) Deselect all nodes in the Node Graph.\n<br>3) Set parameters below.\n<br>4) Select the final comp in your Node Graph, followed by the<br>&nbsp;&nbsp; precomped layers (Read nodes) you want to break down, in order.\n<br>5) Press the \"Breakdown this Shot!\" button, and watch the magic happen!\n\n<br>"}
+ addUserKnob {26 ""}
+ addUserKnob {4 type l "Breakdown Type" M {"Wipe Left-to-Right" Dissolve "Slide Layer In, Top-to-Bottom"}}
+ addUserKnob {3 frame l "Frame to Breakdown"}
+ frame 1033
+ addUserKnob {3 rewind_speed l "Rewind Speed"}
+ rewind_speed 4
+ addUserKnob {26 times_text l "" -STARTLINE T " times"}
+ addUserKnob {3 ttime l "Transition Duration"}
+ ttime 12
+ addUserKnob {26 frames_text l "" -STARTLINE T " frames"}
+ addUserKnob {3 ptime l "Pause Duration"}
+ ptime 8
+ addUserKnob {26 frames_text2 l "" -STARTLINE T " frames"}
+ addUserKnob {6 chk_white_line l "Show white line on wipes?" +STARTLINE}
+ chk_white_line true
+ addUserKnob {26 spacer_01 l "" +STARTLINE T " "}
+ addUserKnob {22 go_btn l "Breakdown This Shot!" T "def breakdownerizationerValidateUnlinkedRead():\n    #if reads are linked to writes, break them them and restore selection order\n    origSel = \[]\n    for node in nuke.selectedNodes():\n        if 'ieBreakLink' in \[knob for knob in node.knobs()]:\n            node\['ieBreakLink'].execute()\n            origSel.insert(0, nuke.selectedNode())\n        else:\n            origSel.insert(0, node)\n    for node in origSel:\n        node\['selected'].setValue(True)\n\ndef breakdownerizationer_run():\n    \n    if not nuke.selectedNodes():\n        nuke.message(\"Please select some nodes, starting with your final comp first, followed by the nodes you want to break down\")\n        return\n    \n    breakdownerizationerValidateUnlinkedRead()\n\n    this_node = nuke.thisNode()\n    \n    # Store all the Breakdown layers in a list.\n    layers = \[]\n    \n    for i in nuke.selectedNodes():\n        layers.append(i)\n\n    layers.reverse()\n    #add comp input to the last layer, so we always wipe back to the comp before playing\n    #other wise it just snaps back to comp without transition, which can be jarring\n    layers.insert(len(layers), layers\[0])\n\n    \n    # Get average position of all selected nodes.\n    xposlist = \[]\n    yposlist = \[]\n    \n    for nodes in layers:\n        xposlist.append(nodes.knob('xpos').value())\n        yposlist.append(nodes.knob('ypos').value())\n    \n    avgxpos = sum(xposlist) / len(xposlist)\n    avgypos = sum(yposlist) / len(yposlist)\n    \n    # Create extra variables to do things later...\n    format_value = layers\[0].knob('format').value()\n    first_frame = layers\[0].knob('first').value()\n    last_frame = layers\[0].knob('last').value()\n    frame_range = last_frame - first_frame\n    breakdown_start = last_frame + (last_frame - nuke.thisNode().knob('frame').value())\n    #+ (int(frame_range / int(this_node.knob('rewind_speed').value())))\n    \n    # Create breakdown Group node, add knobs.\n    grp = nuke.createNode('Group', 'name Breakdownerizationer_Build')\n    grp.knob('xpos').setValue(avgxpos)\n    grp.knob('ypos').setValue(avgypos + 250)\n    \n    if this_node.knob('type').value() == \"Wipe Left-to-Right\":\n    \n        grp.addKnob(nuke.Text_Knob('divider_01', ' '))\n    \n        grp.addKnob(nuke.Boolean_Knob('b_whiteline', 'Show white line on wipes?'))\n        grp.knob('b_whiteline').setValue(int(this_node.knob('chk_white_line').value()))\n    \n        grp.addKnob(nuke.Int_Knob('b_whiteline_width', 'White line width'))\n        grp.knob('b_whiteline_width').setValue(2)\n    \n    grp.addKnob(nuke.Text_Knob('divider_02', ' '))\n    \n    breakdown_type_text = \"<b>Breakdown Type:</b> \" + str(this_node.knob('type').value()) + \"\\n\"\n    grp.addKnob(nuke.Text_Knob('text_type', ' ', breakdown_type_text))\n    grp.addKnob(nuke.Text_Knob('spacer_01', ' ', ' '))\n    \n    # Add knobs and set their values.\n    grp.addKnob(nuke.Int_Knob('num_inputs', 'Number of Inputs'))\n    grp.knob('num_inputs').setValue(int(len(layers)))\n    \n    grp.addKnob(nuke.Int_Knob('b_frame', 'Breakdown Frame'))\n    grp.knob('b_frame').setValue(int(this_node.knob('frame').value()))\n    \n    grp.addKnob(nuke.Int_Knob('b_rSpeed', 'Rewind Speed'))\n    grp.knob('b_rSpeed').setValue(int(this_node.knob('rewind_speed').value()))\n    \n    grp.addKnob(nuke.Int_Knob('b_td', 'Transition Duration'))\n    grp.knob('b_td').setValue(int(this_node.knob('ttime').value()))\n    \n    grp.addKnob(nuke.Int_Knob('b_pause', 'Pause Duration'))\n    grp.knob('b_pause').setValue(int(this_node.knob('ptime').value()))\n    \n    grp.addKnob(nuke.Text_Knob('divider_03', ' '))\n    \n    # Disable the knobs, as they're just for show.\n    grp.knob('num_inputs').setEnabled(False)\n    grp.knob('b_frame').setEnabled(False)\n    grp.knob('b_rSpeed').setEnabled(False)\n    grp.knob('b_td').setEnabled(False)\n    grp.knob('b_pause').setEnabled(False)\n    \n    # Open up the Group to build the dynamic gizmo...\n    grp.begin()\n    \n    # Set variables\n    wipe_time = nuke.thisNode().knob('b_td').value()\n    pause_time = nuke.thisNode().knob('b_pause').value()\n    \n    # Create the first input manually, so we can name it.\n    comp_input = nuke.createNode('Input', \"name comp\")\n    \n    # Create the TimeWarp, that reverses the shot.\n    reverse_time = nuke.createNode('TimeWarp', 'filter nearest')\n    reverse_time_knob = reverse_time.knob('lookup')\n    reverse_time_knob.setAnimated(0)\n    reverse_time_anim = reverse_time_knob.animations()\[0]\n    reverse_time_anim.setKey(last_frame + pause_time, last_frame)\n    reverse_time_anim.setKey(last_frame + pause_time + ((last_frame - nuke.thisNode().knob('b_frame').value()) / nuke.thisNode().knob('b_rSpeed').value()), nuke.thisNode().knob('b_frame').value())\n    \n    # Switch to the TimeWarp at the right time.\n    switch_node = nuke.createNode('Switch')\n    switch_node.setInput(0, comp_input)\n    switch_node.setInput(1, reverse_time)\n    switch_node.knob('which').setAnimated(0)\n    switchAnim = switch_node.knob('which').animations()\[0]\n    switchAnim.setKey(last_frame - 1 + pause_time, 0)\n    switchAnim.setKey(last_frame + pause_time, 1)\n    \n    prev_merge_node = switch_node\n    \n    if this_node.knob('type').value() == \"Wipe Left-to-Right\":\n    \n        # Create the rest of the inputs, based off the number of selected Read nodes. Then do all the things.\n        for x in range(0, (len(layers) - 1)):\n            nuke.createNode('Input')\n            reformat_node = nuke.createNode('Reformat', 'format format_value')\n            solid_alpha_shuffle = nuke.createNode('Shuffle', 'in alpha out alpha red white')\n            framehold_node = nuke.createNode('FrameHold', 'first_frame b_frame')\n            crop_node = nuke.createNode('Crop')\n    \n            # Create white line\n            all_alpha_shuffle = nuke.createNode('Shuffle', 'red alpha green alpha blue alpha alpha alpha')\n            transform_node = nuke.createNode('Transform')\n            transform_node.knob('translate').setExpression('b_whiteline_width*-1', 0)\n    \n            stencil_node = nuke.createNode('Merge2', 'operation stencil')\n            stencil_node.setInput(0, all_alpha_shuffle)\n            stencil_node.setInput(1, transform_node)\n    \n            merge_white_line = nuke.createNode('Merge2', 'operation over')\n            merge_white_line.knob('disable').setExpression('!b_whiteline')\n            merge_white_line.setInput(0, crop_node)\n            merge_white_line.setInput(1, stencil_node)\n    \n            # Create the wipe animations\n            knob = crop_node.knob('box')\n            knob.setAnimated(2)\n    \n            animKnob = knob.animations()\[0]\n            animKnob.setKey(1 + pause_time + (last_frame + pause_time + ((last_frame - nuke.thisNode().knob('b_frame').value()) / nuke.thisNode().knob('b_rSpeed').value())) + x * wipe_time + x * pause_time, -0.001 - nuke.thisNode().knob('b_whiteline_width').value())\n            animKnob.setKey(pause_time + (last_frame + pause_time + ((last_frame - nuke.thisNode().knob('b_frame').value()) / nuke.thisNode().knob('b_rSpeed').value())) + x * wipe_time + x * pause_time + wipe_time, nuke.root()\['format'].value().width())\n    \n            animKnob.setExpression('curve+b_whiteline_width')\n    \n            merge_node = nuke.createNode('Merge2')\n            merge_node.setInput(0, prev_merge_node)\n            merge_node.setInput(1, merge_white_line)\n    \n            prev_merge_node = merge_node\n    \n    \n    \n    \n    \n    elif this_node.knob('type').value() == \"Slide Layer In, Top-to-Bottom\":\n    \n        # Create the rest of the inputs, based off the number of selected Read nodes. Then do all the things.\n        for x in range(0, (len(layers) - 1)):\n            nuke.createNode('Input')\n            reformat_node = nuke.createNode('Reformat', 'format format_value')\n            nuke.createNode('Crop')\n            framehold_node = nuke.createNode('FrameHold', 'first_frame b_frame')\n            transform_node = nuke.createNode('Transform')\n    \n            # Slide the layers into frame with a transform.\n            knob = transform_node.knob('translate')\n            knob.setAnimated(1)\n    \n            animKnob = knob.animations()\[0]\n            animKnob.setKey(1 + pause_time + (last_frame + pause_time + ((last_frame - nuke.thisNode().knob('b_frame').value()) / nuke.thisNode().knob('b_rSpeed').value())) + x * wipe_time + x * pause_time, nuke.root()\['format'].value().height())\n            animKnob.setKey(pause_time + (last_frame + pause_time + ((last_frame - nuke.thisNode().knob('b_frame').value()) / nuke.thisNode().knob('b_rSpeed').value())) + x * wipe_time + x * pause_time + wipe_time, 0)\n    \n            merge_node = nuke.createNode('Merge2')\n            merge_node.setInput(0, prev_merge_node)\n            merge_node.setInput(1, transform_node)\n    \n            prev_merge_node = merge_node\n    \n    \n    \n    elif this_node.knob('type').value() == \"Dissolve\":\n    \n        # Create the rest of the inputs, based off the number of selected Read nodes. Then do all the things.\n        for x in range(0, (len(layers) - 1)):\n            nuke.createNode('Input')\n            reformat_node = nuke.createNode('Reformat', 'format format_value')\n            nuke.createNode('Crop')\n            framehold_node = nuke.createNode('FrameHold', 'first_frame b_frame')\n    \n            # Dissolve the layers.\n            dissolve_node = nuke.createNode('Dissolve')\n            dissolve_node.setInput(1, prev_merge_node)\n            dissolve_node.setInput(0, dissolve_node)\n    \n            knob = dissolve_node.knob('which')\n            knob.setAnimated(0)\n    \n            animKnob = knob.animations()\[0]\n            animKnob.setKey(1 + pause_time + (last_frame + pause_time + ((last_frame - nuke.thisNode().knob('b_frame').value()) / nuke.thisNode().knob('b_rSpeed').value())) + x * wipe_time + x * pause_time, 1)\n            animKnob.setKey(pause_time + (last_frame + pause_time + ((last_frame - nuke.thisNode().knob('b_frame').value()) / nuke.thisNode().knob('b_rSpeed').value())) + x * wipe_time + x * pause_time + wipe_time, 0)\n    \n            prev_merge_node = dissolve_node\n    \n    \n    \n    else:\n    \n        nuke.message(\"Well shit, you've broken it, and I don't know how. Please shoot me an email to support@benmcewan.com and let me know, so I can fix it!\")\n    \n    breakdown_length = int((last_frame + pause_time + ((last_frame - nuke.thisNode().knob('b_frame').value()) / nuke.thisNode().knob('b_rSpeed').value())) + (len(layers)-1) * wipe_time + (len(layers)-1) * pause_time + wipe_time)\n    \n    # Play out the remainder of the shot after the last wipe\n    playout_node = nuke.createNode('TimeWarp')\n    playout_node.setInput(0, comp_input)\n    playout_knob = playout_node.knob('lookup')\n    playout_knob.setAnimated(0)\n    playout_anim = playout_knob.animations()\[0]\n    playout_anim.setKey(breakdown_length, grp.knob('b_frame').value())\n    playout_anim.setKey(breakdown_length + (last_frame - grp.knob('b_frame').value()), last_frame)\n    \n    # Switch to the TimeWarp at the right time\n    switch_node = nuke.createNode('Switch')\n    switch_node.setInput(0, prev_merge_node)\n    switch_node.setInput(1, playout_node)\n    switch_node.knob('which').setAnimated(0)\n    switchAnim = switch_node.knob('which').animations()\[0]\n    switchAnim.setKey(breakdown_length - 1, 0)\n    switchAnim.setKey(breakdown_length, 1)\n    \n    # We need an output node so we can view the Group...\n    nuke.createNode('Crop')\n    nuke.createNode('Output')\n    \n    # End the adding of stuff to our Group.\n    grp.end()\n    \n    # Connect the newly-created inputs to the relevant read nodes.\n    for y in range(0, len(layers)):\n        grp.setInput(y, layers\[y])\n    \n    # Set the frame range in project settings\n    nuke.root().knob('last_frame').setValue(breakdown_length + (last_frame - grp.knob('b_frame').value()))\n\nbreakdownerizationer_run()" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {26 version_info l "" +STARTLINE T "<font color='#777'><b>Breakdownerizationer v0.3</b></font><font color='#555'> created by </font><b><a href=\"https://github.com/BenMcEwan/nuke_public\" style=\"color:#777;\">Ben McEwan</a></b>.<br>\n<font color='#555'><b>Last updated:</b> 15th March, 2023.</font><br><br>\n\n<font color='#777'>This tool needs to be re-written to be bulletproof.<br> If you're having trouble with in, please reach out <br>to Ben on gChat for help!</font>"}
+}
+Group {
+ inputs 0
+ name breakdownWipe
+ selected true
+ xpos -3577
+ ypos -1773
+ addUserKnob {20 breakdownWipe}
+ addUserKnob {41 format l "wipe format" -STARTLINE T Reformat1.format}
+ addUserKnob {41 operation T Merge1.operation}
+ addUserKnob {3 Retime1_output.first l "wipe start"}
+ Retime1_output.first 1060
+ addUserKnob {3 lengthofwipe l "wipe length" -STARTLINE}
+ lengthofwipe 12
+ addUserKnob {3 Retime1_output.last l "wipe end" -STARTLINE +DISABLED R 0 100}
+ Retime1_output.last {{Retime1_output.first+lengthofwipe}}
+ addUserKnob {7 linewidth l "line width" R 1 10}
+ linewidth {{parent.Wipes_Controller.Line_Width}}
+ addUserKnob {41 disable_1 l "turn off line" -STARTLINE T Merge2.disable}
+ addUserKnob {1 Scriplet_Info +DISABLED +INVISIBLE}
+ Scriplet_Info central
+}
+ Roto {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{x4493a7f8 0 1 xbe801a3d 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{x3f80002c 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xb6680000 0 1 x4199ae15 1}}
+      {{xc2867f78 0 1 x3e801a1f 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc1a80000 x43ec0000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000 opc
+   {{x448ec000 0 0 1 0 1 258}
+    {x448ee000 0 0 1 1 1 258}
+    {x448f0000 1 1 1 0 1 258}
+    {x449b6000 1 0 1 xbf800000 1 258}
+    {x449b8000 0 xbf800000 1 0 1 258}}}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  opacity {{curve L x1142 0 0 1 x1243 1 x1244 0}}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto1
+  xpos -34
+  ypos -426
+ }
+ Transform {
+  translate {{curve L x1143 -1 x1243 1920} 0}
+  scale {{parent.linewidth} 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform1
+  xpos 96
+  ypos -426
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos 240
+  ypos -426
+ }
+ Reformat {
+  format {{{Reformat1.format}}}
+  resize distort
+  filter impulse
+  name Reformat2
+  xpos 350
+  ypos -426
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange3
+  xpos 572
+  ypos -426
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{Retime1.output.first}}
+  output.first_lock true
+  output.last {{Retime1.output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  warp {warp {Retime1.warp C 0 1}}
+  time ""
+  name Retime2
+  xpos 691
+  ypos -426
+  icon "\[value Retime1.icon]"
+ }
+ Roto {
+  inputs 0
+  output alpha
+  cliptype none
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {px x448ee000
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{x4489c000 0 1 x3e99999a 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{x4489c000 0 1 x3ecac07b 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 0 1 x4199999b 1}}
+   {{xc1c00000 0 1 xbf010628 1}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{0 -}}
+   {{0 -}}}
+        {{{xc5132000 -}}
+      {{xc1c00000 0 1 xbf19999a 1}}}
+        {{{0 -}}
+   {{0 -}}}}}     idem}
+     {tx x448ee000 xc37f0000 x44030000}
+     {a osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x448ee000 ltm x448ee000 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {960 540}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1143
+  lifetime_end 1143
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  name Roto2
+  xpos -39
+  ypos -539
+ }
+ Transform {
+  translate {{curve x1143 -1 x1243 1921} 0}
+  scale {1 1}
+  center {0 540}
+  filter impulse
+  shutteroffset centred
+  name Transform2
+  xpos 105
+  ypos -534
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop1
+  xpos 235
+  ypos -534
+ }
+ Reformat {
+  resize distort
+  filter impulse
+  name Reformat1
+  xpos 345
+  ypos -534
+ }
+ FrameRange {
+  first_frame 1143
+  last_frame 1243
+  time ""
+  name FrameRange1
+  xpos 571
+  ypos -534
+ }
+ Retime {
+  input.first 1143
+  input.last 1243
+  output.first {{parent.Retime1_output.first}}
+  output.first_lock true
+  output.last {{parent.Retime1_output.last}}
+  output.last_lock true
+  speed 7.769230769
+  filter nearest
+  shutter 0
+  time ""
+  name Retime1
+  xpos 691
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputTo
+  xpos 1110
+  ypos -534
+ }
+ Input {
+  inputs 0
+  name InputFrom
+  xpos 948
+  ypos -638
+  number 1
+ }
+ Merge2 {
+  inputs 2+1
+  name Merge1
+  xpos 948
+  ypos -534
+ }
+ Merge2 {
+  inputs 2
+  name Merge2
+  xpos 948
+  ypos -426
+ }
+ Output {
+  name Output1
+  xpos 948
+  ypos -314
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "Tormund and the free folk ride by."
+  xpos 445
+  ypos -60
+ }
+end_group
