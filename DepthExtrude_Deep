@@ -1,0 +1,582 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+Group {
+ inputs 0
+ name DeepFixHoles1
+ tile_color 0x60ff
+ selected true
+ xpos -1559
+ ypos 264
+ addUserKnob {20 DeepFixHoles}
+ addUserKnob {26 _1 l "" +STARTLINE T "<font><b>Plug straight into your deep read.</b>\n<br><br>\n<i>Fixes holes in the deep alpha with an expression or by deep recoloring with a new alpha. \n<br><br>\nIf alpha input exists will automatically switch to that custom alpha, otherwise will use a solid alpha. "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _2 l "" +STARTLINE T "<b>v1 </b><font color=grey><i>Created by <b>Daniel Bigaj</b> 14 September 2022"}
+}
+ Input {
+  inputs 0
+  name alpha
+  xpos 686
+  ypos 636
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos 536
+  ypos 516
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 570
+  ypos 576
+ }
+set N70a80480 [stack 0]
+ DeepRecolor {
+  inputs 2
+  channels alpha
+  targetInputAlpha true
+  name DeepRecolor
+  xpos 536
+  ypos 630
+ }
+push $N70a80480
+ DeepExpression {
+  chans0 alpha
+  chans1 deep
+  rgba.alpha a>0?1:0
+  name DeepExpression
+  xpos 437
+  ypos 635
+ }
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input1]"}}
+  name Switch1
+  selected true
+  xpos 536
+  ypos 684
+ }
+ Output {
+  name Output
+  xpos 536
+  ypos 736
+ }
+end_group
+DeepReformat {
+ black_outside true
+ pbb true
+ name DeepReformat3
+ selected true
+ xpos -1559
+ ypos 301
+}
+Group {
+ inputs 0
+ name DeepFixHoles
+ tile_color 0x60ff
+ selected true
+ xpos -1725
+ ypos 253
+ addUserKnob {20 DeepFixHoles}
+ addUserKnob {26 _1 l "" +STARTLINE T "<font><b>Plug straight into your deep read.</b>\n<br><br>\n<i>Fixes holes in the deep alpha with an expression or by deep recoloring with a new alpha. \n<br><br>\nIf alpha input exists will automatically switch to that custom alpha, otherwise will use a solid alpha. "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _2 l "" +STARTLINE T "<b>v1 </b><font color=grey><i>Created by <b>Daniel Bigaj</b> 14 September 2022"}
+}
+ Input {
+  inputs 0
+  name alpha
+  xpos 686
+  ypos 636
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos 536
+  ypos 516
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 570
+  ypos 576
+ }
+set N774866b0 [stack 0]
+ DeepRecolor {
+  inputs 2
+  channels alpha
+  targetInputAlpha true
+  name DeepRecolor
+  xpos 536
+  ypos 630
+ }
+push $N774866b0
+ DeepExpression {
+  chans0 alpha
+  chans1 deep
+  rgba.alpha a>0?1:0
+  name DeepExpression
+  xpos 437
+  ypos 635
+ }
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input1]"}}
+  name Switch1
+  selected true
+  xpos 536
+  ypos 684
+ }
+ Output {
+  name Output
+  xpos 536
+  ypos 736
+ }
+end_group
+DeepReformat {
+ black_outside true
+ pbb true
+ name DeepReformat6
+ selected true
+ xpos -1725
+ ypos 301
+}
+Group {
+ inputs 0
+ name DeepFixHoles2
+ tile_color 0x60ff
+ selected true
+ xpos -1901
+ ypos 265
+ addUserKnob {20 DeepFixHoles}
+ addUserKnob {26 _1 l "" +STARTLINE T "<font><b>Plug straight into your deep read.</b>\n<br><br>\n<i>Fixes holes in the deep alpha with an expression or by deep recoloring with a new alpha. \n<br><br>\nIf alpha input exists will automatically switch to that custom alpha, otherwise will use a solid alpha. "}
+ addUserKnob {26 ""}
+ addUserKnob {26 _2 l "" +STARTLINE T "<b>v1 </b><font color=grey><i>Created by <b>Daniel Bigaj</b> 14 September 2022"}
+}
+ Input {
+  inputs 0
+  name alpha
+  xpos 686
+  ypos 636
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos 536
+  ypos 516
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 570
+  ypos 576
+ }
+set N7848a0b0 [stack 0]
+ DeepRecolor {
+  inputs 2
+  channels alpha
+  targetInputAlpha true
+  name DeepRecolor
+  xpos 536
+  ypos 630
+ }
+push $N7848a0b0
+ DeepExpression {
+  chans0 alpha
+  chans1 deep
+  rgba.alpha a>0?1:0
+  name DeepExpression
+  xpos 437
+  ypos 635
+ }
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input1]"}}
+  name Switch1
+  xpos 536
+  ypos 684
+ }
+ Output {
+  name Output
+  selected true
+  xpos 536
+  ypos 736
+ }
+end_group
+DeepReformat {
+ black_outside true
+ pbb true
+ name DeepReformat7
+ selected true
+ xpos -1901
+ ypos 306
+}
+DeepMerge {
+ inputs 3
+ drop_hidden true
+ name DeepMerge2
+ selected true
+ xpos -1725
+ ypos 385
+}
+DeepExpression {
+ chans1 deep
+ deep.back deep.front
+ name DeepExpression1
+ selected true
+ xpos -1725
+ ypos 456
+}
+DeepToImage {
+ name DeepToImage1
+ selected true
+ xpos -1725
+ ypos 503
+}
+Expression {
+ channel0 depth
+ expr0 depth.Z!=0?1/depth.Z:0
+ channel1 none
+ name deepToDepth1
+ selected true
+ xpos -1725
+ ypos 541
+}
+Group {
+ name FillHoles19
+ knobChanged "# Show/Hide mask channels\nif nuke.thisKnob().name() == \"inputChange\":\n    this = nuke.thisNode()\n    if nuke.thisNode().input(1) == None:\n        nuke.thisNode().knobs()\['maskChannelInput'].setVisible(True)\n        nuke.thisNode().knobs()\['maskChannelMask'].setVisible(False)\n    else:\n        nuke.thisNode().knobs()\['maskChannelMask'].setVisible(True)\n        nuke.thisNode().knobs()\['maskChannelInput'].setVisible(False)\n        this.begin()\n        nuke.toNode('Dissolve')\['maskChannelInput'].setValue('none')\n        this.end()"
+ tile_color 0xc48651ff
+ selected true
+ xpos -1725
+ ypos 592
+ addUserKnob {20 User l "Fill Holes"}
+ addUserKnob {41 channels T FilterErode3.channels}
+ addUserKnob {7 size R -50 50}
+ size -2
+ addUserKnob {26 _2 l mask T " "}
+ addUserKnob {41 maskChannelMask l "" -STARTLINE +HIDDEN T Dissolve.maskChannelMask}
+ addUserKnob {41 maskChannelInput l "" -STARTLINE T Dissolve.maskChannelInput}
+ addUserKnob {41 invert_mask l invert -STARTLINE T Dissolve.invert_mask}
+ addUserKnob {26 ""}
+ addUserKnob {26 _1 l " " T "<b>v1 </b><font color=grey><i>Created by <b>Daniel Bigaj</b> 23 August 2022"}
+}
+ Input {
+  inputs 0
+  name mask
+  xpos -852
+  ypos 752
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos -619
+  ypos 378
+ }
+set N78d813d0 [stack 0]
+push $N78d813d0
+ FilterErode {
+  channels {{{FilterErode3.channels}}}
+  size {{-parent.size} {-parent.size}}
+  name FilterErode2
+  xpos -619
+  ypos 520
+ }
+ FilterErode {
+  channels depth
+  size {{parent.size} {parent.size}}
+  name FilterErode3
+  xpos -619
+  ypos 573
+ }
+set N5df6df0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation max
+  name Merge1
+  xpos -726
+  ypos 579
+ }
+push $N78d813d0
+push $N5df6df0
+ Merge2 {
+  inputs 2
+  operation min
+  name Merge2
+  xpos -498
+  ypos 579
+ }
+ Switch {
+  inputs 2
+  which {{parent.size>0}}
+  name Switch1
+  xpos -619
+  ypos 665
+ }
+set N64ff6950 [stack 0]
+push $N78d813d0
+ Dot {
+  name Dot2
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -283
+  ypos 382
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos -283
+  ypos 756
+ }
+ Dissolve {
+  inputs 2+1
+  channels {{{FilterErode3.channels}}}
+  which 1
+  name Dissolve
+  xpos -619
+  ypos 746
+ }
+ Output {
+  name Output1
+  xpos -619
+  ypos 824
+ }
+push $N64ff6950
+ Viewer {
+  frame_range 1009-1082
+  name Viewer1
+  xpos -370
+  ypos 936
+ }
+end_group
+set Ne43f92e0 [stack 0]
+push $Ne43f92e0
+Group {
+ inputs 2
+ name DepthExtrude
+ tile_color 0xff7c27ff
+ selected true
+ xpos -1725
+ ypos 644
+ addUserKnob {20 DepthExtrude l "Depth Extrude"}
+ addUserKnob {41 channel l Channel T Shuffle2.in}
+ addUserKnob {6 viewdepth l "View Depth" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {7 edge l "Adjust Edge" R -10 10}
+ edge -6
+ addUserKnob {14 depth l "Extrude Depth" R 0 100}
+ depth 90
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannelMask l Mask T Dissolve1.maskChannelMask}
+ addUserKnob {20 about l About}
+ addUserKnob {26 abouttext l "        " T "\nCreated by Daniel Bigaj\n\nv1.0\n\nLast revision 15 July 2021"}
+}
+ Input {
+  inputs 0
+  name mask
+  xpos 593
+  ypos -488
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos 812
+  ypos -926
+ }
+set Ndeaf98b0 [stack 0]
+ Shuffle {
+  in depth
+  in2 rgba
+  alpha alpha2
+  name Shuffle2
+  xpos 812
+  ypos -857
+ }
+ Unpremult {
+  name Unpremult1
+  xpos 812
+  ypos -804
+  disable {{parent.edge>0?1:0}}
+ }
+ FilterErode {
+  channels alpha
+  size {{-parent.edge} {-parent.edge}}
+  name ErodeAlpha1
+  xpos 812
+  ypos -778
+ }
+ Premult {
+  name Premult1
+  xpos 812
+  ypos -740
+  disable {{parent.edge>0?1:0}}
+ }
+ Dot {
+  name Dot38
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 846
+  ypos -669
+ }
+set N54df9490 [stack 0]
+ FilterErode {
+  channels alpha
+  size {{-parent.edge} {-parent.edge}}
+  name ErodeAlpha
+  xpos 663
+  ypos -593
+ }
+push $N54df9490
+ Dot {
+  name Dot5
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 962
+  ypos -669
+ }
+set Nea3fc390 [stack 0]
+ FilterErode {
+  channels rgba
+  size {{-parent.depth.w} {-parent.depth.h}}
+  name ErodeDepth
+  xpos 928
+  ypos -639
+ }
+set Na6ef56f0 [stack 0]
+push $Na6ef56f0
+ Blur {
+  inputs 1+1
+  channels rgb
+  size 10
+  name Blur1
+  xpos 928
+  ypos -613
+ }
+push $Nea3fc390
+ Dot {
+  name Dot4
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 1072
+  ypos -669
+ }
+set N242f7b20 [stack 0]
+ Blur {
+  channels rgba
+  size {{-parent.depth.w} {-parent.depth.h}}
+  name BlurDepth
+  xpos 1038
+  ypos -613
+ }
+ Unpremult {
+  name Unpremult2
+  xpos 1038
+  ypos -587
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge1
+  xpos 928
+  ypos -587
+ }
+push $N54df9490
+ Keymix {
+  inputs 3
+  channels rgb
+  invertMask true
+  name Keymix1
+  xpos 812
+  ypos -587
+ }
+push $N242f7b20
+ Dot {
+  name Dot2
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 1142
+  ypos -669
+ }
+ Dot {
+  name Dot1
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 1142
+  ypos -484
+ }
+ Dissolve {
+  inputs 2+1
+  which 1
+  name Dissolve1
+  xpos 812
+  ypos -494
+ }
+set N7728d520 [stack 0]
+push $Ndeaf98b0
+ Dot {
+  name Dot3
+  label "  "
+  note_font "Arial Black"
+  note_font_size 16
+  xpos 1183
+  ypos -922
+ }
+push $N7728d520
+ ShuffleCopy {
+  inputs 2
+  green black
+  blue black
+  alpha black
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out {{{Shuffle2.in}}}
+  out2 rgba
+  name ShuffleCopy1
+  xpos 1149
+  ypos -381
+ }
+ Switch {
+  inputs 2
+  which {{viewdepth}}
+  name Switch1
+  xpos 812
+  ypos -381
+ }
+ Output {
+  name Output1
+  xpos 812
+  ypos -283
+ }
+end_group
+push 0
+Copy {
+ inputs 2
+ from0 depth.Z
+ to0 depth.Z
+ name Copy3
+ selected true
+ xpos -2126
+ ypos 638
+}
