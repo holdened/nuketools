@@ -1,0 +1,55 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+push $cut_paste_input
+Dot {
+ name Dot225
+ selected true
+ xpos -2176
+ ypos 1386
+}
+set N38b588a0 [stack 0]
+Dot {
+ name Dot226
+ selected true
+ xpos -2026
+ ypos 1386
+}
+push $N38b588a0
+Blur {
+ size 100
+ name Blur34
+ selected true
+ xpos -2204
+ ypos 1508
+}
+set N5c84f120 [stack 0]
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge106
+ selected true
+ xpos -2054
+ ypos 1514
+}
+Dot {
+ name Dot216
+ selected true
+ xpos -2026
+ ypos 1740
+}
+push $N5c84f120
+Keymix {
+ name Keymix3
+ label "COPY COLOR"
+ selected true
+ xpos -2204
+ ypos 1592
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge107
+ selected true
+ xpos -2204
+ ypos 1742
+}
