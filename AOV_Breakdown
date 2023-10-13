@@ -1,0 +1,1600 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode20
+ tile_color 0x388e8e00
+ label "<center>Light groups"
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 42
+ note_font_color 0xffffffff
+ selected true
+ xpos -9724
+ ypos -1817
+ appearance Border
+ border_width 20
+ bdwidth 1537
+ bdheight 1672
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode21
+ tile_color 0x388e8e00
+ label <center>Shader
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 42
+ note_font_color 0xffffffff
+ selected true
+ xpos -13350
+ ypos -1842
+ appearance Border
+ border_width 20
+ bdwidth 2885
+ bdheight 1706
+}
+Group {
+ inputs 0
+ name TRN_compTraining_compShotA_character_vivsue_beauty_v0002_2
+ tile_color 0x8eccffff
+ label "\n                          <img src=/software/apps/jabuka/7.186.0/tools/python/2.7/noarch/cortex/10.2/GafferJabukaUI/Resources/Icons/denoised_32.png>"
+ selected true
+ xpos -13502
+ ypos -2264
+ postage_stamp true
+ addUserKnob {20 ieRenderPassLoader l "Render Pass Loader"}
+ addUserKnob {1 ieDisplayName l Name +DISABLED}
+ ieDisplayName character_vivsue_beauty
+ addUserKnob {4 ieEntityVersion l "Entity Version" M {2 1}}
+ addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+ addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+ ieUpdateMode default
+ addUserKnob {26 ieAssetInfoSeparator l "  "}
+ addUserKnob {1 __ieAOVs l __AOVs +INVISIBLE}
+ __ieAOVs "\{\"all/data/position\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"position\", \"loaded\": false\}, \"all/crypto/cryptoObjectID\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cryptoObjectID\", \"loaded\": false\}, \"all/shading/directCoatSpecular\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directCoatSpecular_denoised\", \"loaded\": true\}, \"all/beauty\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"beauty_denoised\", \"loaded\": true\}, \"all/shading/diffuseAlbedo\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"diffuseAlbedo\", \"loaded\": true\}, \"all/shading/refraction\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"refraction_denoised\", \"loaded\": true\}, \"all/shading/indirectDiffuse\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectDiffuse_denoised\", \"loaded\": true\}, \"all/extra/noisiness\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"noisiness\", \"loaded\": false\}, \"all/lightGroup/lightGroupBeauty/15\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/15\", \"loaded\": true\}, \"all/shading/indirectSpecular\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectSpecular_denoised\", \"loaded\": true\}, \"all/id/8\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/8\", \"loaded\": false\}, \"all/lightGroup/lightGroupBeauty/16\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/16\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/11\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/11\", \"loaded\": true\}, \"all/data/motionVectors\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"motionVectors\", \"loaded\": false\}, \"all/lightGroup/lightGroupBeauty/13\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/13\", \"loaded\": true\}, \"all/shading/directSpecular\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directSpecular_denoised\", \"loaded\": true\}, \"all/id/2\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/2\", \"loaded\": false\}, \"all/id/3\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/3\", \"loaded\": false\}, \"all/id/1\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/1\", \"loaded\": false\}, \"all/id/6\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/6\", \"loaded\": false\}, \"all/id/7\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/7\", \"loaded\": false\}, \"all/id/4\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/4\", \"loaded\": false\}, \"all/id/5\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"id/5\", \"loaded\": false\}, \"all/crypto/cryptoAssetID\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cryptoAssetID\", \"loaded\": false\}, \"all/data/pref\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"pref\", \"loaded\": false\}, \"all/shading/indirectEmission\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectEmission_denoised\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/14\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/14\", \"loaded\": true\}, \"all/shading/emission\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"emission_denoised\", \"loaded\": true\}, \"all/shading/cpuTime\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"cpuTime\", \"loaded\": true\}, \"all/data/depth\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"depth\", \"loaded\": false\}, \"all/extra/frameOffsetNext\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"frameOffsetNext\", \"loaded\": false\}, \"all/lightGroup/lightGroupBeauty/10\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/10\", \"loaded\": true\}, \"all/shading/subsurface\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"subsurface_denoised\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/07\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/7\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/04\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/4\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/05\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/5\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/02\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/2\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/03\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/3\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/01\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/1\", \"loaded\": true\}, \"all/shading/directDiffuse\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"directDiffuse_denoised\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/12\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/12\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/06\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/6\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/08\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/8\", \"loaded\": true\}, \"all/lightGroup/lightGroupBeauty/09\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"lightGroupBeauty_denoised/9\", \"loaded\": true\}, \"all/shading/indirectCoatSpecular\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"indirectCoatSpecular_denoised\", \"loaded\": true\}, \"all/data/normal\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"normal\", \"loaded\": false\}, \"all/extra/frameOffsetPrev\": \{\"status\": \"new\", \"linkLoaded\": false, \"version\": \"\", \"updateBehaviour\": \"\", \"originalName\": \"frameOffsetPrev\", \"loaded\": false\}\}"
+ addUserKnob {22 ieReloadReaders l Reload T "JabukaNuke.JNFn.JNFnRenderPass( nuke.thisNode() ).reloadReaders()" +STARTLINE}
+ addUserKnob {3 ieNodeVersion +INVISIBLE}
+ ieNodeVersion 2
+ addUserKnob {4 ieFilterPresets l "Filter Presets" M {All Beauties Deep Denoised Original Data Missing "Version Override" Lock Update}}
+ addUserKnob {6 ieUseDenoisedAov l "Use Denoised AOV" -STARTLINE}
+ ieUseDenoisedAov true
+ addUserKnob {1 ieAovFilter l "AOV Filter" t "Custom pattern to filter aovs in the form of '*denoised*' for filtering all the denoised Aovs.\nMultiple patterns can be used if seperated by space like '*denoised* *data*' will filter all the denoised and data Aovs.\nYou can also filter by status for example \"missing\" for all the missing aovs\".\nkey/value filtering is also supported, for example:\n`version=*` matches any aov that has a version override\n`loaded=True` matches any aov that is currently loaded by the node."}
+ addUserKnob {52 ieAovTree l AOV T "JabukaNuke.UI.Widgets.RenderPassLoaderWidget( nuke.thisNode() )" +STARTLINE}
+ addUserKnob {1 __ieSelectedItems l __selectedItems +INVISIBLE}
+ __ieSelectedItems "\[]"
+ addUserKnob {26 ieAovSeparator l "  "}
+ addUserKnob {3 ieFirstFrame l "Frame Range"}
+ ieFirstFrame 1001
+ addUserKnob {4 ieBeforeFrame l "" -STARTLINE M {hold loop bounce black}}
+ addUserKnob {3 ieLastFrame l "" -STARTLINE}
+ ieLastFrame 1052
+ addUserKnob {4 ieAfterFrame l "" -STARTLINE M {hold loop bounce black}}
+ addUserKnob {4 ieMissingFrame l "Missing Frame" M {error black checkerboard "nearest frame"}}
+ ieMissingFrame black
+ addUserKnob {4 ieBoundingBoxMerge l "Bounding Box Merge" -STARTLINE M {union "B side" "A side"}}
+ ieBoundingBoxMerge "B side"
+ addUserKnob {6 ieDisplayOnlyExistingAOVs l "Display Only Existing AOVs" t "When updating the version we can preverse the AOVs found in the previous version but missing in the new one, or\nonly load the AOVs found in the current version.\nWhen setting this to False, it makes it easier to catch missing AOVs.\nOn the other end, if this is set to True, you are guaranteed that only existing AOVs are displayed in the tree view." +STARTLINE}
+ addUserKnob {20 ieAssetInfo l "Asset Information"}
+ addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> RenderPass\n<B>ieEntityId:</B> 2082023\n<B>ieAssetId:</B> 0\n<B>ieCopyId:</B> 1\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 2079433" n 2}
+ addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+ ieNodeType assetNode
+ addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+ ieEntityType RenderPass
+ addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+ ieEntityId 2082023
+ addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+ addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+ ieCopyId 2
+ addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+ addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+ ieLinkedEntities "\[]"
+ addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+ ieBundleId 2079433
+ addUserKnob {20 AdvancedEG n -1}
+ addUserKnob {3 ieBundleVersion l "<span style=\"color:#32CD32\">Bundle Version (Latest)</span>" t "This bundle version is the\nlatest approved and up-to-date." +DISABLED}
+ ieBundleVersion 8
+ addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+ ieVersionCreationDate "02-10-2021 22:37:45"
+ addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+ ieVersionCreator murrays
+ addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+ addUserKnob {32 ieSourceScene l "Open Source Scene" +STARTLINE}
+ addUserKnob {26 ieSeparator l "  "}
+}
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/beauty_denoised/beauty_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read1
+ }
+set N1f9db9f0 [stack 0]
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/indirectCoatSpecular_denoised/indirectCoatSpecular_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read29
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy55
+ }
+add_layer {indirectCoatSpecular indirectCoatSpecular.red indirectCoatSpecular.green indirectCoatSpecular.blue indirectCoatSpecular.alpha}
+ Shuffle {
+  out indirectCoatSpecular
+  name Shuffle29
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/9/lightGroupBeauty_denoised9.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read28
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy53
+ }
+add_layer {lightGroupBeauty_9 lightGroupBeauty_9.red lightGroupBeauty_9.green lightGroupBeauty_9.blue lightGroupBeauty_9.alpha}
+ Shuffle {
+  out lightGroupBeauty_9
+  name Shuffle28
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/refraction_denoised/refraction_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read27
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy51
+ }
+add_layer {refraction refraction.red refraction.green refraction.blue refraction.alpha}
+ Shuffle {
+  out refraction
+  name Shuffle27
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/12/lightGroupBeauty_denoised12.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read26
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy49
+ }
+add_layer {lightGroupBeauty_12 lightGroupBeauty_12.red lightGroupBeauty_12.green lightGroupBeauty_12.blue lightGroupBeauty_12.alpha}
+ Shuffle {
+  out lightGroupBeauty_12
+  name Shuffle26
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/directDiffuse_denoised/directDiffuse_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read25
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy47
+ }
+add_layer {directDiffuse directDiffuse.red directDiffuse.green directDiffuse.blue directDiffuse.alpha}
+ Shuffle {
+  out directDiffuse
+  name Shuffle25
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/1/lightGroupBeauty_denoised1.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read24
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy45
+ }
+add_layer {lightGroupBeauty_1 lightGroupBeauty_1.red lightGroupBeauty_1.green lightGroupBeauty_1.blue lightGroupBeauty_1.alpha}
+ Shuffle {
+  out lightGroupBeauty_1
+  name Shuffle24
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/3/lightGroupBeauty_denoised3.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read23
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy43
+ }
+add_layer {lightGroupBeauty_3 lightGroupBeauty_3.red lightGroupBeauty_3.green lightGroupBeauty_3.blue lightGroupBeauty_3.alpha}
+ Shuffle {
+  out lightGroupBeauty_3
+  name Shuffle23
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/2/lightGroupBeauty_denoised2.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read22
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy41
+ }
+add_layer {lightGroupBeauty_2 lightGroupBeauty_2.red lightGroupBeauty_2.green lightGroupBeauty_2.blue lightGroupBeauty_2.alpha}
+ Shuffle {
+  out lightGroupBeauty_2
+  name Shuffle22
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/5/lightGroupBeauty_denoised5.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read21
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy39
+ }
+add_layer {lightGroupBeauty_5 lightGroupBeauty_5.red lightGroupBeauty_5.green lightGroupBeauty_5.blue lightGroupBeauty_5.alpha}
+ Shuffle {
+  out lightGroupBeauty_5
+  name Shuffle21
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/4/lightGroupBeauty_denoised4.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read20
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy37
+ }
+add_layer {lightGroupBeauty_4 lightGroupBeauty_4.red lightGroupBeauty_4.green lightGroupBeauty_4.blue lightGroupBeauty_4.alpha}
+ Shuffle {
+  out lightGroupBeauty_4
+  name Shuffle20
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/7/lightGroupBeauty_denoised7.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read19
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy35
+ }
+add_layer {lightGroupBeauty_7 lightGroupBeauty_7.red lightGroupBeauty_7.green lightGroupBeauty_7.blue lightGroupBeauty_7.alpha}
+ Shuffle {
+  out lightGroupBeauty_7
+  name Shuffle19
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/6/lightGroupBeauty_denoised6.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read18
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy33
+ }
+add_layer {lightGroupBeauty_6 lightGroupBeauty_6.red lightGroupBeauty_6.green lightGroupBeauty_6.blue lightGroupBeauty_6.alpha}
+ Shuffle {
+  out lightGroupBeauty_6
+  name Shuffle18
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/cpuTime/cpuTime.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read17
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy31
+ }
+add_layer {cpuTime cpuTime.red cpuTime.green cpuTime.blue cpuTime.alpha}
+ Shuffle {
+  out cpuTime
+  name Shuffle17
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/emission_denoised/emission_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read16
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy29
+ }
+add_layer {emission emission.red emission.green emission.blue emission.alpha}
+ Shuffle {
+  out emission
+  name Shuffle16
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/directCoatSpecular_denoised/directCoatSpecular_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read15
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy27
+ }
+add_layer {directCoatSpecular directCoatSpecular.red directCoatSpecular.green directCoatSpecular.blue directCoatSpecular.alpha}
+ Shuffle {
+  out directCoatSpecular
+  name Shuffle15
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/subsurface_denoised/subsurface_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read14
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy25
+ }
+add_layer {subsurface subsurface.red subsurface.green subsurface.blue subsurface.alpha}
+ Shuffle {
+  out subsurface
+  name Shuffle14
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/indirectSpecular_denoised/indirectSpecular_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read13
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy23
+ }
+add_layer {indirectSpecular indirectSpecular.red indirectSpecular.green indirectSpecular.blue indirectSpecular.alpha}
+ Shuffle {
+  out indirectSpecular
+  name Shuffle13
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/directSpecular_denoised/directSpecular_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read12
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy21
+ }
+add_layer {directSpecular directSpecular.red directSpecular.green directSpecular.blue directSpecular.alpha}
+ Shuffle {
+  out directSpecular
+  name Shuffle12
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/13/lightGroupBeauty_denoised13.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read11
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy19
+ }
+add_layer {lightGroupBeauty_13 lightGroupBeauty_13.red lightGroupBeauty_13.green lightGroupBeauty_13.blue lightGroupBeauty_13.alpha}
+ Shuffle {
+  out lightGroupBeauty_13
+  name Shuffle11
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/10/lightGroupBeauty_denoised10.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read10
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy17
+ }
+add_layer {lightGroupBeauty_10 lightGroupBeauty_10.red lightGroupBeauty_10.green lightGroupBeauty_10.blue lightGroupBeauty_10.alpha}
+ Shuffle {
+  out lightGroupBeauty_10
+  name Shuffle10
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/11/lightGroupBeauty_denoised11.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read9
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy15
+ }
+add_layer {lightGroupBeauty_11 lightGroupBeauty_11.red lightGroupBeauty_11.green lightGroupBeauty_11.blue lightGroupBeauty_11.alpha}
+ Shuffle {
+  out lightGroupBeauty_11
+  name Shuffle9
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/16/lightGroupBeauty_denoised16.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read8
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy13
+ }
+add_layer {lightGroupBeauty_16 lightGroupBeauty_16.red lightGroupBeauty_16.green lightGroupBeauty_16.blue lightGroupBeauty_16.alpha}
+ Shuffle {
+  out lightGroupBeauty_16
+  name Shuffle8
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/14/lightGroupBeauty_denoised14.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read7
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy11
+ }
+add_layer {lightGroupBeauty_14 lightGroupBeauty_14.red lightGroupBeauty_14.green lightGroupBeauty_14.blue lightGroupBeauty_14.alpha}
+ Shuffle {
+  out lightGroupBeauty_14
+  name Shuffle7
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/15/lightGroupBeauty_denoised15.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read6
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy9
+ }
+add_layer {lightGroupBeauty_15 lightGroupBeauty_15.red lightGroupBeauty_15.green lightGroupBeauty_15.blue lightGroupBeauty_15.alpha}
+ Shuffle {
+  out lightGroupBeauty_15
+  name Shuffle6
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/indirectDiffuse_denoised/indirectDiffuse_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read5
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy7
+ }
+add_layer {indirectDiffuse indirectDiffuse.red indirectDiffuse.green indirectDiffuse.blue indirectDiffuse.alpha}
+ Shuffle {
+  out indirectDiffuse
+  name Shuffle5
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/lightGroupBeauty_denoised/8/lightGroupBeauty_denoised8.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read4
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy5
+ }
+add_layer {lightGroupBeauty_8 lightGroupBeauty_8.red lightGroupBeauty_8.green lightGroupBeauty_8.blue lightGroupBeauty_8.alpha}
+ Shuffle {
+  out lightGroupBeauty_8
+  name Shuffle4
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/diffuseAlbedo/diffuseAlbedo.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read3
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy3
+ }
+add_layer {diffuseAlbedo diffuseAlbedo.red diffuseAlbedo.green diffuseAlbedo.blue diffuseAlbedo.alpha}
+ Shuffle {
+  out diffuseAlbedo
+  name Shuffle3
+ }
+push $N1f9db9f0
+ Read {
+  inputs 0
+  file_type exr
+  file /data/jobs/TRN/sequences/compTraining/shots/TRN-compTraining-compShotA/.jabuka/renderPassLibrary/lighting/character_vivsue_beauty/versions/0002/aovs/indirectEmission_denoised/indirectEmission_denoised.####.exr
+  first {{parent.ieFirstFrame}}
+  before {{parent.ieBeforeFrame}}
+  last {{parent.ieLastFrame}}
+  after {{parent.ieAfterFrame}}
+  on_error {{parent.ieMissingFrame}}
+  name Read2
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy1
+ }
+add_layer {indirectEmission indirectEmission.red indirectEmission.green indirectEmission.blue indirectEmission.alpha}
+ Shuffle {
+  out indirectEmission
+  name Shuffle2
+ }
+push $N1f9db9f0
+add_layer {beauty beauty.red beauty.green beauty.blue beauty.alpha}
+ Shuffle {
+  out beauty
+  name Shuffle1
+ }
+ Copy {
+  inputs 2
+  channels indirectEmission
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy2
+ }
+ Copy {
+  inputs 2
+  channels diffuseAlbedo
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy4
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_8
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy6
+ }
+ Copy {
+  inputs 2
+  channels indirectDiffuse
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy8
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_15
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy10
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_14
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy12
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_16
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy14
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_11
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy16
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_10
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy18
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_13
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy20
+ }
+ Copy {
+  inputs 2
+  channels directSpecular
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy22
+ }
+ Copy {
+  inputs 2
+  channels indirectSpecular
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy24
+ }
+ Copy {
+  inputs 2
+  channels subsurface
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy26
+ }
+ Copy {
+  inputs 2
+  channels directCoatSpecular
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy28
+ }
+ Copy {
+  inputs 2
+  channels emission
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy30
+ }
+ Copy {
+  inputs 2
+  channels cpuTime
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy32
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_6
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy34
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_7
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy36
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_4
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy38
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_5
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy40
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_2
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy42
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_3
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy44
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_1
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy46
+ }
+ Copy {
+  inputs 2
+  channels directDiffuse
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy48
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_12
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy50
+ }
+ Copy {
+  inputs 2
+  channels refraction
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy52
+ }
+ Copy {
+  inputs 2
+  channels lightGroupBeauty_9
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy54
+ }
+ Copy {
+  inputs 2
+  channels indirectCoatSpecular
+  bbox {{parent.ieBoundingBoxMerge}}
+  name Copy56
+ }
+ Output {
+  name Output1
+ }
+end_group
+Dot {
+ name Dot72
+ selected true
+ xpos -13468
+ ypos -1870
+}
+Unpremult {
+ channels all
+ name Unpremult1
+ selected true
+ xpos -13502
+ ypos -1810
+}
+Dot {
+ name Dot73
+ selected true
+ xpos -13468
+ ypos -1723
+}
+set N204c27c0 [stack 0]
+Dot {
+ name Dot74
+ selected true
+ xpos -13031
+ ypos -1723
+}
+set N204c7860 [stack 0]
+Dot {
+ name Dot75
+ selected true
+ xpos -12467
+ ypos -1723
+}
+set N204cc880 [stack 0]
+Dot {
+ name Dot76
+ selected true
+ xpos -12148
+ ypos -1723
+}
+set N204d18a0 [stack 0]
+Dot {
+ name Dot77
+ selected true
+ xpos -11897
+ ypos -1723
+}
+set N204d6960 [stack 0]
+Dot {
+ name Dot78
+ selected true
+ xpos -11694
+ ypos -1723
+}
+set N204db940 [stack 0]
+Dot {
+ name Dot79
+ selected true
+ xpos -11472
+ ypos -1723
+}
+set N204e0920 [stack 0]
+Dot {
+ name Dot117
+ selected true
+ xpos -11253
+ ypos -1723
+}
+set N204e5990 [stack 0]
+Dot {
+ name Dot118
+ selected true
+ xpos -11065
+ ypos -1723
+}
+set N204ea9b0 [stack 0]
+Dot {
+ name Dot119
+ selected true
+ xpos -10877
+ ypos -1723
+}
+set N204ef9d0 [stack 0]
+Dot {
+ name Dot120
+ selected true
+ xpos -10679
+ ypos -1723
+}
+set N204f49f0 [stack 0]
+Dot {
+ name Dot86
+ selected true
+ xpos -10222
+ ypos -1723
+}
+set N204f9a10 [stack 0]
+Dot {
+ name Dot88
+ selected true
+ xpos -9510
+ ypos -1722
+}
+set N204fea20 [stack 0]
+Dot {
+ name Dot89
+ selected true
+ xpos -9226
+ ypos -1722
+}
+set N20503ae0 [stack 0]
+Dot {
+ name Dot90
+ selected true
+ xpos -8990
+ ypos -1721
+}
+set N20508b00 [stack 0]
+Dot {
+ name Dot121
+ selected true
+ xpos -8738
+ ypos -1721
+}
+set N2050db20 [stack 0]
+Dot {
+ name Dot124
+ selected true
+ xpos -8452
+ ypos -1721
+}
+set N20512b40 [stack 0]
+Dot {
+ name Dot94
+ selected true
+ xpos -7765
+ ypos -1722
+}
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 alpha
+ fromInput2 {{0} B}
+ mappings "4 black -1 -1 rgba.red 0 0 black -1 -1 rgba.green 0 1 black -1 -1 rgba.blue 0 2 rgba.alpha 0 0 rgba.alpha 0 3"
+ name Shuffle40
+ label "\[value in1]"
+ note_font "Verdana Bold"
+ selected true
+ xpos -7799
+ ypos -1613
+}
+push $N204f9a10
+Dot {
+ name Dot129
+ selected true
+ xpos -10222
+ ypos -153
+}
+push $N204f49f0
+Shuffle {
+ in refraction
+ name Shuffle69
+ label "\[value in]"
+ selected true
+ xpos -10713
+ ypos -1646
+}
+push $N204ef9d0
+Shuffle {
+ in subsurface
+ name Shuffle68
+ label "\[value in]"
+ selected true
+ xpos -10911
+ ypos -1646
+}
+push $N204ea9b0
+Shuffle {
+ in indirectCoatSpecular
+ name Shuffle67
+ label "\[value in]"
+ selected true
+ xpos -11099
+ ypos -1643
+}
+push $N204e5990
+Shuffle {
+ in directCoatSpecular
+ name Shuffle66
+ label "\[value in]"
+ selected true
+ xpos -11287
+ ypos -1643
+}
+push $N204e0920
+Shuffle {
+ in indirectEmission
+ name Shuffle63
+ label "\[value in]"
+ selected true
+ xpos -11506
+ ypos -1641
+}
+push $N204db940
+Shuffle {
+ in emission
+ name Shuffle62
+ label "\[value in]"
+ selected true
+ xpos -11728
+ ypos -1643
+}
+push $N204d6960
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 indirectSpecular
+ fromInput2 {{0} B}
+ mappings "4 indirectSpecular.red 0 0 rgba.red 0 0 indirectSpecular.green 0 1 rgba.green 0 1 indirectSpecular.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+ name Shuffle30
+ label "\[value in1]"
+ note_font "Verdana Bold"
+ selected true
+ xpos -11931
+ ypos -1640
+}
+push $N204d18a0
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 directSpecular
+ fromInput2 {{0} B}
+ mappings "4 directSpecular.red 0 0 rgba.red 0 0 directSpecular.green 0 1 rgba.green 0 1 directSpecular.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+ name Shuffle33
+ label "\[value in1]"
+ note_font "Verdana Bold"
+ selected true
+ xpos -12182
+ ypos -1637
+}
+push $N204c27c0
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 diffuseAlbedo
+ fromInput2 {{0} B}
+ mappings "4 diffuseAlbedo.red 0 0 rgba.red 0 0 diffuseAlbedo.green 0 1 rgba.green 0 1 diffuseAlbedo.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+ name Shuffle35
+ label "\[value in1]"
+ note_font "Verdana Bold"
+ selected true
+ xpos -13502
+ ypos -1651
+}
+Dot {
+ name Dot80
+ selected true
+ xpos -13468
+ ypos -1602
+}
+set N205ace20 [stack 0]
+Dot {
+ name Dot81
+ selected true
+ xpos -12747
+ ypos -1602
+}
+set N205b1d10 [stack 0]
+push $N204cc880
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 indirectDiffuse
+ fromInput2 {{0} B}
+ mappings "4 indirectDiffuse.red 0 0 rgba.red 0 0 indirectDiffuse.green 0 1 rgba.green 0 1 indirectDiffuse.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+ name Shuffle34
+ label "\[value in1]"
+ note_font "Verdana Bold"
+ selected true
+ xpos -12501
+ ypos -1646
+}
+MergeExpression {
+ inputs 2
+ expr0 A.red!=0?B.red/A.red:0
+ expr1 A.green!=0?B.green/A.green:0
+ expr2 A.blue!=0?B.blue/A.blue:0
+ name MergeExpression4
+ selected true
+ xpos -12501
+ ypos -1606
+}
+push $N205b1d10
+Dot {
+ name Dot82
+ selected true
+ xpos -12747
+ ypos -745
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge22
+ selected true
+ xpos -12501
+ ypos -748
+}
+push $N205ace20
+Dot {
+ name Dot83
+ selected true
+ xpos -13271
+ ypos -1562
+}
+set N205e3820 [stack 0]
+push $N204c7860
+Shuffle2 {
+ fromInput1 {{0} B}
+ in1 directDiffuse
+ fromInput2 {{0} B}
+ mappings "4 directDiffuse.red 0 0 rgba.red 0 0 directDiffuse.green 0 1 rgba.green 0 1 directDiffuse.blue 0 2 rgba.blue 0 2 black -1 -1 rgba.alpha 0 3"
+ name Shuffle36
+ label "\[value in1]"
+ note_font "Verdana Bold"
+ selected true
+ xpos -13065
+ ypos -1638
+}
+MergeExpression {
+ inputs 2
+ expr0 A.red!=0?B.red/A.red:0
+ expr1 A.green!=0?B.green/A.green:0
+ expr2 A.blue!=0?B.blue/A.blue:0
+ name MergeExpression3
+ selected true
+ xpos -13065
+ ypos -1566
+}
+push $N205e3820
+Dot {
+ name Dot84
+ selected true
+ xpos -13271
+ ypos -746
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge20
+ selected true
+ xpos -13065
+ ypos -750
+}
+Dot {
+ name Dot85
+ selected true
+ xpos -13031
+ ypos -25
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge21
+ selected true
+ xpos -12501
+ ypos -28
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge28
+ selected true
+ xpos -12182
+ ypos -28
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge29
+ selected true
+ xpos -11931
+ ypos -28
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge25
+ selected true
+ xpos -11728
+ ypos -28
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge26
+ selected true
+ xpos -11506
+ ypos -28
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge27
+ selected true
+ xpos -11287
+ ypos -28
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge30
+ selected true
+ xpos -11099
+ ypos -28
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge31
+ selected true
+ xpos -10911
+ ypos -28
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge35
+ selected true
+ xpos -10713
+ ypos -28
+}
+Dot {
+ name Dot127
+ selected true
+ xpos -10407
+ ypos -24
+}
+MergeExpression {
+ inputs 2
+ expr0 A.red!=0?B.red/A.red:0
+ expr1 A.green!=0?B.green/A.green:0
+ expr2 A.blue!=0?B.blue/A.blue:0
+ name MergeExpression5
+ selected true
+ xpos -10256
+ ypos -28
+}
+Dot {
+ name Dot126
+ selected true
+ xpos -9689
+ ypos -24
+}
+set N206c3700 [stack 0]
+Dot {
+ name Dot87
+ selected true
+ xpos -9395
+ ypos -24
+}
+set N206c8780 [stack 0]
+Dot {
+ name Dot122
+ selected true
+ xpos -9159
+ ypos -24
+}
+set N206cd700 [stack 0]
+Dot {
+ name Dot123
+ selected true
+ xpos -8907
+ ypos -24
+}
+set N206d27c0 [stack 0]
+Dot {
+ name Dot125
+ selected true
+ xpos -8621
+ ypos -24
+}
+push $N20512b40
+Shuffle {
+ in lightGroupBeauty_2
+ name Shuffle44
+ label "\[value in]"
+ selected true
+ xpos -8486
+ ypos -1604
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Merge36
+ selected true
+ xpos -8486
+ ypos 122
+}
+push $N206d27c0
+push $N2050db20
+Shuffle {
+ in lightGroupBeauty_5
+ name Shuffle47
+ label "\[value in]"
+ selected true
+ xpos -8772
+ ypos -1605
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Merge19
+ selected true
+ xpos -8772
+ ypos 122
+}
+push $N206cd700
+push $N20508b00
+Shuffle {
+ in lightGroupBeauty_4
+ name Shuffle46
+ label "\[value in]"
+ selected true
+ xpos -9024
+ ypos -1604
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Merge16
+ selected true
+ xpos -9024
+ ypos 122
+}
+push $N206c8780
+push $N20503ae0
+Shuffle {
+ in lightGroupBeauty_3
+ name Shuffle45
+ label "\[value in]"
+ selected true
+ xpos -9260
+ ypos -1605
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Merge33
+ selected true
+ xpos -9260
+ ypos 122
+}
+push $N206c3700
+push $N204fea20
+Shuffle {
+ in lightGroupBeauty_1
+ name Shuffle32
+ label "\[value in]"
+ selected true
+ xpos -9544
+ ypos -1600
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ Achannels rgb
+ Bchannels rgb
+ output rgb
+ name Merge32
+ selected true
+ xpos -9544
+ ypos 118
+}
+Dot {
+ name Dot91
+ selected true
+ xpos -9510
+ ypos 265
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge34
+ selected true
+ xpos -9260
+ ypos 262
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge23
+ selected true
+ xpos -9024
+ ypos 262
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge24
+ selected true
+ xpos -8772
+ ypos 262
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge37
+ selected true
+ xpos -8486
+ ypos 262
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy7
+ selected true
+ xpos -7799
+ ypos 256
+}
+Premult {
+ channels all
+ name Premult2
+ selected true
+ xpos -7799
+ ypos 370
+}
+add_layer {specular_direct specular_direct.red specular_direct.green specular_direct.blue}
+Remove {
+ operation keep
+ channels rgba
+ channels2 depth
+ channels4 specular_direct
+ name Remove5
+ selected true
+ xpos -7799
+ ypos 494
+}
