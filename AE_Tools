@@ -1,0 +1,3133 @@
+set cut_paste_input [stack 0]
+version 13.2 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x60a06ff
+ label "<center> AE TOOLS"
+ note_font_size 42
+ selected true
+ xpos -755
+ ypos 330
+ bdwidth 255
+ bdheight 1040
+}
+push $cut_paste_input
+Group {
+ name AE_Lens_Diffusion
+ tile_color 0xff873fff
+ selected true
+ xpos -677
+ ypos 457
+ addUserKnob {20 User}
+ addUserKnob {26 text l "" +STARTLINE T "<font><b>AE Lens Diffusion</b><i>  (temp)"}
+ addUserKnob {41 useGPUIfAvailable l "Use GPU if available" T Convolve4.useGPUIfAvailable}
+ addUserKnob {26 ""}
+ addUserKnob {41 falloff l Falloff T ExpGlowV1.falloff}
+ addUserKnob {41 blur_amount l Size T ExpGlowV1.blur_amount}
+ addUserKnob {41 mix T Grade32.mix}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Blur21.channels}
+ addUserKnob {41 size T Blur21.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 which T Dissolve1.which}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -703
+  ypos 420
+ }
+ Dot {
+  name Dot1
+  xpos -922
+  ypos 424
+ }
+set N91cff060 [stack 0]
+ AdjBBox {
+  numpixels 45
+  name AdjBBox1
+  xpos -956
+  ypos 506
+ }
+ Reformat {
+  inputs 0
+  format "512 512 0 0 512 512 1 square_512"
+  name Reformat5
+  xpos -908
+  ypos -254
+ }
+ Dot {
+  name Dot106
+  xpos -874
+  ypos -163
+ }
+set N35ffe630 [stack 0]
+ Dot {
+  name Dot108
+  xpos -708
+  ypos -163
+ }
+ Flare {
+  position {256 256}
+  radius {99 100 101}
+  size_mult 0.039
+  inner_color 1
+  outer_falloff 10
+  inner_falloff 10
+  name Flare2
+  xpos -742
+  ypos -113
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+  name Shuffle13
+  xpos -742
+  ypos 87
+ }
+set N95bfa310 [stack 0]
+push 0
+push $N35ffe630
+ Flare {
+  position {256 256}
+  radius {99 100 101}
+  size_mult 0.009
+  inner_color 1
+  name Flare3
+  xpos -908
+  ypos -113
+ }
+ Grade {
+  white 100
+  black_clamp false
+  name Grade31
+  xpos -908
+  ypos -35
+ }
+ ExpGlowV {
+  name ExpGlowV1
+  label "Exponential Glow V"
+  note_font "Bitstream Vera Sans"
+  xpos -908
+  ypos 6
+  falloff 1.11
+  intensity 8.25
+  blur_amount 0.2
+  add_source true
+  Scriplet_Info "user COMP ExpGlowV03"
+ }
+ Grade {
+  white 0.52
+  gamma 0.85
+  black_clamp false
+  name Grade32
+  xpos -908
+  ypos 63
+ }
+ Grade {
+  white {0.760018 0.778621 1 1}
+  white_panelDropped true
+  multiply 1.5
+  black_clamp false
+  name Grade34
+  xpos -908
+  ypos 95
+ }
+set N73d84910 [stack 0]
+push $N35ffe630
+ Dot {
+  name Dot107
+  xpos -1074
+  ypos -163
+ }
+ Flare {
+  position {256 256}
+  radius {99 100 101}
+  size_mult 0.009
+  inner_color 1
+  name Flare1
+  xpos -1108
+  ypos -110
+ }
+ Grade {
+  white 200
+  black_clamp false
+  name Grade28
+  xpos -1108
+  ypos 56
+ }
+push $N95bfa310
+ Dot {
+  name Dot109
+  xpos -708
+  ypos 166
+ }
+push $N73d84910
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge17
+  xpos -908
+  ypos 162
+ }
+ Merge2 {
+  inputs 2
+  name Merge18
+  xpos -1108
+  ypos 162
+ }
+ Dissolve {
+  inputs 3+1
+  channels rgba
+  name Dissolve1
+  xpos -1108
+  ypos 224
+ }
+ Blur {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  size 2.3
+  name Blur21
+  xpos -1108
+  ypos 261
+ }
+push $N91cff060
+ Convolve2 {
+  inputs 2
+  channels rgb
+  use_input_channels true
+  name Convolve4
+  xpos -1108
+  ypos 420
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -1108
+  ypos 506
+ }
+set N75987310 [stack 0]
+ Output {
+  name Output1
+  xpos -1108
+  ypos 635
+ }
+push $N75987310
+ Viewer {
+  frame_range 1001-1039
+  viewerProcess "Show_LUT_CDL (rec709)"
+  name Viewer1
+  xpos -1539
+  ypos 276
+ }
+end_group
+push $cut_paste_input
+NoOp {
+ name AE_ScaleNodes
+ selected true
+ xpos -673
+ ypos 501
+ addUserKnob {20 User}
+ addUserKnob {26 textHeader l "" +STARTLINE T "<h3><i>AE</i> <font size = 50>\[Scale]</font> <i>NODES"}
+ addUserKnob {26 _1 l "" +STARTLINE T " "}
+ addUserKnob {2 getFile l "menu.py path" t "Browse and select the Menu.py file in your system."}
+ addUserKnob {1 scaleNodesCode +INVISIBLE}
+ scaleNodesCode "######## AE_ScaleNodes #### START ##################################################\n\n#### IMPORT MODULES ####\nfrom time import sleep\nfrom threading import Thread\n\n\n#### RIGHT #####\ndef scaleRight():\n\n    nodesList = nuke.selectedNodes()\n    nodesList.reverse()\n    pivot = nodesList\[0]\['xpos'].value()\n    \n    for p in range(10):        \n\n        for n in nodesList:\n            node = n\n            delta = abs(node\['xpos'].value()-pivot)\n            node.setXpos(int(delta/50)+int(node\['xpos'].value()))\n\n        sleep(0.001)\n        print \"\"        \n\n\n\n\n#### Left #####\ndef scaleLeft():\n\n    nodesList = nuke.selectedNodes()\n    nodesList.reverse()\n    pivot = nodesList\[0]\['xpos'].value()\n    \n    for p in range(10):        \n\n        for n in nodesList:\n            node = n\n            delta = abs(node\['xpos'].value()-pivot)\n            node.setXpos(int(-delta/50)+(int(node\['xpos'].value())))\n\n        sleep(0.001)\n        print \"\"  \n\n\n\n#### Up #####\ndef scaleUp():\n\n    nodesList = nuke.selectedNodes()\n    nodesList.reverse()\n    pivot = nodesList\[0]\['ypos'].value()\n    \n    for p in range(10):        \n\n        for n in nodesList:\n            node = n\n            delta = abs(node\['ypos'].value()-pivot)\n            node.setYpos(int(-delta/50)+(int(node\['ypos'].value())))\n\n        sleep(0.001)\n        print \"\"  \n\n\n#### Down #####\ndef scaleDown():\n\n    nodesList = nuke.selectedNodes()\n    nodesList.reverse()\n    pivot = nodesList\[0]\['ypos'].value()\n    \n    for p in range(10):        \n\n        for n in nodesList:\n            node = n\n            delta = abs(node\['ypos'].value()-pivot)\n            node.setYpos(int(delta/50)+(int(node\['ypos'].value())))\n\n        sleep(0.001)\n        print \"\"  \n\n#### Exec Scale RIGHT ####\ndef execScaleRight():\n    countdown_thread = threading.Thread(target = scaleRight)\n    countdown_thread.start()\n\n#### Exec Scale LEFT ####\ndef execScaleLeft():\n    countdown_thread = threading.Thread(target = scaleLeft)\n    countdown_thread.start()\n\n#### Exec Scale UP ####\ndef execScaleUP():\n    countdown_thread = threading.Thread(target = scaleUp)\n    countdown_thread.start()\n\n#### Exec Scale DOWN ####\ndef execScaleDOWN():\n    countdown_thread = threading.Thread(target = scaleDown)\n    countdown_thread.start()\n\n\n##### Assign Shortcuts ######\n\n\nutilitiesMenu.addCommand(\"Edit/Node/AE_scaleNodes/SC_Right\", 'execScaleRight()', \"SCALENODES_KEY_RIGHT\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_scaleNodes/SC_Left\", 'execScaleLeft()', \"SCALENODES_KEY_LEFT\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_scaleNodes/SC_Up\", 'execScaleUP()', \"SCALENODES_KEY_UP\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_scaleNodes/SC_Down\", 'execScaleDOWN()', \"SCALENODES_KEY_DOWN\", shortcutContext=2)\n\n\n\n######## AE_ScaleNodes #### END ####################################################"
+ addUserKnob {26 ""}
+ addUserKnob {22 addScaleNodes l "<font  color = orange><b>Add Scale Nodes" T "scaleNodesCode = nuke.thisNode()\['scaleNodesCode'].value()\n\nuserRight = nuke.thisNode()\['rightKey'].value()\nuserLeft = nuke.thisNode()\['leftKey'].value()\nuserUp = nuke.thisNode()\['upKey'].value()\nuserDown = nuke.thisNode()\['downKey'].value()\n\nscaleNodesCode = scaleNodesCode.replace(\"SCALENODES_KEY_RIGHT\", userRight)\nscaleNodesCode = scaleNodesCode.replace(\"SCALENODES_KEY_LEFT\", userLeft)\nscaleNodesCode = scaleNodesCode.replace(\"SCALENODES_KEY_UP\", userUp)\nscaleNodesCode = scaleNodesCode.replace(\"SCALENODES_KEY_DOWN\", userDown)\n\nfile_path = nuke.thisNode()\['getFile'].value()\n\nwith open(file_path, \"a\") as file:\n    file.write('\\n' + scaleNodesCode)\n\nnuke.message(\"AE_ScaleNodes Function added to the menu.py file\\nplease restart Nuke to be able to use the function\")" +STARTLINE}
+ addUserKnob {22 clearCode l "<b>Clear Code" -STARTLINE T "file_path = nuke.thisNode()\['getFile'].value()\n\nstart_context = \"######## AE_ScaleNodes #### START ##################################################\"\nend_context = \"######## AE_ScaleNodes #### END ####################################################\"\n\n# Open the original file for reading and writing\nwith open(file_path, \"r+\") as file:\n    # Read the file and store its contents as a list of lines\n    lines = file.readlines()\n    # Reset the file pointer to the beginning\n    file.seek(0)\n    # Traverse the list of lines and remove the lines between the start and end context\n    inside_range = False\n    for line in lines:\n        if start_context in line:\n            inside_range = True\n        elif end_context in line:\n            inside_range = False\n            continue\n        if not inside_range:\n            file.write(line)\n    # Truncate the file at the current position (i.e. remove any extra lines)\n    file.truncate()\n\nnuke.message(\"AE_ScaleNodes Function removed from the menu.py file\\nplease restart Nuke to be able to see the result\")"}
+ addUserKnob {26 ""}
+ addUserKnob {20 scaleNodesGRP l "Scale Nodes Keys" n 1}
+ addUserKnob {1 rightKey l "<b><font color = orange>Right"}
+ rightKey shift+right
+ addUserKnob {1 leftKey l "<b><font color = orange>Left" -STARTLINE}
+ leftKey shift+left
+ addUserKnob {1 upKey l "<b><font color = orange>Up" -STARTLINE}
+ upKey shift+up
+ addUserKnob {1 downKey l "<b><font color = orange>Down" -STARTLINE}
+ downKey shift+down
+ addUserKnob {22 updateButton l "<b><font color = green>Update Keys" T "nuke.thisNode()\['clearCode'].execute()\nnuke.thisNode()\['addScaleNodes'].execute()\n\nnuke.message(\"AE_ScaleNodes Function updated in the menu.py file\\nplease restart Nuke to be able to see the result\")" +STARTLINE}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {26 textTail l "" +STARTLINE T "<b><i><font color = gray>.: by Ali Ehtemami"}
+ addUserKnob {20 tab l Info}
+ addUserKnob {26 text l "" +STARTLINE T "Instructions on how to use this tool:\n\n1. Click on the browser icon and locate the \"menu.py\" file in your .nuke folder.\n2. Set the hotkeys to your preference.\n3. Click on \"Add Scale Nodes\".\n4. The first node you select in the DAG will serve as the pivot for the node scale function.\n5. Use the hotkeys to scale right, left, up, and down.\n\nAdditionally:\n\n- You can remove the AE_Scale_Nodes code from the \"menu.py\" file by clicking on the \"Clear Code\" button.\n- You can update the hotkeys by clicking on the \"Update\" button.\n\nSpecial thanks to Mateusz Krząstek for fixing some DAG animation errors.\n\naliehtemami.com\nali.ehtemami1@gmail.com"}
+}
+Group {
+ inputs 0
+ name AE_Normal_Relight
+ tile_color 0x1eb47dff
+ label "X | \[value Degree.rx]\nY | \[value Degree.ry]"
+ note_font Verdana
+ selected true
+ xpos -676
+ ypos 575
+ addUserKnob {20 User}
+ addUserKnob {3 existsmask +INVISIBLE}
+ existsmask {{"\[exists input1]"}}
+ addUserKnob {26 headtxt l "" +STARTLINE T "<p><b> <font size=7 color=#06AE6F>AE Normal Relight |<font size=4 color=#06AE6F> 360 Degree Mask\n\n"}
+ addUserKnob {26 text l "" +STARTLINE T "<b><font size=4>:: by Ali Ehtemami"}
+ addUserKnob {6 color_rgb_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {41 channel3 l channels T Expselect.channel3}
+ addUserKnob {26 ""}
+ addUserKnob {41 rx l "Rotation X" T Degree.rx}
+ addUserKnob {41 ry l "Rotation Y" T Degree.ry}
+ addUserKnob {26 ""}
+ addUserKnob {41 white l gain T Grade2.white}
+ addUserKnob {41 gamma T Grade2.gamma}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_1 l "" +STARTLINE T "<font size=3><b><a href=\"http://aliehtemami.com.au\"style=\"color: #06AE6F\">www.aliehtemami.com.au</a>"}
+}
+ Input {
+  inputs 0
+  name Inputmask
+  xpos -392
+  ypos 517
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos -580
+  ypos -122
+ }
+set N933f6020 [stack 0]
+ Expression {
+  channel0 rgb
+  channel3 rgb
+  name Expselect
+  xpos -580
+  ypos -56
+ }
+ Expression {
+  expr0 "\[value Expselect.channel3].red"
+  expr1 "\[value Expselect.channel3].green"
+  expr2 "\[value Expselect.channel3].blue"
+  channel3 rgb
+  name Expconvert
+  selected true
+  xpos -580
+  ypos -14
+ }
+push $N933f6020
+ Constant {
+  inputs 0
+  channels rgb
+  color {{cos(radians(rx))*cos(radians(ry))} {sin(radians(rx))} {cos(radians(rx))*sin(radians(ry))} {curve}}
+  name Degree
+  xpos -794
+  ypos -118
+  addUserKnob {20 User}
+  addUserKnob {7 rx l "Rotation X" R 0 360}
+  rx 180
+  addUserKnob {7 ry l "Rotation Y" R 0 360}
+  ry 180
+ }
+ Reformat {
+  type "to box"
+  box_width {{Input.width}}
+  box_height {{Input.height}}
+  box_fixed true
+  box_pixel_aspect {{Input.pixel_aspect}}
+  name Reformat1
+  xpos -794
+  ypos 9
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -794
+  ypos 51
+ }
+ Dot {
+  name Dot1
+  xpos -760
+  ypos 108
+ }
+ Difference {
+  inputs 2
+  name Difference1
+  xpos -580
+  ypos 98
+ }
+ Invert {
+  channels rgba
+  name Invert1
+  xpos -580
+  ypos 244
+ }
+ Grade {
+  channels rgba
+  gamma 0.5
+  name Grade2
+  xpos -580
+  ypos 294
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle2
+  tile_color 0xfefefeff
+  xpos -580
+  ypos 332
+ }
+ Clamp {
+  channels rgba
+  name Clamp1
+  xpos -580
+  ypos 413
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge2
+  xpos -580
+  ypos 517
+  disable {{1-existsmask}}
+ }
+ BlackOutside {
+  name BlackOutside1
+  xpos -580
+  ypos 543
+ }
+ Output {
+  name Output1
+  xpos -580
+  ypos 605
+ }
+ Viewer {
+  frame_range 1001-1001
+  name Viewer1
+  xpos -443
+  ypos -80
+ }
+end_group
+push $cut_paste_input
+Group {
+ name AE_RemoveExtra
+ tile_color 0x9b3f66ff
+ label ".:\[python \{nuke.thisNode()\['butt'].label()\}]:."
+ note_font "Bitstream Vera Sans Bold"
+ selected true
+ xpos -672
+ ypos 643
+ addUserKnob {20 User}
+ addUserKnob {26 text l "" +STARTLINE T "<h1>&#x2702;  AE Remove Extra\n\n"}
+ addUserKnob {26 _1 l "" +STARTLINE}
+ addUserKnob {22 butt l Remove -STARTLINE T "node = nuke.thisNode()\nlabel = node\['butt'].label()\n\nif label == \"Keep\":\n    node\['butt'].setLabel('Remove')\n    with node:\n        nuke.toNode('Switch')\['which'].setValue(1)\n\nelse:\n    node\['butt'].setLabel('Keep')\n    with node:\n        nuke.toNode('Switch')\['which'].setValue(0)\n\n"}
+ addUserKnob {22 clearbutt l Clear -STARTLINE T "knobs = nuke.thisNode().knobs()\nfor k in knobs:\n    if k.startswith('ch'):\n        nuke.thisNode()\[k].setValue('none')"}
+ addUserKnob {22 getbutt l Get -STARTLINE T "node = nuke.thisNode().input(0)\nchannels = node.channels()\n\nlayers = list(set(\[c.split('.')\[0] for c in channels]))\nexept = \['beauty','rgba']\n\nfor e in exept:\n    layers.remove(e)\nlayers.sort(reverse = False)\n\nknobs = nuke.thisNode().knobs()\nchknobs = \[]\nfor k in knobs:\n    if k.startswith('channel'):\n        chknobs.append(k)\n\n\niter = min(len(layers),len(chknobs))\n\nfor i in range(iter):\n    cat = \"channels\"+str(i+1)\n    nuke.thisNode()\[cat].setValue(layers\[i])\n\n"}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels1 l "" +STARTLINE T keep1.channels}
+ addUserKnob {41 channels2 l "" +STARTLINE T keep1.channels2}
+ addUserKnob {41 channels3 l "" +STARTLINE T keep1.channels3}
+ addUserKnob {41 channels4 l "" +STARTLINE T keep1.channels4}
+ addUserKnob {41 channels5 l "" +STARTLINE T keep2.channels}
+ addUserKnob {41 channels6 l "" +STARTLINE T keep2.channels2}
+ addUserKnob {41 channels7 l "" +STARTLINE T keep2.channels3}
+ addUserKnob {41 channels8 l "" +STARTLINE T keep2.channels4}
+ addUserKnob {41 channels9 l "" +STARTLINE T keep3.channels}
+ addUserKnob {41 channels10 l "" +STARTLINE T keep3.channels2}
+ addUserKnob {41 channels11 l "" +STARTLINE T keep3.channels3}
+ addUserKnob {41 channels12 l "" +STARTLINE T keep3.channels4}
+ addUserKnob {41 channels13 l "" +STARTLINE T keep4.channels}
+ addUserKnob {41 channels14 l "" +STARTLINE T keep4.channels2}
+ addUserKnob {41 channels15 l "" +STARTLINE T keep4.channels3}
+ addUserKnob {41 channels16 l "" +STARTLINE T keep4.channels4}
+ addUserKnob {26 text_1 l "" +STARTLINE}
+ addUserKnob {26 text_2 l "" +STARTLINE T "by Ali Ehtemami"}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -908
+  ypos -495
+ }
+set N934f1c30 [stack 0]
+add_layer {crypto_object00 crypto_object00.red crypto_object00.green crypto_object00.blue crypto_object00.alpha}
+ Viewer {
+  frame_range 1001-1038
+  channels crypto_object00
+  viewerProcess "Show_LUT_CDL (rec709)"
+  name Viewer1
+  xpos -1729
+  ypos 508
+ }
+push $N934f1c30
+ Dot {
+  name Dot73
+  xpos -874
+  ypos -250
+ }
+set N92ffaf10 [stack 0]
+ Dot {
+  name Dot1
+  xpos -485
+  ypos -250
+ }
+ Remove {
+  channels {{{parent.keep1.channels}}}
+  channels2 {{{parent.keep1.channels2}}}
+  channels3 {{{parent.keep1.channels3}}}
+  channels4 {{{parent.keep1.channels4}}}
+  name Remove1
+  xpos -519
+  ypos -134
+ }
+ Remove {
+  channels {{{parent.keep2.channels}}}
+  channels2 {{{parent.keep2.channels2}}}
+  channels3 {{{parent.keep2.channels3}}}
+  channels4 {{{parent.keep2.channels4}}}
+  name Remove2
+  xpos -519
+  ypos -96
+ }
+ Remove {
+  channels {{{parent.keep3.channels}}}
+  channels2 {{{parent.keep3.channels2}}}
+  channels3 {{{parent.keep3.channels3}}}
+  channels4 {{{parent.keep3.channels4}}}
+  name Remove3
+  xpos -519
+  ypos -58
+ }
+ Remove {
+  channels {{{parent.keep4.channels}}}
+  channels2 {{{parent.keep4.channels2}}}
+  channels3 {{{parent.keep4.channels3}}}
+  channels4 {{{parent.keep4.channels4}}}
+  name Remove4
+  xpos -519
+  ypos -20
+ }
+push $N92ffaf10
+ Remove {
+  operation keep
+  channels none
+  name keep4
+  xpos -684
+  ypos -174
+ }
+push $N92ffaf10
+ Remove {
+  operation keep
+  channels none
+  name keep3
+  xpos -799
+  ypos -177
+ }
+push $N92ffaf10
+ Remove {
+  operation keep
+  channels none
+  name keep2
+  xpos -908
+  ypos -177
+ }
+push $N92ffaf10
+ Remove {
+  operation keep
+  channels none
+  name keep1
+  xpos -1030
+  ypos -176
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy2
+  xpos -1030
+  ypos -79
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy5
+  xpos -1030
+  ypos 7
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels all
+  name Copy6
+  xpos -1030
+  ypos 92
+ }
+ Switch {
+  inputs 2
+  which 1
+  name Switch
+  xpos -1030
+  ypos 387
+ }
+ Output {
+  name Output
+  xpos -1030
+  ypos 675
+ }
+end_group
+push $cut_paste_input
+Group {
+ name AE_Roughen_Edges
+ tile_color 0xff9455ff
+ note_font "Bitstream Vera Sans Bold"
+ selected true
+ xpos -670
+ ypos 711
+ addUserKnob {20 User l Noise}
+ addUserKnob {3 inexists +INVISIBLE}
+ inexists {{"\[exists input1]"}}
+ addUserKnob {26 text_10 l "" +STARTLINE T "<p><b> <font size=7 color=#e67c3c>AE Roughen Edges\n\n"}
+ addUserKnob {26 text_11 l "" +STARTLINE T "<b><font size=4>:: by Ali Ehtemami"}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Remove2.channels}
+ addUserKnob {26 text_13 l "<b>Built-in Displace"}
+ addUserKnob {41 size l "Blur Size" T Blur1.size}
+ addUserKnob {41 disgain l Gain T IDistort1.disgain}
+ addUserKnob {41 deg l degree T IDistort1.deg}
+ addUserKnob {41 mix l falloff T Merge2.mix}
+ addUserKnob {41 opacity l "Noise Mix" T Noise1.opacity}
+ addUserKnob {20 group_1 l "Noise Setting" n 1}
+ group_1 0
+ addUserKnob {26 text l " "}
+ addUserKnob {41 translate T Noise1.translate}
+ addUserKnob {41 rotate T Noise1.rotate}
+ addUserKnob {41 scale T Noise1.scale}
+ addUserKnob {26 ""}
+ addUserKnob {41 type T Noise1.type}
+ addUserKnob {41 size_1 l x/ysize T Noise1.size}
+ addUserKnob {41 octaves T Noise1.octaves}
+ addUserKnob {41 lacunarity T Noise1.lacunarity}
+ addUserKnob {41 gain T Noise1.gain}
+ addUserKnob {41 gamma T Noise1.gamma}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 text_7 l "<b>External Displace"}
+ addUserKnob {7 dismix l "Displace Mix"}
+ dismix 1
+ addUserKnob {26 ""}
+ addUserKnob {26 text_12 l "" +STARTLINE T "<font size=3><b><a href=\"http://aliehtemami.com.au\"style=\"color: #e67c3c\">www.aliehtemami.com.au</a>"}
+}
+ Input {
+  inputs 0
+  name InputIN
+  xpos 398
+  ypos -179
+ }
+ Remove {
+  operation keep
+  channels alpha
+  name Remove2
+  xpos 398
+  ypos -124
+ }
+ Blur {
+  channels {{{parent.Remove2.channels}}}
+  size 100
+  name Blur1
+  xpos 398
+  ypos -21
+ }
+set Na61fce40 [stack 0]
+ AdjBBox {
+  numpixels {{(abs(disgain)/2)*opacity}}
+  name AdjBBox1
+  xpos 292
+  ypos -15
+ }
+ Transform {
+  translate {{parent.IDistort1.uv_scale.w} {parent.IDistort1.uv_scale.h}}
+  center {1024 713}
+  invert_matrix true
+  shutteroffset centred
+  name Transform2
+  xpos 292
+  ypos 11
+ }
+ Reformat {
+  inputs 0
+  type "to box"
+  box_width {{InputIN.width}}
+  box_height {{InputIN.height}}
+  box_fixed true
+  box_pixel_aspect {{InputIN.pixel_aspect}}
+  pbb true
+  name Reformat1
+  xpos 182
+  ypos -178
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos 182
+  ypos 11
+ }
+ Noise {
+  cliptype bbox
+  size 195
+  center {1136 952}
+  name Noise1
+  xpos 182
+  ypos 52
+ }
+set N92cf9340 [stack 0]
+ Dot {
+  name Dot3
+  xpos 216
+  ypos 146
+ }
+set N8eff7590 [stack 0]
+ Grade {
+  channels alpha
+  gamma 2.2
+  black_clamp false
+  name Grade3
+  xpos 0
+  ypos 136
+ }
+ Dot {
+  name Dot2
+  xpos 34
+  ypos 305
+ }
+set N86effb10 [stack 0]
+ Dot {
+  name Dot4
+  xpos -134
+  ypos 305
+ }
+ Input {
+  inputs 0
+  name InputDisplace
+  xpos -307
+  ypos -145
+  number 1
+ }
+ Remove {
+  operation keep
+  channels alpha
+  name Remove1
+  xpos -307
+  ypos -102
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle6
+  xpos -307
+  ypos 301
+ }
+ Grade {
+  channels rgba
+  white 0
+  black_clamp false
+  white_clamp true
+  mix {{1-dismix x1001 0}}
+  name Grade1
+  xpos -307
+  ypos 411
+ }
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  out2 forward
+  name ShuffleCopy1
+  xpos -168
+  ypos 411
+ }
+push $N86effb10
+ Switch {
+  inputs 2
+  which {{inexists}}
+  name Switch1
+  xpos 0
+  ypos 411
+ }
+ IDistort {
+  channels {{{parent.Remove2.channels}}}
+  uv motion
+  uv_scale {{sin(deg/45)*(disgain)*Merge2.mix x1 0} {cos(deg/45)*(disgain)*Merge2.mix x1 0}}
+  name IDistort3
+  xpos 0
+  ypos 487
+  addUserKnob {20 User}
+  addUserKnob {7 disgain l Gain R -360 360}
+  disgain 204
+  addUserKnob {7 deg l degree R 0 360}
+  deg 209
+ }
+ Shuffle {
+  black red
+  white green
+  red2 blue
+  green2 alpha
+  out2 forward
+  name Shuffle4
+  xpos 0
+  ypos 591
+ }
+push $N8eff7590
+push $Na61fce40
+ Dot {
+  name Dot1
+  xpos 432
+  ypos 253
+ }
+set N8eff3620 [stack 0]
+ EdgeBlur {
+  size 1
+  edge_mult 3
+  output rgba.alpha
+  name EdgeBlur1
+  xpos 291
+  ypos 243
+ }
+ Merge2 {
+  inputs 2
+  operation in
+  name Merge1
+  xpos 182
+  ypos 385
+ }
+push $N8eff3620
+ Merge2 {
+  inputs 2
+  operation average
+  name Merge2
+  xpos 398
+  ypos 385
+ }
+ Multiply {
+  channels {{{parent.Remove2.channels}}}
+  value 2
+  name Multiply1
+  xpos 398
+  ypos 427
+ }
+ Clamp {
+  name Clamp1
+  xpos 398
+  ypos 465
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 forward.u
+  from1 rgba.alpha
+  to1 forward.v
+  bbox B
+  name Copy2
+  xpos 398
+  ypos 579
+ }
+ IDistort {
+  channels {{{parent.Remove2.channels}}}
+  uv motion
+  uv_scale {{sin(deg/45)*(disgain) x1 0} {cos(deg/45)*(disgain) x1 0}}
+  name IDistort1
+  xpos 398
+  ypos 641
+  addUserKnob {20 User}
+  addUserKnob {7 disgain l Gain R -360 360}
+  disgain 100
+  addUserKnob {7 deg l degree R 0 360}
+  deg 90
+ }
+ Transform {
+  translate {{parent.IDistort1.uv_scale.w} {parent.IDistort1.uv_scale.h}}
+  center {1024 713}
+  shutteroffset centred
+  name Transform1
+  xpos 398
+  ypos 697
+ }
+ BlackOutside {
+  name BlackOutside1
+  xpos 398
+  ypos 736
+ }
+ Remove {
+  operation keep
+  channels {{{parent.Remove2.channels}}}
+  name Remove3
+  xpos 398
+  ypos 790
+ }
+ Output {
+  name Output1
+  xpos 398
+  ypos 1130
+ }
+push $N92cf9340
+ Viewer {
+  frame 1017
+  frame_range 1001-1001
+  center_fstop -1
+  viewerProcess "None (rec709)"
+  input_process false
+  name Viewer1
+  xpos 448
+  ypos 1403
+ }
+end_group
+push $cut_paste_input
+Group {
+ name AE_Lens_Diffusion1
+ tile_color 0xff873fff
+ selected true
+ xpos -672
+ ypos 773
+ addUserKnob {20 User}
+ addUserKnob {26 text l "" +STARTLINE T "<font><b>AE Lens Diffusion</b><i>  (temp)"}
+ addUserKnob {41 useGPUIfAvailable l "Use GPU if available" T Convolve4.useGPUIfAvailable}
+ addUserKnob {26 ""}
+ addUserKnob {41 falloff l Falloff T ExpGlowV1.falloff}
+ addUserKnob {41 blur_amount l Size T ExpGlowV1.blur_amount}
+ addUserKnob {41 mix T Grade32.mix}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Blur21.channels}
+ addUserKnob {41 size T Blur21.size}
+ addUserKnob {26 ""}
+ addUserKnob {41 which T Dissolve1.which}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -703
+  ypos 420
+ }
+ Dot {
+  name Dot1
+  xpos -922
+  ypos 424
+ }
+set Na61fa660 [stack 0]
+ AdjBBox {
+  numpixels 45
+  name AdjBBox1
+  xpos -956
+  ypos 506
+ }
+ Reformat {
+  inputs 0
+  format "512 512 0 0 512 512 1 square_512"
+  name Reformat5
+  xpos -908
+  ypos -254
+ }
+ Dot {
+  name Dot106
+  xpos -874
+  ypos -163
+ }
+set N837f9510 [stack 0]
+ Dot {
+  name Dot108
+  xpos -708
+  ypos -163
+ }
+ Flare {
+  position {256 256}
+  radius {99 100 101}
+  size_mult 0.039
+  inner_color 1
+  outer_falloff 10
+  inner_falloff 10
+  name Flare2
+  xpos -742
+  ypos -113
+ }
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+  name Shuffle13
+  xpos -742
+  ypos 87
+ }
+set N8e3fd920 [stack 0]
+push 0
+push $N837f9510
+ Flare {
+  position {256 256}
+  radius {99 100 101}
+  size_mult 0.009
+  inner_color 1
+  name Flare3
+  xpos -908
+  ypos -113
+ }
+ Grade {
+  white 100
+  black_clamp false
+  name Grade31
+  xpos -908
+  ypos -35
+ }
+ ExpGlowV {
+  name ExpGlowV1
+  label "Exponential Glow V"
+  note_font "Bitstream Vera Sans"
+  xpos -908
+  ypos 6
+  falloff 1.11
+  intensity 8.25
+  blur_amount 0.2
+  add_source true
+  Scriplet_Info "user COMP ExpGlowV03"
+ }
+ Grade {
+  white 0.52
+  gamma 0.85
+  black_clamp false
+  name Grade32
+  xpos -908
+  ypos 63
+ }
+ Grade {
+  white {0.760018 0.778621 1 1}
+  white_panelDropped true
+  multiply 1.5
+  black_clamp false
+  name Grade34
+  xpos -908
+  ypos 95
+ }
+set N4430d040 [stack 0]
+push $N837f9510
+ Dot {
+  name Dot107
+  xpos -1074
+  ypos -163
+ }
+ Flare {
+  position {256 256}
+  radius {99 100 101}
+  size_mult 0.009
+  inner_color 1
+  name Flare1
+  xpos -1108
+  ypos -110
+ }
+ Grade {
+  white 200
+  black_clamp false
+  name Grade28
+  xpos -1108
+  ypos 56
+ }
+push $N8e3fd920
+ Dot {
+  name Dot109
+  xpos -708
+  ypos 166
+ }
+push $N4430d040
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge17
+  xpos -908
+  ypos 162
+ }
+ Merge2 {
+  inputs 2
+  name Merge18
+  xpos -1108
+  ypos 162
+ }
+ Dissolve {
+  inputs 3+1
+  channels rgba
+  name Dissolve1
+  xpos -1108
+  ypos 224
+ }
+ Blur {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  size 2.3
+  name Blur21
+  xpos -1108
+  ypos 261
+ }
+push $Na61fa660
+ Convolve2 {
+  inputs 2
+  channels rgb
+  use_input_channels true
+  name Convolve4
+  xpos -1108
+  ypos 420
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -1108
+  ypos 506
+ }
+set N43a093b0 [stack 0]
+ Output {
+  name Output1
+  xpos -1108
+  ypos 635
+ }
+push $N43a093b0
+ Viewer {
+  frame_range 1001-1039
+  viewerProcess "Show_LUT_CDL (rec709)"
+  name Viewer1
+  xpos -1539
+  ypos 276
+ }
+end_group
+push $cut_paste_input
+Group {
+ name AE_Bugz2
+ tile_color 0x51b4f0ff
+ selected true
+ xpos -668
+ ypos 831
+ addUserKnob {20 User}
+ addUserKnob {26 header l "" +STARTLINE T "<font><H1>&#x0243;&#x0244;&#x0193;&#x017E"}
+ addUserKnob {26 version_text l "" +STARTLINE T <b>v.1}
+ addUserKnob {35 presets l "" +STARTLINE M {presets/Idle "knobs this \{vertex_rate 0.01 lifetime 500 size 0.2 velocity 0.403 mass 1 gravity_ui -0.0005 strength 0.1 disable_1 1 maximum 1 znear 70 zfar 500 geo Sphere uniform_scale 150\}" presets/Idle2 "knobs this \{vertex_rate 0.21 lifetime 500 size 0.1 velocity 1 mass 1 gravity_ui -0.0003 strength 0.5 disable_1 1 maximum 1 znear 200 zfar 1000 geo Cube uniform_scale 240\}" presets/Snowing "knobs this \{vertex_rate 0.3 lifetime 500 size 0.2 velocity 0.104 mass 1 gravity_ui -0.002 strength 0.1 disable_1 1 maximum 1 znear 50 zfar 500 geo Sphere uniform_scale 150\}" "presets/Angry Bugs" "knobs this \{vertex_rate 0.3 lifetime 500 size 0.2 velocity 3 mass 90 gravity_ui -0.003 strength 0.6 disable_1 1 maximum 1 znear 140 zfar 1000 geo Sphere uniform_scale 140\}" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}}
+ addUserKnob {26 "" -STARTLINE}
+ addUserKnob {41 first_frame l "first frame" t "grabs the camera position from this frame" +INVISIBLE T FrameHold2.first_frame}
+ addUserKnob {41 start_frame l "start at" t "particle emittion start frame" -STARTLINE T ParticleEmitter3.start_frame}
+ addUserKnob {41 seed l "random seed" -STARTLINE T ParticleEmitter3.seed}
+ addUserKnob {26 _1 l "<b><h3><font color=\"lightblue\">Particle"}
+ addUserKnob {41 vertex_rate l "vertex emission rate" T ParticleEmitter3.vertex_rate}
+ addUserKnob {41 lifetime l "max lifetime" T ParticleEmitter3.lifetime}
+ addUserKnob {41 size T ParticleEmitter3.size}
+ addUserKnob {41 velocity T ParticleEmitter3.velocity}
+ addUserKnob {41 mass T ParticleEmitter3.mass}
+ addUserKnob {26 _2 l "<b><h3><font color=\"lightblue\">Gravity"}
+ addUserKnob {7 gravity_ui l Gravity R -0.5 0.5}
+ gravity_ui -0.0003
+ addUserKnob {26 _3 l "<b><h3><font color=\"lightblue\">Turbulence"}
+ addUserKnob {41 strength T ParticleTurbulence3.strength}
+ addUserKnob {26 _4 l "<b><h3><font color=\"lightblue\">Speed Limit"}
+ addUserKnob {41 disable_1 l disable T ParticleSpeedLimit1.disable}
+ addUserKnob {41 maximum T ParticleSpeedLimit1.maximum}
+ addUserKnob {26 _5 l "<b><h3><font color=\"lightblue\">Deep Crop"}
+ addUserKnob {41 znear T DeepCrop4.znear}
+ addUserKnob {41 zfar T DeepCrop4.zfar}
+ addUserKnob {26 _6 l "<b><h3><font color=\"lightblue\">Emitter Geo"}
+ addUserKnob {68 geo l "Emitter Geo" M {Cube Sphere}}
+ addUserKnob {41 uniform_scale l "uniform scale" -STARTLINE T TransformGeo1.uniform_scale}
+ addUserKnob {26 text_3 l "<b><h3><font color=\"lightblue\">Particle Geo"}
+ addUserKnob {68 particle_geo l " " M {Default Built-in Input "" "" ""}}
+ addUserKnob {26 ""}
+ addUserKnob {26 author l "" +STARTLINE T "by <b>Ali Ehtemami"}
+ addUserKnob {20 rendering_tab l Rendering}
+ addUserKnob {41 antialiasing T ScanlineRender4.antialiasing}
+ addUserKnob {41 samples T ScanlineRender4.samples}
+ addUserKnob {41 shutter T ScanlineRender4.shutter}
+ addUserKnob {41 overscan T ScanlineRender4.overscan}
+ addUserKnob {26 ""}
+ addUserKnob {68 output_mode l Output M {RGBA Deep}}
+}
+ Input {
+  inputs 0
+  name Inputcam
+  xpos 829
+  ypos 187
+ }
+ Dot {
+  name Dot138
+  label cam
+  xpos 863
+  ypos 238
+ }
+ Dot {
+  name Dot136
+  xpos 863
+  ypos 325
+ }
+set Nb14ffa60 [stack 0]
+ Dot {
+  name Dot137
+  xpos 964
+  ypos 325
+ }
+ Input {
+  inputs 0
+  name Inputparticle
+  xpos -97
+  ypos 444
+  number 1
+ }
+ Reformat {
+  inputs 0
+  format "512 512 0 0 512 512 1 square_512"
+  name Reformat1
+  xpos 139
+  ypos 225
+ }
+ Flare {
+  position {256 256}
+  size_mult 2
+  inner_color 1
+  name Flare1
+  xpos 139
+  ypos 263
+ }
+set Nb10f36c0 [stack 0]
+ Shuffle2 {
+  fromInput1 {{0} B}
+  fromInput2 {{0} B}
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.red 0 0 rgba.alpha 0 3 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2"
+  name Shuffle1
+  xpos 139
+  ypos 289
+ }
+ Dot {
+  inputs 0
+  name Dot1
+  xpos 28
+  ypos 376
+ }
+ Switch {
+  inputs 3
+  which {{particle_geo}}
+  name Switch1
+  xpos 139
+  ypos 444
+ }
+push $Nb14ffa60
+ FrameHold {
+  firstFrame 1001
+  name FrameHold2
+  xpos 700
+  ypos 315
+ }
+ Sphere {
+  inputs 0
+  display wireframe
+  rows 5
+  columns 5
+  name Sphere2
+  xpos 565
+  ypos 265
+ }
+ Cube {
+  inputs 0
+  rows 1
+  columns 1
+  name Cube2
+  xpos 462
+  ypos 266
+ }
+ Switch {
+  inputs 2
+  which {{geo}}
+  name Switch2
+  xpos 462
+  ypos 321
+ }
+ TransformGeo {
+  uniform_scale 240
+  name TransformGeo1
+  xpos 462
+  ypos 374
+ }
+ TransformGeo {
+  inputs 2
+  name TransformGeo3
+  xpos 700
+  ypos 374
+ }
+push 0
+ ParticleEmitter {
+  inputs 3
+  start_frame 500
+  emit_order uniformly
+  randomize_type "randomized direction"
+  rate 3
+  vertex_rate 0.21
+  lifetime 500
+  mass_variation 1
+  seed 3
+  name ParticleEmitter3
+  xpos 700
+  ypos 444
+ }
+ ParticleGravity {
+  to {0 {parent.gravity_ui} 0}
+  name ParticleGravity3
+  xpos 700
+  ypos 477
+ }
+ ParticleTurbulence {
+  strength {0.5 0 0}
+  name ParticleTurbulence3
+  xpos 700
+  ypos 527
+ }
+ ParticleSpeedLimit {
+  maximum 1
+  name ParticleSpeedLimit1
+  xpos 700
+  ypos 641
+  disable true
+ }
+ Dot {
+  name Dot139
+  xpos 734
+  ypos 746
+ }
+push 0
+ ScanlineRender {
+  inputs 3
+  conservative_shader_sampling false
+  antialiasing high
+  overscan {45 16}
+  samples 4
+  shutteroffset centred
+  motion_vectors_type distance
+  name ScanlineRender4
+  xpos 930
+  ypos 742
+ }
+ DeepCrop {
+  znear 200
+  zfar 1000
+  bbox {889.5999756 619.2000122 3558.399902 2476.800049}
+  use_bbox false
+  name DeepCrop4
+  xpos 930
+  ypos 782
+ }
+ Group {
+  name DeepToImage_v0002_27
+  help "Composites deep image data to 2D image."
+  tile_color 0x60ff
+  xpos 930
+  ypos 822
+  disable {{output_mode}}
+  addUserKnob {20 DeepToImage l DeepHoldout}
+  addUserKnob {41 volumetric_composition l "volumetric composition" T DeepToImage1.volumetric_composition}
+  addUserKnob {20 ieAssetInfo l "Asset Information"}
+  addUserKnob {20 Advanced t "\n<B>ieEntityType:</B> NukeScriptletPackage\n<B>ieEntityId:</B> 1678309.0\n<B>ieAssetId:</B> 0.0\n<B>ieCopyId:</B> 11\n<B>ieNodeTag:</B> \n<B>ieLinkedEntities:</B> \[]\n<B>ieBundleId:</B> 0.0" n 2}
+  addUserKnob {1 ieNodeType l "Node Type" +INVISIBLE}
+  ieNodeType assetNode
+  addUserKnob {1 ieEntityType l "Entity Type" +DISABLED}
+  ieEntityType NukeScriptletPackage
+  addUserKnob {3 ieEntityId l "Entity Id" +DISABLED}
+  ieEntityId 1678309
+  addUserKnob {3 ieAssetId l "Asset Id" +DISABLED}
+  addUserKnob {1 ieCopyId l "Copy Id" +DISABLED}
+  ieCopyId 27
+  addUserKnob {1 ieNodeTag l "Node Tag" +DISABLED}
+  addUserKnob {1 ieLinkedEntities l "Linked Entities" +DISABLED}
+  ieLinkedEntities "\[]"
+  addUserKnob {3 ieBundleId l "Bundle Id" +DISABLED}
+  addUserKnob {20 "" n -1}
+  addUserKnob {3 ieBundleVersion l "<span style=\"color:Silver\">Bundle Version </span>" t "\nThis entity is not part\nof a bundle." +DISABLED}
+  addUserKnob {4 ieEntityVersion l "Entity Version" M {2}}
+  addUserKnob {32 ieUpdateVersions l "Update Versions" -STARTLINE}
+  addUserKnob {1 ieVersionCreationDate l "Version Creation Date" +DISABLED}
+  ieVersionCreationDate "12-02-2019 16:35:46"
+  addUserKnob {1 ieVersionCreator l Artist -STARTLINE +DISABLED}
+  ieVersionCreator nicolasd
+  addUserKnob {4 ieUpdateMode l "Update Mode" M {locked latest latestApproved default}}
+  ieUpdateMode default
+  addUserKnob {6 ieRelativeToLocation l "Entity is Dynamic - Relative To Environment Location" +STARTLINE}
+  addUserKnob {26 ieSeparator l "  "}
+  addUserKnob {20 "" n -1}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 149
+   ypos -139
+  }
+  DeepToImage {
+   name DeepToImage1
+   xpos 149
+   ypos -102
+  }
+  ModifyMetaData {
+   metadata {
+    {remove exr/chunkCount ""}
+   }
+   name ModifyMetaData1
+   xpos 149
+   ypos -69
+  }
+  Output {
+   name Output1
+   xpos 149
+   ypos 31
+  }
+ end_group
+ Output {
+  name Output1
+  xpos 930
+  ypos 922
+ }
+push $Nb10f36c0
+ Viewer {
+  frame_range 1006-1074
+  viewerProcess "Show_LUT_CDL (rec709)"
+  name Viewer1
+  xpos 1289
+  ypos 936
+ }
+end_group
+push $cut_paste_input
+NoOp {
+ name AE_Script_Cleaner1
+ tile_color 0xff0000ff
+ selected true
+ xpos -665
+ ypos 1116
+ addUserKnob {20 User}
+ addUserKnob {26 header l "" +STARTLINE T "<span style='font-weight:bold;font-size:35px;'><span style='color:#6B6B6B;'>A</span><span style='color:#767676;'>E</span> <span style='color:#8E8E8E;'>S</span><span style='color:#9A9A9A;'>c</span><span style='color:#A5A5A5;'>r</span><span style='color:#B1B1B1;'>i</span><span style='color:#BDBDBD;'>p</span><span style='color:#C9C9C9;'>t</span> <span style='color:#B1B1B1;'>C</span><span style='color:#A5A5A5;'>l</span><span style='color:#9A9A9A;'>e</span><span style='color:#8E8E8E;'>a</span><span style='color:#828282;'>n</span><span style='color:#767676;'>e</span><span style='color:#6B6B6B;'>r</span></span>"}
+ addUserKnob {26 credit l "" +STARTLINE T "<span style='font-weight:bold;font-style:italic;font-size:10px;'><span style='color:#74727A;'>.</span><span style='color:#78767D;'>:</span> <span style='color:#807E85;'>b</span><span style='color:#848288;'>y</span> <span style='color:#8C8B90;'>A</span><span style='color:#908F94;'>l</span><span style='color:#949397;'>i</span> <span style='color:#9C9B9F;'>E</span><span style='color:#A09FA2;'>h</span><span style='color:#A4A3A6;'>t</span><span style='color:#A8A8AA;'>e</span><span style='color:#ACACAE;'>m</span><span style='color:#B0B0B1;'>a</span><span style='color:#B4B4B5;'>m</span><span style='color:#B8B8B9;'>i</span></span>"}
+ addUserKnob {26 score l "Nodes ? | Selected ?"}
+ addUserKnob {4 mode l Mode M {"All Writes" "Selected Writes"}}
+ addUserKnob {6 merges l "Empty Merges" t "Select merge and any AB input nodes which has one input empty" -STARTLINE}
+ merges true
+ addUserKnob {6 exc_viewer l "Except Viewer" t "skip the active viewer node in the cleaning process" -STARTLINE}
+ exc_viewer true
+ addUserKnob {26 _1 l "  Jabuka"}
+ addUserKnob {22 butt_jabukaSaveas l "<b>Save as" t "save as your comp as \"compReduced\"\n" T "IECompositing.executeProc( \"MenuCommands\", \"jabukaSaveSceneAs\", \[  ] )\n" +STARTLINE}
+ addUserKnob {22 butt_ieBreakLink l "<b><font color = gray>ieBreakLink" t "Breaks the link between Jabuka Read and write nodes" -STARTLINE T "for n in nuke.allNodes():\n    if n.knob('ieBreakLink') != None:\n        n\['ieBreakLink'].execute()"}
+ addUserKnob {26 text l "" +STARTLINE}
+ addUserKnob {22 vault l VAULT T "#### Add a Vault Backdrop ####\n\nvault = nukescripts.autoBackdrop()\nvname = \"VAULT_\"+vault.name()\nvault.setName(vname)\nvault\['label'].setValue(\"<h1><B>VAULT\")\n" +STARTLINE}
+ addUserKnob {22 butt_del_2 l "<font color = red>&#10005;" T "nuke.thisNode().setSelected(False)\nfor n in nuke.selectedNodes():\n    nuke.delete(n)\n\nnuke.thisNode()\['score'].setLabel(\"Nodes \" + str(len(nuke.allNodes()))+\" | \"+\"Selected \" + str(len(nuke.selectedNodes())))\n" +STARTLINE}
+ addUserKnob {22 butt_sel_dis l "<font><b>Select Disabled" t "Select All Disabled nodes which the disable knob is not Animated" -STARTLINE T "disnodes = 0\n\nfor d in nuke.allNodes():\n    if d.knob('disable') and d\['disable'].value() == 1 and d\['disable'].isAnimated() == False:\n        d.setSelected(True)\n        disnodes = disnodes + 1\n\ntp = type(nuke.thisNode())\nif type(nuke.thisNode().input(0)) == tp:\n    nuke.thisNode().input(0).setSelected(False)\nelse:\n    pass\n\nfor n in nuke.allNodes(\"BackdropNode\"):\n    if \"VAULT\" in n.name():\n        n.setSelected(False)\n        for i in n.getNodes():\n            i.setSelected(False)\n    else:\n        pass\n\nnuke.thisNode()\['score'].setLabel(\"Nodes \" + str(len(nuke.allNodes()))+\" | \"+\"Selected \" + str(len(nuke.selectedNodes())))\n"}
+ addUserKnob {22 butt_del_dp l "<font color = red>&#10005;" T "nuke.thisNode().setSelected(False)\nfor n in nuke.selectedNodes():\n    nuke.delete(n)\n\nnuke.thisNode()\['score'].setLabel(\"Nodes \" + str(len(nuke.allNodes()))+\" | \"+\"Selected \" + str(len(nuke.selectedNodes())))" +STARTLINE}
+ addUserKnob {22 butt_select l "<font><b>Select Unused" t "Select independent nodes to All Writes or Selected Write nodes" -STARTLINE T "### Script: Select Independent nodes\n### Author: Ali Ehtemami (alie)\n### Date: 27 May 2022\n#####################################\n\n\n########################################## MODE SELECTOR\n\nif nuke.thisNode()\['mode'].value() == \"All Writes\":\n    for k in nuke.allNodes():\n        k.setSelected(False)\nelse:\n    pass\n\n\ndep = \[]\n\n\n########################################## Scan for nodes dependencies\n\ndef scandep(node):\n    for i in node.dependencies():\n        dep.append(i) if i not in dep else dep\n\n    return dep\n\n\n######################################### scan all dependencies of a node\n\ndef sel_all_deps(write_node):\n    for s in scandep(write_node):\n        scandep(s)\n    for d in dep:\n        d.setSelected(True)\n\n\n########################################## scan and select all dependent nodes of write nodes\n\n\nif nuke.thisNode()\['mode'].value() == \"All Writes\":\n    nodelist = nuke.allNodes()\n\nelif nuke.thisNode()\['mode'].value() == \"Selected Writes\":\n    nodelist = nuke.selectedNodes()\n    \n\n\n\nfor w in nodelist:\n    if w.Class() == 'Write' or w.Class() == 'DeepWrite': \n        sel_all_deps(w)\n        w.setSelected(True)\n    else:\n        pass\n\n\n\n###################################### Select Independent nodes (Except Backdrops and Stickynotes)\n\nexclude_list = nuke.thisNode()\['exclude_list'].value().split(\",\")\n\nfor n in nuke.allNodes():\n    if n\['selected'].value() == True:\n        n.setSelected(False)\n    else:\n        if n.Class() not in exclude_list:\n            n.setSelected(True)\n\nnuke.thisNode().setSelected(False)\n\n\n##################################################################### Empty Merges\n\nif nuke.thisNode()\['merges'].value():\n    mergelist = nuke.thisNode()\['merges_list'].value().split(\",\")\n\n    for n in nuke.allNodes():\n        for l in mergelist:\n            if n.Class() == l:\n                if n.input(0) == None or n.input(1) == None :\n                    n.setSelected(True)\n\n##################################################################### EXCEPT VIEWER\nif nuke.thisNode()\['exc_viewer'].value() and type(nuke.activeViewer()) is not 'NoneType':\n    nuke.activeViewer().node().setSelected(False)\nelse:\n    pass\n\n\n##################################################################### EXCEPT INPUT NODE\n\n\ntp = type(nuke.thisNode())\nif type(nuke.thisNode().input(0)) == tp:\n    nuke.thisNode().input(0).setSelected(False)\nelse:\n    pass\n\n#################################################################### EXCEPT VAULT\n\nfor n in nuke.allNodes(\"BackdropNode\"):\n    if \"VAULT\" in n.name():\n        n.setSelected(False)\n        for i in n.getNodes():\n            i.setSelected(False)\n    else:\n        pass\n\n##################################################################### UPDATE Heading TEXT\nnuke.thisNode()\['score'].setLabel(\"Nodes \" + str(len(nuke.allNodes()))+\" | \"+\"Selected \" + str(len(nuke.selectedNodes())))"}
+ addUserKnob {22 butt_delete l "<font color = red>&#10005;" t "Delete Selected Nodes" T "nuke.thisNode().setSelected(False)\nfor n in nuke.selectedNodes():\n    nuke.delete(n)\n\nnuke.thisNode()\['score'].setLabel(\"Nodes \" + str(len(nuke.allNodes()))+\" | \"+\"Selected \" + str(len(nuke.selectedNodes())))" +STARTLINE}
+ addUserKnob {22 butt_deeptrace l "<font><b>Deep Trace" -STARTLINE T "#### DEEP TRACE ####\n\n#### Define dead end nodes inputs = zero ####\ndeadend = nuke.thisNode()\['deadend_list'].value().split(\",\")\n\nexclude_list = nuke.thisNode()\['exclude_list'].value().split(\",\")\n\ndeadnodes = \[]\n\n########################\n#### List of Deadend nodes #####\n\nfor node in nuke.allNodes():\n    if node.inputs() == 0 and node.Class() not in deadend:\n        node.setSelected(True)\n        deadnodes.append(node)\n\n###############################\n#### define select dead end nodes deps ####\n\ndef sel_dead_dep(node):\n    for dep in node.dependent():\n        dp = 0\n        for i in range(dep.inputs()):\n            if i<2 and dep.input(i) in deadnodes:\n                dp += 1\n\n        if dp == dep.inputs():\n            deadnodes.append(dep)\n            dep.setSelected(True)\n\n\n\nfor d in deadnodes:\n    sel_dead_dep(d)\n\nfor s in nuke.selectedNodes():\n    if s.Class() in exclude_list:\n        s.setSelected(False)\nnuke.thisNode().setSelected(False)\n\n##################################################################### EXCEPT node input\n\ntp = type(nuke.thisNode())\nif type(nuke.thisNode().input(0)) == tp:\n    nuke.thisNode().input(0).setSelected(False)\nelse:\n    pass\n\n##################################################################### EXCEPT VAULT\n\nfor n in nuke.allNodes(\"BackdropNode\"):\n    if \"VAULT\" in n.name():\n        n.setSelected(False)\n        for i in n.getNodes():\n            i.setSelected(False)\n    else:\n        pass\n\n##################################################################### UPDATE Heading TEXT\nnuke.thisNode()\['score'].setLabel(\"Nodes \" + str(len(nuke.allNodes()))+\" | \"+\"Selected \" + str(len(nuke.selectedNodes())))\n"}
+ addUserKnob {22 butt_empty_backdrops l "<font><b>Delete Empty Backdrops" T "for n in nuke.allNodes('BackdropNode'):\n    if n.getNodes() == \[]:\n        nuke.delete(n)\n\n\nnuke.thisNode()\['score'].setLabel(\"Nodes \" + str(len(nuke.allNodes()))+\" | \"+\"Selected \" + str(len(nuke.selectedNodes())))" +STARTLINE}
+ addUserKnob {26 _2 l "<font color=gray>ieNodes"}
+ addUserKnob {22 iecam l "<font color = gray><b><i>ieCam" T "nuke.thisNode().setSelected(False)\ndef ieCam(node):\n    iecam = node\n    \n    node.setSelected(True)\n    nodeX = iecam\['xpos'].value()\n    nodeY = iecam\['ypos'].value()\n    nodeName = iecam\['name'].value()\n    node = nuke.createNode(\"Camera2\", inpanel = False)\n\n    \n    \n    #### Translate ####\n    check = iecam\['translate'].isAnimated()\n    if check:\n        for i in range(3):\n            node\['translate'].copyAnimation(i, iecam\['translate'].animation(i))\n    else:\n        node\['translate'].setValue(iecam\['translate'].value())\n    \n    #### rotate ####\n    check = iecam\['rotate'].isAnimated()\n    if check:\n        for i in range(3):\n            node\['rotate'].copyAnimation(i, iecam\['rotate'].animation(i))\n    else:\n        node\['rotate'].setValue(iecam\['rotate'].value())\n    \n    #### scalling ####\n    check = iecam\['scaling'].isAnimated()\n    if check:\n        for i in range(3):\n            node\['scaling'].copyAnimation(i, iecam\['scaling'].animation(i))\n    else:\n        node\['scaling'].setValue(iecam\['scaling'].value())\n    \n    #### focal ####\n    check = iecam\['focal'].isAnimated()\n    if check:\n        node\['focal'].copyAnimation(0, iecam\['focal'].animation(0))\n    else:\n        node\['focal'].setValue(iecam\['focal'].value())\n    \n    #### haperture ####\n    check = iecam\['haperture'].isAnimated()\n    if check:\n        node\['haperture'].copyAnimation(0, iecam\['haperture'].animation(0))\n    else:\n        node\['haperture'].setValue(iecam\['haperture'].value())\n    \n    #### vaperture ####\n    check = iecam\['vaperture'].isAnimated()\n    if check:\n        node\['vaperture'].copyAnimation(0, iecam\['vaperture'].animation(0))\n    else:\n        node\['vaperture'].setValue(iecam\['vaperture'].value())\n    \n    \n    #### near ####\n    check = iecam\['near'].isAnimated()\n    if check:\n        node\['near'].copyAnimation(0, iecam\['near'].animation(0))\n    else:\n        node\['near'].setValue(iecam\['near'].value())\n    \n    #### far ####\n    check = iecam\['far'].isAnimated()\n    if check:\n        node\['far'].copyAnimation(0, iecam\['far'].animation(0))\n    else:\n        node\['far'].setValue(iecam\['far'].value())\n    \n    \n    #### win_translate ####\n    check = iecam\['win_translate'].isAnimated()\n    if check:\n        for i in range(2):\n            node\['win_translate'].copyAnimation(i, iecam\['win_translate'].animation(i))\n    else:\n        node\['win_translate'].setValue(iecam\['win_translate'].value())\n    \n    #### focal_point ####\n    check = iecam\['focal_point'].isAnimated()\n    if check:\n        node\['focal_point'].copyAnimation(0, iecam\['focal_point'].animation(0))\n    else:\n        node\['focal_point'].setValue(iecam\['focal_point'].value())\n    \n    #### fstop ####\n    check = iecam\['fstop'].isAnimated()\n    if check:\n        node\['fstop'].copyAnimation(0, iecam\['fstop'].animation(0))\n    else:\n        node\['fstop'].setValue(iecam\['fstop'].value())\n\n    #### remove ieCam ####\n    nuke.delete(iecam)\n\n    node.setXpos(int(nodeX))\n    node.setYpos(int(nodeY))\n    node.setSelected(False)\n    node\['name'].setValue(nodeName)\n\ncount = 0\ncamList = \[]\nfor n in nuke.allNodes('Camera2'):\n    camList.append(str(count+1)+\". \" + n.name() )\n    ieCam(n)\n    count = count+1\n\n\nmsg = \"\\n\".join(camList)\nif count > 1:\n    msg = str(count) + \" Cameras has been converted:\\n\\n\"+msg\nelse:\n    msg = str(count) + \" Camera has been converted:\\n\\n\"+msg\n\n\nnuke.message(msg)\n" +STARTLINE}
+ addUserKnob {20 lists_tab l lists}
+ addUserKnob {1 exclude_list l Exclude}
+ exclude_list BackdropNode,StickyNote
+ addUserKnob {1 deadend_list l Deadend}
+ deadend_list Input,DeepWrite,DeepRead,Write,Read,AudioRead,BlinkScript,DiskCache,Group,Crop,Roto,Precomp,LiveGroup,Light,Grid,Environment,Spotlight,DirectLight,PointCloudGenerator,ReadGeo2,Sphere,Light2,Camera2,ReLight,Axis2,Card2,Cube,Cylinder,RotoPaint,Flare,Noise,Radial,Ramp,Rectangle,Sparkles,Text2,Constant,CheckerBoard2,ColorBars,ColorWheel
+ addUserKnob {1 merges_list l Merges}
+ merges_list Merge2,DeepMerge2,Copy,Keymix,CopyBBox,Switch,ChannelMerge
+}
+Group {
+ inputs 0
+ name AE_PointLight_2D6
+ tile_color 0xc6723fff
+ selected true
+ xpos -668
+ ypos 1056
+ addUserKnob {20 User}
+ addUserKnob {26 headtxt l "" +STARTLINE T "<p><b> <font size=7 color=#ba713f>AE PointLight 2D \n\n"}
+ addUserKnob {26 text l "" +STARTLINE T "<b><font size=4>:: by Ali Ehtemami"}
+ addUserKnob {26 _1 l "" +STARTLINE}
+ addUserKnob {41 point1 l Center T CalcRGB.point1}
+ addUserKnob {41 zpos l "          Depth" T ui.zpos}
+ addUserKnob {26 ""}
+ addUserKnob {6 invsw l "Invert Input" +STARTLINE}
+ addUserKnob {6 logsw l "Log Convert" +STARTLINE}
+ logsw true
+ addUserKnob {6 palpha l "Light to alpha" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 intensity T N_PointLight1.intensity}
+ addUserKnob {41 fallofftype l "falloff type" T N_PointLight1.fallofftype}
+ addUserKnob {41 falloff T N_PointLight1.falloff}
+ addUserKnob {26 text_1 l <b>Pre-process}
+ addUserKnob {6 soft l Soften +STARTLINE}
+ addUserKnob {41 amount T Soften1.amount}
+ addUserKnob {41 size T Soften1.size}
+ addUserKnob {7 bsize l Blur R 0 10}
+ bsize 1.9
+}
+ Input {
+  inputs 0
+  name Input
+  xpos 204
+  ypos -56
+ }
+ OCIOLogConvert {
+  operation "lin to log"
+  name OCIOLogConvert
+  xpos 204
+  ypos -17
+  disable {{1-parent.logsw}}
+ }
+ Invert {
+  name Invert
+  xpos 204
+  ypos 22
+  disable {{1-parent.invsw}}
+ }
+ Dot {
+  name Dot116
+  xpos 238
+  ypos 84
+ }
+set Nd75f2b40 [stack 0]
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos 19
+  ypos 74
+ }
+ Dot {
+  name Dot115
+  xpos -103
+  ypos 84
+ }
+push $Nd75f2b40
+ Expression {
+  expr0 (x+0.5)/width
+  expr1 (y+0.5)/height
+  name Expression1
+  xpos 136
+  ypos 170
+ }
+ Shuffle {
+  alpha white
+  name Shuffle35
+  label "\[value in]"
+  xpos 20
+  ypos 164
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.blue
+  bbox B
+  mix 0
+  name Copy3
+  xpos -137
+  ypos 164
+ }
+ Multiply {
+  channels rgb
+  value {10 7 1 1}
+  name Scale
+  xpos -329
+  ypos 170
+ }
+ ColorMatrix {
+  matrix {
+      {1 0 0}
+      {0 {cos(radians(angle))} {-sin(radians(angle))}}
+      {0 {sin(radians(angle))} {cos(radians(angle))}}
+    }
+  name X
+  xpos -329
+  ypos 222
+  addUserKnob {20 User}
+  addUserKnob {7 angle R 0 360}
+ }
+ ColorMatrix {
+  matrix {
+      {{cos(radians(angle))} 0 {sin(radians(angle))}}
+      {0 1 0}
+      {{-sin(radians(angle))} 0 {cos(radians(angle)) x1001 1}}
+    }
+  name Y
+  xpos -329
+  ypos 267
+  addUserKnob {20 User}
+  addUserKnob {7 angle R 0 360}
+ }
+ ColorMatrix {
+  matrix {
+      {{cos(radians(angle))} {-sin(radians(angle))} 1.224646799e-16}
+      {{sin(radians(angle))} {cos(radians(angle))} 0}
+      {0 0 1}
+    }
+  name Z
+  xpos -329
+  ypos 310
+  addUserKnob {20 User}
+  addUserKnob {7 angle R 0 360}
+ }
+ Add {
+  channels rgb
+  value {0 0 0 0}
+  value_panelDropped true
+  name Translate
+  xpos -329
+  ypos 378
+ }
+set Nd7cfc3f0 [stack 0]
+ Multiply {
+  value {7.593994141 1.393476963 0 1}
+  name Multiply5
+  xpos -594
+  ypos 372
+  addUserKnob {20 User}
+ }
+ NoOp {
+  inputs 0
+  name ui
+  xpos 308
+  ypos -56
+  addUserKnob {20 User}
+  addUserKnob {7 zpos l "Z pos" R -1 1}
+  zpos 0.4
+ }
+ Input {
+  inputs 0
+  name Inputmask
+  xpos -92
+  ypos 910
+  number 1
+ }
+push $Nd75f2b40
+ Dot {
+  name Dot1
+  xpos 238
+  ypos 420
+ }
+ Soften {
+  amount 0.05
+  size 2.8
+  name Soften1
+  xpos 204
+  ypos 477
+  disable {{1-soft}}
+ }
+ Blur {
+  size {{bsize}}
+  name Blur2
+  xpos 204
+  ypos 515
+  disable {{1-soft}}
+ }
+ Group {
+  name Luma_to_Normals2
+  help "Performs a Sobel filter on the Luminance channel of an image to extract an approximation of a Normal map.\n\nFor a mathematical conversion of a displacement map to normals, do not use Details separation."
+  xpos 204
+  ypos 587
+  addUserKnob {20 luma_to_normals l "Luma to Normals"}
+  addUserKnob {26 div_pre l Pre-Process}
+  addUserKnob {7 blur R 0 10}
+  addUserKnob {7 gain}
+  gain 1
+  addUserKnob {26 div_details l "Details Separation"}
+  addUserKnob {7 size t "Bigger sizes will separate high and low frequencies more." R 0 100}
+  addUserKnob {7 details_weight t "How much the details affect the final output"}
+  addUserKnob {26 div_out l Output}
+  addUserKnob {4 value_check t "Some big values might create impossible normals. Use gain and Blur to ensure there are no error values.\n\nValues in red on error check represent a vertical normal (parallel to the camera) which would not normally be visible to the camera." M {Result "Check Errors" "" "" "" ""}}
+  addUserKnob {6 normalize t "Switch between -1 to 1 range or 0 to 1 range" +STARTLINE}
+  addUserKnob {6 legalize t "Normal maps should generally be represented with a vector magnitude of 1.\nTurning on legalization will scale all vectors to ensure they all have a magnitude of 1.\n\nYou may want to disable it for more interesting effects when generating normals for a fake refraction through an iDistort, where having vectors of different length adds depth." -STARTLINE}
+  addUserKnob {26 ""}
+  addUserKnob {26 copyright l "" t www.erwanleroy.com +STARTLINE T "v1.1 - Part of VectorTools by Erwan Leroy"}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -576
+   ypos -353
+  }
+set Nd82f69a0 [stack 0]
+  Saturation {
+   saturation 0
+   name Saturation1
+   xpos -576
+   ypos -238
+  }
+  Blur {
+   size {{parent.blur}}
+   name Blur2
+   xpos -576
+   ypos -204
+  }
+  Multiply {
+   value {{0.5*parent.gain}}
+   name Multiply1
+   xpos -576
+   ypos -134
+  }
+set Nd84f5b50 [stack 0]
+  Blur {
+   size {{parent.size}}
+   name Blur1
+   xpos -576
+   ypos -83
+  }
+  Dot {
+   name Dot2
+   xpos -542
+   ypos -45
+  }
+set N821f0100 [stack 0]
+  Matrix {
+   matrix {
+       {2 0 -2}
+       {1 0 -1}
+       {2 0 -2}
+     }
+   name Matrix1
+   xpos -576
+   ypos 36
+  }
+push $N821f0100
+  Dot {
+   name Dot3
+   xpos -432
+   ypos -45
+  }
+set N820f06c0 [stack 0]
+  Matrix {
+   matrix {
+       {-2 -1 -2}
+       {0 0 0}
+       {2 1 2}
+     }
+   name Matrix2
+   xpos -466
+   ypos 38
+  }
+  Dot {
+   name Dot4
+   xpos -432
+   ypos 92
+  }
+  ShuffleCopy {
+   inputs 2
+   red red
+   blue black
+   alpha black
+   name ShuffleCopy1
+   xpos -577
+   ypos 88
+  }
+  Multiply {
+   value {{(1-parent.details_weight)*(parent.size/10+1)}}
+   name Multiply2
+   xpos -577
+   ypos 129
+  }
+push $N820f06c0
+push $Nd84f5b50
+  Dot {
+   name Dot1
+   xpos -319
+   ypos -124
+  }
+  Merge2 {
+   inputs 2
+   operation from
+   name Merge1
+   xpos -353
+   ypos -49
+  }
+  Dot {
+   name Dot5
+   xpos -319
+   ypos -23
+  }
+set N818f8b80 [stack 0]
+  Matrix {
+   matrix {
+       {2 0 -2}
+       {1 0 -1}
+       {2 0 -2}
+     }
+   name Matrix3
+   xpos -353
+   ypos 31
+  }
+push $N818f8b80
+  Dot {
+   name Dot6
+   xpos -181
+   ypos -23
+  }
+  Matrix {
+   matrix {
+       {-2 -1 -2}
+       {0 0 0}
+       {2 1 2}
+     }
+   name Matrix4
+   xpos -215
+   ypos 33
+  }
+  Dot {
+   name Dot7
+   xpos -181
+   ypos 87
+  }
+  ShuffleCopy {
+   inputs 2
+   red red
+   blue black
+   alpha black
+   name ShuffleCopy2
+   xpos -353
+   ypos 83
+  }
+  Multiply {
+   value {{parent.details_weight}}
+   name Multiply3
+   xpos -353
+   ypos 119
+  }
+  Dot {
+   name Dot8
+   xpos -319
+   ypos 188
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge2
+   xpos -577
+   ypos 184
+  }
+  Expression {
+   temp_name0 mag
+   temp_expr0 sqrt(pow(r,2)+pow(g,2)+pow(b,2))
+   expr0 mag>1?r/mag:r
+   expr1 mag>1?g/mag:g
+   name Expression3
+   xpos -577
+   ypos 221
+   disable {{1-parent.legalize}}
+  }
+set N80ff1be0 [stack 0]
+  Dot {
+   name Dot9
+   xpos -400
+   ypos 225
+  }
+  Remove {
+   operation keep
+   channels rgb
+   name Remove2
+   xpos -434
+   ypos 270
+  }
+  Expression {
+   temp_name0 facing
+   temp_expr0 sqrt(-pow(r,2)-pow(g,2)+1)
+   expr0 isnan(facing)?1:0
+   expr1 0
+   name Expression1
+   xpos -434
+   ypos 316
+  }
+  Dot {
+   name Dot10
+   xpos -400
+   ypos 378
+  }
+push $N80ff1be0
+  Expression {
+   temp_name0 facing
+   temp_expr0 sqrt(-pow(r,bc)-pow(g,bc)+1)
+   expr2 isnan(facing)?0:facing
+   name Expression2
+   xpos -577
+   ypos 259
+   addUserKnob {20 User}
+   addUserKnob {7 bc l "blue control" R 0 3}
+   bc 2
+  }
+set N80cf13c0 [stack 0]
+  Remove {
+   operation keep
+   channels rgb
+   name Remove1
+   xpos -577
+   ypos 300
+  }
+  Grade {
+   white 0.5
+   add 0.5
+   name Grade1
+   xpos -577
+   ypos 338
+   disable {{1-parent.normalize}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.value_check}}
+   name Switch1
+   xpos -577
+   ypos 374
+  }
+  Output {
+   name Output1
+   xpos -577
+   ypos 418
+  }
+push $Nd82f69a0
+  Dot {
+   name Dot11
+   xpos 39
+   ypos -315
+  }
+set N809f72b0 [stack 0]
+  Emboss {
+   Angle 270
+   Width {{parent.Emboss4.Width}}
+   name Emboss7
+   xpos 5
+   ypos -277
+  }
+push $N809f72b0
+  Dot {
+   name Dot12
+   xpos -71
+   ypos -315
+  }
+set N807f5550 [stack 0]
+  Emboss {
+   Angle 180
+   Width {{parent.Emboss4.Width}}
+   name Emboss6
+   xpos -105
+   ypos -275
+  }
+push 0
+push $N807f5550
+  Dot {
+   name Dot13
+   xpos -181
+   ypos -315
+  }
+set N805f0be0 [stack 0]
+  Dot {
+   name Dot14
+   xpos -284
+   ypos -315
+  }
+  Emboss {
+   Width 0.5
+   name Emboss4
+   xpos -318
+   ypos -281
+  }
+push $N805f0be0
+  Emboss {
+   Angle 90
+   Width {{parent.Emboss4.Width}}
+   name Emboss5
+   xpos -215
+   ypos -275
+  }
+  Merge2 {
+   inputs 4+1
+   operation min
+   name Merge3
+   xpos -318
+   ypos -199
+  }
+set N15bf6590 [stack 0]
+  Grade {
+   white 1.82
+   gamma 0.1
+   black_clamp false
+   name Grade2
+   xpos -825
+   ypos 180
+  }
+set N15af6ce0 [stack 0]
+  Blur {
+   size 100
+   name Blur3
+   xpos -995
+   ypos 174
+  }
+push $N15af6ce0
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge4
+   xpos -920
+   ypos 238
+  }
+push $N80ff1be0
+  Copy {
+   inputs 2
+   from0 rgba.blue
+   to0 rgba.blue
+   name Copy1
+   xpos -920
+   ypos 268
+  }
+  Crop {
+   box {1 3 1911 1074}
+   crop false
+   name Crop1
+   xpos -920
+   ypos 306
+   disable true
+  }
+push $N15af6ce0
+  Invert {
+   name Invert1
+   xpos -701
+   ypos 174
+  }
+  Grade {
+   gamma 0.1
+   black_clamp false
+   name Grade3
+   xpos -701
+   ypos 212
+  }
+push $N15bf6590
+push $N80cf13c0
+  Viewer {
+   inputs 2
+   frame_range 1-100
+   center_fstop -1
+   name Viewer1
+   selected true
+   xpos -835
+   ypos -159
+  }
+ end_group
+push $Nd7cfc3f0
+ Dot {
+  name P
+  label P
+  note_font_size 50
+  xpos -295
+  ypos 448
+ }
+ Axis2 {
+  inputs 0
+  translate {{parent.CalcRGB.ValueThing.r x4 3.784179688} {parent.CalcRGB.ValueThing.g x4 5.949999809} {parent.ui.zpos}}
+  name Axis1
+  xpos -573
+  ypos 271
+ }
+ Group {
+  inputs 3
+  name N_PointLight1
+  help "Takes normal and position passes to generate a point light in 3d space.\nLight input can be any node containing 3d position info (like an Axis or a Light node).\nYou can then control the position of the Point light by either tweaking that node in the 3d viewer or through its properties panel."
+  xpos -329
+  ypos 587
+  addUserKnob {20 N_PointLight}
+  addUserKnob {41 in l "normal input" t "Select the layer containing normals information from your norm. input" T Shuffle_Norm.in}
+  addUserKnob {41 in_1 l "position input" t "Select the layer containing position information from your pos. input" T Shuffle_Pos.in}
+  addUserKnob {26 ""}
+  addUserKnob {18 colour}
+  colour 1
+  addUserKnob {6 colour_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 colour_panelDropped_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {7 intensity R 0 10}
+  intensity 1
+  addUserKnob {26 ""}
+  addUserKnob {4 fallofftype l "falloff type" M {"No Falloff" Linear Quadratic Cubic ""}}
+  addUserKnob {7 falloff}
+  falloff 0.5
+ }
+  Input {
+   inputs 0
+   name pos
+   xpos -316
+   ypos -324
+   number 1
+  }
+add_layer {Pos Pos.x Pos.y Pos.z}
+  Shuffle {
+   in rgb
+   out Pos
+   name Shuffle_Pos
+   xpos -316
+   ypos -209
+  }
+  Input {
+   inputs 0
+   name norm
+   xpos -171
+   ypos -324
+   number 2
+  }
+add_layer {Normal Normal.x Normal.y Normal.z}
+  Shuffle {
+   in rgb
+   out Normal
+   name Shuffle_Norm
+   xpos -171
+   ypos -274
+  }
+  Copy {
+   inputs 2
+   from0 Pos.x
+   to0 Pos.x
+   from1 Pos.y
+   to1 Pos.y
+   from2 Pos.z
+   to2 Pos.z
+   name Copy1
+   xpos -171
+   ypos -230
+  }
+set N7e9f0100 [stack 0]
+  Expression {
+   expr3 "falloff*sqrt(pow2(light.position.x-Pos.x) + pow2(light.position.y-Pos.y) + pow2(light.position.z-Pos.z))"
+   name FALLOFF
+   xpos 107
+   ypos -212
+   addUserKnob {20 User}
+  }
+set N7e9fe210 [stack 0]
+  Expression {
+   expr3 clamp(1/(a*a*a),0,1)
+   name Cubic
+   xpos 201
+   ypos -171
+  }
+push $N7e9f0100
+  Expression {
+   temp_name0 vx
+   temp_expr0 "(lightPos.x-Pos.x)/sqrt( pow2(lightPos.x-Pos.x) + pow2(lightPos.y-Pos.y) + pow2(lightPos.z-Pos.z))"
+   temp_name1 vy
+   temp_expr1 "(lightPos.y-Pos.y)/sqrt( pow2(lightPos.x-Pos.x) + pow2(lightPos.y-Pos.y) + pow2(lightPos.z-Pos.z))"
+   temp_name2 vz
+   temp_expr2 "(lightPos.z-Pos.z)/sqrt( pow2(lightPos.x-Pos.x) + pow2(lightPos.y-Pos.y) + pow2(lightPos.z-Pos.z))"
+   channel3 {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+   expr3 "(Normal.x*vx + Normal.y*vy + Normal.z*vz)*intensity"
+   name POINTLIGHT
+   xpos -171
+   ypos -73
+   addUserKnob {20 User}
+   addUserKnob {13 lightPos}
+   lightPos {{parent.light.position} {parent.light.position} {parent.light.position}}
+   addUserKnob {13 vector}
+   addUserKnob {7 dist}
+  }
+set N7e5fad10 [stack 0]
+  Dot {
+   name Dot1
+   xpos -137
+   ypos -34
+  }
+set N7e4fa950 [stack 0]
+  Dot {
+   name Dot2
+   xpos -137
+   ypos 4
+  }
+set N7e4ff780 [stack 0]
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge3
+   xpos 201
+   ypos -1
+  }
+push $N7e9fe210
+  Expression {
+   expr3 clamp(1/pow2(a),0,1)
+   name Quadratic
+   xpos 107
+   ypos -171
+  }
+push $N7e4fa950
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge2
+   xpos 107
+   ypos -39
+  }
+push $N7e9fe210
+  Expression {
+   expr3 clamp(1/a,0,1)
+   name Linear
+   xpos 11
+   ypos -172
+  }
+push $N7e5fad10
+  Merge2 {
+   inputs 2
+   operation multiply
+   name Merge1
+   xpos 11
+   ypos -73
+  }
+push $N7e4ff780
+  Switch {
+   inputs 4
+   which {{fallofftype}}
+   name Switch_Falloff
+   xpos -171
+   ypos 139
+  }
+  Expression {
+   expr0 alpha*colour.r
+   expr1 alpha*colour.g
+   expr2 alpha*colour.b
+   name Expression1
+   selected true
+   xpos -171
+   ypos 183
+  }
+  Output {
+   name Output1
+   xpos -171
+   ypos 240
+  }
+  Input {
+   inputs 0
+   name light
+   xpos -583
+   ypos -71
+   addUserKnob {20 User}
+   addUserKnob {13 position}
+   position {{input.translate} {input.translate} {input.translate}}
+  }
+ end_group
+set N7f1f6700 [stack 0]
+ Remove {
+  operation keep
+  channels rgba
+  name Remove1
+  xpos -561
+  ypos 587
+ }
+ Blur {
+  size 200
+  name Blur1
+  xpos -561
+  ypos 675
+ }
+ Grade {
+  channels rgba
+  white 1.32
+  black_clamp false
+  name Grade1
+  xpos -561
+  ypos 761
+ }
+push $N7f1f6700
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -329
+  ypos 755
+  disable {{1-palpha}}
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge1
+  xpos -329
+  ypos 910
+  disable {{"\[python 1-(1\\ if\\ nuke.thisGroup().input(1)\\ else\\ 0)]" x1001 0}}
+ }
+ Output {
+  name Output1
+  xpos -329
+  ypos 1045
+ }
+ Sphere {
+  inputs 0
+  radius 0.2
+  translate {{Axis1.translate.x} {Axis1.translate.y} {Axis1.translate.z}}
+  name Sphere1
+  xpos -790
+  ypos 415
+ }
+push $Nd7cfc3f0
+ Shuffle {
+  name Shuffsample
+  xpos -599
+  ypos 434
+ }
+ NoOp {
+  name CalcRGB
+  knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\n\nif k.name() == 'point1':\n    x, y = n\['point1'].value()\n  \n    sampler = nuke.toNode('Shuffsample')\n\n    r, g, b = \[sampler.sample(chan, x, y) for chan in (\"red\", \"green\", \"blue\")]\n\n    pickpos = n\['ValueThing']\n    pickpos.setValue(r, 0)\n    pickpos.setValue(g, 1)\n    pickpos.setValue(b, 2)"
+  selected true
+  xpos -705
+  ypos 498
+  addUserKnob {20 User}
+  addUserKnob {12 point1 l Center}
+  point1 {200 200}
+  addUserKnob {18 ValueThing l RGB R 0 100}
+  ValueThing {0.9790039062 0.9842215776 0.1764723063}
+  addUserKnob {6 ValueThing_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 ValueThing_panelDropped_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 RGB_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+end_group
+push $cut_paste_input
+NoOp {
+ name AE_Node_to_Text
+ tile_color 0xff9e00ff
+ selected true
+ xpos -669
+ ypos 987
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 text l "" +STARTLINE T "<font size=200><b>AE Node to Text  &#x2635;"}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_1 l "" +STARTLINE T "select the nodes\nyou want to convert\nthen press:   "}
+ addUserKnob {22 write l "<b><font color = orange>Write to Text" -STARTLINE T "def nodeToText():\n    import getpass\n    \n    # creating the clipboard text file in the user file path\n    user = getpass.getuser()\n    tempFile = \"/data/share/%s/nuke_Clipboard.txt\" % user\n    open(tempFile, \"w\")\n    \n    \n    # selected node\n    selnode = nuke.selectedNode()\n    xpos = selnode\['xpos'].value()\n    ypos = selnode\['ypos'].value()\n    \n    # storing the selected node in tempFile\n    nuke.nodeCopy(tempFile)\n    \n    \n    # creating the Switch node\n    tonode = nuke.createNode('AppendClip',  inpanel = False)\n    \n    # deselect node\n    selnode.setSelected(False)\n    \n    # connection the inputs\n    for i in range(selnode.inputs()):\n        tonode.setInput(i,selnode.input(i))\n    \n    # tonode rename\n    getName = selnode.name()\n    nuke.delete(selnode)\n    tonode.setName(getName)\n    tonode\['label'].setValue(\"<b>LOCKED\")\n    \n    # fetching data from the tempFile as a string\n    with open(tempFile, 'r') as file:\n    \n        # Read the entire contents of the file as a string\n        file_contents = file.read()\n    \n    # Create a Multiline_Eval_Knob\n    text_knob = nuke.Multiline_Eval_String_Knob('text_input', 'Text Input', file_contents)\n    \n    # Add the knob to the Read node\n    tonode.addKnob(text_knob)\n    \n    # Add the get Node Button\n    \n    button_knob = nuke.PyScript_Knob('button_knob','Get Node','import getpass\\nuser = getpass.getuser()\\ntempFile = \"/data/share/%s/nuke_Clipboard.txt\" % user\\nnodeText  = nuke.thisNode()\[\"text_input\"].getText()\\nxpos = nuke.thisNode()\[\"xpos\"].value()\\nypos = nuke.thisNode()\[\"ypos\"].value()\\nwith open(tempFile, \"w\") as f:\\n    f.write(nodeText)\\nnuke.thisNode().setName(\"tempName\")\\nnuke.nodePaste(tempFile)\\nfor i in range(nuke.thisNode().inputs()):\\n    nuke.selectedNode().setInput(i,nuke.thisNode().input(i))\\nnuke.delete(nuke.thisNode())\\nnuke.selectedNode().setXpos(int(xpos))\\nnuke.selectedNode().setYpos(int(ypos))\\nnuke.selectedNode().setSelected(False)')\n    \n    tonode.addKnob(button_knob)\n    tonode.setXpos(int(xpos))\n    tonode.setYpos(int(ypos))\n\nfor n in nuke.selectedNodes():\n    if n\['label'].value() != \"<b>LOCKED\":\n        n.selectOnly()\n        nodeToText()\n    else:\n        pass"}
+ addUserKnob {22 getNodes l "<font color = SeaGreen><b>GET Nodes" -STARTLINE T "def getAll():\n    for n in nuke.allNodes():\n        if n.knob('button_knob'):\n            n.selectOnly()\n            n\['button_knob'].execute()\n        else:\n            pass\n\ndef getSelected():\n    for n in nuke.selectedNodes():\n        if n.knob('button_knob'):\n            n.selectOnly()\n            n\['button_knob'].execute()\n        else:\n            pass\n\nif nuke.thisNode()\['pulldown'].value() == \"All Nodes\":\n    getAll()\nelse:\n    getSelected()"}
+ addUserKnob {4 pulldown l "" -STARTLINE M {"All Nodes" Selected "" "" "" "" "" "" "" "" ""}}
+ pulldown Selected
+ addUserKnob {22 findNodes l "<font color = gray><b>Find Nodes" -STARTLINE T "nodesList = \[]\n\nfor n in nuke.allNodes(\"AppendClip\"):\n    if n\[\"label\"].value() == \"<b>LOCKED\":\n        n.setSelected(True)\n        nodesList.append(n.name())\n\nmessage = \"\\n\".join(nodesList)\nnuke.message(message)"}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_2 l "" +STARTLINE T "<font color = gray>.: by Ali Ehtemami"}
+}
+NoOp {
+ inputs 0
+ name AE_MoveNodes
+ selected true
+ xpos -667
+ ypos 1174
+ addUserKnob {20 User}
+ addUserKnob {26 textHeader l "" +STARTLINE T "<font size = 5>AE<font size = 50>&#8596;<b>Move</b>&#8597;<font size = 5>Nodes"}
+ addUserKnob {26 _1 l "" +STARTLINE T " "}
+ addUserKnob {2 getFile l "menu.py path" t "Browse and select the Menu.py file in your system."}
+ addUserKnob {1 moveNodesCode +INVISIBLE}
+ moveNodesCode "######## AE_moveNodes #### START ##################################################\n\nfrom time import sleep\nfrom threading import Thread\n\ndef AE_moveNodes(direction,gain):\n\n    nodes = nuke.selectedNodes()\n    gain = int(gain)\n\n    #### RIGHT ###############################\n    def moveRight():          \n        for x in range(gain):\n            for n in nodes:\n                n.setXpos(int(n\['xpos'].value()+(gain-x)))\n            sleep(0.001)\n            print \"\"\n    \n    \n    #########################################\n\n    #### LEFT ###############################\n    def moveLeft():          \n        for x in range(gain):\n            for n in nodes:\n                n.setXpos(int(n\['xpos'].value()-(gain-x)))\n            sleep(0.001)\n            print \"\"\n    \n    \n    #########################################        \n\n    #### UP ###############################\n    def moveUp():          \n        for x in range(gain):\n            for n in nodes:\n                n.setYpos(int(n\['ypos'].value()-(gain-x)))\n            sleep(0.001)\n            print \"\"\n    \n    \n    #########################################   \n     \n    #### DOWN ###############################\n    def moveDown():          \n        for x in range(gain):\n            for n in nodes:\n                n.setYpos(int(n\['ypos'].value()+(gain-x)))\n            sleep(0.001)\n            print \"\"\n    \n    \n    ######################################### \n\n\n    ###### DIRECTION DEFINE #################\n    if direction == \"Right\":\n        countdown_thread = threading.Thread(target = moveRight)\n        countdown_thread.start()\n    elif direction == \"Left\":\n        countdown_thread = threading.Thread(target = moveLeft)\n        countdown_thread.start()\n    elif direction == \"Up\":  \n        countdown_thread = threading.Thread(target = moveUp)\n        countdown_thread.start()\n    elif direction == \"Down\":   \n        countdown_thread = threading.Thread(target = moveDown)\n        countdown_thread.start()\n\n\n\nutilitiesMenu.addCommand(\"Edit/Node/AE_moveNodes/SH_Right\", 'AE_moveNodes(\"Right\",\"MOVENODES_GAIN\")', \"MOVENODES_RIGHT\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_moveNodes/SH_Left\", 'AE_moveNodes(\"Left\",\"MOVENODES_GAIN\")', \"MOVENODES_LEFT\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_moveNodes/SH_Up\", 'AE_moveNodes(\"Up\",\"MOVENODES_GAIN\")', \"MOVENODES_UP\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_moveNodes/SH_Down\", 'AE_moveNodes(\"Down\",\"MOVENODES_GAIN\")', \"MOVENODES_DOWN\", shortcutContext=2)\n\nutilitiesMenu.addCommand(\"Edit/Node/AE_moveNodes/CT_Right\", 'AE_moveNodes(\"Right\",\"MOVENODES_BOOST_GAIN\")', \"MOVENODES_BOOST_RIGHT\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_moveNodes/CT_Left\", 'AE_moveNodes(\"Left\",\"MOVENODES_BOOST_GAIN\")', \"MOVENODES_BOOST_LEFT\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_moveNodes/CT_Up\", 'AE_moveNodes(\"Up\",\"MOVENODES_BOOST_GAIN\")', \"MOVENODES_BOOST_UP\", shortcutContext=2)\nutilitiesMenu.addCommand(\"Edit/Node/AE_moveNodes/CT_Down\", 'AE_moveNodes(\"Down\",\"MOVENODES_BOOST_GAIN\")', \"MOVENODES_BOOST_DOWN\", shortcutContext=2)\n######## AE_moveNodes #### END ####################################################"
+ addUserKnob {26 ""}
+ addUserKnob {22 addMoveNodes l "<font  color = orange><b>Add Move Nodes" T "moveNodesCode = nuke.thisNode()\['moveNodesCode'].value()\n\n##### moveNodes ###############################\n\nuserRight = nuke.thisNode()\['rightKey'].value()\nuserLeft = nuke.thisNode()\['leftKey'].value()\nuserUp = nuke.thisNode()\['upKey'].value()\nuserDown = nuke.thisNode()\['downKey'].value()\nuserGain = int(nuke.thisNode()\['moveNodesGain'].value())\n\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_RIGHT\", str(userRight))\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_LEFT\", str(userLeft))\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_UP\", str(userUp))\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_DOWN\", str(userDown))\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_GAIN\", str(userGain))\n\n##### moveNodes Boost ###############################\n\nuserBoostRight = nuke.thisNode()\['rightBoostKey'].value()\nuserBoostLeft = nuke.thisNode()\['leftBoostKey'].value()\nuserBoostUp = nuke.thisNode()\['upBoostKey'].value()\nuserBoostDown = nuke.thisNode()\['downBoostKey'].value()\nuserBoostGain = int(nuke.thisNode()\['moveNodesBoostGain'].value())\n\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_BOOST_RIGHT\", str(userBoostRight))\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_BOOST_LEFT\", str(userBoostLeft))\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_BOOST_UP\", str(userBoostUp))\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_BOOST_DOWN\", str(userBoostDown))\nmoveNodesCode = moveNodesCode.replace(\"MOVENODES_BOOST_GAIN\", str(userBoostGain))\n\n\n\nfile_path = nuke.thisNode()\['getFile'].value()\n\nwith open(file_path, \"a\") as file:\n    file.write('\\n' + moveNodesCode)\n\nnuke.message(\"AE_MoveNodes Function added to the menu.py file\\nplease restart Nuke to be able to use the function\")" +STARTLINE}
+ addUserKnob {22 clearCode l "<b>Clear Code" -STARTLINE T "file_path = nuke.thisNode()\['getFile'].value()\n\nstart_context = \"######## AE_moveNodes #### START ##################################################\"\nend_context = \"######## AE_moveNodes #### END ####################################################\"\n\n# Open the original file for reading and writing\nwith open(file_path, \"r+\") as file:\n    # Read the file and store its contents as a list of lines\n    lines = file.readlines()\n    # Reset the file pointer to the beginning\n    file.seek(0)\n    # Traverse the list of lines and remove the lines between the start and end context\n    inside_range = False\n    for line in lines:\n        if start_context in line:\n            inside_range = True\n        elif end_context in line:\n            inside_range = False\n            continue\n        if not inside_range:\n            file.write(line)\n    # Truncate the file at the current position (i.e. remove any extra lines)\n    file.truncate()\n\n\nnuke.message(\"AE_MoveNodes Function removed from the menu.py file\\nplease restart Nuke to be able to see the result\")"}
+ addUserKnob {26 ""}
+ addUserKnob {20 scaleNodesGRP l "Scale Nodes Keys" n 1}
+ addUserKnob {3 moveNodesGain l <b><i>Gain}
+ moveNodesGain 15
+ addUserKnob {1 rightKey l "<b><font color = orange>Right"}
+ rightKey right
+ addUserKnob {1 leftKey l "<b><font color = orange>Left" -STARTLINE}
+ leftKey left
+ addUserKnob {1 upKey l "<b><font color = orange>Up" -STARTLINE}
+ upKey up
+ addUserKnob {1 downKey l "<b><font color = orange>Down" -STARTLINE}
+ downKey down
+ addUserKnob {26 ""}
+ addUserKnob {3 moveNodesBoostGain l "<b><i>Boost Gain"}
+ moveNodesBoostGain 25
+ addUserKnob {1 rightBoostKey l "<b><font color = orange>Right Boost"}
+ rightBoostKey ctrl+right
+ addUserKnob {1 leftBoostKey l "<b><font color = orange>Left Boost" -STARTLINE}
+ leftBoostKey ctrl+left
+ addUserKnob {1 upBoostKey l "<b><font color = orange>Up Boost" -STARTLINE}
+ upBoostKey ctrl+up
+ addUserKnob {1 downBoostKey l "<b><font color = orange>Down Boost" -STARTLINE}
+ downBoostKey ctrl+down
+ addUserKnob {22 updateButton l "<b><font color = green>Update Keys" T "nuke.thisNode()\['clearCode'].execute()\nnuke.thisNode()\['addMoveNodes'].execute()\n" +STARTLINE}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {26 textTail l "" +STARTLINE T "<b><i><font color = gray>.: by Ali Ehtemami"}
+ addUserKnob {20 tab l Info}
+ addUserKnob {26 text l "" +STARTLINE T "Instructions on how to use this tool:\n\n1. Click on the browser icon and locate the \"menu.py\" file in your .nuke folder.\n2. Set the hotkeys to your preference.\n3. Click on \"Add Scale Nodes\".\n4. Use the hotkeys to move right, left, up, and down.\n\nAdditionally:\n\n- You can remove the AE_Scale_Nodes code from the \"menu.py\" file by clicking on the \"Clear Code\" button.\n- You can update the hotkeys by clicking on the \"Update\" button.\n\nSpecial thanks to Mateusz Krząstek for fixing some DAG animation errors.\n\naliehtemami.com\nali.ehtemami1@gmail.com"}
+}
+Group {
+ inputs 0
+ name AE_TC_Tool
+ tile_color 0xff8942ff
+ label "- - - - - - - - - -\n\[value viewsw]"
+ note_font "Bitstream Vera Sans Bold"
+ selected true
+ xpos -665
+ ypos 1243
+ addUserKnob {20 User}
+ addUserKnob {26 header l "" +STARTLINE T "<p><b> <font size=7 color=#FF5813>AE Tech Check\n\n"}
+ addUserKnob {26 text_3 l "" +STARTLINE T "<b><font size=4>:: by Ali Ehtemami"}
+ addUserKnob {26 ""}
+ addUserKnob {68 viewsw l <b>View M {Shot "VFX Difference" "VFX Isolated" "Grain Difference" Grain "Sharpness Difference" Sharpness "Log View" "Clamp Check" Saturation "DI mattes" "" "" "" "" "" "" "" "" ""}}
+ viewsw "VFX Difference"
+ addUserKnob {41 white l gain -STARTLINE T Grade9.white}
+ addUserKnob {26 ""}
+ addUserKnob {26 _1 l "" +STARTLINE T "<font size=3><b><a href=\"http://aliehtemami.com.au\"style=\"color: #FF5813\">www.aliehtemami.com.au</a>"}
+}
+ Rectangle {
+  inputs 0
+  area {983 329.5 1493 1354.5}
+  name Rectangle1
+  xpos -667
+  ypos 697
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle1
+  xpos -667
+  ypos 729
+ }
+ Dot {
+  name Dot2
+  xpos -633
+  ypos 775
+ }
+set N743fae00 [stack 0]
+ EdgeBlur {
+  size {{rlsize}}
+  output rgba.alpha
+  name EdgeBlur1
+  xpos -667
+  ypos 812
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.1
+  whitepoint 0.1
+  white_clamp true
+  name Grade3
+  xpos -667
+  ypos 870
+ }
+set N8defefe0 [stack 0]
+push $N743fae00
+ Input {
+  inputs 0
+  name Plate
+  xpos 714
+  ypos 549
+  number 1
+ }
+ Dot {
+  name Dot103
+  label Plate
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 51
+  xpos 748
+  ypos 635
+ }
+ Dot {
+  name Dot86
+  xpos 748
+  ypos 810
+ }
+set N7cef3ee0 [stack 0]
+ Dot {
+  name Dot97
+  xpos 44
+  ypos 1188
+ }
+set N759fa9b0 [stack 0]
+ Input {
+  inputs 0
+  name Comp
+  xpos 1156
+  ypos 546
+ }
+ Dot {
+  name Dot87
+  label Comp
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 51
+  xpos 1190
+  ypos 644
+ }
+ Dot {
+  name Dot88
+  xpos 1190
+  ypos 890
+ }
+set N15df53b0 [stack 0]
+ Dot {
+  name Dot98
+  xpos 148
+  ypos 1266
+ }
+set N759f1cd0 [stack 0]
+ Keymix {
+  inputs 3
+  name Keymix1
+  xpos -520
+  ypos 766
+ }
+ Grade {
+  inputs 1+1
+  white 0
+  add 1
+  black_clamp false
+  name Grade2
+  xpos -520
+  ypos 876
+ }
+set N744f6350 [stack 0]
+push $N759fa9b0
+push $N759f1cd0
+ Switch {
+  inputs 3
+  which {{toggle}}
+  name Switch3
+  tile_color 0x9fffff
+  xpos -959
+  ypos 1217
+ }
+ Saturation {
+  saturation 4
+  name Saturation3
+  tile_color 0x555555ff
+  xpos -959
+  ypos 1298
+ }
+ Dot {
+  name Dot100
+  label "Saturation View"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos -925
+  ypos 1709
+ }
+ Dot {
+  name Dot111
+  xpos -925
+  ypos 2012
+ }
+push $N744f6350
+push $N759fa9b0
+push $N759f1cd0
+ Switch {
+  inputs 3
+  which {{toggle}}
+  name Switch1
+  tile_color 0x9fffff
+  xpos 10
+  ypos 1263
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color 1
+  name Constant1
+  xpos -100
+  ypos 1145
+ }
+ Merge2 {
+  inputs 2
+  operation max
+  name Merge30
+  tile_color 0x555555ff
+  xpos -100
+  ypos 1263
+ }
+ Grade {
+  add -1
+  black_clamp false
+  name Grade46
+  tile_color 0x555555ff
+  xpos -100
+  ypos 1287
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color 0.18
+  name Constant3
+  xpos -271
+  ypos 1338
+ }
+ Merge2 {
+  inputs 2
+  operation hypot
+  name Merge31
+  tile_color 0x555555ff
+  xpos -100
+  ypos 1362
+ }
+ Dot {
+  name Dot90
+  label "Clamp Check"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos -66
+  ypos 1718
+ }
+ Dot {
+  name Dot113
+  xpos -66
+  ypos 1991
+ }
+push $N744f6350
+push $N759fa9b0
+push $N759f1cd0
+ Switch {
+  inputs 3
+  which {{toggle}}
+  name Switch4
+  tile_color 0x9fffff
+  xpos -1449
+  ypos 1294
+ }
+ PLogLin {
+  operation "lin to log"
+  name PLogLin3
+  tile_color 0x555555ff
+  xpos -1449
+  ypos 1357
+ }
+ Sharpen {
+  amount 3
+  name Sharpen1
+  tile_color 0x555555ff
+  xpos -1449
+  ypos 1398
+ }
+ Dot {
+  name Dot101
+  label "Log View"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos -1415
+  ypos 1704
+ }
+ Dot {
+  name Dot110
+  xpos -1415
+  ypos 2084
+ }
+push $N744f6350
+push $N759fa9b0
+push $N759f1cd0
+ Switch {
+  inputs 3
+  which {{toggle}}
+  name Switch2
+  tile_color 0x9fffff
+  xpos -520
+  ypos 1156
+ }
+ PLogLin {
+  operation "lin to log"
+  name PLogLin2
+  tile_color 0x555555ff
+  xpos -520
+  ypos 1551
+ }
+ Laplacian {
+  name Laplacian1
+  tile_color 0x555555ff
+  xpos -520
+  ypos 1575
+ }
+ PLogLin {
+  name PLogLin1
+  tile_color 0x555555ff
+  xpos -520
+  ypos 1611
+ }
+ Grade {
+  blackpoint 0.0002
+  white 170
+  gamma 0.1
+  black_clamp false
+  name Grade47
+  tile_color 0x555555ff
+  xpos -520
+  ypos 1635
+ }
+ Dot {
+  name Dot99
+  label "Sharpnes View"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos -486
+  ypos 1713
+ }
+ Dot {
+  name Dot112
+  xpos -486
+  ypos 2009
+ }
+push $N759f1cd0
+ PLogLin {
+  operation "lin to log"
+  name PLogLin6
+  tile_color 0x555555ff
+  xpos -313
+  ypos 1548
+ }
+ Laplacian {
+  name Laplacian3
+  tile_color 0x555555ff
+  xpos -313
+  ypos 1572
+ }
+ PLogLin {
+  name PLogLin7
+  tile_color 0x555555ff
+  xpos -313
+  ypos 1608
+ }
+ Grade {
+  blackpoint 0.0002
+  white 170
+  gamma 0.1
+  black_clamp false
+  name Grade6
+  tile_color 0x555555ff
+  xpos -313
+  ypos 1632
+ }
+set N731f4ee0 [stack 0]
+push $N759fa9b0
+ PLogLin {
+  operation "lin to log"
+  name PLogLin4
+  tile_color 0x555555ff
+  xpos -417
+  ypos 1550
+ }
+ Laplacian {
+  name Laplacian2
+  tile_color 0x555555ff
+  xpos -417
+  ypos 1574
+ }
+ PLogLin {
+  name PLogLin5
+  tile_color 0x555555ff
+  xpos -417
+  ypos 1610
+ }
+ Grade {
+  blackpoint 0.0002
+  white 170
+  gamma 0.1
+  black_clamp false
+  name Grade5
+  tile_color 0x555555ff
+  xpos -417
+  ypos 1634
+ }
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge2
+  tile_color 0x555555ff
+  xpos -417
+  ypos 1673
+ }
+ Dot {
+  name Dot4
+  label "Sharpness Difference"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos -383
+  ypos 1824
+ }
+ Dot {
+  name Dot3
+  xpos -383
+  ypos 2011
+ }
+push $N8defefe0
+push $N743fae00
+push $N7cef3ee0
+ Dot {
+  name Dot1
+  xpos 1375
+  ypos 1640
+ }
+set Ned4f69a0 [stack 0]
+push $Ned4f69a0
+ Blur {
+  size 2
+  name Blur1
+  tile_color 0x555555ff
+  xpos 1341
+  ypos 1790
+ }
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge1
+  tile_color 0x555555ff
+  xpos 1451
+  ypos 1796
+ }
+ Grade {
+  white 100
+  black_clamp false
+  name Grade1
+  tile_color 0x555555ff
+  xpos 1337
+  ypos 1846
+ }
+set Ned2fa440 [stack 0]
+push $N15df53b0
+ Dot {
+  name Dot91
+  xpos 1190
+  ypos 1324
+ }
+set Necfeb740 [stack 0]
+push $Necfeb740
+ Blur {
+  size 2
+  name Blur18
+  tile_color 0x555555ff
+  xpos 1156
+  ypos 1474
+ }
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge26
+  tile_color 0x555555ff
+  xpos 1311
+  ypos 1480
+ }
+set Neceede10 [stack 0]
+ Grade {
+  white 100
+  black_clamp false
+  name Grade45
+  tile_color 0x555555ff
+  xpos 1156
+  ypos 1559
+ }
+set N72ef3cb0 [stack 0]
+ Keymix {
+  inputs 3
+  name Keymix2
+  xpos 1475
+  ypos 1895
+ }
+ Grade {
+  inputs 1+1
+  white 0
+  add 1
+  black_clamp false
+  name Grade4
+  xpos 1475
+  ypos 2005
+ }
+push $Ned2fa440
+push $N72ef3cb0
+ Dot {
+  name Dot93
+  label "Grain View"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos 1190
+  ypos 1728
+ }
+ Switch {
+  inputs 3
+  which {{toggle}}
+  name Switch7
+  tile_color 0x9fffff
+  xpos 1156
+  ypos 1846
+ }
+ Dot {
+  name Dot106
+  xpos 1190
+  ypos 2089
+ }
+push $N7cef3ee0
+ Dot {
+  name Dot92
+  xpos 1821
+  ypos 1340
+ }
+set N72af0ab0 [stack 0]
+push $N72af0ab0
+ Blur {
+  size 2
+  name Blur17
+  tile_color 0x555555ff
+  xpos 1787
+  ypos 1490
+ }
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge27
+  tile_color 0x555555ff
+  xpos 1942
+  ypos 1496
+ }
+ Grade {
+  white 500
+  black_clamp false
+  name Grade43
+  tile_color 0x555555ff
+  xpos 1942
+  ypos 1544
+ }
+push $Neceede10
+ Grade {
+  white 500
+  black_clamp false
+  name Grade42
+  tile_color 0x555555ff
+  xpos 1560
+  ypos 1557
+ }
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge28
+  tile_color 0x555555ff
+  xpos 1733
+  ypos 1615
+ }
+ Dot {
+  name Dot94
+  label "Grain Difference"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos 1767
+  ypos 1724
+ }
+ Dot {
+  name Dot105
+  xpos 1767
+  ypos 2189
+ }
+push $N15df53b0
+push $N7cef3ee0
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge24
+  tile_color 0x555555ff
+  xpos 714
+  ypos 887
+ }
+set N724f0960 [stack 0]
+ Dot {
+  name Dot89
+  xpos 407
+  ypos 1040
+ }
+ Dot {
+  name Dot96
+  label "Isolated VFX"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos 407
+  ypos 1727
+ }
+ Dot {
+  name Dot108
+  xpos 407
+  ypos 2094
+ }
+push $N724f0960
+ Grade {
+  white 50
+  black_clamp false
+  name Grade35
+  tile_color 0x555555ff
+  xpos 714
+  ypos 971
+ }
+ Saturation {
+  saturation 0
+  mode Maximum
+  name Saturation1
+  selected true
+  xpos 714
+  ypos 1104
+ }
+ Grade {
+  white {1 0 0.517079 1}
+  white_panelDropped true
+  black_clamp false
+  name Grade7
+  xpos 714
+  ypos 1128
+ }
+ Grade {
+  white 4
+  black_clamp false
+  name Grade9
+  xpos 714
+  ypos 1154
+ }
+ FilterErode {
+  channels rgba
+  size -5
+  name FilterErode1
+  xpos 714
+  ypos 1243
+  disable true
+ }
+push $Necfeb740
+ Saturation {
+  saturation 0
+  name Saturation2
+  xpos 895
+  ypos 1321
+ }
+ Grade {
+  white 0.5
+  black_clamp false
+  name Grade8
+  xpos 895
+  ypos 1345
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge25
+  tile_color 0x555555ff
+  xpos 714
+  ypos 1345
+ }
+ Dot {
+  name Dot95
+  label "VFX Difference view"
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos 748
+  ypos 1725
+ }
+ Dot {
+  name Dot107
+  xpos 748
+  ypos 2112
+ }
+set N71bfe6b0 [stack 0]
+push $N744f6350
+push $N759fa9b0
+push $N759f1cd0
+ Switch {
+  inputs 3
+  which {{toggle}}
+  name Switch6
+  tile_color 0x9fffff
+  xpos 114
+  ypos 1619
+ }
+ Dot {
+  name Dot104
+  label View
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 31
+  xpos 148
+  ypos 1886
+ }
+ Switch {
+  inputs 10
+  which {{viewsw}}
+  name Switch5
+  xpos 114
+  ypos 2206
+ }
+ Output {
+  name Output1
+  xpos 114
+  ypos 2316
+ }
+push $N731f4ee0
+push $N71bfe6b0
+ Viewer {
+  inputs 2
+  frame_range 1001-1001
+  center_fstop -1
+  input_process false
+  name Viewer1
+  xpos -1180
+  ypos 1454
+ }
+end_group
+push $cut_paste_input
+Group {
+ name AE_Balance_Grade
+ tile_color 0xf244dff
+ label "<center><font color = 'red'> \[value slope_cdl.0]\n<font color = 'green'> \[value slope_cdl.1]\n<font color = 'blue'> \[value slope_cdl.2]"
+ note_font "Verdana Bold"
+ selected true
+ xpos -667
+ ypos 881
+ addUserKnob {20 User}
+ addUserKnob {26 header_text l "" +STARTLINE T "<h1><font>&#9878;  AE Balance Grade"}
+ addUserKnob {26 ""}
+ addUserKnob {26 hint l "" +STARTLINE T "click on the colorpicker of the SAMPLE knob\non the viewer hold CTRL+ALT+SHIFT and select a Gray region from your image\n"}
+ addUserKnob {41 sample l "<b><h3><font color = orange>Sample" T OCIOCDLTransform1.slope}
+ addUserKnob {26 attention l "" -STARTLINE T "<h1><font color = orange>  &#9754;"}
+ addUserKnob {26 ""}
+ addUserKnob {41 slope_cdl l "Neutral CDL" T OCIOCDLTransform2.slope}
+ addUserKnob {41 mix T OCIOCDLTransform1.mix}
+ addUserKnob {26 text l "" +STARTLINE T " "}
+ addUserKnob {22 get_cdl l "Get CDL" T "#### GET CDL ######\nthisnode = nuke.thisNode()\['name'].value()\nnuke.thisNode().setSelected(False)\n\nwith nuke.root():\n\n    node = nuke.createNode(\"OCIOCDLTransform\")\n    node\['slope'].setValue(\[0,0,0])\n    node\['slope'].setExpression('parent.'+thisnode+'.slope_cdl',0)\n    node\['slope'].setExpression('parent.'+thisnode+'.slope_cdl',1)\n    node\['slope'].setExpression('parent.'+thisnode+'.slope_cdl',2)" +STARTLINE}
+ addUserKnob {22 get_Inverse_cdl l "Get Inverse CDL" -STARTLINE T "#### GET CDL  Inverse ######\nthisnode = nuke.thisNode()\['name'].value()\nnuke.thisNode().setSelected(False)\n\nwith nuke.root():\n\n    node = nuke.createNode(\"OCIOCDLTransform\")\n    node\['slope'].setValue(\[0,0,0])\n    node\['slope'].setExpression('parent.'+thisnode+'.slope_cdl',0)\n    node\['slope'].setExpression('parent.'+thisnode+'.slope_cdl',1)\n    node\['slope'].setExpression('parent.'+thisnode+'.slope_cdl',2)\n    node\['direction'].setValue(\"inverse\")\n    node\['label'].setValue(\"\[value direction]\")"}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos 729
+  ypos 174
+ }
+ Dot {
+  name Dot7
+  xpos 763
+  ypos 238
+ }
+set Nd6df1380 [stack 0]
+ OCIOCDLTransform {
+  slope {{1/((1*(1-parent.OCIOCDLTransform1.mix))+(parent.OCIOCDLTransform1.slope*parent.OCIOCDLTransform1.mix))} {1/((1*(1-parent.OCIOCDLTransform1.mix))+(parent.OCIOCDLTransform1.slope*parent.OCIOCDLTransform1.mix))} {1/((1*(1-parent.OCIOCDLTransform1.mix))+(parent.OCIOCDLTransform1.slope*parent.OCIOCDLTransform1.mix))}}
+  working_space scene_linear
+  name OCIOCDLTransform2
+  selected true
+  xpos 729
+  ypos 317
+ }
+ Output {
+  name Output1
+  xpos 729
+  ypos 412
+ }
+push $Nd6df1380
+push $Nd6df1380
+ Saturation {
+  saturation 0
+  name Saturation3
+  xpos 865
+  ypos 234
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  bbox B
+  name Merge3
+  xpos 865
+  ypos 289
+ }
+ OCIOCDLTransform {
+  slope {1 1 1}
+  invert true
+  working_space scene_linear
+  name OCIOCDLTransform1
+  xpos 865
+  ypos 315
+ }
+end_group
